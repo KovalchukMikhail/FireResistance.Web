@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Data.Interfaces
 {
-    internal interface IDatabase
+    internal interface IDataSP63
     {
     }
 }

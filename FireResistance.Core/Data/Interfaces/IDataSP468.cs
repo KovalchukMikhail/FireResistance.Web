@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Data.Interfaces
 {
-    internal interface Interface1
+    internal interface IDataSP468
     {
+        public double GetGammaBT();
+        public double GetBetaB();
+        public double GetGammaSt();
+        public double GetBetaS();
+        public double GetСoefficientFixationElement();
     }
 }

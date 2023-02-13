@@ -5,6 +5,10 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireResistance.Web", "FireResistance.Web\FireResistance.Web.csproj", "{6D49CA59-EF48-4243-9B07-AFA1AA0ECBBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireResistance.Core", "FireResistance.Core\FireResistance.Core.csproj", "{49762291-7465-4B91-B88A-14ACBECB4F64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireResistance.Report", "FireResistance.Report\FireResistance.Report.csproj", "{FFAE72C0-2A5E-4379-B0EF-5AD3D4C32EE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6D49CA59-EF48-4243-9B07-AFA1AA0ECBBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D49CA59-EF48-4243-9B07-AFA1AA0ECBBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D49CA59-EF48-4243-9B07-AFA1AA0ECBBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49762291-7465-4B91-B88A-14ACBECB4F64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49762291-7465-4B91-B88A-14ACBECB4F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49762291-7465-4B91-B88A-14ACBECB4F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49762291-7465-4B91-B88A-14ACBECB4F64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFAE72C0-2A5E-4379-B0EF-5AD3D4C32EE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFAE72C0-2A5E-4379-B0EF-5AD3D4C32EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFAE72C0-2A5E-4379-B0EF-5AD3D4C32EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFAE72C0-2A5E-4379-B0EF-5AD3D4C32EE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

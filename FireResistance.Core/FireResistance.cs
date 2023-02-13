@@ -1,7 +1,10 @@
 ﻿namespace FireResistance.Core
 {
-    public class Class1
+    public class FireResistance : IFireResistance
     {
-
+        public CalculationResult GetResult()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

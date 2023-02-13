@@ -8,5 +8,6 @@ namespace FireResistance.Core.Data.Interfaces
 {
     internal interface IDataTemperature
     {
+        public double GetTemperatureForH200R30();
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Entities.Materials.AbstractClasses
 {
-    internal class Material
+    internal abstract class Material
     {
     }
 }

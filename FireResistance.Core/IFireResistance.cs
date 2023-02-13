@@ -8,5 +8,6 @@ namespace FireResistance.Core
 {
     internal interface IFireResistance
     {
+        public CalculationResult GetResult();
     }
 }
