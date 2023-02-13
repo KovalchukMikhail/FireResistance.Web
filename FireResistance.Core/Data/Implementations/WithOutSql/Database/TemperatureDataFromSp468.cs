@@ -32,8 +32,8 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
         public static double[,] TemperatureH400R90 => Utilities.GetCopyArray(temperatureH400R90);
         public static double[,] TemperatureH400R120 => Utilities.GetCopyArray(temperatureH400R120);
         public static double[,] TemperatureH400R150 => Utilities.GetCopyArray(temperatureH400R150);
-        public static double[,] CriticalTemperatureConcreteSilicate => Utilities.GetCopyArray(criticalTemperatureConcreteSilicate);
-        public static double[,] CriticalTemperatureConcreteCarbonate => Utilities.GetCopyArray(criticalTemperatureConcreteCarbonate);
+        public static double[,] DeepCriticalTemperatureConcreteSilicate => Utilities.GetCopyArray(deepCriticalTemperatureConcreteSilicate);
+        public static double[,] DeepCriticalTemperatureConcreteCarbonate => Utilities.GetCopyArray(deepCriticalTemperatureConcreteCarbonate);
 
 
         private static List<int> lenthFromArmatureToEdgeTable200 = new List<int>()
@@ -297,7 +297,7 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
             {1030, 763, 561, 410, 295, 208, 149, 112, 90, 81, 79}
         };
 
-        private static double[,] criticalTemperatureConcreteSilicate =
+        private static double[,] deepCriticalTemperatureConcreteSilicate =
         {
             {15, 11, 8, 6, 6, 6, 6, 6, 6},
             {22, 18, 15, 13, 13, 13, 13, 13, 13},
@@ -307,7 +307,7 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
             {70, 62, 55, 52, 48, 47, 46, 45, 44}
         };
 
-        private static double[,] criticalTemperatureConcreteCarbonate =
+        private static double[,] deepCriticalTemperatureConcreteCarbonate =
         {
             {8, 5, 3, 3, 3, 3, 3, 3, 3},
             {15, 12, 8, 7, 7, 7, 7, 7, 7},
