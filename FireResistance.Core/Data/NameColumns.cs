@@ -13,11 +13,12 @@ namespace FireResistance.Core.Data
         public static List<string> ConcreteType => new List<string>(concreteType);
         public static List<string> FixationElement => new List<string>(fixationElement);
         public static List<int> TemperatureForTable => new List<int>(temperatureForTable);
-        public static List<int> LenthFromArmatureToEdgeForH200 => new List<int>(lenthFromArmatureToEdgeForH200);
-        public static List<int> LenthFromArmatureToEdgeForH300 => new List<int>(lenthFromArmatureToEdgeForH300);
-        public static List<int> LenthFromArmatureToEdgeForH400 => new List<int>(lenthFromArmatureToEdgeForH400);
+        public static List<int> DistanceToArmatureH200 => new List<int>(distanceToArmatureH200);
+        public static List<int> DistanceToArmatureH300 => new List<int>(distanceToArmatureH300);
+        public static List<int> DistanceToArmatureH400 => new List<int>(distanceToArmatureH400);
         public static List<int> TemperatureForCriticalTemperature => new List<int>(temperatureForCriticalTemperature);
         public static List<string> FireResistanceForCriticalTemperature => new List<string>(fireResistanceForCriticalTemperature);
+        public static List<int> StandartHight => new List<int>(standartHight);
 
         private static List<string> armatureClass = new List<string>()
         {
@@ -54,17 +55,17 @@ namespace FireResistance.Core.Data
         {
             20, 200, 300, 400, 500, 600, 700, 800
         };
-        private static List<int> lenthFromArmatureToEdgeForH200 = new List<int>()
+        private static List<int> distanceToArmatureH200 = new List<int>()
         {
             0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100
         };
 
-        private static List<int> lenthFromArmatureToEdgeForH300 = new List<int>()
+        private static List<int> distanceToArmatureH300 = new List<int>()
         {
             0, 30, 60, 90, 120, 150
         };
 
-        private static List<int> lenthFromArmatureToEdgeForH400 = new List<int>()
+        private static List<int> distanceToArmatureH400 = new List<int>()
         {
             0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200
         };
@@ -78,7 +79,10 @@ namespace FireResistance.Core.Data
         {
             "R30", "R45", "R60", "R90", "R120", "R150"
         };
-
+        private static List<int> standartHight = new List<int>()
+        {
+            200, 300, 400
+        };
 
 
     }

@@ -27,9 +27,9 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
 
         private static List<string> concreteTypeForTables = new List<string>()
         {
-            "ТЯЖЕЛЫЙ, НА СИЛИКАТНОМ ЗАПОЛНИТЕЛЕ",
-            "ТЯЖЕЛЫЙ, НА КАРБОНАТНОМ ЗАПОЛНИТЕЛЕ",
-            "КОНСТРУКЦИОННЫЙ КЕРАМЗИТОБЕТОН"
+            "ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ",
+            "ТЯЖЕЛЫЙ_НА КАРБОНАТНОМ_ЗАПОЛНИТЕЛЕ",
+            "КОНСТРУКЦИОННЫЙ_КЕРАМЗИТОБЕТОН"
         };
         private static List<string> armatureClassForTables = new List<string>()
         {
@@ -40,9 +40,9 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
             "А800",
             "А1000",
             "В500",
-            "А500С МАРКА 25Г2С ПО ГОСТ Р 52544-2006",
-            "А600С МАРКИ 18Г2СФ ТЕРМОМЕХАНИЧЕСКИ УПРОЧНЕННАЯ",
-            "А500С МАРКИ Ст3Гпс ТЕРМОМЕХАНИЧЕСКИ УПРОЧНЕННАЯ ПО ГОСТ 34028-2016"
+            "А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544-2006",
+            "А600С_МАРКИ_18Г2СФ_ТЕРМОМЕХАНИЧЕСКИ_УПРОЧНЕННАЯ",
+            "А500С_МАРКИ_Ст3Гпс_ТЕРМОМЕХАНИЧЕСКИ_УПРОЧНЕННАЯ_ПО_ГОСТ_34028_2016"
         };
 
         private static List<int> temperatureForTables = new List<int>()

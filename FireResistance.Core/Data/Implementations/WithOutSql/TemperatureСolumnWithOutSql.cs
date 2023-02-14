@@ -12,17 +12,27 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
     {
         public double GetDeepForCarbonateСolumn(string fireResistans, int temperature)
         {
-            throw new NotImplementedException();
+            int fireResistansIndex = NameColumns.FireResistanceForCriticalTemperature.IndexOf(fireResistans);
+            int temperatureIndex = NameColumns.TemperatureForCriticalTemperature.IndexOf(temperature);
+            if (fireResistansIndex == -1 || temperatureIndex == -1) return -1;
+            return TemperatureDataFromSp468.DeepCriticalTemperatureConcreteCarbonate[fireResistansIndex, temperatureIndex];
         }
 
         public double GetDeepForSilicateСolumn(string fireResistans, int temperature)
         {
-            throw new NotImplementedException();
+            int fireResistansIndex = NameColumns.FireResistanceForCriticalTemperature.IndexOf(fireResistans);
+            int temperatureIndex = NameColumns.TemperatureForCriticalTemperature.IndexOf(temperature);
+            if (fireResistansIndex == -1 || temperatureIndex == -1) return -1;
+            return TemperatureDataFromSp468.DeepCriticalTemperatureConcreteSilicate[fireResistansIndex, temperatureIndex];
         }
 
-        public double GetTemperatureСolumn(string fireResistans, int hight, int deep)
+        public double GetTemperatureOfСolumn(string fireResistans, int hight, int deep)
         {
-            throw new NotImplementedException();
+            List<int> deepList = GetListOfDistanceToArmature(hight);
+            double[,] array = GetArrayTemperature(fireResistans, hight);
+            int deepIndex = deepList.IndexOf(deep);
+            if (array.GetLength(0) == 0 || deepIndex == -1) return -1;
+            return array[deepIndex, deepIndex];
         }
 
         public double[,] GetArrayTemperature(string fireResistans, int hight)
@@ -50,7 +60,17 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
                 "H400R150" => TemperatureDataFromSp468.TemperatureH400R150,
                 _ => new double[,] {}
             };
+        }
 
+        public List<int> GetListOfDistanceToArmature(int hight)
+        {
+            return hight switch
+            {
+                200 => NameColumns.DistanceToArmatureH200,
+                300 => NameColumns.DistanceToArmatureH300,
+                400 => NameColumns.DistanceToArmatureH400,
+                _ => new List<int>()
+            };
         }
     }
 }

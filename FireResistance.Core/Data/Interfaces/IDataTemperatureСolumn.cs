@@ -8,7 +8,7 @@ namespace FireResistance.Core.Data.Interfaces
 {
     internal interface IDataTemperatureСolumn
     {
-        public double GetTemperatureСolumn(string fireResistans, int hight, int deep);
+        public double GetTemperatureOfСolumn(string fireResistans, int hight, int deep);
         public double GetDeepForSilicateСolumn(string fireResistans, int temperature);
         public double GetDeepForCarbonateСolumn(string fireResistans, int temperature);
     }
