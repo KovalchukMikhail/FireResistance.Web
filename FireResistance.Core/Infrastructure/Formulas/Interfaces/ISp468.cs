@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FireResistance.Core.Infrastructure
+namespace FireResistance.Core.Infrastructure.Formulas.Interfaces
 {
-    internal class Sp63
+    internal interface ISp468
     {
     }
 }

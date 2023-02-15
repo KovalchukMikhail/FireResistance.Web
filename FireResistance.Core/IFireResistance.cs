@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FireResistance.Core.Entities.SourceDataForCalculation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace FireResistance.Core
 {
     internal interface IFireResistance
     {
-        public CalculationResult GetResult();
+        public CalculationResult GetResult(SourceData sourceData);
     }
 }

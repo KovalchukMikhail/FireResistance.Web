@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FireResistance.Core.Infrastructure.Interfaces
+namespace FireResistance.Core.Infrastructure.Factorys.Interfaces
 {
-    internal interface ISp468
+    internal class IWallFactory
     {
     }
 }

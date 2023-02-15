@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FireResistance.Core.Infrastructure
+namespace FireResistance.Core.Infrastructure.Factorys.Interfaces
 {
-    internal class Sp468
+    internal class IColumnFactory
     {
     }
 }

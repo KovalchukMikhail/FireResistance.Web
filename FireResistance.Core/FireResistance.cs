@@ -1,10 +1,12 @@
-﻿namespace FireResistance.Core
+﻿using FireResistance.Core.Entities.SourceData;
+
+namespace FireResistance.Core
 {
     public class FireResistance : IFireResistance
     {
-        public CalculationResult GetResult()
+        CalculationResult IFireResistance.GetResult(SourceData sourceData)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
