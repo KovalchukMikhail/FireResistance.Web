@@ -1,4 +1,5 @@
-﻿using FireResistance.Core.Entities.SourceDataForCalculation;
+﻿using FireResistance.Core.Entities.Calculations.AbstractClasses;
+using FireResistance.Core.Entities.SourceDataForCalculation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core
 {
-    internal interface IFireResistance
+    internal interface IFireResistance <N>
     {
-        public CalculationResult GetResult(SourceData sourceData);
+        public void PerformCalculation();
+        public N GetResult();
     }
 }

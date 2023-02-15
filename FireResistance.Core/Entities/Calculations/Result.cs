@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Entities.Calculations
 {
-    public class Result : CalculationResult <Dictionary<string, double>, Dictionary<string, string>>
+    public class ResultAsDictionary : CalculationResult <Dictionary<string, double>, Dictionary<string, string>>
     {
         private Dictionary<string, double> result;
         private Dictionary<string, string> description;
 
-        public Result(SourceData sourceData) : base(sourceData)
+        public ResultAsDictionary(SourceData sourceData) : base(sourceData)
         {
             result = new Dictionary<string, double>();
             description = new Dictionary<string, string>();
