@@ -1,4 +1,5 @@
-﻿using FireResistance.Web.Models;
+﻿using FireResistance.Core;
+using FireResistance.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -15,6 +16,9 @@ namespace FireResistance.Web.Controllers
 
         public IActionResult Index()
         {
+            FireResistanceBasic resistance = new FireResistanceBasic();
+            string answer = resistance.GetResultString();
+            ViewData["Answer"] = answer;
             return View();
         }
 
