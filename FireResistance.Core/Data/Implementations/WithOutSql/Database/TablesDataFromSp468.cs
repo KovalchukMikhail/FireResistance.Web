@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
 {
-    internal class DataFromSp468
+    internal static class DataFromSp468
     {
         public static List<string> ConcreteTypeForTables => new List<string>(concreteTypeForTables);
         public static List<string> ArmatureClassForTables => new List<string>(armatureClassForTables);

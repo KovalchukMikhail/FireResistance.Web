@@ -10,7 +10,21 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
 {
     public class ColumnFireIsWithFourSidesData : SourceData<Dictionary<string, string>>
     {
-        public ColumnFireIsWithFourSidesData(TypeCalculations type) : base(type) { }
+        public string FireResistanceValue { get; set; }
+        public int LengthColumn { get; set; }
+        public int HighColumn { get; set; }
+        public int WidthColumn { get; set; }
+        public int ArmatureInstallationDepth { get; set; }
+        public string FixationElement { get; set; }
+        public string ArmatureClass { get; set; }
+        public string ConcreteType { get; set; }
+        public string ConcreteClass { get; set; }
+        public int ArmatureDiameter { get; set; }
+        public int ArmatureCount { get; set; }
+        public double Moment { get; set; }
+        public double Strength { get; set; }
+
+
         public override Dictionary<string, string> GetData()
         {
             throw new NotImplementedException();

@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
 {
-    internal class WallFireIsWithOneSideData : SourceData<Dictionary<string, string>>
+    public class WallFireIsWithOneSideData : SourceData<Dictionary<string, string>>
     {
-        public WallFireIsWithOneSideData(TypeCalculations type) : base(type) { }
         public override Dictionary<string, string> GetData()
         {
             throw new NotImplementedException();

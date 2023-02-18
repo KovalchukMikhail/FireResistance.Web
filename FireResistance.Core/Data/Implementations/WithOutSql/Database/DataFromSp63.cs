@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
 {
-    internal class DataFromSp63
+    internal static class DataFromSp63
     {
         public static Dictionary<string, double> TableConcreteResistNormative
         {

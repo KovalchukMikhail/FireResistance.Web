@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
 {
-    internal class Utilities
+    internal static class Utilities
     {
         public static double[,] GetCopyArray(double[,] array)
         {

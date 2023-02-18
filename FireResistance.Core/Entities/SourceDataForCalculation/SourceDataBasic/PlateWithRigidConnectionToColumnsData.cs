@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
 {
-    internal class PlateWithRigidConnectionToColumnsData : SourceData<Dictionary<string, string>>
+    public class PlateWithRigidConnectionToColumnsData : SourceData<Dictionary<string, string>>
     {
-        public PlateWithRigidConnectionToColumnsData(TypeCalculations type) : base(type) { }
         public override Dictionary<string, string> GetData()
         {
             throw new NotImplementedException();

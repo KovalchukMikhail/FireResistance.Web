@@ -9,12 +9,8 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses
 {
     public abstract class SourceData <T>
     {
-        public TypeCalculations TypeCalculations { get; init; }
+        public bool Check { get; set; } = false;
 
-        public SourceData(TypeCalculations type)
-        {
-            TypeCalculations = type;
-        }
         public abstract T GetData();
         
     }
