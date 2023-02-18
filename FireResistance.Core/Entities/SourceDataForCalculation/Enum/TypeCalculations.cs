@@ -11,6 +11,6 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.Enum
         ColumnFireIsWithFourSides,
         WallFireIsWithOneSide,
         PlateWithRigidConnectionToColumns,
-        PlateWithRigidConnectionToTwoWals
+        PlateWithRigidConnectionToTwoWalls
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FireResistance.Core.Entities.SourceDataForCalculation
+namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactories
 {
-    public class SourceData
+    internal class PlateWithRigidConnectionToTwoWalls
     {
     }
 }

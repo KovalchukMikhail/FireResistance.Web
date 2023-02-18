@@ -9,9 +9,9 @@ namespace FireResistance.Core.Entities.Calculations.AbstractClasses
 {
     public abstract class CalculationResult <T, K>
     {
-        public SourceData SourceData { get;}
+        public SourceDataBasic SourceData { get;}
     
-        public CalculationResult(SourceData sourceData)
+        public CalculationResult(SourceDataBasic sourceData)
         {
             SourceData = sourceData;
         }
