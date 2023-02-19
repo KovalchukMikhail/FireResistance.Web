@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FireResistance.Core.Entities.SourceDataForCalculation;
+using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 
 namespace FireResistance.Core.Entities.Calculations.AbstractClasses
 {
     public abstract class CalculationResult <T, K>
     {
-        public SourceDataBasic SourceData { get;}
-    
-        public CalculationResult(SourceDataBasic sourceData)
+        public SourceData<K> SourceData { get; }
+
+        public CalculationResult(SourceData<K> sourceData)
         {
             SourceData = sourceData;
         }

@@ -1,5 +1,6 @@
 ﻿using FireResistance.Core.Entities.Calculations.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation;
+using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace FireResistance.Core.Entities.Calculations
         private Dictionary<string, double> result;
         private Dictionary<string, string> description;
 
-        public ResultAsDictionary(SourceDataBasic sourceData) : base(sourceData)
+        public ResultAsDictionary(SourceData<Dictionary<string, string>> sourceData) : base(sourceData)
         {
             result = new Dictionary<string, double>();
             description = new Dictionary<string, string>();

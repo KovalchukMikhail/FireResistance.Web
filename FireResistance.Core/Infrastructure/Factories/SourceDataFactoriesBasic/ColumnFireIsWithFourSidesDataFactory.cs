@@ -35,16 +35,59 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
 
             if (!utilit.CheckCountValue(stringValues, doubleValues, keys)) return false;
 
+            string tempStr = stringValues[ConstantsName.fireResistanceLabel];
+            if (NameColumns.FireResistanceForCriticalTemperature.IndexOf(tempStr) != -1) result.FireResistanceValue = tempStr;
+            else return false;
 
+            double tempNumber = doubleValues[ConstantsName.LenthElementLabel];
+            if (tempNumber > 0) result.LengthColumn = (int)tempNumber;
+            else return false;
 
-            //result.Check = stringValues.TryGetValue("Предел_огнестойкости", out string resistance);
-            //if (result.Check && NameColumns.FireResistanceForCriticalTemperature.IndexOf(resistance) >= 0) result.FireResistanceValue = resistance;
-            //else return false;
+            tempNumber = doubleValues[ConstantsName.HighElementLabel];
+            if (tempNumber > 0) result.HighColumn = (int)tempNumber;
+            else return false;
 
+            tempNumber = doubleValues[ConstantsName.WidthElementLabel];
+            if (tempNumber > 0) result.WidthColumn = (int)tempNumber;
+            else return false;
 
+            tempStr = stringValues[ConstantsName.ArmatureClassLabel];
+            if (NameColumns.ArmatureClass.IndexOf(tempStr) != -1) result.ArmatureClass = tempStr;
+            else return false;
 
+            tempNumber = doubleValues[ConstantsName.ArmatureDiameterLabel];
+            if (NameColumns.ArmatureDiameter.IndexOf((int)tempNumber) != -1) result.ArmatureDiameter = (int)tempNumber;
+            else return false;
 
+            tempNumber = doubleValues[ConstantsName.ArmatureCountLabel];
+            if (tempNumber > 0) result.ArmatureCount = (int)tempNumber;
+            else return false;
 
+            tempNumber = doubleValues[ConstantsName.ArmatureInstallationDepthLabel];
+            if (tempNumber <= result.HighColumn && tempNumber <= result.WidthColumn) result.ArmatureInstallationDepth = (int)tempNumber;
+            else return false;
+
+            tempStr = stringValues[ConstantsName.ConcreteClassLabel];
+            if (NameColumns.ConcreteClass.IndexOf(tempStr) != -1) result.ConcreteClass = tempStr;
+            else return false;
+
+            tempStr = stringValues[ConstantsName.ConcreteTypeLabel];
+            if (NameColumns.ConcreteType.IndexOf(tempStr) != -1) result.ConcreteType = tempStr;
+            else return false;
+
+            tempStr = stringValues[ConstantsName.FixationElementLabel];
+            if (NameColumns.FixationElement.IndexOf(tempStr) != -1) result.FixationElement = tempStr;
+            else return false;
+
+            tempNumber = doubleValues[ConstantsName.MomentLabel];
+            if (tempNumber >= 0) result.Moment = (int)tempNumber;
+            else return false;
+
+            tempNumber = doubleValues[ConstantsName.StrengthLabel];
+            if (tempNumber >= 0) result.Strength = (int)tempNumber;
+            else return false;
+
+            return true;
 
         }
 

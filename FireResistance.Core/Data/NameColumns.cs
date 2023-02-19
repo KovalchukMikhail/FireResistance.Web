@@ -19,6 +19,7 @@ namespace FireResistance.Core.Data
         public static List<int> TemperatureForCriticalTemperature => new List<int>(temperatureForCriticalTemperature);
         public static List<string> FireResistanceForCriticalTemperature => new List<string>(fireResistanceForCriticalTemperature);
         public static List<int> StandartHight => new List<int>(standartHight);
+        public static List<int> ArmatureDiameter => new List<int>(armatureDiameter);
 
         private static List<string> armatureClass = new List<string>()
         {
@@ -84,6 +85,10 @@ namespace FireResistance.Core.Data
             200, 300, 400
         };
 
+        private static List<int> armatureDiameter = new List<int>()
+        {
+            6, 8, 10, 12, 14, 16, 18, 20, 22, 25, 28, 32, 36, 40
+        };
 
     }
 }
