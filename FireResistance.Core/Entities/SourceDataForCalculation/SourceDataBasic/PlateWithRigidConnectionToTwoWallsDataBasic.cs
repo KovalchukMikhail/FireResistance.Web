@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
 {
-    public class PlateWithRigidConnectionToColumnsData : SourceData<Dictionary<string, string>>
+    public class PlateWithRigidConnectionToTwoWallsDataBasic : PlateWithRigidConnectionToTwoWallsData<Dictionary<string, string>>
     {
         public override Dictionary<string, string> GetData()
         {

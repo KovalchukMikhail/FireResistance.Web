@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
 {
-    internal class WallFireIsWithOneSideDataFactory : IWallFireIsWithOneSideDataFactory<WallFireIsWithOneSideData>
+    internal class WallFireIsWithOneSideDataFactory : IWallFireIsWithOneSideDataFactory<WallFireIsWithOneSideDataBasic>
     {
-        public bool TryCreate(Dictionary<string, string> stringValues, Dictionary<string, double> doubleValues, out WallFireIsWithOneSideData result)
+        public bool TryCreate(Dictionary<string, string> stringValues, Dictionary<string, double> doubleValues, out WallFireIsWithOneSideDataBasic result)
         {
             throw new NotImplementedException();
         }

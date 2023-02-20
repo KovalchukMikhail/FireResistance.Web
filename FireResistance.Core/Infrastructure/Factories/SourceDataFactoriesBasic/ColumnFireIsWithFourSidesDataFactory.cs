@@ -2,6 +2,7 @@
 using FireResistance.Core.Data.Implementations.WithOutSql.Database;
 using FireResistance.Core.Entities.SourceDataForCalculation;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
+using FireResistance.Core.Entities.SourceDataForCalculation.Enum;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.SourceDataFactory;
 using FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic;
@@ -13,11 +14,11 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
 {
-    public class ColumnFireIsWithFourSidesDataFactory : IColumnFireIsWithFourSidesDataFactory<ColumnFireIsWithFourSidesData>
+    public class ColumnFireIsWithFourSidesDataFactory : IColumnFireIsWithFourSidesDataFactory<ColumnFireIsWithFourSidesDataBasic>
     {
-        public bool TryCreate(Dictionary<string, string> stringValues, Dictionary<string, double> doubleValues, out ColumnFireIsWithFourSidesData result)
+        public bool TryCreate(Dictionary<string, string> stringValues, Dictionary<string, double> doubleValues, out ColumnFireIsWithFourSidesDataBasic result)
         {
-            result = new ColumnFireIsWithFourSidesData();
+            result = new ColumnFireIsWithFourSidesDataBasic();
             Utilities utilit = new Utilities();
             string[] keys = {ConstantsName.fireResistanceLabel,
                             ConstantsName.LenthElementLabel,

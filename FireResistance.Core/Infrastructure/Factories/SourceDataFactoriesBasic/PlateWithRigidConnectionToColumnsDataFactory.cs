@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
 {
-    public class PlateWithRigidConnectionToColumnsDataFactory : IPlateWithRigidConnectionToColumnsDataFactory<PlateWithRigidConnectionToColumnsData>
+    public class PlateWithRigidConnectionToColumnsDataFactory : IPlateWithRigidConnectionToColumnsDataFactory<PlateWithRigidConnectionToColumnsDataBasic>
     {
-        public bool TryCreate(Dictionary<string, string> stringValues, Dictionary<string, double> doubleValues, out PlateWithRigidConnectionToColumnsData result)
+        public bool TryCreate(Dictionary<string, string> stringValues, Dictionary<string, double> doubleValues, out PlateWithRigidConnectionToColumnsDataBasic result)
         {
             throw new NotImplementedException();
         }

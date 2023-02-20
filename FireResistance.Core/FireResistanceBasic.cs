@@ -9,12 +9,15 @@ using System;
 
 namespace FireResistance.Core
 {
-    public class FireResistanceBasic : IFireResistance<ResultAsDictionary>
+    public class FireResistanceBasic : IFireResistance<ResultAsDictionary, SourceData<Dictionary<string, string>>>
     {
-        private bool Check { get; set; } = false;
-        public bool TryPerformCalculation()
+        public bool TryPerformCalculation(SourceData<Dictionary<string, string>> data)
         {
-            throw new NotImplementedException();
+            if(data.Check)
+            {
+                return true;
+            }
+            else return false;
         }
         public ResultAsDictionary GetResult()
         {

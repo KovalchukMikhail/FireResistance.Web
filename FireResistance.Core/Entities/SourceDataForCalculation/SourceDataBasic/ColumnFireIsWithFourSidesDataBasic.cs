@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
 {
-    public class ColumnFireIsWithFourSidesData : SourceData<Dictionary<string, string>>
+    public class ColumnFireIsWithFourSidesDataBasic : ColumnFireIsWithFourSidesData<Dictionary<string, string>>
     {
         public string FireResistanceValue { get; set; }
         public int LengthColumn { get; set; }

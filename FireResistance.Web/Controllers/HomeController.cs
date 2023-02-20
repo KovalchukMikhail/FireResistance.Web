@@ -40,7 +40,7 @@ namespace FireResistance.Web.Controllers
 
 
             ColumnFireIsWithFourSidesDataFactory dataFactory = new ColumnFireIsWithFourSidesDataFactory();
-            bool check = dataFactory.TryCreate(dictStr, dictDbl, out ColumnFireIsWithFourSidesData data);
+            bool check = dataFactory.TryCreate(dictStr, dictDbl, out ColumnFireIsWithFourSidesDataBasic data);
 
             string answer = $"Диаметр арматуры{data.ArmatureDiameter}:Количество арматуры{data.ArmatureCount}:Класс арматуры{data.ArmatureClass}:Расположение арматуры{data.ArmatureInstallationDepth}:Тип бетона{data.ConcreteType}:Класс бетона{data.ConcreteClass}:Предел огнестойкости{data.FireResistanceValue}:Момент{data.Moment}:Продольная сила{data.Strength}:Длина колонны{data.LengthColumn}:Высота колонны{data.HighColumn}:Ширина колонны{data.WidthColumn}:закрепление{data.FixationElement}";
             ViewData["Answer"] = answer;

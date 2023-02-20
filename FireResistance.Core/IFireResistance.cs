@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core
 {
-    internal interface IFireResistance <N>
+    internal interface IFireResistance <N, K>
     {
-        public bool TryPerformCalculation();
+        public bool TryPerformCalculation(K data);
         public N GetResult();
     }
 }
