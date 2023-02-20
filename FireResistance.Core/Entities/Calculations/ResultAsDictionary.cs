@@ -14,7 +14,7 @@ namespace FireResistance.Core.Entities.Calculations
         private Dictionary<string, double> result;
         private Dictionary<string, string> description;
 
-        public ResultAsDictionary(SourceData<Dictionary<string, string>> sourceData) : base(sourceData)
+        public ResultAsDictionary()
         {
             result = new Dictionary<string, double>();
             description = new Dictionary<string, string>();

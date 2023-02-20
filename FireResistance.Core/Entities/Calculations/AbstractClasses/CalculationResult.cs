@@ -10,12 +10,7 @@ namespace FireResistance.Core.Entities.Calculations.AbstractClasses
 {
     public abstract class CalculationResult <T, K>
     {
-        public SourceData<K> SourceData { get; }
-
-        public CalculationResult(SourceData<K> sourceData)
-        {
-            SourceData = sourceData;
-        }
+        public SourceData<K> SourceData { get; set; }
 
         public abstract double GetItemResult(string key);
         public abstract void AddItemResult(string key, double value);
