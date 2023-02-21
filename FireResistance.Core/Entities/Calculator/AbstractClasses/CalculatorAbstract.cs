@@ -10,12 +10,8 @@ namespace FireResistance.Core.Entities.Calculator.AbstractClasses
 {
     internal abstract class CalculatorAbstract <T>
     {
-        protected T resultBuilder;
+        public T ResultBuilder { get; set; }
 
-        public CalculatorAbstract(T resultbuilder)
-        {
-            this.resultBuilder = resultbuilder;
-        }
-        public abstract void Construct();
+        public abstract bool TryConstruct();
     }
 }

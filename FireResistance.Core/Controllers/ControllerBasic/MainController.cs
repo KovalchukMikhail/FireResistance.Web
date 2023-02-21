@@ -41,7 +41,8 @@ namespace FireResistance.Core.Controllers.ControllerBasic
             };
 
             CalculatorAbstract<IResultBuilder<ResultAsDictionary>> calculator = provider.GetService<CalculatorAbstract<IResultBuilder<ResultAsDictionary>>>();
-
+            calculator.ResultBuilder = resultBuilder;
+            return calculator.TryConstruct();
 
         }
     }

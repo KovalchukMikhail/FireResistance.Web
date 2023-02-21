@@ -9,9 +9,9 @@ namespace FireResistance.Core.Infrastructure.Builder.Interfaces
 {
     internal interface IResultBuilder <N>
     {
-        void BuildConstructions();
-        void BuildSourceValues();
-        void BuildCalculation();
+        bool BuildConstructions();
+        bool BuildSourceValues();
+        bool BuildCalculation();
         N GetCalculationResult();
     }
 }

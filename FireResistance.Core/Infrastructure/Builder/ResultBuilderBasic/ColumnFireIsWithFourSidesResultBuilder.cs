@@ -16,17 +16,17 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic
         {
             result = new ResultAsDictionary();
         }
-        public void BuildConstructions()
+        public bool BuildConstructions()
         {
             throw new NotImplementedException();
         }
 
-        public void BuildSourceValues()
+        public bool BuildSourceValues()
         {
             throw new NotImplementedException();
         }
 
-        public void BuildCalculation()
+        public bool BuildCalculation()
         {
             throw new NotImplementedException();
         }

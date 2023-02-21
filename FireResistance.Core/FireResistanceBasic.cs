@@ -25,9 +25,10 @@ namespace FireResistance.Core
         {
             return controller.Run(data, resultBuilder);
         }
+
         public ResultAsDictionary GetResult()
         {
-            throw new NotImplementedException();
+            return resultBuilder.GetCalculationResult();
         }
 
         //public string GetResultString()

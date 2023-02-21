@@ -12,12 +12,13 @@ namespace FireResistance.Core.Entities.Calculator
 {
     internal class CalculatorBasic : CalculatorAbstract <IResultBuilder<ResultAsDictionary>>
     {
-        public CalculatorBasic (IResultBuilder<ResultAsDictionary> resultbuilder) : base(resultbuilder) { }
-        public override void Construct()
+        public override bool TryConstruct()
         {
-            resultBuilder.BuildConstructions();
-            resultBuilder.BuildSourceValues();
-            resultBuilder.BuildCalculation();
+            bool status = false;
+            status = ResultBuilder.BuildConstructions();
+            status = ResultBuilder.BuildSourceValues();
+            status = ResultBuilder.BuildCalculation();
+            return status;
         }
     }
 }
