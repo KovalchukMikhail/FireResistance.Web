@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Entities.Materials.AbstractClasses
 {
-    internal abstract class Material
+    public abstract class Material
     {
+        public string ClassName { get; init; }
+        public Material(string className)
+        {
+            ClassName = className;
+        }
     }
 }

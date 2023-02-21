@@ -2,7 +2,6 @@
 using FireResistance.Core.Dependency;
 using FireResistance.Core.Entities.Calculations;
 using FireResistance.Core.Entities.Calculator.AbstractClasses;
-using FireResistance.Core.Entities.Calculator.Interfaces;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
