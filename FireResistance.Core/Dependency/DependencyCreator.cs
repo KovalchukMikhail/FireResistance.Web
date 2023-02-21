@@ -1,9 +1,16 @@
-﻿using FireResistance.Core.Data.Implementations.WithOutSql;
+﻿using FireResistance.Core.Controllers.ControllerBasic;
+using FireResistance.Core.Controllers.Interfaces;
+using FireResistance.Core.Data.Implementations.WithOutSql;
 using FireResistance.Core.Data.Interfaces;
 using FireResistance.Core.Entities.Calculations;
 using FireResistance.Core.Entities.Calculations.AbstractClasses;
+using FireResistance.Core.Entities.Calculator;
+using FireResistance.Core.Entities.Calculator.AbstractClasses;
 using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.Materials.BaseClasses;
+using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
+using FireResistance.Core.Infrastructure.Builder.Interfaces;
+using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic;
 using FireResistance.Core.Infrastructure.Formulas;
 using FireResistance.Core.Infrastructure.Formulas.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,7 +33,13 @@ namespace FireResistance.Core.Dependency
             .AddTransient<Armature, ArmatureForFR>()
             .AddTransient<Concrete, ConcreteForFR>()
             .AddTransient<ISp468, Sp468>()
-            .AddTransient<ISp63, Sp63>();
+            .AddTransient<ISp63, Sp63>()
+            .AddTransient<IMainController<SourceData<Dictionary<string, string>>, IResultBuilder<ResultAsDictionary>>, MainController>()
+            .AddTransient<IColumnFireIsWithFourSidesResultBuilder<ResultAsDictionary>, ColumnFireIsWithFourSidesResultBuilder>()
+            .AddTransient<CalculatorAbstract<IResultBuilder<ResultAsDictionary>>, CalculatorBasic>();
+
+        
+
 
         public static ServiceProvider GetServiceProvider()
         {

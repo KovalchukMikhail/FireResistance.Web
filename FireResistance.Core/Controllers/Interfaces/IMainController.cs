@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Controllers.Interfaces
 {
-    internal interface IMainController
+    internal interface IMainController <T, K>
     {
-        public bool Run(SourceData<Dictionary<string, string>> data);
+        public bool Run(T data, K resultBilder);
     }
 }

@@ -33,7 +33,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic
 
         public ResultAsDictionary GetCalculationResult()
         {
-            throw new NotImplementedException();
+            return result;
         }
     }
 }

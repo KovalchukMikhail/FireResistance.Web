@@ -11,6 +11,7 @@ namespace FireResistance.Core.Entities.Calculations.AbstractClasses
     public abstract class CalculationResult <T, K>
     {
         public SourceData<K> SourceData { get; set; }
+        public bool Status { get; set; } = false;
 
         public abstract double GetItemResult(string key);
         public abstract void AddItemResult(string key, double value);
