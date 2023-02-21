@@ -1,4 +1,5 @@
 ﻿using FireResistance.Core.Entities.Calculations;
+using FireResistance.Core.Entities.Calculations.AbstractClasses;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic
 {
-    internal class ColumnFireIsWithFourSidesResultBuilder : IColumnFireIsWithFourSidesResultBuilder<ResultAsDictionary>
+    internal class ColumnFireIsWithFourSidesResultBuilder : IColumnFireIsWithFourSidesResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>
     {
         private ResultAsDictionary result;
 

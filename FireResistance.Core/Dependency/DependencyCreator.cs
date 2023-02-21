@@ -34,9 +34,9 @@ namespace FireResistance.Core.Dependency
             .AddTransient<Concrete, ConcreteForFR>()
             .AddTransient<ISp468, Sp468>()
             .AddTransient<ISp63, Sp63>()
-            .AddTransient<IMainController<SourceData<Dictionary<string, string>>, IResultBuilder<ResultAsDictionary>>, MainController>()
-            .AddTransient<IColumnFireIsWithFourSidesResultBuilder<ResultAsDictionary>, ColumnFireIsWithFourSidesResultBuilder>()
-            .AddTransient<CalculatorAbstract<IResultBuilder<ResultAsDictionary>>, CalculatorBasic>();
+            .AddTransient<IMainController<SourceData<Dictionary<string, string>>, IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>, MainController>()
+            .AddTransient<IColumnFireIsWithFourSidesResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>, ColumnFireIsWithFourSidesResultBuilder>()
+            .AddTransient<CalculatorAbstract<IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>, CalculatorBasic>();
 
         
 

@@ -1,6 +1,5 @@
 ﻿using FireResistance.Core.Entities.Calculations;
 using FireResistance.Core.Entities.Calculator.AbstractClasses;
-using FireResistance.Core.Entities.Calculator.Interfaces;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Entities.Calculator
 {
-    internal class CalculatorBasic : CalculatorAbstract <IResultBuilder<ResultAsDictionary>>
+    internal class CalculatorBasic : CalculatorAbstract <IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>
     {
         public override bool TryConstruct()
         {

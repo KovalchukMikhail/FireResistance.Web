@@ -1,4 +1,5 @@
 ﻿using FireResistance.Core.Entities.Calculations;
+using FireResistance.Core.Entities.Calculations.AbstractClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Builder.Interfaces
 {
-    internal interface IColumnFireIsWithFourSidesResultBuilder<N> : IResultBuilder<N>
+    internal interface IColumnFireIsWithFourSidesResultBuilder<N, T, K> : IResultBuilder<N, T, K>
+        where N : CalculationResult<T, K>
     {
     }
 }

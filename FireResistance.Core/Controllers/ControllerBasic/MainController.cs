@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Controllers.ControllerBasic
 {
-    internal class MainController : IMainController <SourceData<Dictionary<string, string>>, IResultBuilder<ResultAsDictionary>>
+    internal class MainController : IMainController <SourceData<Dictionary<string, string>>, IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>
     {
-        public bool Run(SourceData<Dictionary<string, string>> data, IResultBuilder<ResultAsDictionary> resultBuilder)
+        public bool Run(SourceData<Dictionary<string, string>> data, IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>> resultBuilder)
         {
             if (!data.Check) return false;
 
@@ -25,7 +25,8 @@ namespace FireResistance.Core.Controllers.ControllerBasic
             switch (data)
             {
                 case ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData:
-                    resultBuilder = provider.GetService<IColumnFireIsWithFourSidesResultBuilder<ResultAsDictionary>>();
+                    resultBuilder = provider.GetService<IColumnFireIsWithFourSidesResultBuilder<ResultAsDictionary, Dictionary<string, double>,
+                                                        Dictionary<string, string>>>();
                     break;
                 case PlateWithRigidConnectionToColumnsData<Dictionary<string, string>> sourceData:
                     resultBuilder = null;
@@ -39,7 +40,9 @@ namespace FireResistance.Core.Controllers.ControllerBasic
                 default: return false;
             };
 
-            CalculatorAbstract<IResultBuilder<ResultAsDictionary>> calculator = provider.GetService<CalculatorAbstract<IResultBuilder<ResultAsDictionary>>>();
+            CalculatorAbstract<IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>> calculator =
+                provider.GetService<CalculatorAbstract<IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>>();
+
             calculator.ResultBuilder = resultBuilder;
             return calculator.TryConstruct();
 

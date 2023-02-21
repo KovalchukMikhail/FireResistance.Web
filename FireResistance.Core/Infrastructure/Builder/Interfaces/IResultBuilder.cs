@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Builder.Interfaces
 {
-    internal interface IResultBuilder <N>
+    internal interface IResultBuilder <N, T, K> where N : CalculationResult<T, K>
     {
         bool BuildConstructions();
         bool BuildSourceValues();
