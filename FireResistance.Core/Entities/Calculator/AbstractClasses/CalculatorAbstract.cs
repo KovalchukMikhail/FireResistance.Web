@@ -1,5 +1,6 @@
 ﻿using FireResistance.Core.Entities.Calculations;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace FireResistance.Core.Entities.Calculator.AbstractClasses
     {
         public T ResultBuilder { get; set; }
 
-        public abstract bool TryConstruct();
+        public abstract bool TryConstruct(ServiceProvider provider);
     }
 }

@@ -26,18 +26,18 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
             return TemperatureDataFromSp468.DeepCriticalTemperatureConcreteSilicate[fireResistansIndex, temperatureIndex];
         }
 
-        public double GetTemperatureOfСolumn(string fireResistans, int hight, int deep)
+        public double GetTemperatureOfСolumn(string fireResistans, int height, int deep)
         {
-            List<int> deepList = GetListOfDistanceToArmature(hight);
-            double[,] array = GetArrayTemperature(fireResistans, hight);
+            List<int> deepList = GetListOfDistanceToArmature(height);
+            double[,] array = GetArrayTemperature(fireResistans, height);
             int deepIndex = deepList.IndexOf(deep);
             if (array.GetLength(0) == 0 || deepIndex == -1) return -1;
             return array[deepIndex, deepIndex];
         }
 
-        public double[,] GetArrayTemperature(string fireResistans, int hight)
+        public double[,] GetArrayTemperature(string fireResistans, int height)
         {
-            string name = $"H{hight}{fireResistans}";
+            string name = $"H{height}{fireResistans}";
             return name switch
             {
                 "H200R30" => TemperatureDataFromSp468.TemperatureH200R30,
@@ -62,9 +62,9 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
             };
         }
 
-        public List<int> GetListOfDistanceToArmature(int hight)
+        public List<int> GetListOfDistanceToArmature(int height)
         {
-            return hight switch
+            return height switch
             {
                 200 => NameColumns.DistanceToArmatureH200,
                 300 => NameColumns.DistanceToArmatureH300,

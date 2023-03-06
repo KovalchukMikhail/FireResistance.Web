@@ -9,25 +9,25 @@ namespace FireResistance.Core.Entities.Materials.BaseClasses
 {
     public class Armature : Material
     {
-        public int Diameter { get; init; }
-        public int Amount { get; init; }
-        public double Area { get; init; }
-        public double ResistNormativeForStretch { get; init; }
-        public double ResistСalculationForStretch { get; init; }
-        public double ResistСalculationForSqueeze { get; init; }
-        public double ElasticityModulus { get; init; }
-        public Armature(string className, int diameter, int amount, double area,
-                        double resistNormativeForStretch, double resistСalculationForStretch,
-                        double resistСalculationForSqueeze, double elasticityModulus) : base(className) 
-        {
-            Amount = amount;
-            Diameter = diameter;
-            Area = area;
-            ResistNormativeForStretch = resistNormativeForStretch;
-            ResistСalculationForStretch = resistСalculationForStretch;
-            ResistСalculationForSqueeze = resistСalculationForSqueeze;
-            ElasticityModulus = elasticityModulus;
-        }
+        public int Diameter { get; set; }
+        public int Amount { get; set; }
+        public double Area { get; set; }
+        public double ResistNormativeForStretch { get; set; }
+        public double ResistСalculationForStretch { get; set; }
+        public double ResistСalculationForSqueeze { get; set; }
+        public double ElasticityModulus { get; set; }
+        //public Armature(string className, int diameter, int amount, double area,
+        //                double resistNormativeForStretch, double resistСalculationForStretch,
+        //                double resistСalculationForSqueeze, double elasticityModulus) : base(className) 
+        //{
+        //    Amount = amount;
+        //    Diameter = diameter;
+        //    Area = area;
+        //    ResistNormativeForStretch = resistNormativeForStretch;
+        //    ResistСalculationForStretch = resistСalculationForStretch;
+        //    ResistСalculationForSqueeze = resistСalculationForSqueeze;
+        //    ElasticityModulus = elasticityModulus;
+        //}
 
         public override string ToString()
         {

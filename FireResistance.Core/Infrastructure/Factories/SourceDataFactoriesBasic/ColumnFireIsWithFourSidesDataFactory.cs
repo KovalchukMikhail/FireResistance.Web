@@ -22,7 +22,7 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
             Utilities utilit = new Utilities();
             string[] keys = {ConstantsName.fireResistanceLabel,
                             ConstantsName.LenthElementLabel,
-                            ConstantsName.HighElementLabel,
+                            ConstantsName.HeighElementLabel,
                             ConstantsName.WidthElementLabel,
                             ConstantsName.ArmatureClassLabel,
                             ConstantsName.ArmatureDiameterLabel,
@@ -44,8 +44,8 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
             if (tempNumber > 0) result.LengthColumn = (int)tempNumber;
             else return false;
 
-            tempNumber = doubleValues[ConstantsName.HighElementLabel];
-            if (tempNumber > 0) result.HighColumn = (int)tempNumber;
+            tempNumber = doubleValues[ConstantsName.HeighElementLabel];
+            if (tempNumber > 0) result.HeighColumn = (int)tempNumber;
             else return false;
 
             tempNumber = doubleValues[ConstantsName.WidthElementLabel];
@@ -65,7 +65,7 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
             else return false;
 
             tempNumber = doubleValues[ConstantsName.ArmatureInstallationDepthLabel];
-            if (tempNumber <= result.HighColumn && tempNumber <= result.WidthColumn) result.ArmatureInstallationDepth = (int)tempNumber;
+            if (tempNumber <= result.HeighColumn && tempNumber <= result.WidthColumn) result.ArmatureInstallationDepth = (int)tempNumber;
             else return false;
 
             tempStr = stringValues[ConstantsName.ConcreteClassLabel];

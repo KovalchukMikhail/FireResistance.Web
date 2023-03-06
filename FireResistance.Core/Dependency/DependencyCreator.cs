@@ -6,6 +6,8 @@ using FireResistance.Core.Entities.Calculations;
 using FireResistance.Core.Entities.Calculations.AbstractClasses;
 using FireResistance.Core.Entities.Calculator;
 using FireResistance.Core.Entities.Calculator.AbstractClasses;
+using FireResistance.Core.Entities.Constructions.AbstractClasses;
+using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
@@ -34,9 +36,16 @@ namespace FireResistance.Core.Dependency
             .AddTransient<Concrete, ConcreteForFR>()
             .AddTransient<ISp468, Sp468>()
             .AddTransient<ISp63, Sp63>()
-            .AddTransient<IMainController<SourceData<Dictionary<string, string>>, IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>, MainController>()
-            .AddTransient<IColumnFireIsWithFourSidesResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>, ColumnFireIsWithFourSidesResultBuilder>()
-            .AddTransient<CalculatorAbstract<IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>, CalculatorBasic>();
+            .AddTransient<IMainController<SourceData<Dictionary<string, string>>,
+                               CalculatorAbstract<IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>>,
+                            MainController>()
+            .AddTransient<IColumnFireIsWithFourSidesResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>,
+                            ColumnFireIsWithFourSidesResultBuilder>()
+            .AddTransient<CalculatorAbstract<IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>,
+                            CalculatorBasic>()
+            .AddTransient<Slab, SlabBasic>()
+            .AddTransient<Column, ColumnBasic>()
+            .AddTransient<Wall, WallBasic>();
 
         
 

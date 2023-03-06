@@ -16,14 +16,14 @@ namespace FireResistance.Core.Entities.Materials.BaseClasses
 
 
 
-        public Concrete(string className, string type, double resistNormativeForStretch,
-            double resistNormativeForSqueeze, double startElasticityModulus) : base(className)
-        {
-            Type = type;
-            ResistNormativeForStretch = resistNormativeForStretch;
-            ResistNormativeForSqueeze = resistNormativeForSqueeze;
-            StartElasticityModulus = startElasticityModulus;
-        }
+        //public Concrete(string className, string type, double resistNormativeForStretch,
+        //    double resistNormativeForSqueeze, double startElasticityModulus) : base(className)
+        //{
+        //    Type = type;
+        //    ResistNormativeForStretch = resistNormativeForStretch;
+        //    ResistNormativeForSqueeze = resistNormativeForSqueeze;
+        //    StartElasticityModulus = startElasticityModulus;
+        //}
 
         public override string ToString()
         {

@@ -8,10 +8,7 @@ namespace FireResistance.Core.Entities.Materials.AbstractClasses
 {
     public abstract class Material
     {
-        public string ClassName { get; init; }
-        public Material(string className)
-        {
-            ClassName = className;
-        }
+        public string ClassName { get; set; }
+
     }
 }
