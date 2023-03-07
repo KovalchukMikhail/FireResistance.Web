@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FireResistance.Core.Infrastructure.Factories.Interfaces
+namespace FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory
 {
-    internal class ISlabFactory
+    internal interface IConstructionFactory
     {
     }
 }

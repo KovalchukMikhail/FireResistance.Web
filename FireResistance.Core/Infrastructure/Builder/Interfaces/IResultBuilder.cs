@@ -1,4 +1,5 @@
 ﻿using FireResistance.Core.Entities.Calculations.AbstractClasses;
+using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Builder.Interfaces
 {
-    internal interface IResultBuilder <N, T, K> where N : CalculationResult<T, K>
+    internal interface IResultBuilder <P, N, T, K> where N : CalculationResult<T, K>
     {
-        bool BuildConstructions(ServiceProvider provider);
-        bool BuildSourceValues();
-        bool BuildCalculation();
-        N GetCalculationResult();
+        public bool BuildConstructions(ServiceProvider provider);
+        public bool BuildSourceValues();
+        public bool BuildCalculation();
+        public void SetSourceData(SourceData <P> sourceData);
+        public N GetCalculationResult();
     }
 }

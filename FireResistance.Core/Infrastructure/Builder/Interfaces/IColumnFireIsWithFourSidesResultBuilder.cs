@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Builder.Interfaces
 {
-    internal interface IColumnFireIsWithFourSidesResultBuilder<N, T, K> : IResultBuilder<N, T, K>
+    internal interface IColumnFireIsWithFourSidesResultBuilder<P, N, T, K> : IResultBuilder<P, N, T, K>
         where N : CalculationResult<T, K>
     {
     }

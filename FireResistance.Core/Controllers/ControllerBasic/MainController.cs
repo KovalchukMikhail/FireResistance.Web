@@ -14,12 +14,14 @@ using System.Threading.Tasks;
 namespace FireResistance.Core.Controllers.ControllerBasic
 {
     internal class MainController : IMainController <SourceData<Dictionary<string, string>>,
-                                                        CalculatorAbstract<IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>>
+                                                        CalculatorAbstract<IResultBuilder<Dictionary<string, string>, ResultAsDictionary, Dictionary<string, double>,
+                                                        Dictionary<string, string>>>>
     {
-        private IResultBuilder<ResultAsDictionary, Dictionary<string, double>,
+        private IResultBuilder<Dictionary<string, string>,
+                                ResultAsDictionary, Dictionary<string, double>,
                                 Dictionary<string, string>> resultBuilder;
         public bool Run(SourceData<Dictionary<string, string>> data,
-                            CalculatorAbstract<IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>> calculator,
+                            CalculatorAbstract<IResultBuilder<Dictionary<string, string>, ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>> calculator,
                             ServiceProvider provider)
         {
             if (!data.Check) return false;
@@ -28,8 +30,10 @@ namespace FireResistance.Core.Controllers.ControllerBasic
             switch (data)
             {
                 case ColumnFireIsWithFourSidesData<Dictionary<string, string>>:
-                    resultBuilder = provider.GetService<IColumnFireIsWithFourSidesResultBuilder<ResultAsDictionary, Dictionary<string, double>,
-                                                        Dictionary<string, string>>>();
+                    resultBuilder = provider.GetService<IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>,
+                                                                                                ResultAsDictionary,
+                                                                                                Dictionary<string, double>,
+                                                                                                Dictionary<string, string>>>();
                     break;
                 case PlateWithRigidConnectionToColumnsData<Dictionary<string, string>>:
                     resultBuilder = null;
@@ -43,7 +47,7 @@ namespace FireResistance.Core.Controllers.ControllerBasic
                 default: return false;
             };
 
-            //resultBuilder.
+            resultBuilder.SetSourceData(data);
             calculator.ResultBuilder = resultBuilder;
             return calculator.TryConstruct(provider);
 

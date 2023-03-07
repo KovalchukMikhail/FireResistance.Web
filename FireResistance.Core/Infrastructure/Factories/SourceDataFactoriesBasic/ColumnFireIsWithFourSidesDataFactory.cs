@@ -14,9 +14,9 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
 {
-    public class ColumnFireIsWithFourSidesDataFactory : IColumnFireIsWithFourSidesDataFactory<ColumnFireIsWithFourSidesDataBasic>
+    public class ColumnFireIsWithFourSidesDataFactory : IColumnFireIsWithFourSidesDataFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>, Dictionary<string, string>>
     {
-        public bool TryCreate(Dictionary<string, string> stringValues, Dictionary<string, double> doubleValues, out ColumnFireIsWithFourSidesDataBasic result)
+        public bool TryCreate(Dictionary<string, string> stringValues, Dictionary<string, double> doubleValues, out ColumnFireIsWithFourSidesData<Dictionary<string, string>> result)
         {
             result = new ColumnFireIsWithFourSidesDataBasic();
             Utilities utilit = new Utilities();
@@ -87,8 +87,8 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
             tempNumber = doubleValues[ConstantsName.StrengthLabel];
             if (tempNumber >= 0) result.Strength = (int)tempNumber;
             else return false;
-
-            return true;
+            
+            return result.Check = true;
 
         }
 

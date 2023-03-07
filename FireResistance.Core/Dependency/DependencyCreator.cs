@@ -13,6 +13,8 @@ using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic;
+using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
+using FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic;
 using FireResistance.Core.Infrastructure.Formulas;
 using FireResistance.Core.Infrastructure.Formulas.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,17 +34,23 @@ namespace FireResistance.Core.Dependency
             .AddTransient<IDataSP63, DataFromSP63WithOutSql>()
             .AddTransient<IDataSP468, DataFromSP468WithOutSql>()
             .AddTransient<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, ResultAsDictionary>()
-            .AddTransient<Armature, ArmatureForFR>()
-            .AddTransient<Concrete, ConcreteForFR>()
+            .AddTransient<ArmatureForFR>()
+            .AddTransient<ConcreteForFR>()
+            .AddTransient<IArmatureFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>, ArmatureForFRFactory>()
+            .AddTransient<IConcreteFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>, ConcreteForFRFactory>()
             .AddTransient<ISp468, Sp468>()
             .AddTransient<ISp63, Sp63>()
             .AddTransient<IMainController<SourceData<Dictionary<string, string>>,
-                               CalculatorAbstract<IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>>,
-                            MainController>()
-            .AddTransient<IColumnFireIsWithFourSidesResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>,
-                            ColumnFireIsWithFourSidesResultBuilder>()
-            .AddTransient<CalculatorAbstract<IResultBuilder<ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>,
-                            CalculatorBasic>()
+                                                        CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
+                                                            ResultAsDictionary, Dictionary<string, double>,
+                                                            Dictionary<string, string>>>>, MainController>()
+            .AddTransient<IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>,
+                                                                    ResultAsDictionary,
+                                                                    Dictionary<string, double>,
+                                                                    Dictionary<string, string>>, ColumnFireIsWithFourSidesResultBuilder>()
+            .AddTransient<CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
+                                             ResultAsDictionary, Dictionary<string, double>,
+                                             Dictionary<string, string>>>, CalculatorBasic>()
             .AddTransient<Slab, SlabBasic>()
             .AddTransient<Column, ColumnBasic>()
             .AddTransient<Wall, WallBasic>();
