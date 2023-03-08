@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Data.Implementations.WithOutSql
 {
-    internal class TemperatureСolumnWithOutSql : IDataTemperatureСolumn
+    internal class TemperatureСolumnWithOutSql : IDataTemperatureСolumnRequestDb
     {
         public double GetDeepForCarbonateСolumn(string fireResistans, int temperature)
         {

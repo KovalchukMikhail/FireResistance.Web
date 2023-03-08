@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Data.Implementations.WithOutSql
 {
-    internal class DataFromSP63WithOutSql : IDataSP63
+    internal class DataFromSP63WithOutSql : IDataSP63RequestDb
     {
         public double GetArmatureResistNormative(string armatureClass)
         {
@@ -31,9 +31,16 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
             return -1;
         }
 
-        public double GetConcreteResistNormative(string concreteClass)
+        public double GetConcreteResistNormativeSqueeze(string concreteClass)
         {
-            bool check = DataFromSp63.TableConcreteResistNormative.TryGetValue(concreteClass, out double result);
+            bool check = DataFromSp63.TableConcreteResistNormativeSqueeze.TryGetValue(concreteClass, out double result);
+            if (check) return result;
+            return -1;
+        }
+
+        public double GetConcreteResistNormativeStretch(string concreteClass)
+        {
+            bool check = DataFromSp63.TableConcreteResistNormativeStretch.TryGetValue(concreteClass, out double result);
             if (check) return result;
             return -1;
         }
@@ -43,6 +50,11 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
             bool check = DataFromSp63.TableConcreteStartElasticityModulus.TryGetValue(concreteClass, out double result);
             if (check) return result;
             return -1;
+        }
+
+        public double GetArmatureElasticityModulus(string armatureClass)
+        {
+            return DataFromSp63.ArmatureElasticityModulus;
         }
     }
 }

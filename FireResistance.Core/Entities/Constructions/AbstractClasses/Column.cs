@@ -9,7 +9,9 @@ namespace FireResistance.Core.Entities.Constructions.AbstractClasses
 {
     internal class Column : Construction
     {
-        public Column(Armature armature, Concrete concrete) : base(armature, concrete) { }
+        public double distanceToArmature { get; set; }
+        public string fixationElement { get; set; }
+        public double workLenth { get; set; }
 
         public override string ToString()
         {

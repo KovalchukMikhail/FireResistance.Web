@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Data.Implementations.WithOutSql
 {
-    internal class DataFromSP468WithOutSql : IDataSP468
+    internal class DataFromSP468WithOutSql : IDataSP468RequestDb
     {
         public double GetBetaB(string concreteType, int temperature)
         {

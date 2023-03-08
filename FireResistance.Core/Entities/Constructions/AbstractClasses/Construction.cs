@@ -14,12 +14,10 @@ namespace FireResistance.Core.Entities.Constructions.AbstractClasses
         public virtual double Height { get; set; }
         public virtual double Width { get; set;}
         public virtual double Length { get; set; }
+        public virtual double Moment { get; set; }
+        public virtual double Strength { get; set; }
+        public double workHeight { get; set; }
 
-        public Construction(Armature armature, Concrete concrete)
-        {
-            this.Armature = armature;
-            this.Concrete = concrete;
-        }
 
     }
 }

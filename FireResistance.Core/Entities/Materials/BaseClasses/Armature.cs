@@ -10,7 +10,7 @@ namespace FireResistance.Core.Entities.Materials.BaseClasses
     public class Armature : Material
     {
         public int Diameter { get; set; }
-        public int Amount { get; set; }
+        public int Count { get; set; }
         public double Area { get; set; }
         public double ResistNormativeForStretch { get; set; }
         public double ResistСalculationForStretch { get; set; }

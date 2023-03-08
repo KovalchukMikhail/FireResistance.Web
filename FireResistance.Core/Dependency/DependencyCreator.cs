@@ -1,5 +1,6 @@
 ﻿using FireResistance.Core.Controllers.ControllerBasic;
 using FireResistance.Core.Controllers.Interfaces;
+using FireResistance.Core.Data;
 using FireResistance.Core.Data.Implementations.WithOutSql;
 using FireResistance.Core.Data.Interfaces;
 using FireResistance.Core.Entities.Calculations;
@@ -30,9 +31,9 @@ namespace FireResistance.Core.Dependency
     internal class DependencyCreator
     {
         private static IServiceCollection services = new ServiceCollection()
-            .AddTransient<IDataTemperatureСolumn, TemperatureСolumnWithOutSql>()
-            .AddTransient<IDataSP63, DataFromSP63WithOutSql>()
-            .AddTransient<IDataSP468, DataFromSP468WithOutSql>()
+            .AddTransient<IDataTemperatureСolumnRequestDb, TemperatureСolumnWithOutSql>()
+            .AddTransient<IDataSP63RequestDb, DataFromSP63WithOutSql>()
+            .AddTransient<IDataSP468RequestDb, DataFromSP468WithOutSql>()
             .AddTransient<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, ResultAsDictionary>()
             .AddTransient<ArmatureForFR>()
             .AddTransient<ConcreteForFR>()
@@ -51,9 +52,14 @@ namespace FireResistance.Core.Dependency
             .AddTransient<CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
                                              ResultAsDictionary, Dictionary<string, double>,
                                              Dictionary<string, string>>>, CalculatorBasic>()
-            .AddTransient<Slab, SlabBasic>()
-            .AddTransient<Column, ColumnBasic>()
-            .AddTransient<Wall, WallBasic>();
+            .AddTransient<Slab, SlabFR>()
+            .AddTransient<Column, ColumnFR>()
+            .AddTransient<Wall, WallFR>()
+            .AddTransient<IArmatureAreaRequestDb, ArmatureArea>()
+            .AddTransient<IDataSP468RequestDb, DataFromSP468WithOutSql>()
+            .AddTransient<IDataSP63RequestDb, DataFromSP63WithOutSql>()
+            .AddTransient<IDataTemperatureСolumnRequestDb, TemperatureСolumnWithOutSql>()
+            .AddTransient<RequestDb>();
 
         
 

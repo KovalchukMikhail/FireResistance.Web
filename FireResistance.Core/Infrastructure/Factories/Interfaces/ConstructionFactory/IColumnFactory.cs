@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory
 {
-    internal interface IColumnFactory : IConstructionFactory
+    internal interface IColumnFactory <T> : IConstructionFactory <T>
     {
     }
 }

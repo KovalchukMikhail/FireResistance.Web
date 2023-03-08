@@ -9,10 +9,10 @@ namespace FireResistance.Core.Entities.Materials.BaseClasses
 {
     public class Concrete : Material
     {
-        public string Type { get; init; }
-        public double ResistNormativeForStretch { get; init; }
-        public double ResistNormativeForSqueeze { get; init; }
-        public double StartElasticityModulus { get; init; }
+        public string TypeName { get; set; }
+        public double ResistNormativeForStretch { get; set; }
+        public double ResistNormativeForSqueeze { get; set; }
+        public double StartElasticityModulus { get; set; }
 
 
 
@@ -28,7 +28,7 @@ namespace FireResistance.Core.Entities.Materials.BaseClasses
         public override string ToString()
         {
             return $"Класс_бетона_по_прочности {ClassName}:" +
-                $"Вид_бетона {Type}:" +
+                $"Вид_бетона {TypeName}:" +
                 $"Нормативное_сопротивление_бетона_растяжению {ResistNormativeForStretch}:" +
                 $"Нормативное_сопротивление_бетона_сжатию {ResistNormativeForSqueeze}:" +
                 $"Модуль_деформации_бетона {StartElasticityModulus}";

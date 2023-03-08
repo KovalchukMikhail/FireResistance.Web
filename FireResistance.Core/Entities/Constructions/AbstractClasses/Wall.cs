@@ -9,7 +9,6 @@ namespace FireResistance.Core.Entities.Constructions.AbstractClasses
 {
     internal abstract class Wall : Construction
     {
-        public Wall(Armature armature, Concrete concrete) : base(armature, concrete) { }
 
         public override string ToString()
         {

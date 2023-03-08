@@ -8,12 +8,21 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
 {
     internal static class DataFromSp63
     {
-        public static Dictionary<string, double> TableConcreteResistNormative
+        public static Dictionary<string, double> TableConcreteResistNormativeSqueeze
         {
             get
             {
                 Dictionary<string, double> dict = new Dictionary<string, double>();
-                return dict = tableConcreteResistNormative.ToDictionary(entry => entry.Key, entry => entry.Value);
+                return dict = tableConcreteResistNormativeSqueeze.ToDictionary(entry => entry.Key, entry => entry.Value);
+            }
+        }
+
+        public static Dictionary<string, double> TableConcreteResistNormativeStretch
+        {
+            get
+            {
+                Dictionary<string, double> dict = new Dictionary<string, double>();
+                return dict = tableConcreteResistNormativeStretch.ToDictionary(entry => entry.Key, entry => entry.Value);
             }
         }
         public static Dictionary<string, double> TableConcreteStartElasticityModulus
@@ -48,7 +57,9 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
                 return dict = tableArmatureResistStretchСalculation.ToDictionary(entry => entry.Key, entry => entry.Value);
             }
         }
-        private static Dictionary<string, double> tableConcreteResistNormative = new Dictionary<string, double>()
+        public static double ArmatureElasticityModulus { get; } = 200000;
+
+        private static Dictionary<string, double> tableConcreteResistNormativeSqueeze = new Dictionary<string, double>()
         {
             {"B15", 11},
             {"B20", 15},
@@ -58,6 +69,18 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
             {"B40", 29},
             {"B45", 32},
             {"B50", 36}
+        };
+
+        private static Dictionary<string, double> tableConcreteResistNormativeStretch = new Dictionary<string, double>()
+        {
+            {"B15", 1.1},
+            {"B20", 1.35},
+            {"B25", 1.55},
+            {"B30", 1.75},
+            {"B35", 1.95},
+            {"B40", 2.1},
+            {"B45", 2.25},
+            {"B50", 2.45}
         };
 
         private static Dictionary<string, double> tableConcreteStartElasticityModulus = new Dictionary<string, double>()
@@ -112,5 +135,6 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
             {"А600С_МАРКИ_18Г2СФ_ТЕРМОМЕХАНИЧЕСКИ_УПРОЧНЕННАЯ", 520},
             {"А500С_МАРКИ_Ст3Гпс_ТЕРМОМЕХАНИЧЕСКИ_УПРОЧНЕННАЯ_ПО_ГОСТ 34028-2016", 435}
         };
+
     }
 }

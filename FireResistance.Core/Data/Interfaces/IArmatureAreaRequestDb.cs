@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Data.Interfaces
 {
-    internal interface IArmatureArea
+    internal interface IArmatureAreaRequestDb
     {
         public double GetArmatureArea(int armatureDiameter);
     }

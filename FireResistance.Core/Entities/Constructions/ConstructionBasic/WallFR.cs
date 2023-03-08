@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Entities.Constructions.ConstructionBasic
 {
-    internal class SlabBasic : Slab
+    internal class WallFR : Wall
     {
-        public SlabBasic(Armature armature, Concrete concrete) : base(armature, concrete) { }
+        public string fireResistanceVolume { get; set; }
     }
 }

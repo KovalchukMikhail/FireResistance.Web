@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Data.Implementations.WithOutSql
 {
-    internal class ArmatureArea : IArmatureArea
+    internal class ArmatureArea : IArmatureAreaRequestDb
     {
         public double GetArmatureArea(int armatureDiameter)
         {

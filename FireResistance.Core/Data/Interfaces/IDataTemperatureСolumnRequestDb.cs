@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Data.Interfaces
 {
-    internal interface IDataTemperatureСolumn
+    internal interface IDataTemperatureСolumnRequestDb
     {
         public double GetTemperatureOfСolumn(string fireResistans, int hight, int deep);
         public double GetDeepForSilicateСolumn(string fireResistans, int temperature);

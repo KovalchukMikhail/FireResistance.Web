@@ -9,6 +9,6 @@ namespace FireResistance.Core.Entities.Constructions.AbstractClasses
 {
     internal abstract class Slab : Construction
     {
-        public Slab(Armature armature, Concrete concrete) : base(armature, concrete) { }
+
     }
 }

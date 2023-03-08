@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Data.Interfaces
 {
-    internal interface IDataSP468
+    internal interface IDataSP468RequestDb
     {
         public double GetGammaBT(string concreteType, int temperature);
         public double GetBetaB(string concreteType, int temperature);
