@@ -10,13 +10,13 @@ namespace FireResistance.Core.Entities.Constructions.ConstructionBasic
 {
     internal class ColumnFR : Column
     {
-        public int distanceFromBringToPointAverageTemperature { get; set; }
-        public string fireResistanceVolume { get; set; }
-        public double DeepConcreteWarming { get; set; }
-        public double HeightProfileWithWarming { get; set; }
-        public double WorkWidthWithWarming { get; set; }
-        public double SquareChangedProfile { get; set; }
-        public double WorkHeightProfileWithWarming { get; set; }
+        public virtual int distanceFromBringToPointAverageTemperature { get; set; }
+        public virtual string fireResistanceVolume { get; set; }
+        public virtual double DeepConcreteWarming { get; set; }
+        public virtual double HeightProfileWithWarming { get; set; }
+        public virtual double WorkWidthWithWarming { get; set; }
+        public virtual double SquareChangedProfile { get; set; }
+        public virtual double WorkHeightProfileWithWarming { get; set; }
         
 
 

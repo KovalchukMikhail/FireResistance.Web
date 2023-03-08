@@ -18,6 +18,8 @@ using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
 using FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic;
 using FireResistance.Core.Infrastructure.Formulas;
 using FireResistance.Core.Infrastructure.Formulas.Interfaces;
+using FireResistance.Core.Infrastructure.Utilities.Interfaces;
+using FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -59,9 +61,9 @@ namespace FireResistance.Core.Dependency
             .AddTransient<IDataSP468RequestDb, DataFromSP468WithOutSql>()
             .AddTransient<IDataSP63RequestDb, DataFromSP63WithOutSql>()
             .AddTransient<IDataTemperatureСolumnRequestDb, TemperatureСolumnWithOutSql>()
-            .AddTransient<RequestDb>();
-
-        
+            .AddTransient<RequestDb>()
+            .AddTransient<IIndexDeterminant<string, Dictionary<string, int>>, IndexDeterminantBasic>()
+            .AddTransient<IInterpolator, InterpolatorBasic>();
 
 
         public static ServiceProvider GetServiceProvider()
