@@ -1,11 +1,13 @@
 ﻿using FireResistance.Core.Entities.Calculations;
 using FireResistance.Core.Entities.Calculations.AbstractClasses;
 using FireResistance.Core.Entities.Constructions.AbstractClasses;
+using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.Materials.AbstractClasses;
 using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
+using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,8 +48,14 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic
             //concrete = factory.Create(provider, this.sourceData) as ConcreteForFR;
 
             //column = provider.GetRequiredService<Column>();
-            IInterpolator interpolator = provider.GetService<IInterpolator>();
-            result.AddItemDescription("ответ", interpolator.Run(400).ToString());
+            IColumnFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>> columnFactory
+                = provider.GetRequiredService<IColumnFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>>();
+
+            ColumnFR column = columnFactory.Create(provider, sourceData) as ColumnFR;
+            ArmatureForFR armature = column.Armature as ArmatureForFR;
+            double temperature = armature.Temperature;
+
+            result.AddItemDescription("ответ", temperature.ToString());
 
             return true;
             

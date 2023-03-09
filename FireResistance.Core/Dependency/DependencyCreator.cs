@@ -14,10 +14,13 @@ using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic;
+using FireResistance.Core.Infrastructure.Factories.ConstructionFactory;
+using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
 using FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic;
 using FireResistance.Core.Infrastructure.Formulas;
 using FireResistance.Core.Infrastructure.Formulas.Interfaces;
+using FireResistance.Core.Infrastructure.Formulas.TemperutureFormSp468;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 using FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic;
 using Microsoft.Extensions.DependencyInjection;
@@ -54,16 +57,21 @@ namespace FireResistance.Core.Dependency
             .AddTransient<CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
                                              ResultAsDictionary, Dictionary<string, double>,
                                              Dictionary<string, string>>>, CalculatorBasic>()
-            .AddTransient<Slab, SlabFR>()
-            .AddTransient<Column, ColumnFR>()
-            .AddTransient<Wall, WallFR>()
+            .AddTransient<SlabFR>()
+            .AddTransient<ColumnFR>()
+            .AddTransient<WallFR>()
             .AddTransient<IArmatureAreaRequestDb, ArmatureArea>()
             .AddTransient<IDataSP468RequestDb, DataFromSP468WithOutSql>()
             .AddTransient<IDataSP63RequestDb, DataFromSP63WithOutSql>()
             .AddTransient<IDataTemperatureСolumnRequestDb, TemperatureСolumnWithOutSql>()
             .AddTransient<RequestDb>()
-            .AddTransient<IIndexDeterminant<string, Dictionary<string, int>>, IndexDeterminantBasic>()
-            .AddTransient<IInterpolator, InterpolatorBasic>();
+            .AddTransient<IIndexDeterminant, IndexDeterminantBasic>()
+            .AddTransient<IInterpolator, InterpolatorBasic>()
+            .AddTransient<IColumnFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>, ColumnFactoryFR>()
+            .AddTransient<ColumnTemperature>();
+
+        
+
 
 
         public static ServiceProvider GetServiceProvider()

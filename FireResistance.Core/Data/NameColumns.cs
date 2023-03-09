@@ -12,11 +12,11 @@ namespace FireResistance.Core.Data
         public static List<string> ConcreteClass => new List<string>(concreteClass);
         public static List<string> ConcreteType => new List<string>(concreteType);
         public static List<string> FixationElement => new List<string>(fixationElement);
-        public static List<int> TemperatureForTable => new List<int>(temperatureForTable);
-        public static List<int> DistanceToArmatureH200 => new List<int>(distanceToArmatureH200);
-        public static List<int> DistanceToArmatureH300 => new List<int>(distanceToArmatureH300);
-        public static List<int> DistanceToArmatureH400 => new List<int>(distanceToArmatureH400);
-        public static List<int> TemperatureForCriticalTemperature => new List<int>(temperatureForCriticalTemperature);
+        public static List<double> TemperatureForTable => new List<double>(temperatureForTable);
+        public static List<double> DistanceToArmatureH200 => new List<double>(distanceToArmatureH200);
+        public static List<double> DistanceToArmatureH300 => new List<double>(distanceToArmatureH300);
+        public static List<double> DistanceToArmatureH400 => new List<double>(distanceToArmatureH400);
+        public static List<double> TemperatureForCriticalTemperature => new List<double>(temperatureForCriticalTemperature);
         public static List<string> FireResistanceForCriticalTemperature => new List<string>(fireResistanceForCriticalTemperature);
         public static List<int> StandartHeight => new List<int>(standartHeight);
         public static List<int> ArmatureDiameter => new List<int>(armatureDiameter);
@@ -52,26 +52,26 @@ namespace FireResistance.Core.Data
             "НЕ_СМЕЩАЕМАЯ_ЗАДЕЛКА_НА_ДВУХ_КОНЦАХ_С_ПОДАТЛИВЫМ_ОГРАНИЧЕННЫМ_ПОВОРОТОМ",
             "ШАРНИРНЫЕ_ОПОРЫ_НА_ДВУХ_КОНЦАХ"
         };
-        private static List<int> temperatureForTable = new List<int>()
+        private static List<double> temperatureForTable = new List<double>()
         {
             20, 200, 300, 400, 500, 600, 700, 800
         };
-        private static List<int> distanceToArmatureH200 = new List<int>()
+        private static List<double> distanceToArmatureH200 = new List<double>()
         {
             0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100
         };
 
-        private static List<int> distanceToArmatureH300 = new List<int>()
+        private static List<double> distanceToArmatureH300 = new List<double>()
         {
             0, 30, 60, 90, 120, 150
         };
 
-        private static List<int> distanceToArmatureH400 = new List<int>()
+        private static List<double> distanceToArmatureH400 = new List<double>()
         {
             0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200
         };
 
-        private static List<int> temperatureForCriticalTemperature = new List<int>()
+        private static List<double> temperatureForCriticalTemperature = new List<double>()
         {
             200, 300, 400, 500, 600, 700, 800, 900, 1000
         };

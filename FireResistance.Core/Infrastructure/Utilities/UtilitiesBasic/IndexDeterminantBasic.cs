@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
 {
-    internal class IndexDeterminantBasic : IIndexDeterminant<string, List<string>>
+    internal class IndexDeterminantBasic : IIndexDeterminant
     {
         public double GetIndex(string value, List<string> list)
         {    

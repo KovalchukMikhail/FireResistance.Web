@@ -28,7 +28,7 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
 
         public double GetTemperatureOfСolumn(string fireResistans, int height, int deep)
         {
-            List<int> deepList = GetListOfDistanceToArmature(height);
+            List<double> deepList = GetListOfDistanceToArmature(height);
             double[,] array = GetArrayTemperature(fireResistans, height);
             int deepIndex = deepList.IndexOf(deep);
             if (array.GetLength(0) == 0 || deepIndex == -1) return -1;
@@ -62,14 +62,14 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
             };
         }
 
-        public List<int> GetListOfDistanceToArmature(int height)
+        public List<double> GetListOfDistanceToArmature(int height)
         {
             return height switch
             {
                 200 => NameColumns.DistanceToArmatureH200,
                 300 => NameColumns.DistanceToArmatureH300,
                 400 => NameColumns.DistanceToArmatureH400,
-                _ => new List<int>()
+                _ => new List<double>()
             };
         }
     }

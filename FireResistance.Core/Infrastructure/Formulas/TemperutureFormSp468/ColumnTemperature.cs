@@ -38,13 +38,13 @@ namespace FireResistance.Core.Infrastructure.Formulas.TemperutureFormSp468
             {
                 double firstValue = GetTemperatureAtPoint(minSize, construction);
                 double secondValue = GetTemperatureAtPoint(mediumSize, construction);
-                return GetIntermediateValue(minSize, mediumSize, size, firstValue, secondValue);
+                return interpolator.GetIntermediateValue(minSize, mediumSize, size, firstValue, secondValue);
             }
             else if (size > mediumSize && size < maxSize)
             {
                 double firstValue = GetTemperatureAtPoint(mediumSize, construction);
                 double secondValue = GetTemperatureAtPoint(maxSize, construction);
-                return GetIntermediateValue(mediumSize, maxSize, size, firstValue, secondValue);
+                return interpolator.GetIntermediateValue(mediumSize, maxSize, size, firstValue, secondValue);
             }
             else return -1;
         }
@@ -57,13 +57,9 @@ namespace FireResistance.Core.Infrastructure.Formulas.TemperutureFormSp468
         private double GetTemperatureAtPoint(int size, ColumnFR construction)
         {
             double[,] temperutureArray = db.TemperatureDb.GetArrayTemperature(construction.fireResistanceVolume, size);
-            List<int> distanceToArmatureForArray = db.TemperatureDb.GetListOfDistanceToArmature(size);
+            List<double> distanceToArmatureForArray = db.TemperatureDb.GetListOfDistanceToArmature(size);
             return interpolator.GetValueFromTemperatureTable(distanceToArmatureForArray, construction.distanceToArmature, temperutureArray);
         }
 
-        private double GetIntermediateValue(double minSize, double maxSize, double size, double temperatureOfMinSize, double temperatureOfMaxSize)
-        {
-            return temperatureOfMinSize - (size - minSize) * (temperatureOfMinSize - temperatureOfMaxSize) / (maxSize - minSize);
-        }
     }
 }

@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Utilities.Interfaces
 {
-    internal interface IIndexDeterminant <T, K> where K : IEnumerable
+    internal interface IIndexDeterminant
     {
-        public double GetIndex(T value, K dict);
+        public double GetIndex(string value, List<string> list);
+        public double GetIndex(double value, List<double> list);
     }
 }

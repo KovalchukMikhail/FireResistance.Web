@@ -12,6 +12,6 @@ namespace FireResistance.Core.Data.Interfaces
         public double GetDeepForSilicateСolumn(string fireResistans, int temperature);
         public double GetDeepForCarbonateСolumn(string fireResistans, int temperature);
         public double[,] GetArrayTemperature(string fireResistans, int height);
-        public List<int> GetListOfDistanceToArmature(int height);
+        public List<double> GetListOfDistanceToArmature(int height);
     }
 }
