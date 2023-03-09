@@ -1,6 +1,7 @@
 ﻿using FireResistance.Core.Entities.Constructions.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
+using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
         public Construction Create(ServiceProvider provider, ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData)
         {
             Column column = provider.GetRequiredService<Column>();
-
+            return null;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FireResistance.Core;
 using FireResistance.Core.Entities.Calculations;
+using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic;
 using FireResistance.Web.Models;
@@ -41,7 +42,7 @@ namespace FireResistance.Web.Controllers
 
 
             ColumnFireIsWithFourSidesDataFactory dataFactory = new ColumnFireIsWithFourSidesDataFactory();
-            bool check = dataFactory.TryCreate(dictStr, dictDbl, out ColumnFireIsWithFourSidesDataBasic data);
+            bool check = dataFactory.TryCreate(dictStr, dictDbl, out ColumnFireIsWithFourSidesData<Dictionary<string, string>> data);
             data.Check = true;
             FireResistanceBasic fireResistance = new FireResistanceBasic();
             fireResistance.TryPerformCalculation(data);

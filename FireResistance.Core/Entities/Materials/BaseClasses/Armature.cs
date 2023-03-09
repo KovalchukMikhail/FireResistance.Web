@@ -33,7 +33,7 @@ namespace FireResistance.Core.Entities.Materials.BaseClasses
         {
             return $"Класс_арматуры_по_прочности {base.ClassName}:" +
                 $"Диаметр_арматуры {Diameter}:" +
-                $"Количество_арматуры {Amount}:" +
+                $"Количество_арматуры {Count}:" +
                 $"Площадь_арматуры {Area}:" +
                 $"Нормативное_сопротивление_арматуры_растяжению {ResistNormativeForStretch}:" +
                 $"Расчетное_сопротивление_арматуры_растяжению {ResistСalculationForStretch}:" +

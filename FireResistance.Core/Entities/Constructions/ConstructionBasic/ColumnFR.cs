@@ -12,11 +12,11 @@ namespace FireResistance.Core.Entities.Constructions.ConstructionBasic
     {
         public virtual int distanceFromBringToPointAverageTemperature { get; set; }
         public virtual string fireResistanceVolume { get; set; }
-        public virtual double DeepConcreteWarming { get; set; }
-        public virtual double HeightProfileWithWarming { get; set; }
-        public virtual double WorkWidthWithWarming { get; set; }
-        public virtual double SquareChangedProfile { get; set; }
-        public virtual double WorkHeightProfileWithWarming { get; set; }
+        public virtual int DeepConcreteWarming { get; set; }
+        public virtual int HeightProfileWithWarming { get; set; }
+        public virtual int WorkWidthWithWarming { get; set; }
+        public virtual int AreaChangedProfile { get; set; }
+        public virtual int WorkHeightProfileWithWarming { get; set; }
         
 
 

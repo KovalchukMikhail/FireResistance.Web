@@ -14,5 +14,15 @@ namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
         {
             IndexDeterminant = indexDeterminant;
         }
+
+        public double GetValueFromTable(List<string> namesOfRows, List<int> namesOfColumns, string rowName, int columnName, double table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public double GetValueFromTemperatureTable(List<int> namesOfRows, int rowName, double[,] table)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

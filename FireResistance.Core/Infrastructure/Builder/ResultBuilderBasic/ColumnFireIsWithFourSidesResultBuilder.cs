@@ -7,6 +7,7 @@ using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
+using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -37,15 +38,16 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic
 
         public bool BuildConstructions(ServiceProvider provider)
         {
-            IMaterialFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>> factory
-                            = provider.GetRequiredService<IArmatureFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>>();
-            armature = factory.Create(provider, this.sourceData) as ArmatureForFR;
+            //IMaterialFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>> factory
+            //                = provider.GetRequiredService<IArmatureFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>>();
+            //armature = factory.Create(provider, this.sourceData) as ArmatureForFR;
 
-            factory = provider.GetRequiredService<IConcreteFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>>();
-            concrete = factory.Create(provider, this.sourceData) as ConcreteForFR;
+            //factory = provider.GetRequiredService<IConcreteFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>>();
+            //concrete = factory.Create(provider, this.sourceData) as ConcreteForFR;
 
-            column = provider.GetRequiredService<Column>();
-            result.AddItemDescription("ответ",column.ToString());
+            //column = provider.GetRequiredService<Column>();
+            IInterpolator interpolator = provider.GetService<IInterpolator>();
+            result.AddItemDescription("ответ", interpolator.Run(400).ToString());
 
             return true;
             

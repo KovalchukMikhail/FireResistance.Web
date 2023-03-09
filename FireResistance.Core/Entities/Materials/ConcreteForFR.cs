@@ -14,7 +14,6 @@ namespace FireResistance.Core.Entities.Materials
         public double GammaBT { get; set; }
         public double BetaB { get; set; }
         public double ResistWithTemperatureNormative { get; set; }
-        public double ResistWithTemperatureNormative { get; set; }
 
     }
 }
