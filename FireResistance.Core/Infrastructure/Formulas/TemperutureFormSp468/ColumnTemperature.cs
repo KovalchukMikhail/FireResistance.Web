@@ -90,8 +90,8 @@ namespace FireResistance.Core.Infrastructure.Formulas.TemperutureFormSp468
 
         private double GetAveregeTemperature(int size, ColumnFR construction, double criticalTemperature, int additionalSize = 0)
         {
-            int positionForCalculation = construction.distanceFromBringToPointAverageTemperature > size / 2 ?
-                size / 2
+            int positionForCalculation = construction.distanceFromBringToPointAverageTemperature > (size / 2) ?
+                (size / 2)
                 : construction.distanceFromBringToPointAverageTemperature;
             double temperatureCount = 0;
             int count = 0;
@@ -99,10 +99,10 @@ namespace FireResistance.Core.Infrastructure.Formulas.TemperutureFormSp468
             double currentTemperature = 0;
             for (int i = 0; i < positionForCalculation + 1; i++)
             {
-                currentTemperature = GetTemperatureAtPoint(size, positionForCalculation, construction);
+                currentTemperature = GetTemperatureAtPoint(size, i, construction);
                 if(currentTemperature <= criticalTemperature)
                 {
-                    temperatureCount += criticalTemperature;
+                    temperatureCount += currentTemperature;
                     count++;
                     last = currentTemperature;
                 }

@@ -1,4 +1,5 @@
 ﻿using FireResistance.Core.Entities.Constructions.AbstractClasses;
+using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.Materials.BaseClasses;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace FireResistance.Core.Entities.Constructions.ConstructionBasic
 {
     internal class ColumnFR : Column
     {
+        public virtual ArmatureForFR ArmatureFR { get; set; }
+        public virtual ConcreteForFR ConcreteFR { get; set; }
         public virtual int distanceFromBringToPointAverageTemperature { get; set; }
         public virtual string fireResistanceVolume { get; set; }
         public virtual int DeepConcreteWarming { get; set; }

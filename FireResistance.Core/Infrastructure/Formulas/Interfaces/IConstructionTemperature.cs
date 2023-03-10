@@ -11,7 +11,7 @@ namespace FireResistance.Core.Infrastructure.Formulas.Interfaces
 {
     internal interface IConstructionTemperature <T> where T: Construction
     {
-        public double GetConcreteTemperature(T constraction);
+        public double GetConcreteTemperature(T constraction, double criticalTemperature);
         public double GetArmatureTemperature(T construction);
     }
 }

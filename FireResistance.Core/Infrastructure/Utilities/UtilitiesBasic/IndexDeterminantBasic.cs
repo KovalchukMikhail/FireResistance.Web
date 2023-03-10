@@ -35,6 +35,7 @@ namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
                         nextIndex = i + 1;
                         double appendix = (value - preValue)/(nextValue - preValue);
                         indexValue = appendix + preIndex;
+                        break;
                     } 
                 }
             }

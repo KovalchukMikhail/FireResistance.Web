@@ -6,6 +6,7 @@ using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
+using FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic;
 using FireResistance.Core.Infrastructure.Formulas.TemperutureFormSp468;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,7 +35,11 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
             double temperatureArmature = columnTemperature.GetArmatureTemperature(column);
             double criticalTemperature = db.DataSP468Db.GetCriticalTemperatureConcrete(sourceData.ConcreteType);
             double TemperatureConcrete = columnTemperature.GetConcreteTemperature(column, criticalTemperature);
-            column.Armature = armature;
+            ArmatureForFRFactory armatureFactory = provider.GetRequiredService<ArmatureForFRFactory>();
+            ConcreteForFRFactory concreteFactory = provider.GetRequiredService<ConcreteForFRFactory>();
+            column.ArmatureFR = armatureFactory.Create(provider, sourceData, temperatureArmature) as ArmatureForFR;
+            column.ConcreteFR = concreteFactory.Create(provider, sourceData, TemperatureConcrete) as ConcreteForFR;
+
             return column;
         }
     }

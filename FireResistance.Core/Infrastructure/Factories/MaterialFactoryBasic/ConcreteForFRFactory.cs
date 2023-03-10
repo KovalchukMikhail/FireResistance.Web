@@ -23,6 +23,7 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
             concrete.StartElasticityModulus = db.DataSP63Db.GetConcreteStartElasticityModulus(concrete.ClassName);
             concrete.ResistNormativeForStretch = db.DataSP63Db.GetConcreteResistNormativeStretch(concrete.ClassName);
             concrete.ResistNormativeForSqueeze = db.DataSP63Db.GetConcreteResistNormativeSqueeze(concrete.ClassName);
+            concrete.Temperature = temperature;
             return concrete;
         }
     }

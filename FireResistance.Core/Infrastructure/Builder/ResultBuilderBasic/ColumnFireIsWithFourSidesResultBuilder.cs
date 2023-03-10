@@ -7,6 +7,7 @@ using FireResistance.Core.Entities.Materials.AbstractClasses;
 using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
+using FireResistance.Core.Infrastructure.Factories.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
@@ -26,7 +27,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic
         private ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData;
         ArmatureForFR armature;
         ConcreteForFR concrete;
-        Column column;
+        ColumnFR column;
 
         public ColumnFireIsWithFourSidesResultBuilder()
         {
@@ -48,14 +49,13 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic
             //concrete = factory.Create(provider, this.sourceData) as ConcreteForFR;
 
             //column = provider.GetRequiredService<Column>();
-            IColumnFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>> columnFactory
-                = provider.GetRequiredService<IColumnFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>>();
+            ColumnFactoryFR columnFactory = provider.GetRequiredService<ColumnFactoryFR>();
 
             ColumnFR column = columnFactory.Create(provider, sourceData) as ColumnFR;
-            ArmatureForFR armature = column.Armature as ArmatureForFR;
-            double temperature = armature.Temperature;
 
-            result.AddItemDescription("ответ", temperature.ToString());
+
+            result.AddItemDescription("ответ", "\nТемпература арматуры: " + column.ArmatureFR.Temperature.ToString() +
+                                        "\nТемпература бетона: " + column.ConcreteFR.Temperature.ToString());
 
             return true;
             

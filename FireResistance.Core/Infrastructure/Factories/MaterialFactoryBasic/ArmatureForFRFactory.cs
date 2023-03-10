@@ -29,6 +29,7 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
             armature.ElasticityModulus = db.DataSP63Db.GetArmatureElasticityModulus(armature.ClassName);
             armature.ResistСalculationForSqueeze = db.DataSP63Db.GetArmatureResistSqueezeСalculation(armature.ClassName);
             armature.ResistСalculationForStretch = db.DataSP63Db.GetArmatureResistStretchСalculation(armature.ClassName);
+            armature.Temperature = temperature;
             return armature;
         }
     }
