@@ -12,13 +12,9 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
 {
-    internal class ConcreteForFRFactory : IConcreteFactory <ColumnFireIsWithFourSidesData<Dictionary<string, string>>>
+    internal class ConcreteForFRFactory : IMaterialFactoryFR <ColumnFireIsWithFourSidesData<Dictionary<string, string>>>
     {
-        private double temperature; 
-        public ConcreteForFRFactory(double temperature) {
-            this.temperature = temperature;
-        }
-        public Material Create(ServiceProvider provider, ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData)
+        public Material Create(ServiceProvider provider, ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData, double temperature)
         {
             RequestDb db = provider.GetService<RequestDb>();
             ConcreteForFR concrete = provider.GetService<ConcreteForFR>();

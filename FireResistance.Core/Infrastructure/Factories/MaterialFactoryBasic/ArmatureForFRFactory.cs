@@ -1,4 +1,6 @@
 ﻿using FireResistance.Core.Data;
+using FireResistance.Core.Entities.Constructions.AbstractClasses;
+using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.Materials.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
@@ -12,15 +14,10 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
 {
-    internal class ArmatureForFRFactory : IArmatureFactory <ColumnFireIsWithFourSidesData<Dictionary<string, string>>>
+    internal class ArmatureForFRFactory : IMaterialFactoryFR <ColumnFireIsWithFourSidesData<Dictionary<string, string>>>
     {
 
-        private double temperature;
-        public ArmatureForFRFactory(double temperature)
-        {
-            this.temperature = temperature;
-        }
-        public Material Create(ServiceProvider provider, ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData)
+        public Material Create(ServiceProvider provider, ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData, double temperature)
         {
             RequestDb db = provider.GetRequiredService<RequestDb>();
             ArmatureForFR armature = provider.GetRequiredService<ArmatureForFR>();

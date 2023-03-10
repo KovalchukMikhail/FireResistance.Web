@@ -48,5 +48,12 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
             if (check) return result;
             return -1;
         }
+
+        public double GetCriticalTemperatureConcrete(string concreteType)
+        {
+            bool check = TemperatureDataFromSp468.CriticalTemperatureConcrete.TryGetValue(concreteType, out double result);
+            if (check) return result;
+            return -1;
+        }
     }
 }

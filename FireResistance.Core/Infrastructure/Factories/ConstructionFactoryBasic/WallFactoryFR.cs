@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
 {
-    internal class WallFactoryFR : IWallFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>
+    internal class WallFactoryFR : IConstructionFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>
     {
-        public Construction Create(ServiceProvider provider, ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData)
+        public virtual Construction Create(ServiceProvider provider, ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData)
         {
             throw new NotImplementedException();
         }

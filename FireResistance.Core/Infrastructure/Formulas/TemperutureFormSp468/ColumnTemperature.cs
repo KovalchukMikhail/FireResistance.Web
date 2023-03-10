@@ -54,29 +54,29 @@ namespace FireResistance.Core.Infrastructure.Formulas.TemperutureFormSp468
             else return -1;
         }
 
-        public double GetConcreteTemperature(ColumnFR construction)
+        public double GetConcreteTemperature(ColumnFR construction, double criticalTemperature)
         {
             int size = Convert.ToInt32(Math.Min(construction.Width, construction.Height));
 
             if (size == minSize || size == mediumSize || size == maxSize)
             {
-                return GetAveregeTemperature(size, construction);
+                return GetAveregeTemperature(size, construction, criticalTemperature);
             }
             else if (size > minSize && size < mediumSize)
             {
-                double firstValue = GetAveregeTemperature(minSize, construction);
-                double secondValue = GetAveregeTemperature(mediumSize, construction);
+                double firstValue = GetAveregeTemperature(minSize, construction, criticalTemperature);
+                double secondValue = GetAveregeTemperature(mediumSize, construction, criticalTemperature);
                 return interpolator.GetIntermediateValue(minSize, mediumSize, size, firstValue, secondValue);
             }
             else if (size > mediumSize && size < maxSize)
             {
-                double firstValue = GetAveregeTemperature(mediumSize, construction);
-                double secondValue = GetAveregeTemperature(maxSize, construction);
+                double firstValue = GetAveregeTemperature(mediumSize, construction, criticalTemperature);
+                double secondValue = GetAveregeTemperature(maxSize, construction, criticalTemperature);
                 return interpolator.GetIntermediateValue(mediumSize, maxSize, size, firstValue, secondValue);
             }
             if(size > maxSize)
             {
-                return GetAveregeTemperature(maxSize, construction, (size - maxSize)/2);
+                return GetAveregeTemperature(maxSize, construction, criticalTemperature, (size - maxSize)/2);
             }
             else return -1;
         }
@@ -88,7 +88,7 @@ namespace FireResistance.Core.Infrastructure.Formulas.TemperutureFormSp468
             return interpolator.GetValueFromTemperatureTable(distanceToArmatureForArray, distanceToPoint, temperutureArray);
         }
 
-        private double GetAveregeTemperature(int size, ColumnFR construction, int additionalSize = 0)
+        private double GetAveregeTemperature(int size, ColumnFR construction, double criticalTemperature, int additionalSize = 0)
         {
             int positionForCalculation = construction.distanceFromBringToPointAverageTemperature > size / 2 ?
                 size / 2
@@ -97,7 +97,6 @@ namespace FireResistance.Core.Infrastructure.Formulas.TemperutureFormSp468
             int count = 0;
             double last = 0;
             double currentTemperature = 0;
-            double criticalTemperature = ((ConcreteForFR)construction.Concrete).criticalTemperature;
             for (int i = 0; i < positionForCalculation + 1; i++)
             {
                 currentTemperature = GetTemperatureAtPoint(size, positionForCalculation, construction);

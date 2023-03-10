@@ -14,6 +14,14 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
         public static List<int> LenthFromArmatureToEdgeTable400 => new List<int>(lenthFromArmatureToEdgeTable400);
         public static List<int> TemperatureForCriticalTemperature => new List<int>(temperatureForCriticalTemperature);
         public static List<string> FireResistanceForCriticalTemperature => new List<string>(fireResistanceForCriticalTemperature);
+        public static Dictionary<string, double> CriticalTemperatureConcrete
+        {
+            get
+            {
+                Dictionary<string, double> dict = new Dictionary<string, double>();
+                return dict = criticalTemperatureConcrete.ToDictionary(entry => entry.Key, entry => entry.Value);
+            }
+        }
         public static double[,] TemperatureH200R30 => Utilities.GetCopyArray(temperatureH200R30);
         public static double[,] TemperatureH200R45 => Utilities.GetCopyArray(temperatureH200R45);
         public static double[,] TemperatureH200R60 => Utilities.GetCopyArray(temperatureH200R60);
@@ -55,6 +63,13 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
         private static List<string> fireResistanceForCriticalTemperature = new List<string>
         {
             "R30", "R45", "R60", "R90", "R120", "R150"
+        };
+
+        private static Dictionary<string, double> criticalTemperatureConcrete = new Dictionary<string, double>()
+        {
+            {"ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ", 500 },
+            {"ТЯЖЕЛЫЙ_НА_КАРБОНАТНОМ_ЗАПОЛНИТЕЛЕ", 600 },
+            {"КОНСТРУКЦИОННЫЙ_КЕРАМЗИТОБЕТОН", 600 }
         };
 
         private static double[,] temperatureH200R30 =

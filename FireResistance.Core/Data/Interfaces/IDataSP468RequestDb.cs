@@ -13,5 +13,6 @@ namespace FireResistance.Core.Data.Interfaces
         public double GetGammaSt(string armatureClass, int temperature);
         public double GetBetaS(string armatureClass, int temperature);
         public double GetСoefficientFixationElement(string fixationElement);
+        public double GetCriticalTemperatureConcrete(string concreteType);
     }
 }

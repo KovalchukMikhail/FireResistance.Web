@@ -42,8 +42,8 @@ namespace FireResistance.Core.Dependency
             .AddTransient<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, ResultAsDictionary>()
             .AddTransient<ArmatureForFR>()
             .AddTransient<ConcreteForFR>()
-            .AddTransient<IArmatureFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>, ArmatureForFRFactory>()
-            .AddTransient<IConcreteFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>, ConcreteForFRFactory>()
+            .AddTransient<ArmatureForFRFactory>()
+            .AddTransient<ConcreteForFRFactory>()
             .AddTransient<ISp468, Sp468>()
             .AddTransient<ISp63, Sp63>()
             .AddTransient<IMainController<SourceData<Dictionary<string, string>>,
@@ -67,7 +67,7 @@ namespace FireResistance.Core.Dependency
             .AddTransient<RequestDb>()
             .AddTransient<IIndexDeterminant, IndexDeterminantBasic>()
             .AddTransient<IInterpolator, InterpolatorBasic>()
-            .AddTransient<IColumnFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>, ColumnFactoryFR>()
+            .AddTransient<ColumnFactoryFR>()
             .AddTransient<ColumnTemperature>();
 
         
