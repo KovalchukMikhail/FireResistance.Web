@@ -40,27 +40,27 @@ namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
             else return -1;
         }
 
-        public double GetIntermediateValue(double pointMaxValue, double pointMinValue, double curentPoint, double maxValue, double minValue)
+        public double GetIntermediateValue(double pointOfMaxValue, double pointOfMinValue, double curentPoint, double maxValue, double minValue)
         {
-            if(curentPoint > pointMaxValue)
+            if(curentPoint > pointOfMaxValue)
             {
-                return maxValue - (curentPoint - pointMaxValue) * (maxValue - minValue) / (pointMinValue - pointMaxValue);
+                return maxValue - (curentPoint - pointOfMaxValue) * (maxValue - minValue) / (pointOfMinValue - pointOfMaxValue);
             }
             else
             {
-                return minValue + (curentPoint - pointMinValue) * (maxValue - minValue) / (pointMaxValue - pointMinValue);
+                return minValue + (curentPoint - pointOfMinValue) * (maxValue - minValue) / (pointOfMaxValue - pointOfMinValue);
             } 
         }
 
-        public double GetIntermediateValue(int pointMaxValue, int pointMinValue, double curentPoint, double maxValue, double minValue)
+        public double GetIntermediateValue(int pointOfMaxValue, int pointOfMinValue, double curentPoint, double maxValue, double minValue)
         {
-            if (curentPoint > pointMaxValue)
+            if (curentPoint > pointOfMaxValue)
             {
-                return maxValue - (curentPoint - pointMaxValue) * (maxValue - minValue) / (pointMinValue - pointMaxValue);
+                return maxValue - (curentPoint - pointOfMaxValue) * (maxValue - minValue) / (pointOfMinValue - pointOfMaxValue);
             }
             else
             {
-                return minValue + (curentPoint - pointMinValue) * (maxValue - minValue) / (pointMaxValue - pointMinValue);
+                return minValue + (curentPoint - pointOfMinValue) * (maxValue - minValue) / (pointOfMaxValue - pointOfMinValue);
             }
         }
     }
