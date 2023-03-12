@@ -18,9 +18,9 @@ using FireResistance.Core.Infrastructure.Factories.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
 using FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic;
-using FireResistance.Core.Infrastructure.Formulas;
-using FireResistance.Core.Infrastructure.Formulas.Interfaces;
-using FireResistance.Core.Infrastructure.Formulas.TemperutureFormSp468;
+using FireResistance.Core.Infrastructure.Core;
+using FireResistance.Core.Infrastructure.Core.Interfaces;
+using FireResistance.Core.Infrastructure.Core.TemperutureFormSp468;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 using FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic;
 using Microsoft.Extensions.DependencyInjection;
@@ -49,8 +49,8 @@ namespace FireResistance.Core.Dependency
             .AddTransient<ArmatureForFRFactory>()
             .AddTransient<ConcreteForFRFactory>()
             .AddTransient<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, ResultAsDictionary>()
-            .AddTransient<ISp468, Sp468>()
-            .AddTransient<ISp63, Sp63>()
+            .AddTransient<IEquationsFromSp468, EquationsFromSp468>()
+            .AddTransient<IEquationsFromSp63, EquationsFromSp63>()
             .AddTransient<IMainController<SourceData<Dictionary<string, string>>,
                                                         CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
                                                             ResultAsDictionary, Dictionary<string, double>,

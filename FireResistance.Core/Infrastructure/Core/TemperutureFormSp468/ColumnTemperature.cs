@@ -2,7 +2,7 @@
 using FireResistance.Core.Entities.Constructions.AbstractClasses;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.Materials;
-using FireResistance.Core.Infrastructure.Formulas.Interfaces;
+using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FireResistance.Core.Infrastructure.Formulas.TemperutureFormSp468
+namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
 {
     internal class ColumnTemperature : IConstructionTemperature <ColumnFR>
     {
@@ -93,7 +93,7 @@ namespace FireResistance.Core.Infrastructure.Formulas.TemperutureFormSp468
             int positionForCalculation = construction.distanceFromBringToPointAverageTemperature > (size / 2) ?
                 (size / 2)
                 : construction.distanceFromBringToPointAverageTemperature;
-            double temperatureCount = 0;
+            double temperatureSum = 0;
             int count = 0;
             double last = 0;
             double currentTemperature = 0;
@@ -102,14 +102,14 @@ namespace FireResistance.Core.Infrastructure.Formulas.TemperutureFormSp468
                 currentTemperature = GetTemperatureAtPoint(size, i, construction);
                 if(currentTemperature <= criticalTemperature)
                 {
-                    temperatureCount += currentTemperature;
+                    temperatureSum += currentTemperature;
                     count++;
                     last = currentTemperature;
                 }
             }
-            temperatureCount += last * additionalSize;
-            if (temperatureCount == 0) return -1;
-            else return temperatureCount/(count + additionalSize);
+            temperatureSum += last * additionalSize;
+            if (temperatureSum == 0) return -1;
+            else return temperatureSum/(count + additionalSize);
 
         }
 
