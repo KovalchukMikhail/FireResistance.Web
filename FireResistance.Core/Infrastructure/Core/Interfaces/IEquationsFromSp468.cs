@@ -72,7 +72,7 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public double GetNs(double n1, double Rbtnt, double ls, double us, double alpha, double Rsnt, double AsSqueeze);
 
         /// <summary>Equation (8.16)</summary>
-        public bool CheckEquationEightDotSixteen(double Rsnt, double AsStretch, out double partLeft, out double partRight);
+        public bool CheckEquationEightDotSixteen(double Rsnt, double AsStretch, double Rbnt, double bft, double hft, double Rsct, double AsSqueeze, out double partLeft, out double partRight);
 
         /// <summary>Equation (8.17)</summary>
         public double GetMultTEquationEightDotSeventeen(double Rbnt, int bt, int xt, int h0, double Rbn, double bft, double hft, double Rsct, double AsStretch, int a);
@@ -81,7 +81,8 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public double GetXtEquationEightDotEighteen(double Rsnt, double AsStretch, double Rsct, double AsSqueeze, double Rbn, double bft, double bt, double hft, double Rbnt);
 
         /// <summary>Equation (8.19)</summary>
-        public double GetMultTEquationEightDotNineteen(double Rsnt, double AsStretch, double h0, double xt, double Rsct, double AsSqueeze, double a);
+        /// <remarks> Length of Rsnt must be equal to length AsStretch, h0, xtForLeft and Length of Rsct must be equal to xtForRight, AsSqueeze, a. Otherwise it will return -1</remarks>
+        public double GetMultTEquationEightDotNineteen(double[] Rsnt, double[] AsStretch, double[] h0, double[] xtForLeft, double[] xtForRight, double[] Rsct, double[] AsSqueeze, double[] a);
 
         /// <summary>Equation (8.20)</summary>
         public double GetGammaSCr(double Mn, double A, double B, double Rsn, double AsStretch, double h0, double xt);
