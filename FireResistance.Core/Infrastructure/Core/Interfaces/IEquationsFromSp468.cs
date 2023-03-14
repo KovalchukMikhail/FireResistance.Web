@@ -30,28 +30,28 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public double GetEs0(double Rst, double Est);
 
         /// <summary>Equation (8.2)</summary>
-        public int GetBtFireThreeSides(int b, int at);
+        public double GetBtFireThreeSides(int b, int at);
 
         /// <summary>Equation (8.3)</summary>
-        public int GetBftFireThreeSides(int bf, int at);
+        public double GetBftFireThreeSides(int bf, int at);
 
         /// <summary>Equation (8.4)</summary>
-        public int GetHftFireThreeSides(int hf, int at);
+        public double GetHftFireThreeSides(int hf, int at);
 
         /// <summary>Equation (8.5)</summary>
-        public int GetHtFireThreeSides(int h, int at);
+        public double GetHtFireThreeSides(int h, int at);
 
         /// <summary>Equation (8.6)</summary>
-        public int GetAredColumnFireThreeSides(int h, int b, int at);
+        public double GetAredColumnFireThreeSides(int h, int b, int at);
 
         /// <summary>Equation (8.7)</summary>
-        public int GetHtFireFourSides(int h, int at);
+        public double GetHtFireFourSides(int h, int at);
 
         /// <summary>Equation (8.8)</summary>
-        public int GetAredColumnFourSides(int h, int width, int at);
+        public double GetAredColumnFourSides(int h, int width, int at);
 
         /// <summary>Equation (8.9)</summary>
-        public int GetH0tFireFourSides(int h0, int at);
+        public double GetH0tFireFourSides(int h0, int at);
 
         /// <summary>Equation (8.10)</summary>
         public double GetMultTEquationEightDotTen(double Rbnt, int b, double xt, int h0, double Rsct, double AsSqueeze, double a);
@@ -69,7 +69,7 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public double GetGammaStCrSecondOption(double Mn, double Rsct, double AsSqueeze, double xt, int a, double Rsn, double AsStretch, int h0);
 
         /// <summary>Equation (8.15)</summary>
-        public double GetNs(double n1, double Rbtnt, double ls, double us, double alpha, double Rsnt, double AsSqueeze);
+        public bool GetNs(double n1, double Rbtnt, double ls, double us, double alpha, double Rsnt, double AsStretch, out double partLeft, out double partRight);
 
         /// <summary>Equation (8.16)</summary>
         public bool CheckEquationEightDotSixteen(double Rsnt, double AsStretch, double Rbnt, double bft, double hft, double Rsct, double AsSqueeze, out double partLeft, out double partRight);
@@ -94,7 +94,7 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public double GetB(double Rsct, double AsStretch, double h0, double a);
 
         /// <summary>Equation (8.23)</summary>
-        public bool CheckEquationEightDotTwentyThree(double fi, double NultT, double Ared, double Rsct, double Astot, out double partRight);
+        public bool CheckEquationEightDotTwentyThree(double fi, double NultT, double Rbnt, double Ared, double Rsct, double Astot, out double partRight);
 
         /// <summary>Equation (8.24)</summary>
         public double GetAred(double d, double at);
@@ -160,7 +160,7 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public double GetXitEquationEightDotFourtyFive(double Rsnt, double As, double Rbnt, double lTwo);
 
         /// <summary>Equation (8.46)</summary>
-        public bool CheckEquationEightDotFourtySix(double q, double lOne, double lTwo, double MOne, double MTwo, double MILeft, double MIRight, double MIIDown, double MIIUp,  out double partLeft);
+        public bool CheckEquationEightDotFourtySix(double q, double lOne, double lTwo, double MOne, double MTwo, double MILeft, double MIRight, double MIIDown, double MIIUp, out double partLeft, out double partRight);
 
         /// <summary>Equation (8.47)</summary>
         public double GetMEquationEightDotFourtySeven(double As, double Rsnt, double z);
