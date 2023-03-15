@@ -10,20 +10,17 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
 {
     internal class TemperatureСolumnWithOutSql : IDataTemperatureСolumnRequestDb
     {
-        public double GetDeepForCarbonateСolumn(string fireResistans, int temperature)
+        public double[,] GetTableOfDeepWarmingToCriticalTemperatureForСolumn(string concreteType)
         {
-            int fireResistansIndex = NameColumns.FireResistanceForCriticalTemperature.IndexOf(fireResistans);
-            int temperatureIndex = NameColumns.TemperatureForCriticalTemperature.IndexOf(temperature);
-            if (fireResistansIndex == -1 || temperatureIndex == -1) return -1;
-            return TemperatureDataFromSp468.DeepCriticalTemperatureConcreteCarbonate[fireResistansIndex, temperatureIndex];
-        }
-
-        public double GetDeepForSilicateСolumn(string fireResistans, int temperature)
-        {
-            int fireResistansIndex = NameColumns.FireResistanceForCriticalTemperature.IndexOf(fireResistans);
-            int temperatureIndex = NameColumns.TemperatureForCriticalTemperature.IndexOf(temperature);
-            if (fireResistansIndex == -1 || temperatureIndex == -1) return -1;
-            return TemperatureDataFromSp468.DeepCriticalTemperatureConcreteSilicate[fireResistansIndex, temperatureIndex];
+            if (concreteType == NameColumns.ConcreteType[0])
+            {
+                return TemperatureDataFromSp468.DeepCriticalTemperatureConcreteSilicate;
+            }
+            else if (concreteType == NameColumns.ConcreteType[1] || concreteType == NameColumns.ConcreteType[2])
+            {
+                return TemperatureDataFromSp468.DeepCriticalTemperatureConcreteCarbonate;
+            }
+            else return new double[0, 0];
         }
 
         public double GetTemperatureOfСolumn(string fireResistans, int height, int deep)

@@ -10,36 +10,24 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
 {
     internal class DataFromSP468WithOutSql : IDataSP468RequestDb
     {
-        public double GetBetaB(string concreteType, int temperature)
+        public double [,] GetBetaBTable()
         {
-            int concreteTypeIndex = NameColumns.ConcreteType.IndexOf(concreteType);
-            int temperatureIndex = NameColumns.TemperatureForTable.IndexOf(temperature);
-            if (concreteTypeIndex == -1 || temperatureIndex == -1) return -1;
-            return DataFromSp468.TableBetaB[concreteTypeIndex, temperatureIndex];
+            return DataFromSp468.TableBetaB;
         }
 
-        public double GetBetaS(string armatureClass, int temperature)
+        public double [,] GetBetaSTable()
         {
-            int armatureClassIndex = NameColumns.ArmatureClass.IndexOf(armatureClass);
-            int temperatureIndex = NameColumns.TemperatureForTable.IndexOf(temperature);
-            if (armatureClassIndex == -1 || temperatureIndex == -1) return -1;
-            return DataFromSp468.TableBetaS[armatureClassIndex, temperatureIndex];
+            return DataFromSp468.TableBetaS;
         }
 
-        public double GetGammaBT(string concreteType, int temperature)
+        public double [,] GetGammaBtTable()
         {
-            int concreteTypeIndex = NameColumns.ConcreteType.IndexOf(concreteType);
-            int temperatureIndex = NameColumns.TemperatureForTable.IndexOf(temperature);
-            if (concreteTypeIndex == -1 || temperatureIndex == -1) return -1;
-            return DataFromSp468.TableGammaBT[concreteTypeIndex, temperatureIndex];
+            return DataFromSp468.TableGammaBT;
         }
 
-        public double GetGammaSt(string armatureClass, int temperature)
+        public double [,] GetGammaStTable()
         {
-            int armatureClassIndex = NameColumns.ArmatureClass.IndexOf(armatureClass);
-            int temperatureIndex = NameColumns.TemperatureForTable.IndexOf(temperature);
-            if (armatureClassIndex == -1 || temperatureIndex == -1) return -1;
-            return DataFromSp468.TableGammaSt[armatureClassIndex, temperatureIndex];
+            return DataFromSp468.TableGammaSt;
         }
 
         public double GetСoefficientFixationElement(string fixationElement)

@@ -12,7 +12,7 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
         public static List<int> LenthFromArmatureToEdgeTable200 => new List<int>(lenthFromArmatureToEdgeTable200);
         public static List<int> LenthFromArmatureToEdgeTable300 => new List<int>(lenthFromArmatureToEdgeTable300);
         public static List<int> LenthFromArmatureToEdgeTable400 => new List<int>(lenthFromArmatureToEdgeTable400);
-        public static List<int> TemperatureForCriticalTemperature => new List<int>(temperatureForCriticalTemperature);
+        public static List<double> SizeForCriticalTemperature => new List<double>(sizeForCriticalTemperature);
         public static List<string> FireResistanceForCriticalTemperature => new List<string>(fireResistanceForCriticalTemperature);
         public static Dictionary<string, double> CriticalTemperatureConcrete
         {
@@ -56,7 +56,7 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
         {
             0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200
         };
-        private static List<int> temperatureForCriticalTemperature = new List<int>
+        private static List<double> sizeForCriticalTemperature = new List<double>
         {
             200, 300, 400, 500, 600, 700, 800, 900, 1000
         };

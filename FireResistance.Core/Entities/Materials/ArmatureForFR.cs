@@ -15,6 +15,7 @@ namespace FireResistance.Core.Entities.Materials
         public double ResistSqueezeWithTemperatureСalculation { get; set; }
 
         public double ResistStretchWithTemperatureСalculation { get; set; }
+        public double ElasticityModulusWithWarming { get; set; }
         public double GammaST { get; set; }
         public double BetaS { get; set; }
 

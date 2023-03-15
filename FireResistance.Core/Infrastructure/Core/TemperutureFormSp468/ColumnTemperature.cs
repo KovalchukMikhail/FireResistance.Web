@@ -37,18 +37,18 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
 
             if (size == minSize || size == mediumSize || size >= maxSize)
             {
-                return GetTemperatureAtPoint(size, construction.distanceToArmature, construction);
+                return GetTemperatureAtPoint(size, construction.DistanceToArmature, construction);
             }
             else if (size > minSize && size < mediumSize)
             {
-                double firstValue = GetTemperatureAtPoint(minSize, construction.distanceToArmature, construction);
-                double secondValue = GetTemperatureAtPoint(mediumSize, construction.distanceToArmature, construction);
+                double firstValue = GetTemperatureAtPoint(minSize, construction.DistanceToArmature, construction);
+                double secondValue = GetTemperatureAtPoint(mediumSize, construction.DistanceToArmature, construction);
                 return interpolator.GetIntermediateValue(minSize, mediumSize, size, firstValue, secondValue);
             }
             else if (size > mediumSize && size < maxSize)
             {
-                double firstValue = GetTemperatureAtPoint(mediumSize, construction.distanceToArmature, construction);
-                double secondValue = GetTemperatureAtPoint(maxSize, construction.distanceToArmature, construction);
+                double firstValue = GetTemperatureAtPoint(mediumSize, construction.DistanceToArmature, construction);
+                double secondValue = GetTemperatureAtPoint(maxSize, construction.DistanceToArmature, construction);
                 return interpolator.GetIntermediateValue(mediumSize, maxSize, size, firstValue, secondValue);
             }
             else return -1;
@@ -83,16 +83,16 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
 
         private double GetTemperatureAtPoint(int size, int distanceToPoint, ColumnFR construction)
         {
-            double[,] temperutureArray = db.TemperatureDb.GetArrayTemperature(construction.fireResistanceVolume, size);
+            double[,] temperutureArray = db.TemperatureDb.GetArrayTemperature(construction.FireResistanceVolume, size);
             List<double> distanceToArmatureForArray = db.TemperatureDb.GetListOfDistanceToArmature(size);
             return interpolator.GetValueFromTemperatureTable(distanceToArmatureForArray, distanceToPoint, temperutureArray);
         }
 
         private double GetAveregeTemperature(int size, ColumnFR construction, double criticalTemperature, int additionalSize = 0)
         {
-            int positionForCalculation = construction.distanceFromBringToPointAverageTemperature > (size / 2) ?
+            int positionForCalculation = Convert.ToInt32(construction.DistanceFromBringToPointAverageTemperature) > (size / 2) ?
                 (size / 2)
-                : construction.distanceFromBringToPointAverageTemperature;
+                : Convert.ToInt32(construction.DistanceFromBringToPointAverageTemperature);
             double temperatureSum = 0;
             int count = 0;
             double last = 0;

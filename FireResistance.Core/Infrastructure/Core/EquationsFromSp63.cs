@@ -9,5 +9,13 @@ namespace FireResistance.Core.Infrastructure.Core
 {
     internal class EquationsFromSp63 : IEquationsFromSp63
     {
+        /// <summary>Equation from item 8.1.7</summary>
+        public double Gete0(bool staticallyDefinable, double moment, double strength, double length, double height)
+        {
+            if (strength == 0) return -1;
+            double ea = Math.Max(Math.Max(length / 600, height / 30), 10);
+            if (staticallyDefinable) return moment / strength + ea;
+            return Math.Max(moment/ strength, ea);
+        }
     }
 }

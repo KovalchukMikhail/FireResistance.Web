@@ -16,7 +16,7 @@ namespace FireResistance.Core.Data
         public static List<double> DistanceToArmatureH200 => new List<double>(distanceToArmatureH200);
         public static List<double> DistanceToArmatureH300 => new List<double>(distanceToArmatureH300);
         public static List<double> DistanceToArmatureH400 => new List<double>(distanceToArmatureH400);
-        public static List<double> TemperatureForCriticalTemperature => new List<double>(temperatureForCriticalTemperature);
+        public static List<double> SizeForCriticalTemperature => new List<double>(sizeForCriticalTemperature);
         public static List<string> FireResistanceForCriticalTemperature => new List<string>(fireResistanceForCriticalTemperature);
         public static List<int> StandartHeight => new List<int>(standartHeight);
         public static List<int> ArmatureDiameter => new List<int>(armatureDiameter);
@@ -71,7 +71,7 @@ namespace FireResistance.Core.Data
             0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200
         };
 
-        private static List<double> temperatureForCriticalTemperature = new List<double>()
+        private static List<double> sizeForCriticalTemperature = new List<double>()
         {
             200, 300, 400, 500, 600, 700, 800, 900, 1000
         };

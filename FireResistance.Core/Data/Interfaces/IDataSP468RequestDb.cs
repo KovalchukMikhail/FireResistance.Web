@@ -8,10 +8,10 @@ namespace FireResistance.Core.Data.Interfaces
 {
     internal interface IDataSP468RequestDb
     {
-        public double GetGammaBT(string concreteType, int temperature);
-        public double GetBetaB(string concreteType, int temperature);
-        public double GetGammaSt(string armatureClass, int temperature);
-        public double GetBetaS(string armatureClass, int temperature);
+        public double[,] GetGammaBtTable();
+        public double[,] GetBetaBTable();
+        public double[,] GetGammaStTable();
+        public double[,] GetBetaSTable();
         public double GetСoefficientFixationElement(string fixationElement);
         public double GetCriticalTemperatureConcrete(string concreteType);
     }

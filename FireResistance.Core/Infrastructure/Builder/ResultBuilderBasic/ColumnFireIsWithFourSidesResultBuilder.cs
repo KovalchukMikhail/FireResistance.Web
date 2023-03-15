@@ -7,6 +7,7 @@ using FireResistance.Core.Entities.Materials.AbstractClasses;
 using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
+using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Factories.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
@@ -25,50 +26,39 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic
     {
         private ResultAsDictionary result;
         private ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData;
-        ArmatureForFR armature;
-        ConcreteForFR concrete;
-        ColumnFR column;
+        private ColumnFR column;
+        private ServiceProvider provider;
 
         public ColumnFireIsWithFourSidesResultBuilder()
         {
             result = new ResultAsDictionary();
         }
 
-        public void SetSourceData(SourceData<Dictionary<string, string>> sourceData)
+        public void SetSourceData(SourceData<Dictionary<string, string>> sourceData, ServiceProvider provider)
         {
             this.sourceData = sourceData as ColumnFireIsWithFourSidesData<Dictionary<string, string>>;
+            this.provider = provider;
         }
 
-        public bool BuildConstructions(ServiceProvider provider)
+        public bool BuildConstructions()
         {
-            //IMaterialFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>> factory
-            //                = provider.GetRequiredService<IArmatureFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>>();
-            //armature = factory.Create(provider, this.sourceData) as ArmatureForFR;
-
-            //factory = provider.GetRequiredService<IConcreteFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>>();
-            //concrete = factory.Create(provider, this.sourceData) as ConcreteForFR;
-
-            //column = provider.GetRequiredService<Column>();
             ColumnFactoryFR columnFactory = provider.GetRequiredService<ColumnFactoryFR>();
-
-            ColumnFR column = columnFactory.Create(provider, sourceData) as ColumnFR;
-
-
-            result.AddItemDescription("ответ", "\nТемпература арматуры: " + column.ArmatureFR.Temperature.ToString() +
-                                        "\nТемпература бетона: " + column.ConcreteFR.Temperature.ToString());
-
+            column = columnFactory.Create(provider, sourceData) as ColumnFR;
             return true;
             
         }
 
-        public bool BuildSourceValues()
-        {
-            return true;
-        }
-
         public bool BuildCalculation()
         {
-            return true;
+            IEquationsFromSp468 equationsSp468 = provider.GetRequiredService<IEquationsFromSp468>();
+            IEquationsFromSp63 equationsSp63 = provider.GetRequiredService<IEquationsFromSp63>();
+            double e0 = equationsSp63.Gete0(false, column.Moment, column.Strength, column.Length, column.Height);
+
+        }
+
+        protected void BuildResult()
+        {
+           
         }
 
         public ResultAsDictionary GetCalculationResult()

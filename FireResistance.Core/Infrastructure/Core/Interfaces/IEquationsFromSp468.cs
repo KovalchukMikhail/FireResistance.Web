@@ -24,49 +24,49 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public double GetRsWithGammaSt(double Rs, double gammaSt);
 
         /// <summary>Equation (5.7)</summary>
-        public double Est(double Es, double betaS);
+        public double GetEst(double Es, double betaS);
 
         /// <summary>Equation (5.8)</summary>
         public double GetEs0(double Rst, double Est);
 
         /// <summary>Equation (8.2)</summary>
-        public double GetBtFireThreeSides(int b, int at);
+        public double GetBtFireThreeSides(double b, double at);
 
         /// <summary>Equation (8.3)</summary>
-        public double GetBftFireThreeSides(int bf, int at);
+        public double GetBftFireThreeSides(double bf, double at);
 
         /// <summary>Equation (8.4)</summary>
-        public double GetHftFireThreeSides(int hf, int at);
+        public double GetHftFireThreeSides(double hf, double at);
 
         /// <summary>Equation (8.5)</summary>
-        public double GetHtFireThreeSides(int h, int at);
+        public double GetHtFireThreeSides(double h, double at);
 
         /// <summary>Equation (8.6)</summary>
-        public double GetAredColumnFireThreeSides(int h, int b, int at);
+        public double GetAredColumnFireThreeSides(double h, double b, double at);
 
         /// <summary>Equation (8.7)</summary>
-        public double GetHtFireFourSides(int h, int at);
+        public double GetHtFireFourSides(double h, double at);
 
         /// <summary>Equation (8.8)</summary>
-        public double GetAredColumnFourSides(int h, int width, int at);
+        public double GetAredColumnFourSides(double h, double b, double at);
 
         /// <summary>Equation (8.9)</summary>
-        public double GetH0tFireFourSides(int h0, int at);
+        public double GetH0tFireFourSides(double h0, double at);
 
         /// <summary>Equation (8.10)</summary>
-        public double GetMultTEquationEightDotTen(double Rbnt, int b, double xt, int h0, double Rsct, double AsSqueeze, double a);
+        public double GetMultTEquationEightDotTen(double Rbnt, double b, double xt, double h0, double Rsct, double AsSqueeze, double a);
 
         /// <summary>Equation (8.11)</summary>
-        public double GetXtEquationEightDotEleven(double Rsnt, double AsStretch, double Rsct, double AsSqueeze, double Rbnt, int b);
+        public double GetXtEquationEightDotEleven(double Rsnt, double AsStretch, double Rsct, double AsSqueeze, double Rbnt, double b);
 
         /// <summary>Equation (8.12)</summary>
-        public double GetMultTEquationEightDotTwelve(double Rsnt, double AsStretch, int h0, double xt, double Rsct, double AsSqueeze, int a);
+        public double GetMultTEquationEightDotTwelve(double Rsnt, double AsStretch, double h0, double xt, double Rsct, double AsSqueeze, double a);
 
         /// <summary>Equation (8.13)</summary>
-        public double GetGammaStCrFirstOption(double Mn, double Rsn, double AsStretch, int h0, double xt);
+        public double GetGammaStCrFirstOption(double Mn, double Rsn, double AsStretch, double h0, double xt);
 
         /// <summary>Equation (8.14)</summary>
-        public double GetGammaStCrSecondOption(double Mn, double Rsct, double AsSqueeze, double xt, int a, double Rsn, double AsStretch, int h0);
+        public double GetGammaStCrSecondOption(double Mn, double Rsct, double AsSqueeze, double xt, double a, double Rsn, double AsStretch, double h0);
 
         /// <summary>Equation (8.15)</summary>
         public bool GetNs(double n1, double Rbtnt, double ls, double us, double alpha, double Rsnt, double AsStretch, out double partLeft, out double partRight);
@@ -75,7 +75,7 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public bool CheckEquationEightDotSixteen(double Rsnt, double AsStretch, double Rbnt, double bft, double hft, double Rsct, double AsSqueeze, out double partLeft, out double partRight);
 
         /// <summary>Equation (8.17)</summary>
-        public double GetMultTEquationEightDotSeventeen(double Rbnt, int bt, int xt, int h0, double Rbn, double bft, double hft, double Rsct, double AsStretch, int a);
+        public double GetMultTEquationEightDotSeventeen(double Rbnt, double bt, double xt, double h0, double Rbn, double bft, double hft, double Rsct, double AsStretch, double a);
 
         /// <summary>Equation (8.18)</summary>
         public double GetXtEquationEightDotEighteen(double Rsnt, double AsStretch, double Rsct, double AsSqueeze, double Rbn, double bft, double bt, double hft, double Rbnt);
@@ -188,5 +188,11 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
 
         /// <summary>Equation (8.55)</summary>
         public double GetSigmaEquationEightDotFiftyFive(double ts);
+
+        /// <summary>Equation from item 5.4 for Column</summary>
+        public double GetDistanceFromBringToPointAverageTemperatureForColumn(double h0t, double xt = 0, double Er = 0);
+
+        /// <summary>Equation from item 5.4 for slab</summary>
+        public double GetDistanceFromBringToPointAverageTemperatureForSlab(double h0t, double xt = 0, double Er = 0);
     }
 }

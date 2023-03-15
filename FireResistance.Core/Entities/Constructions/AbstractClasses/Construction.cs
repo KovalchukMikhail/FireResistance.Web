@@ -16,7 +16,7 @@ namespace FireResistance.Core.Entities.Constructions.AbstractClasses
         public virtual int Length { get; set; }
         public virtual double Moment { get; set; }
         public virtual double Strength { get; set; }
-        public int workHeight { get; set; }
+        public double WorkHeight { get; set; }
 
 
     }

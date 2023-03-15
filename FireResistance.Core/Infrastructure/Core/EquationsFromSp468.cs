@@ -25,53 +25,53 @@ namespace FireResistance.Core.Infrastructure.Core
         public double GetRsWithGammaSt(double Rs, double gammaSt) => Rs * gammaSt;
 
         /// <summary>Equation (5.7)</summary>
-        public double Est(double Es, double betaS) => Es * betaS;
+        public double GetEst(double Es, double betaS) => Es * betaS;
 
         /// <summary>Equation (5.8)</summary>
         public double GetEs0(double Rst, double Est) => Rst / Est;
 
         /// <summary>Equation (8.2)</summary>
-        public double GetBtFireThreeSides(int b, int at) => b - 2 * at;
+        public double GetBtFireThreeSides(double b, double at) => b - 2 * at;
 
         /// <summary>Equation (8.3)</summary>
-        public double GetBftFireThreeSides(int bf, int at) => bf - 2 * at;
+        public double GetBftFireThreeSides(double bf, double at) => bf - 2 * at;
 
         /// <summary>Equation (8.4)</summary>
-        public double GetHftFireThreeSides(int hf, int at) => hf - at;
+        public double GetHftFireThreeSides(double hf, double at) => hf - at;
 
         /// <summary>Equation (8.5)</summary>
-        public double GetHtFireThreeSides(int h, int at) => h - at;
+        public double GetHtFireThreeSides(double h, double at) => h - at;
 
         /// <summary>Equation (8.6)</summary>
-        public double GetAredColumnFireThreeSides(int h, int b, int at) => 0.95 * (b - 2 * at) * (h - at);
+        public double GetAredColumnFireThreeSides(double h, double b, double at) => 0.95 * (b - 2 * at) * (h - at);
 
         /// <summary>Equation (8.7)</summary>
-        public double GetHtFireFourSides(int h, int at) => h - 2 * at;
+        public double GetHtFireFourSides(double h, double at) => h - 2 * at;
 
         /// <summary>Equation (8.8)</summary>
-        public double GetAredColumnFourSides(int h, int b, int at) => 0.9 * (b - 2 * at) * (h - 2 * at);
+        public double GetAredColumnFourSides(double h, double b, double at) => 0.9 * (b - 2 * at) * (h - 2 * at);
 
         /// <summary>Equation (8.9)</summary>
-        public double GetH0tFireFourSides(int h0, int at) => h0- at;
+        public double GetH0tFireFourSides(double h0, double at) => h0- at;
 
         /// <summary>Equation (8.10)</summary>
-        public double GetMultTEquationEightDotTen(double Rbnt, int b, double xt, int h0, double Rsct, double AsSqueeze, double a)
+        public double GetMultTEquationEightDotTen(double Rbnt, double b, double xt, double h0, double Rsct, double AsSqueeze, double a)
             => Rbnt * b * xt * (h0 - 0.5 * xt) + Rsct * AsSqueeze * (h0 - a);
 
         /// <summary>Equation (8.11)</summary>
-        public double GetXtEquationEightDotEleven(double Rsnt, double AsStretch, double Rsct, double AsSqueeze, double Rbnt, int b)
+        public double GetXtEquationEightDotEleven(double Rsnt, double AsStretch, double Rsct, double AsSqueeze, double Rbnt, double b)
             => (Rsnt * AsStretch - Rsct * AsSqueeze) / (Rbnt * b);
 
         /// <summary>Equation (8.12)</summary>
-        public double GetMultTEquationEightDotTwelve(double Rsnt, double AsStretch, int h0, double xt, double Rsct, double AsSqueeze, int a)
+        public double GetMultTEquationEightDotTwelve(double Rsnt, double AsStretch, double h0, double xt, double Rsct, double AsSqueeze, double a)
             => Rsnt * AsStretch * (h0 - 0.5 * xt) + Rsct * AsSqueeze * (0.5 * xt - a);
 
         /// <summary>Equation (8.13)</summary>
-        public double GetGammaStCrFirstOption(double Mn, double Rsn, double AsStretch, int h0, double xt)
+        public double GetGammaStCrFirstOption(double Mn, double Rsn, double AsStretch, double h0, double xt)
             => Mn / (Rsn * AsStretch *(h0 - 0.5 * xt));
 
         /// <summary>Equation (8.14)</summary>
-        public double GetGammaStCrSecondOption(double Mn, double Rsct, double AsSqueeze, double xt, int a, double Rsn, double AsStretch, int h0)
+        public double GetGammaStCrSecondOption(double Mn, double Rsct, double AsSqueeze, double xt, double a, double Rsn, double AsStretch, double h0)
             => (Mn - Rsct * AsSqueeze * (0.5 * xt - a))/(Rsn * AsStretch * (h0 - 0.5 * xt));
 
         /// <summary>Equation (8.15)</summary>
@@ -91,7 +91,7 @@ namespace FireResistance.Core.Infrastructure.Core
         }
 
         /// <summary>Equation (8.17)</summary>
-        public double GetMultTEquationEightDotSeventeen(double Rbnt, int bt, int xt, int h0, double Rbn, double bft, double hft, double Rsct, double AsStretch, int a)
+        public double GetMultTEquationEightDotSeventeen(double Rbnt, double bt, double xt, double h0, double Rbn, double bft, double hft, double Rsct, double AsStretch, double a)
             => Rbnt * bt * xt * (h0 - 0.5 * xt) + Rbn * (bft - bt) * hft * (h0 - 0.5 * hft) + Rsct * AsStretch * (h0 - a);
 
         /// <summary>Equation (8.18)</summary>
@@ -285,5 +285,18 @@ namespace FireResistance.Core.Infrastructure.Core
 
         /// <summary>Equation (8.55)</summary>
         public double GetSigmaEquationEightDotFiftyFive(double ts) => 89 - 0.27 * ts;
+
+        /// <summary>Equation from item 5.4</summary>
+        public double GetDistanceFromBringToPointAverageTemperatureForColumn(double h0t, double xt = 0, double Er = 0)
+        {
+            if (xt == 0 || Er == 0) return 0.2 * h0t;
+            else return 0.5 * xt;
+        }
+        /// <summary>Equation from item 5.4</summary>
+        public double GetDistanceFromBringToPointAverageTemperatureForSlab(double h0t, double xt = 0, double Er = 0)
+        {
+            if (xt == 0 || Er == 0) return 0.1 * h0t;
+            else return 0.5 * xt;
+        }
     }
 }
