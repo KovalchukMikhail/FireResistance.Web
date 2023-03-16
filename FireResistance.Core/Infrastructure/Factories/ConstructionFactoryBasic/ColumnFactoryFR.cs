@@ -43,6 +43,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
                                                                         db.TemperatureDb.GetTableOfDeepWarmingToCriticalTemperatureForСolumn(sourceData.ConcreteType));
             column.WorkHeight = GetWorkHeight(column.Height, column.DistanceToArmature);
             column.HeightProfileWithWarming = equations.GetHtFireFourSides(column.Height, column.DeepConcreteWarming);
+            column.WidthProfileWithWarming = equations.GetHtFireFourSides(column.Width, column.DeepConcreteWarming);
             column.WorkWidthWithWarming = equations.GetHtFireFourSides(column.Width, column.DeepConcreteWarming);
             column.AreaChangedProfile = equations.GetAredColumnFourSides(column.Height, column.Width, column.DeepConcreteWarming);
             column.WorkHeightProfileWithWarming = equations.GetH0tFireFourSides(column.WorkHeight, column.DeepConcreteWarming);

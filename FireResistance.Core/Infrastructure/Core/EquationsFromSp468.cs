@@ -158,9 +158,9 @@ namespace FireResistance.Core.Infrastructure.Core
             => (Nn + Rsnl * AsStretch - Rsct * AsStretch) / (Rbnt * bt);
 
         /// <summary>Equation (8.27)</summary>
-        public double GetXtEquationEightDotTwentySeven(double Nn, double Rsnt, double AsStretch, double Er, double Rsct, double AsSqueeze, double Rbnt, double bt, double h0t)
-            => (Nn + Rsnt * AsStretch * (1 + Er) / (1 - Er) - Rsct * AsSqueeze)
-            / (Rbnt * bt + 2 * Rsnt * AsStretch/(h0t * (1 - Er)));
+        public double GetXtEquationEightDotTwentySeven(double Nn, double Rsnt, double AsStretch, double KsiR, double Rsct, double AsSqueeze, double Rbnt, double bt, double h0t)
+            => (Nn + Rsnt * AsStretch * (1 + KsiR) / (1 - KsiR) - Rsct * AsSqueeze)
+            / (Rbnt * bt + 2 * Rsnt * AsStretch/(h0t * (1 - KsiR)));
 
         /// <summary>Equation (8.28)</summary>
         public double GetEEquationEightDotTwentyEight(double e0, double n, double h0, double a, double et)
@@ -287,16 +287,18 @@ namespace FireResistance.Core.Infrastructure.Core
         public double GetSigmaEquationEightDotFiftyFive(double ts) => 89 - 0.27 * ts;
 
         /// <summary>Equation from item 5.4</summary>
-        public double GetDistanceFromBringToPointAverageTemperatureForColumn(double h0t, double xt = 0, double Er = 0)
+        public double GetDistanceFromBringToPointAverageTemperatureForColumn(double h0t, double xt = 0, double KsiR = 0)
         {
-            if (xt == 0 || Er == 0) return 0.2 * h0t;
+            if (xt == 0 || KsiR == 0) return 0.2 * h0t;
             else return 0.5 * xt;
         }
         /// <summary>Equation from item 5.4</summary>
-        public double GetDistanceFromBringToPointAverageTemperatureForSlab(double h0t, double xt = 0, double Er = 0)
+        public double GetDistanceFromBringToPointAverageTemperatureForSlab(double h0t, double xt = 0, double KsiR = 0)
         {
-            if (xt == 0 || Er == 0) return 0.1 * h0t;
+            if (xt == 0 || KsiR == 0) return 0.1 * h0t;
             else return 0.5 * xt;
         }
+        /// <summary>Equation from item 8.20 for Ksi</summary>
+        public double GetKsi(double xt, double h0t) => xt / h0t;
     }
 }

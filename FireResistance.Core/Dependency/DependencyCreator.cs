@@ -70,10 +70,11 @@ namespace FireResistance.Core.Dependency
             .AddTransient<ColumnFactoryFR>()
             .AddTransient<ColumnTemperature>()
             .AddTransient<IEquationsFromSp468, EquationsFromSp468>()
-            .AddTransient<IEquationsFromSp63, EquationsFromSp63>();
+            .AddTransient<IEquationsFromSp63, EquationsFromSp63>()
+            .AddTransient<ICommonEquations, CommonEquations>();
 
 
-
+        
 
         public static ServiceProvider GetServiceProvider()
         {

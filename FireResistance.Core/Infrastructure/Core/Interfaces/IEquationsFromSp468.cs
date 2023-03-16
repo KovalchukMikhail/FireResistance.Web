@@ -194,5 +194,7 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
 
         /// <summary>Equation from item 5.4 for slab</summary>
         public double GetDistanceFromBringToPointAverageTemperatureForSlab(double h0t, double xt = 0, double Er = 0);
+        /// <summary>Equation from item 8.20 for Ksi</summary>
+        public double GetKsi(double xt, double h0t);
     }
 }
