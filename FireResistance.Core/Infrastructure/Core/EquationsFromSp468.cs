@@ -136,10 +136,10 @@ namespace FireResistance.Core.Infrastructure.Core
             => Rsct * AsStretch * (h0 - a);
 
         /// <summary>Equation (8.23)</summary>
-        public bool CheckEquationEightDotTwentyThree(double fi, double NultT, double Rbnt, double Ared, double Rsct, double Astot, out double partRight)
+        public bool CheckEquationEightDotTwentyThree(double fi, double Nn, double Rbnt, double Ared, double Rsct, double Astot, out double partRight)
         {
             partRight = fi * (Rbnt * Ared + Rsct * Astot);
-            return NultT <= partRight;
+            return Nn <= partRight;
         }
 
         /// <summary>Equation (8.24)</summary>

@@ -17,6 +17,7 @@ namespace FireResistance.Core.Data
         public static List<double> DistanceToArmatureH300 => new List<double>(distanceToArmatureH300);
         public static List<double> DistanceToArmatureH400 => new List<double>(distanceToArmatureH400);
         public static List<double> SizeForCriticalTemperature => new List<double>(sizeForCriticalTemperature);
+        public static List<double> FlexibilityForTableEightDotOne => new List<double>(flexibilityForTableEightDotOne);
         public static List<string> FireResistanceForCriticalTemperature => new List<string>(fireResistanceForCriticalTemperature);
         public static List<int> StandartHeight => new List<int>(standartHeight);
         public static List<int> ArmatureDiameter => new List<int>(armatureDiameter);
@@ -88,6 +89,11 @@ namespace FireResistance.Core.Data
         private static List<int> armatureDiameter = new List<int>()
         {
             6, 8, 10, 12, 14, 16, 18, 20, 22, 25, 28, 32, 36, 40
+        };
+
+        private static List<double> flexibilityForTableEightDotOne = new List<double>()
+        {
+            12, 16, 20
         };
 
     }

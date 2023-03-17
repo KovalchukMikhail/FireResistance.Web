@@ -14,9 +14,11 @@ namespace FireResistance.Core.Entities.Calculator
     {
         public override bool TryConstruct()
         {
-            if(!ResultBuilder.BuildConstructions()  
-                || !ResultBuilder.BuildCalculation()) return false;
-            return true;
+            bool check = false;
+            check = ResultBuilder.BuildConstructions();
+            check = ResultBuilder.BuildCalculation();
+            check = ResultBuilder.BuildResult();
+            return check;
         }
     }
 }

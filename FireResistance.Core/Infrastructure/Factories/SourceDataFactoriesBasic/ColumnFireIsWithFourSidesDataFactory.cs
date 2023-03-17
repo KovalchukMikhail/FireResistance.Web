@@ -45,11 +45,11 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
             else return false;
 
             tempNumber = doubleValues[ConstantsName.HeighElementLabel];
-            if (tempNumber > 0) result.HeighColumn = (int)tempNumber;
+            if (tempNumber >= 200) result.HeighColumn = (int)tempNumber;
             else return false;
 
             tempNumber = doubleValues[ConstantsName.WidthElementLabel];
-            if (tempNumber > 0) result.WidthColumn = (int)tempNumber;
+            if (tempNumber >= 200) result.WidthColumn = (int)tempNumber;
             else return false;
 
             tempStr = stringValues[ConstantsName.ArmatureClassLabel];

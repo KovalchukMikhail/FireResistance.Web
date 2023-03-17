@@ -11,9 +11,10 @@ namespace FireResistance.Core.Infrastructure.Builder.Interfaces
 {
     internal interface IResultBuilder <P, N, T, K> where N : CalculationResult<T, K>
     {
+        public void SetSourceData(SourceData<P> sourceData, ServiceProvider provider);
         public bool BuildConstructions();
         public bool BuildCalculation();
-        public void SetSourceData(SourceData <P> sourceData, ServiceProvider provider);
+        public bool BuildResult(); 
         public N GetCalculationResult();
     }
 }

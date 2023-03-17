@@ -43,5 +43,10 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
             if (check) return result;
             return -1;
         }
+
+        public double[,] GetTableFiNumberEightDotOne()
+        {
+            return DataFromSp468.TableFiNumberEightDotOne;
+        }
     }
 }

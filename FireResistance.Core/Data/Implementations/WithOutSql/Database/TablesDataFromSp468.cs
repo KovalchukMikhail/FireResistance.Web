@@ -16,6 +16,7 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
         public static double[,] TableBetaB => Utilities.GetCopyArray(tableBetaB);
         public static double[,] TableGammaSt => Utilities.GetCopyArray(tableGammaSt);
         public static double[,] TableBetaS => Utilities.GetCopyArray(tableBetaS);
+        public static double[,] TableFiNumberEightDotOne => Utilities.GetCopyArray(tableFiNumberEightDotOne);
         public static Dictionary<string, double> FixationElementTable
         {
             get
@@ -104,6 +105,13 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
             {"НЕ_СМЕЩАЕМАЯ_ЗАДЕЛКА_НА_ДВУХ_КОНЦАХ", 0.5},
             {"НЕ_СМЕЩАЕМАЯ_ЗАДЕЛКА_НА_ДВУХ_КОНЦАХ_С_ПОДАТЛИВЫМ_ОГРАНИЧЕННЫМ_ПОВОРОТОМ", 0.8},
             {"ШАРНИРНЫЕ_ОПОРЫ_НА_ДВУХ_КОНЦАХ", 1}
+        };
+
+        private static double[,] tableFiNumberEightDotOne =
+        {
+            {0.9, 0.8, 0.7 },
+            {0.9, 0.8, 0.7 },
+            {0.85, 0.68, 0.55 }
         };
     }
 }

@@ -94,7 +94,7 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public double GetB(double Rsct, double AsStretch, double h0, double a);
 
         /// <summary>Equation (8.23)</summary>
-        public bool CheckEquationEightDotTwentyThree(double fi, double NultT, double Rbnt, double Ared, double Rsct, double Astot, out double partRight);
+        public bool CheckEquationEightDotTwentyThree(double fi, double Nn, double Rbnt, double Ared, double Rsct, double Astot, out double partRight);
 
         /// <summary>Equation (8.24)</summary>
         public double GetAred(double d, double at);
@@ -190,10 +190,10 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public double GetSigmaEquationEightDotFiftyFive(double ts);
 
         /// <summary>Equation from item 5.4 for Column</summary>
-        public double GetDistanceFromBringToPointAverageTemperatureForColumn(double h0t, double xt = 0, double Er = 0);
+        public double GetDistanceFromBringToPointAverageTemperatureForColumn(double h0t, double xt = 0, double KsiR = 0);
 
         /// <summary>Equation from item 5.4 for slab</summary>
-        public double GetDistanceFromBringToPointAverageTemperatureForSlab(double h0t, double xt = 0, double Er = 0);
+        public double GetDistanceFromBringToPointAverageTemperatureForSlab(double h0t, double xt = 0, double KsiR = 0);
         /// <summary>Equation from item 8.20 for Ksi</summary>
         public double GetKsi(double xt, double h0t);
     }

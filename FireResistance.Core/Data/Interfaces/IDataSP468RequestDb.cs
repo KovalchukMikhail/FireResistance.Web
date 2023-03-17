@@ -14,5 +14,6 @@ namespace FireResistance.Core.Data.Interfaces
         public double[,] GetBetaSTable();
         public double GetСoefficientFixationElement(string fixationElement);
         public double GetCriticalTemperatureConcrete(string concreteType);
+        public double[,] GetTableFiNumberEightDotOne();
     }
 }
