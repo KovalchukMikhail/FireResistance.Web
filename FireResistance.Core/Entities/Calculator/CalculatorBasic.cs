@@ -12,13 +12,11 @@ namespace FireResistance.Core.Entities.Calculator
 {
     internal class CalculatorBasic : CalculatorAbstract <IResultBuilder<Dictionary<string, string>, ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>
     {
-        public override bool TryConstruct()
+        public override void TryConstruct()
         {
-            bool check = false;
-            check = ResultBuilder.BuildConstructions();
-            check = ResultBuilder.BuildCalculation();
-            check = ResultBuilder.BuildResult();
-            return check;
+            ResultBuilder.BuildConstructions();
+            ResultBuilder.BuildCalculation();
+            ResultBuilder.BuildResult();
         }
     }
 }

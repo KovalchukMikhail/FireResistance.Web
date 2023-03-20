@@ -13,7 +13,7 @@ using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
-using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic;
+using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column;
 using FireResistance.Core.Infrastructure.Factories.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
@@ -29,7 +29,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.interfaces;
 
 namespace FireResistance.Core.Dependency
 {
@@ -71,10 +71,10 @@ namespace FireResistance.Core.Dependency
             .AddTransient<ColumnTemperature>()
             .AddTransient<IEquationsFromSp468, EquationsFromSp468>()
             .AddTransient<IEquationsFromSp63, EquationsFromSp63>()
-            .AddTransient<ICommonEquations, CommonEquations>();
+            .AddTransient<ICommonEquations, CommonEquations>()
+            .AddTransient<IColumnFireIsWithFourSidesEquationsManager, ColumnFireIsWithFourSidesEquationsManager>()
+            .AddTransient<TempValuesForColumn>();
 
-
-        
 
         public static ServiceProvider GetServiceProvider()
         {

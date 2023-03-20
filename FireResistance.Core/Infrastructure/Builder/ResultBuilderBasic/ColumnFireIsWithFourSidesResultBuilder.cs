@@ -79,44 +79,43 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic
             db = provider.GetRequiredService<RequestDb>();
         }
 
-        public bool BuildConstructions()
+        public void BuildConstructions()
         {
             columnFactory = provider.GetRequiredService<ColumnFactoryFR>();
-            column = columnFactory.Create(provider, sourceData) as ColumnFR;
-            return true;
-            
+            column = columnFactory.Create(provider, sourceData) as ColumnFR;   
         }
         
-        public bool BuildCalculation()
+        public void BuildCalculation()
         {
             RunPartFirstOfEquations();
             if (e0 <= column.Height / 30 && lambda <= 20)
             {
                 finalEquation = mainEquations[0];
-                return RunEquationEightDotTwentyThree();
+                result.Status = RunEquationEightDotTwentyThree();
             }
             RunPartSecondOfEquations();
             if (Ncr <= column.Strength)
             {
                 finalEquation = mainEquations[1];
-                return false;
+                result.Status = false;
             }
             RunPartThirdOfEquations();
             if (xt >= KsiR * column.WorkHeightProfileWithWarming && firstTime)
             {
                 columnFactory.OverrideColumn(provider, sourceData, column, xt, KsiR);
                 firstTime = false;
-                return BuildCalculation();
+                BuildCalculation();
             }
-            finalEquation = mainEquations[2];
-            return equationsSp468.CheckEquationEightDotTwentyFive(column.Strength, e, column.ConcreteFR.ResistWithTemperatureNormativeForSqueeze, column.WidthProfileWithWarming, xt, column.WorkHeightProfileWithWarming, column.ArmatureFR.ResistSqueezeWithTemperatureСalculation, column.ArmatureFR.Area, column.WorkHeight, column.DistanceToArmature, out leftPartOfFinalEquation, out RightPartOfFinalEquation);
-
+            else
+            {
+                finalEquation = mainEquations[2];
+                result.Status = equationsSp468.CheckEquationEightDotTwentyFive(column.Strength, e, column.ConcreteFR.ResistWithTemperatureNormativeForSqueeze, column.WidthProfileWithWarming, xt, column.WorkHeightProfileWithWarming, column.ArmatureFR.ResistSqueezeWithTemperatureСalculation, column.ArmatureFR.Area, column.WorkHeight, column.DistanceToArmature, out leftPartOfFinalEquation, out RightPartOfFinalEquation);
+            }
         }
 
-        public bool BuildResult()
+        public void BuildResult()
         {
             result.AddItemDescription("ответ", finalEquation + "N= " + column.Strength + " Result= " + RightPartOfFinalEquation);
-            return true;
         }
 
         public ResultAsDictionary GetCalculationResult()
@@ -177,5 +176,17 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic
             return equationsSp468.CheckEquationEightDotTwentyThree(fi, column.Strength, column.ConcreteFR.ResistWithTemperatureNormativeForSqueeze, column.AreaChangedProfile, column.ArmatureFR.ResistSqueezeWithTemperatureСalculation, Astot, out RightPartOfFinalEquation);
         }
 
+        protected virtual void AddSourseDataToReult()
+        {
+
+        }
+        protected virtual void AddConstructionToReult()
+        {
+
+        }
+        protected virtual void AddConstructionToReult()
+        {
+
+        }
     }
 }

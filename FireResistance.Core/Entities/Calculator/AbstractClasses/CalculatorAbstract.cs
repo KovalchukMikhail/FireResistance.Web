@@ -13,6 +13,6 @@ namespace FireResistance.Core.Entities.Calculator.AbstractClasses
     {
         public T ResultBuilder { get; set; }
 
-        public abstract bool TryConstruct();
+        public abstract void TryConstruct();
     }
 }

@@ -49,7 +49,8 @@ namespace FireResistance.Core.Controllers.ControllerBasic
 
             resultBuilder.SetSourceData(data, provider);
             calculator.ResultBuilder = resultBuilder;
-            return calculator.TryConstruct();
+            calculator.TryConstruct();
+            return true;
 
         }
     }
