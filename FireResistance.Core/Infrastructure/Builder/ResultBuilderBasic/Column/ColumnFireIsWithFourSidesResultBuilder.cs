@@ -38,7 +38,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
         private bool firstTime { get; set; } = true;
 
 
-
+  
         public ColumnFireIsWithFourSidesResultBuilder(CalculationResult<Dictionary<string, double>,
                                                         Dictionary<string, string>> result,
                                                         TempValuesForColumn values,
