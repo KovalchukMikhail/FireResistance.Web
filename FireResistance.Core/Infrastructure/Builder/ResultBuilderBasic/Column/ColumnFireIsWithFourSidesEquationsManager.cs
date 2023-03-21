@@ -30,25 +30,25 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             this.interpolator = interpolator;
         }
 
-        public virtual void RunPartFirstOfEquations(TempValuesForColumn values, ColumnFR column)
+        public virtual void RunPartOneOfEquations(TempValuesForColumn values, ColumnFR column)
         {
             values.e0 = equationsSp63.Gete0(false, column.Moment, column.Strength, column.Length, column.Height);
-            values.lambda = column.WorkLenth / column.HeightProfileWithWarming;
+            values.Lambda = column.WorkLenth / column.HeightProfileWithWarming;
         }
 
-        public virtual void RunPartSecondOfEquations(TempValuesForColumn values, ColumnFR column)
+        public virtual void RunPartTwoOfEquations(TempValuesForColumn values, ColumnFR column)
         {
-            values.deltaE = equationsSp63.GetDeltaE(values.e0, column.HeightProfileWithWarming);
-            values.fiL = equationsSp63.GetFiL(column.Moment, column.Moment);
-            values.momentOfInertiaOfConcrete = commonEquations.GetMomentOfInertiaOfConcrete(column.WidthProfileWithWarming, column.HeightProfileWithWarming);
-            values.momentOfInertiaOfArmature = commonEquations.GetMomentOfInertiaOfArmature(column.ArmatureFR.Area, column.Height, column.DistanceToArmature);
-            values.kb = equationsSp63.GetKb(values.fiL, values.deltaE);
+            values.DeltaE = equationsSp63.GetDeltaE(values.e0, column.HeightProfileWithWarming);
+            values.FiL = equationsSp63.GetFiL(column.Moment, column.Moment);
+            values.MomentOfInertiaOfConcrete = commonEquations.GetMomentOfInertiaOfConcrete(column.WidthProfileWithWarming, column.HeightProfileWithWarming);
+            values.MomentOfInertiaOfArmature = commonEquations.GetMomentOfInertiaOfArmature(column.ArmatureFR.Area, column.Height, column.DistanceToArmature);
+            values.kb = equationsSp63.GetKb(values.FiL, values.DeltaE);
             values.ks = equationsSp63.GetKs();
-            values.D = equationsSp63.GetD(values.kb, column.ConcreteFR.ElasticityModulusWithWarming, values.momentOfInertiaOfConcrete, values.ks, column.ArmatureFR.ElasticityModulusWithWarming, values.momentOfInertiaOfArmature);
+            values.D = equationsSp63.GetD(values.kb, column.ConcreteFR.ElasticityModulusWithWarming, values.MomentOfInertiaOfConcrete, values.ks, column.ArmatureFR.ElasticityModulusWithWarming, values.MomentOfInertiaOfArmature);
             values.Ncr = equationsSp63.GetNcr(values.D, column.WorkLenth);
         }
 
-        public virtual void RunPartThirdOfEquations(TempValuesForColumn values, ColumnFR column)
+        public virtual void RunPartThreeOfEquations(TempValuesForColumn values, ColumnFR column)
         {
             values.n = equationsSp63.Getn(column.Strength, values.Ncr);
             values.e = equationsSp468.GetEEquationEightDotTwentyEight(values.e0, values.n, column.WorkHeight, column.DistanceToArmature, 0);
@@ -74,7 +74,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             values.Ksi = equationsSp468.GetKsi(values.xtFirst, column.WorkHeightProfileWithWarming);
             values.xt = values.Ksi <= values.KsiR ? values.xtFirst : values.xtSecond;
         }
-        public virtual bool RunPartFourthOfEquations(TempValuesForColumn values, ColumnFR column)
+        public virtual bool RunPartFourOfEquations(TempValuesForColumn values, ColumnFR column)
         {
             bool check = equationsSp468.CheckEquationEightDotTwentyFive(column.Strength, values.e, column.ConcreteFR.ResistWithTemperatureNormativeForSqueeze, column.WidthProfileWithWarming, values.xt, column.WorkHeightProfileWithWarming, column.ArmatureFR.ResistSqueezeWithTemperatureСalculation, column.ArmatureFR.Area, column.WorkHeight, column.DistanceToArmature, out double leftPartOfEquation, out double rightPartOfEquation);
             values.LeftPartOfFinalEquation = leftPartOfEquation;
@@ -84,10 +84,10 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 
         public virtual bool RunEquationEightDotTwentyThree(TempValuesForColumn values, ColumnFR column)
         {
-            values.lambda = values.lambda < 12 ? 12 : values.lambda;
+            values.Lambda = values.Lambda < 12 ? 12 : values.Lambda;
             values.Astot = 2 * column.ArmatureFR.Area;
-            values.fi = interpolator.GetValueFromTable(NameColumns.ConcreteType, NameColumns.FlexibilityForTableEightDotOne, column.ConcreteFR.TypeName, values.lambda, db.DataSP468Db.GetTableFiNumberEightDotOne());
-            bool check = equationsSp468.CheckEquationEightDotTwentyThree(values.fi, column.Strength, column.ConcreteFR.ResistWithTemperatureNormativeForSqueeze, column.AreaChangedProfile, column.ArmatureFR.ResistSqueezeWithTemperatureСalculation, values.Astot, out  double rightPartEquation);
+            values.Fi = interpolator.GetValueFromTable(NameColumns.ConcreteType, NameColumns.FlexibilityForTableEightDotOne, column.ConcreteFR.TypeName, values.Lambda, db.DataSP468Db.GetTableFiNumberEightDotOne());
+            bool check = equationsSp468.CheckEquationEightDotTwentyThree(values.Fi, column.Strength, column.ConcreteFR.ResistWithTemperatureNormativeForSqueeze, column.AreaChangedProfile, column.ArmatureFR.ResistSqueezeWithTemperatureСalculation, values.Astot, out  double rightPartEquation);
             values.RightPartOfFinalEquation = rightPartEquation;
             return check;
         }

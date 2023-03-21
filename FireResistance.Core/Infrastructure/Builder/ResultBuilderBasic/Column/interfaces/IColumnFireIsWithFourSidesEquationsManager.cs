@@ -12,12 +12,14 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.i
 {
     internal interface IColumnFireIsWithFourSidesEquationsManager
     {
-        public void RunPartFirstOfEquations(TempValuesForColumn values, ColumnFR column);
+        public void RunPartOneOfEquations(TempValuesForColumn values, ColumnFR column);
 
-        public void RunPartSecondOfEquations(TempValuesForColumn values, ColumnFR column);
+        public void RunPartTwoOfEquations(TempValuesForColumn values, ColumnFR column);
 
-        public void RunPartThirdOfEquations(TempValuesForColumn values, ColumnFR column);
+        public void RunPartThreeOfEquations(TempValuesForColumn values, ColumnFR column);
 
         public bool RunEquationEightDotTwentyThree(TempValuesForColumn values, ColumnFR column);
+
+        public bool RunPartFourOfEquations(TempValuesForColumn values, ColumnFR column);
     }
 }

@@ -11,6 +11,7 @@ namespace FireResistance.Core.Entities.Constructions.AbstractClasses
     {
         public virtual int DistanceToArmature { get; set; }
         public virtual string FixationElement { get; set; }
+        public virtual double СoefficientFixationElement { get; set; }
         public virtual double WorkLenth { get; set; }
 
         public override string ToString()

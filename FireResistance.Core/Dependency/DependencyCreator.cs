@@ -56,9 +56,11 @@ namespace FireResistance.Core.Dependency
                                                             ResultAsDictionary, Dictionary<string, double>,
                                                             Dictionary<string, string>>>>, MainController>()
             .AddTransient<IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>,
-                                                                    ResultAsDictionary,
+                                                                    CalculationResult<Dictionary<string, double>,
+                                                                    Dictionary<string, string>>,
                                                                     Dictionary<string, double>,
-                                                                    Dictionary<string, string>>, ColumnFireIsWithFourSidesResultBuilder>()
+                                                                    Dictionary<string, string>>,
+                                                        ColumnFireIsWithFourSidesResultBuilder>()
             .AddTransient<CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
                                              ResultAsDictionary, Dictionary<string, double>,
                                              Dictionary<string, string>>>, CalculatorBasic>()
@@ -73,9 +75,10 @@ namespace FireResistance.Core.Dependency
             .AddTransient<IEquationsFromSp63, EquationsFromSp63>()
             .AddTransient<ICommonEquations, CommonEquations>()
             .AddTransient<IColumnFireIsWithFourSidesEquationsManager, ColumnFireIsWithFourSidesEquationsManager>()
+            .AddTransient<IColumnFireIsWithFourSidesResultCreator, ColumnFireIsWithFourSidesResultCreator>()
             .AddTransient<TempValuesForColumn>();
 
-
+        
         public static ServiceProvider GetServiceProvider()
         {
             ServiceProvider serviceProvider = services.BuildServiceProvider();

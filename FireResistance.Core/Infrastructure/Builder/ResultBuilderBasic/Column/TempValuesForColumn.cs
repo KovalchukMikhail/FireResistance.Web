@@ -9,13 +9,13 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
     internal class TempValuesForColumn
     {
         public virtual double e0 { get; set; } // from item 8.1.7 SP63
-        public virtual double deltaE { get; set; } // from item 8.1.15 SP63
-        public virtual double fi { get; set; } // from item 8.18 SP468
+        public virtual double DeltaE { get; set; } // from item 8.1.15 SP63
+        public virtual double Fi { get; set; } // from item 8.18 SP468
         public virtual double Astot { get; set; } // from item 8.18 SP468
-        public virtual double lambda { get; set; } // from item 8.18 SP468
-        public virtual double fiL { get; set; } // from item 8.1.15 SP63
-        public virtual double momentOfInertiaOfConcrete { get; set; }
-        public virtual double momentOfInertiaOfArmature { get; set; }
+        public virtual double Lambda { get; set; } // from item 8.18 SP468
+        public virtual double FiL { get; set; } // from item 8.1.15 SP63
+        public virtual double MomentOfInertiaOfConcrete { get; set; }
+        public virtual double MomentOfInertiaOfArmature { get; set; }
         public virtual double kb { get; set; } // from item 8.1.15 SP63
         public virtual double ks { get; set; } // from item 8.1.15 SP63
         public virtual double D { get; set; } // from item 8.1.15 SP63
@@ -31,8 +31,8 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
         public virtual double xt { get; set; } // from item 8.20 SP468
         public virtual double LeftPartOfFinalEquation { get; set; }
         public virtual double RightPartOfFinalEquation { get; set; }
-        public virtual string finalEquation { get; set; }
+        public virtual string FinalEquation { get; set; }
 
-        public string[] mainEquations { get; } = { "8.23:SP468", "8.15:SP63", "8.25:SP468" };
+        public string[] MainEquations { get; } = { "8.23:SP468", "8.15:SP63", "8.25:SP468" };
     }
 }

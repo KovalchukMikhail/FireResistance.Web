@@ -31,10 +31,9 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
         private ColumnFR column;
         private ColumnFactoryFR columnFactory;
         private ServiceProvider provider;
-        private IInterpolator interpolator;
-        private RequestDb db;
         private TempValuesForColumn values;
         private IColumnFireIsWithFourSidesEquationsManager equationsManager;
+        private IColumnFireIsWithFourSidesResultCreator resultCreator;
 
         private bool firstTime { get; set; } = true;
 
@@ -42,16 +41,16 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 
         public ColumnFireIsWithFourSidesResultBuilder(CalculationResult<Dictionary<string, double>,
                                                         Dictionary<string, string>> result,
-                                                        RequestDb db,
-                                                        IInterpolator interpolator,
                                                         TempValuesForColumn values,
-                                                        IColumnFireIsWithFourSidesEquationsManager equationsManager)
+                                                        IColumnFireIsWithFourSidesEquationsManager equationsManager,
+                                                        ColumnFactoryFR columnFactory,
+                                                        IColumnFireIsWithFourSidesResultCreator resultCreator)
         {
             this.result = result;
-            this.db = db;
-            this.interpolator = interpolator;
             this.values = values;
             this.equationsManager = equationsManager;
+            this.columnFactory = columnFactory;
+            this.resultCreator = resultCreator;
         }
 
         public void SetSourceData(SourceData<Dictionary<string, string>> sourceData, ServiceProvider provider)
@@ -62,25 +61,24 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 
         public void BuildConstructions()
         {
-            columnFactory = provider.GetRequiredService<ColumnFactoryFR>();
             column = columnFactory.Create(provider, sourceData) as ColumnFR;   
         }
         
         public void BuildCalculation()
         {
-            equationsManager.RunPartFirstOfEquations(values, column);
-            if (values.e0 <= column.Height / 30 && values.lambda <= 20)
+            equationsManager.RunPartOneOfEquations(values, column);
+            if (values.e0 <= column.Height / 30 && values.Lambda <= 20)
             {
-                values.finalEquation = values.mainEquations[0];
+                values.FinalEquation = values.MainEquations[0];
                 result.Status = equationsManager.RunEquationEightDotTwentyThree(values, column);
             }
-            equationsManager.RunPartSecondOfEquations(values, column);
+            equationsManager.RunPartTwoOfEquations(values, column);
             if (values.Ncr <= column.Strength)
             {
-                values.finalEquation = values.mainEquations[1];
+                values.FinalEquation = values.MainEquations[1];
                 result.Status = false;
             }
-            equationsManager.RunPartThirdOfEquations(values, column);
+            equationsManager.RunPartThreeOfEquations(values, column);
             if (values.xt >= values.KsiR * column.WorkHeightProfileWithWarming && firstTime)
             {
                 columnFactory.OverrideColumn(provider, sourceData, column, values.xt, values.KsiR);
@@ -89,14 +87,18 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             }
             else
             {
-                values.finalEquation = values.mainEquations[2];
-                result.Status = equationsManager.RunPartFourthOfEquations(values, column); 
+                values.FinalEquation = values.MainEquations[2];
+                result.Status = equationsManager.RunPartFourOfEquations(values, column); 
             }
         }
 
         public void BuildResult()
         {
-            result.AddItemDescription("ответ", values.finalEquation + "N= " + column.Strength + " Result= " + values.RightPartOfFinalEquation);
+            result.FinalEquations = values.MainEquations;
+            resultCreator.AddConstructionDataToResult(result, column);
+            if (values.FinalEquation == values.MainEquations[0]) resultCreator.AddResultIfLastIsEightDotTwentyThree(result, values);
+            else if (values.FinalEquation == values.MainEquations[1]) resultCreator.AddResultIfLastIsEightDotFifteen(result, values);
+            else if (values.FinalEquation == values.MainEquations[2]) resultCreator.AddResultIfLastIsEightDotTwentyFive(result, values);
         }
 
         public CalculationResult<Dictionary<string, double>, Dictionary<string, string>> GetCalculationResult()

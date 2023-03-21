@@ -12,6 +12,8 @@ namespace FireResistance.Core.Entities.Calculations.AbstractClasses
     {
         public SourceData<K> SourceData { get; set; }
         public bool Status { get; set; } = false;
+        public string ResultAsString { get; set; } = "";
+        public string[] FinalEquations { get; set; }
 
         public abstract double GetItemResult(string key);
         public abstract void AddItemResult(string key, double value);
@@ -20,5 +22,9 @@ namespace FireResistance.Core.Entities.Calculations.AbstractClasses
         public abstract string GetItemDescription(string key);
         public abstract void AddItemDescription(string key, string value);
         public abstract K GetDescription();
+        public override string ToString()
+        {
+            return ResultAsString;
+        }
     }
 }

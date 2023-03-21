@@ -44,7 +44,8 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
                                                                         Math.Min(minSize, NameColumns.SizeForCriticalTemperature[NameColumns.SizeForCriticalTemperature.Count - 1]),
                                                                         db.TemperatureDb.GetTableOfDeepWarmingToCriticalTemperatureForСolumn(sourceData.ConcreteType));
             column.WorkHeight = commonEquation.GetWorkHeight(column.Height, column.DistanceToArmature);
-            column.WorkLenth = commonEquation.GetWorkLenth(column.Length, db.DataSP468Db.GetСoefficientFixationElement(column.FixationElement));
+            column.СoefficientFixationElement = db.DataSP468Db.GetСoefficientFixationElement(column.FixationElement);
+            column.WorkLenth = commonEquation.GetWorkLenth(column.Length, column.СoefficientFixationElement);
             column.HeightProfileWithWarming = equationsSp468.GetHtFireFourSides(column.Height, column.DeepConcreteWarming);
             column.WidthProfileWithWarming = equationsSp468.GetHtFireFourSides(column.Width, column.DeepConcreteWarming);
             column.WorkWidthWithWarming = equationsSp468.GetHtFireFourSides(column.Width, column.DeepConcreteWarming);
