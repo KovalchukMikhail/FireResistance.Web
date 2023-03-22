@@ -48,7 +48,7 @@ namespace FireResistance.Web.Controllers
             fireResistance.TryPerformCalculation(data);
             
             ResultAsDictionary result = fireResistance.GetResult();
-            string answer = result.GetItemDescription("ответ");
+            string answer = result.GetItemDescription("FireResistanceVolume");
 
 
             //string answer = $"Диаметр арматуры{data.ArmatureDiameter}:Количество арматуры{data.ArmatureCount}:Класс арматуры{data.ArmatureClass}:Расположение арматуры{data.ArmatureInstallationDepth}:Тип бетона{data.ConcreteType}:Класс бетона{data.ConcreteClass}:Предел огнестойкости{data.FireResistanceValue}:Момент{data.Moment}:Продольная сила{data.Strength}:Длина колонны{data.LengthColumn}:Высота колонны{data.HighColumn}:Ширина колонны{data.WidthColumn}:закрепление{data.FixationElement}";

@@ -17,5 +17,6 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.i
         public void AddResultIfLastIsEightDotFifteen(CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result, TempValuesForColumn values);
 
         public void AddResultIfLastIsEightDotTwentyFive(CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result, TempValuesForColumn values);
+        public string BuildString(CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result)
     }
 }

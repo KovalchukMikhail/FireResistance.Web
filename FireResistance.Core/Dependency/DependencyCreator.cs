@@ -48,25 +48,9 @@ namespace FireResistance.Core.Dependency
             .AddTransient<ConcreteForFR>()
             .AddTransient<ArmatureForFRFactory>()
             .AddTransient<ConcreteForFRFactory>()
-            .AddTransient<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, ResultAsDictionary>()
+            .AddTransient<ResultAsDictionary>()
             .AddTransient<IEquationsFromSp468, EquationsFromSp468>()
             .AddTransient<IEquationsFromSp63, EquationsFromSp63>()
-            .AddTransient<IMainController<SourceData<Dictionary<string, string>>,
-                                                        CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
-                                                            ResultAsDictionary, Dictionary<string, double>,
-                                                            Dictionary<string, string>>>>, MainController>()
-            .AddTransient<IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>,
-                                                                    CalculationResult<Dictionary<string, double>,
-                                                                    Dictionary<string, string>>,
-                                                                    Dictionary<string, double>,
-                                                                    Dictionary<string, string>>,
-                                                        ColumnFireIsWithFourSidesResultBuilder>()
-            .AddTransient<CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
-                                             ResultAsDictionary, Dictionary<string, double>,
-                                             Dictionary<string, string>>>, CalculatorBasic>()
-            .AddTransient<SlabFR>()
-            .AddTransient<ColumnFR>()
-            .AddTransient<WallFR>()
             .AddTransient<IIndexDeterminant, IndexDeterminantBasic>()
             .AddTransient<IInterpolator, InterpolatorBasic>()
             .AddTransient<ColumnFactoryFR>()
@@ -76,9 +60,25 @@ namespace FireResistance.Core.Dependency
             .AddTransient<ICommonEquations, CommonEquations>()
             .AddTransient<IColumnFireIsWithFourSidesEquationsManager, ColumnFireIsWithFourSidesEquationsManager>()
             .AddTransient<IColumnFireIsWithFourSidesResultCreator, ColumnFireIsWithFourSidesResultCreator>()
-            .AddTransient<TempValuesForColumn>();
+            .AddTransient<TempValuesForColumn>()
+            .AddTransient<IMainController<SourceData<Dictionary<string, string>>,
+                                                        CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
+                                                            ResultAsDictionary, Dictionary<string, double>,
+                                                            Dictionary<string, string>>>>, MainController>()
+            .AddTransient<IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>,
+                                                                    ResultAsDictionary,
+                                                                    Dictionary<string, double>,
+                                                                    Dictionary<string, string>>,
+                                                        ColumnFireIsWithFourSidesResultBuilder>()
+            .AddTransient<CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
+                                             ResultAsDictionary, Dictionary<string, double>,
+                                             Dictionary<string, string>>>, CalculatorBasic>()
+            .AddTransient<SlabFR>()
+            .AddTransient<ColumnFR>()
+            .AddTransient<WallFR>();
 
-        
+
+
         public static ServiceProvider GetServiceProvider()
         {
             ServiceProvider serviceProvider = services.BuildServiceProvider();

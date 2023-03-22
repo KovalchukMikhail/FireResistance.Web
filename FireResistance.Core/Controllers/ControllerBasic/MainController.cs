@@ -1,6 +1,7 @@
 ﻿using FireResistance.Core.Controllers.Interfaces;
 using FireResistance.Core.Dependency;
 using FireResistance.Core.Entities.Calculations;
+using FireResistance.Core.Entities.Calculations.AbstractClasses;
 using FireResistance.Core.Entities.Calculator.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
@@ -31,9 +32,9 @@ namespace FireResistance.Core.Controllers.ControllerBasic
             {
                 case ColumnFireIsWithFourSidesData<Dictionary<string, string>>:
                     resultBuilder = provider.GetService<IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>,
-                                                                                                ResultAsDictionary,
-                                                                                                Dictionary<string, double>,
-                                                                                                Dictionary<string, string>>>();
+                                                                    ResultAsDictionary,
+                                                                    Dictionary<string, double>,
+                                                                    Dictionary<string, string>>>();
                     break;
                 case PlateWithRigidConnectionToColumnsData<Dictionary<string, string>>:
                     resultBuilder = null;

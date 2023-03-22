@@ -22,11 +22,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
+
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 {
-    internal class ColumnFireIsWithFourSidesResultBuilder : IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>, CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>
+    internal class ColumnFireIsWithFourSidesResultBuilder : IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>, ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>
     {
-        private CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result;
+        private ResultAsDictionary result;
         private ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData;
         private ColumnFR column;
         private ColumnFactoryFR columnFactory;
@@ -37,10 +38,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 
         private bool firstTime { get; set; } = true;
 
-
-  
-        public ColumnFireIsWithFourSidesResultBuilder(CalculationResult<Dictionary<string, double>,
-                                                        Dictionary<string, string>> result,
+        public ColumnFireIsWithFourSidesResultBuilder(ResultAsDictionary result,
                                                         TempValuesForColumn values,
                                                         IColumnFireIsWithFourSidesEquationsManager equationsManager,
                                                         ColumnFactoryFR columnFactory,
@@ -99,9 +97,10 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             if (values.FinalEquation == values.MainEquations[0]) resultCreator.AddResultIfLastIsEightDotTwentyThree(result, values);
             else if (values.FinalEquation == values.MainEquations[1]) resultCreator.AddResultIfLastIsEightDotFifteen(result, values);
             else if (values.FinalEquation == values.MainEquations[2]) resultCreator.AddResultIfLastIsEightDotTwentyFive(result, values);
+            resultCreator.BuildString(result);
         }
 
-        public CalculationResult<Dictionary<string, double>, Dictionary<string, string>> GetCalculationResult()
+        public ResultAsDictionary GetCalculationResult()
         { 
             return result;
         }
