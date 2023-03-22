@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.Interfaces.SourceDataFactory
 {
-    public interface ISourceDataFactory<T, K> 
-        where T : SourceData<K>
+    public interface ISourceDataFactory<T> 
+        where T : SourceData
     {
         public bool TryCreate(Dictionary<string, string> stringValues, Dictionary<string, double> doubleValues, out T result);
     }

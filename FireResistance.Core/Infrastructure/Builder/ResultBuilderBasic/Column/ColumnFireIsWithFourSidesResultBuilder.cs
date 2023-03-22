@@ -7,6 +7,7 @@ using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.Materials.AbstractClasses;
 using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
+using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.interfaces;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
@@ -25,10 +26,10 @@ using System.Threading.Tasks.Dataflow;
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 {
-    internal class ColumnFireIsWithFourSidesResultBuilder : IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>, CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>
+    internal class ColumnFireIsWithFourSidesResultBuilder : IColumnFireIsWithFourSidesResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>
     {
         private CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result;
-        private ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData;
+        private ColumnFireIsWithFourSidesData sourceData;
         private ColumnFR column;
         private ColumnFactoryFR columnFactory;
         private ServiceProvider provider;
@@ -51,9 +52,9 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             this.resultCreator = resultCreator;
         }
 
-        public void SetSourceData(SourceData<Dictionary<string, string>> sourceData, ServiceProvider provider)
+        public void SetSourceData(SourceData sourceData, ServiceProvider provider)
         {
-            this.sourceData = sourceData as ColumnFireIsWithFourSidesData<Dictionary<string, string>>;
+            this.sourceData = sourceData as ColumnFireIsWithFourSidesData;
             this.provider = provider;
         }
 

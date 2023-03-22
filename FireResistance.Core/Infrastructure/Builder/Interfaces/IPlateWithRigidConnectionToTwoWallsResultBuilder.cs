@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Builder.Interfaces
 {
-    internal interface IPlateWithRigidConnectionToTwoWallsResultBuilder<P, N, T, K> : IResultBuilder<P, N, T, K>
+    internal interface IPlateWithRigidConnectionToTwoWallsResultBuilder<N, T, K> : IResultBuilder<N, T, K>
         where N : CalculationResult<T, K>
     {
     }

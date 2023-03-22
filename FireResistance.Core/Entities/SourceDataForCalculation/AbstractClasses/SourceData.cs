@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses
 {
-    public abstract class SourceData<T>
+    public abstract class SourceData
     {
         public bool Check { get; set; } = false;
-
-        public abstract T GetData();
         
     }
 }

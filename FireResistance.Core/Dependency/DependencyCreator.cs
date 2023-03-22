@@ -61,17 +61,14 @@ namespace FireResistance.Core.Dependency
             .AddTransient<IColumnFireIsWithFourSidesEquationsManager, ColumnFireIsWithFourSidesEquationsManager>()
             .AddTransient<IColumnFireIsWithFourSidesResultCreator, ColumnFireIsWithFourSidesResultCreator>()
             .AddTransient<TempValuesForColumn>()
-            .AddTransient<IMainController<SourceData<Dictionary<string, string>>,
-                                                        CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
-                                                            CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
-                                                            Dictionary<string, string>>>>, MainController>()
-            .AddTransient<IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>,
-                                                                    CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
+            .AddTransient<IMainController<SourceData,
+                                          CalculatorAbstract<IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
+                                              Dictionary<string, string>>>>, MainController>()
+            .AddTransient<IColumnFireIsWithFourSidesResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
                                                                     Dictionary<string, double>,
                                                                     Dictionary<string, string>>,
                                                         ColumnFireIsWithFourSidesResultBuilder>()
-            .AddTransient<CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
-                                             CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
+            .AddTransient<CalculatorAbstract<IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
                                              Dictionary<string, string>>>, CalculatorBasic>()
             .AddTransient<SlabFR>()
             .AddTransient<ColumnFR>()

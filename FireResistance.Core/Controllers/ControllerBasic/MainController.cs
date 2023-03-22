@@ -4,6 +4,7 @@ using FireResistance.Core.Entities.Calculations;
 using FireResistance.Core.Entities.Calculations.AbstractClasses;
 using FireResistance.Core.Entities.Calculator.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
+using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,15 +15,14 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Controllers.ControllerBasic
 {
-    internal class MainController : IMainController <SourceData<Dictionary<string, string>>,
-                                                        CalculatorAbstract<IResultBuilder<Dictionary<string, string>, CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
+    internal class MainController : IMainController <SourceData,
+                                                        CalculatorAbstract<IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
                                                         Dictionary<string, string>>>>
     {
-        private IResultBuilder<Dictionary<string, string>,
-                                CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
+        private IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
                                 Dictionary<string, string>> resultBuilder;
-        public bool Run(SourceData<Dictionary<string, string>> data,
-                            CalculatorAbstract<IResultBuilder<Dictionary<string, string>, CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>> calculator,
+        public bool Run(SourceData data,
+                            CalculatorAbstract<IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>> calculator,
                             ServiceProvider provider)
         {
             if (!data.Check) return false;
@@ -30,19 +30,18 @@ namespace FireResistance.Core.Controllers.ControllerBasic
 
             switch (data)
             {
-                case ColumnFireIsWithFourSidesData<Dictionary<string, string>>:
-                    resultBuilder = provider.GetService<IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>,
-                                                                    CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
+                case ColumnFireIsWithFourSidesData:
+                    resultBuilder = provider.GetService<IColumnFireIsWithFourSidesResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
                                                                     Dictionary<string, double>,
                                                                     Dictionary<string, string>>>();
                     break;
-                case PlateWithRigidConnectionToColumnsData<Dictionary<string, string>>:
+                case PlateWithRigidConnectionToColumnsData:
                     resultBuilder = null;
                     break;
-                case PlateWithRigidConnectionToTwoWallsData<Dictionary<string, string>>:
+                case PlateWithRigidConnectionToTwoWallsData:
                     resultBuilder = null;
                     break;
-                case WallFireIsWithOneSideData<Dictionary<string, string>>:
+                case WallFireIsWithOneSideData:
                     resultBuilder = null;
                     break;
                 default: return false;

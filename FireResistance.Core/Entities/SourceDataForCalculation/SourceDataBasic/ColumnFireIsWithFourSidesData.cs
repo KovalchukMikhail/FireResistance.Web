@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 
-namespace FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses
+namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
 {
-    public abstract class ColumnFireIsWithFourSidesData <T> : SourceData<T>
+    public class ColumnFireIsWithFourSidesData : SourceData
     {
         public virtual string FireResistanceValue { get; set; }
         public virtual int LengthColumn { get; set; }
@@ -23,7 +24,5 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses
         public virtual double Moment { get; set; }
         public virtual double Strength { get; set; }
 
-
-        public abstract override T GetData();
     }
 }

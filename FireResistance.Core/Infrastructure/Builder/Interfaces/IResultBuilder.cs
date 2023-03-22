@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Builder.Interfaces
 {
-    internal interface IResultBuilder <P, N, T, K> where N : CalculationResult<T, K>
+    internal interface IResultBuilder <N, T, K> where N : CalculationResult<T, K>
     {
-        public void SetSourceData(SourceData<P> sourceData, ServiceProvider provider);
+        public void SetSourceData(SourceData sourceData, ServiceProvider provider);
         public void BuildConstructions();
         public void BuildCalculation();
         public void BuildResult(); 

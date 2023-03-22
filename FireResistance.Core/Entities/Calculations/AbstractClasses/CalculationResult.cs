@@ -10,7 +10,7 @@ namespace FireResistance.Core.Entities.Calculations.AbstractClasses
 {
     public abstract class CalculationResult <T, K>
     {
-        public SourceData<K> SourceData { get; set; }
+        public SourceData SourceData { get; set; }
         public bool Status { get; set; } = false;
         public string ResultAsString { get; set; } = "";
         public string[] FinalEquations { get; set; }

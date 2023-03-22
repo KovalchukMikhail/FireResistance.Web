@@ -14,11 +14,11 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
 {
-    public class ColumnFireIsWithFourSidesDataFactory : IColumnFireIsWithFourSidesDataFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>, Dictionary<string, string>>
+    public class ColumnFireIsWithFourSidesDataFactory : IColumnFireIsWithFourSidesDataFactory<ColumnFireIsWithFourSidesData>
     {
-        public bool TryCreate(Dictionary<string, string> stringValues, Dictionary<string, double> doubleValues, out ColumnFireIsWithFourSidesData<Dictionary<string, string>> result)
+        public bool TryCreate(Dictionary<string, string> stringValues, Dictionary<string, double> doubleValues, out ColumnFireIsWithFourSidesData result)
         {
-            result = new ColumnFireIsWithFourSidesDataBasic();
+            result = new ColumnFireIsWithFourSidesData();
             Utilities utilit = new Utilities();
             string[] keys = {ConstantsName.fireResistanceLabel,
                             ConstantsName.LenthElementLabel,

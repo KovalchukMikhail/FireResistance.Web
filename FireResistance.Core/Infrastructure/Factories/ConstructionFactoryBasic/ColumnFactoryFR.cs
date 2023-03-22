@@ -3,7 +3,6 @@ using FireResistance.Core.Entities.Constructions.AbstractClasses;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.Materials.BaseClasses;
-using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
 using FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic;
@@ -17,12 +16,13 @@ using System.Text;
 using System.Threading.Tasks;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using System.Data.Common;
+using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 
 namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
 {
-    internal class ColumnFactoryFR : IConstructionFactory<ColumnFireIsWithFourSidesData<Dictionary<string, string>>>
+    internal class ColumnFactoryFR : IConstructionFactory<ColumnFireIsWithFourSidesData>
     {
-        public virtual Construction Create(ServiceProvider provider, ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData)
+        public virtual Construction Create(ServiceProvider provider, ColumnFireIsWithFourSidesData sourceData)
         {
             RequestDb db = provider.GetService<RequestDb>();
             ColumnFR column = provider.GetRequiredService<ColumnFR>();
@@ -56,7 +56,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
             return column;
         }
 
-        public virtual ColumnFR OverrideColumn(ServiceProvider provider, ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData, ColumnFR column, double xt, double KsiR)
+        public virtual ColumnFR OverrideColumn(ServiceProvider provider, ColumnFireIsWithFourSidesData sourceData, ColumnFR column, double xt, double KsiR)
         {
             RequestDb db = provider.GetService<RequestDb>();
             IEquationsFromSp468 equations = provider.GetRequiredService<IEquationsFromSp468>();
@@ -65,7 +65,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
             return column;
         }
 
-        protected virtual void SetMaterials(ColumnFR column, ServiceProvider provider, ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData, RequestDb db)
+        protected virtual void SetMaterials(ColumnFR column, ServiceProvider provider, ColumnFireIsWithFourSidesData sourceData, RequestDb db)
         {
             ColumnTemperature columnTemperature = provider.GetRequiredService<ColumnTemperature>();
             double temperatureArmature = columnTemperature.GetArmatureTemperature(column);

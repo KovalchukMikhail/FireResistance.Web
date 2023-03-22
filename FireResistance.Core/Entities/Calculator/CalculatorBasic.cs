@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Entities.Calculator
 {
-    internal class CalculatorBasic : CalculatorAbstract <IResultBuilder<Dictionary<string, string>, CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>>
+    internal class CalculatorBasic : CalculatorAbstract <IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>>
     {
         public override void TryConstruct()
         {
