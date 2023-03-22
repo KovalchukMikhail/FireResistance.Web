@@ -1,8 +1,116 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model string[]
+
+<h2>Введите значения</h2>
+<form method="post">
+    <p>
+        <label for="valueOfFireResistance">Выберете требуемый предел огнестойкости:</label>
+        <select multiple name="valueOfFireResistance">
+            <option value="R30">R30</option>
+            <option value="R45">R45</option>
+            <option value="R60">R60</option>
+            <option value="R90">R90</option>
+            <option value="R120">R120</option>
+            <option value="R150">R150</option>
+        </select>
+    </p>
+    <p>
+        <label for="fixationElement">Выберите вариант закрепления по концам элемента:</label>
+        <select multiple name="fixationElement">
+            <option value="НЕ_СМЕЩАЕМАЯ_ЗАДЕЛКА_НА_ДВУХ_КОНЦАХ">НЕ_СМЕЩАЕМАЯ_ЗАДЕЛКА_НА_ДВУХ_КОНЦАХ</option>
+            <option value="НЕ_СМЕЩАЕМАЯ_ЗАДЕЛКА_НА_ДВУХ_КОНЦАХ_С_ПОДАТЛИВЫМ_ОГРАНИЧЕННЫМ_ПОВОРОТОМ">НЕ_СМЕЩАЕМАЯ_ЗАДЕЛКА_НА_ДВУХ_КОНЦАХ_С_ПОДАТЛИВЫМ_ОГРАНИЧЕННЫМ_ПОВОРОТОМ</option>
+            <option value="ШАРНИРНЫЕ_ОПОРЫ_НА_ДВУХ_КОНЦАХ">ШАРНИРНЫЕ_ОПОРЫ_НА_ДВУХ_КОНЦАХ</option>
+        </select>
+    </p>
+    <p>
+        <label for="armatureClass">Выберите класс арматуры по прочности:</label>
+        <select multiple name="armatureClass">
+            <option value="A240">A240</option>
+            <option value="А400">А400</option>
+            <option value="А500">А500</option>
+            <option value="А600">А600</option>
+            <option value="А800">А800</option>
+            <option value="А1000">А1000</option>
+            <option value="В500">В500</option>
+            <option value="А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544_2006">А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544_2006</option>
+            <option value="А600С_МАРКИ_18Г2СФ_ТЕРМОМЕХАНИЧЕСКИ_УПРОЧНЕННАЯ">А600С_МАРКИ_18Г2СФ_ТЕРМОМЕХАНИЧЕСКИ_УПРОЧНЕННАЯ</option>
+            <option value="А500С_МАРКИ_Ст3Гпс_ТЕРМОМЕХАНИЧЕСКИ_УПРОЧНЕННАЯ_ПО_ГОСТ_34028_2016">А500С_МАРКИ_Ст3Гпс_ТЕРМОМЕХАНИЧЕСКИ_УПРОЧНЕННАЯ_ПО_ГОСТ_34028_2016</option>
+        </select>
+    </p>
+    <p>
+        <label for="concreteType">Выберите вид бетона:</label>
+        <select multiple name="concreteType">
+            <option value="ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ">ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ</option>
+            <option value="ТЯЖЕЛЫЙ_НА_КАРБОНАТНОМ_ЗАПОЛНИТЕЛЕ">ТЯЖЕЛЫЙ_НА_КАРБОНАТНОМ_ЗАПОЛНИТЕЛЕ</option>
+            <option value="КОНСТРУКЦИОННЫЙ_КЕРАМЗИТОБЕТОН">КОНСТРУКЦИОННЫЙ_КЕРАМЗИТОБЕТОН</option>
+        </select>
+    </p>
+    <p>
+        <label for="concreteClass">Выберите класс бетона:</label>
+        <select multiple name="concreteClass">
+            <option value="B15">B15</option>
+            <option value="B20">B20</option>
+            <option value="B25">B25</option>
+            <option value="B30">B30</option>
+            <option value="B35">B35</option>
+            <option value="B40">B40</option>
+            <option value="B45">B45</option>
+            <option value="B50">B50</option>
+        </select>
+    </p>
+    <p>
+        <label>Укажите длину элемента:</label><br />
+        <input type="number" name="lenth" value=5450 />
+    </p>
+    <p>
+        <label>Укажите высоту элемента:</label><br />
+        <input type="number" name="heigh" value=1200 />
+    </p>
+    <p>
+        <label>Укажите ширину элемента:</label><br />
+        <input type="number" name="width" value=300 />
+    </p>
+    <p>
+        <label>Укажите расстояние от грани элемента до центра тяжести арматуры:</label><br />
+        <input type="number" name="armatureInstallationDepth" value=55 />
+    </p>
+    <p>
+        <label>Укажите диаметр арматуры:</label><br />
+        <input type="number" name="armatureDiameter" value=25 />
+    </p>
+    <p>
+        <label>Укажите количество арматуры:</label><br />
+        <input type="number" name="armatureCount" value=3 />
+    </p>
+    <p>
+        <label>Укажите вличену изгибающего момента от постоянной и длительной нормативной нагрузки:</label><br />
+        <input type="number" name="moment" value=10 />
+    </p>
+    <p>
+        <label>Укажите вличену нормальной силы от постоянной и длительной нормативной нагрузки:</label><br />
+        <input type="number" name="strength" value=300 />
+    </p>
+    <input type="submit" value="Send" />
+</form>
+@if(Model != null)
+{
+    foreach (string str in Model)
+    {
+        if (str.StartsWith("#"))
+        {
+            string text = str.Replace("#", "");
+            <h2>@text</h2>
+        }
+        else if (!str.StartsWith("\t")) 
+        {
+            <strong>
+                @str
+            </strong>
+        }
+        else
+        {
+            <p>@str</p>
+        }
+
+    }
 }
 
-<div class="text-center">
-    <h4 class="display-4">Welcome @ViewData["Answer"]</h4>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>

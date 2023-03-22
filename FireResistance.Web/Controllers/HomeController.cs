@@ -17,43 +17,42 @@ namespace FireResistance.Web.Controllers
         {
             _logger = logger;
         }
+        [HttpGet]
+        public IActionResult Index() => View();
 
-        public IActionResult Index()
+        [HttpPost]
+        public IActionResult Index(string valueOfFireResistance, string fixationElement, string armatureClass, string concreteType, string concreteClass, double lenth, double heigh, double width, double armatureInstallationDepth, double armatureDiameter, double armatureCount, double moment, double strength)
         {
             Dictionary<string, string> dictStr = new Dictionary<string, string>()
             {
-                {"Предел_огнестойкости", "R120" },
-                {"Закрепление_по_концам_элемента", "НЕ_СМЕЩАЕМАЯ_ЗАДЕЛКА_НА_ДВУХ_КОНЦАХ"},
-                {"Класс_арматуры_по_прочности", "А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544_2006" },
-                {"Вид_бетона", "ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ"},
-                {"Класс_бетона_по_прочности", "B35"}
+                {"Предел_огнестойкости", valueOfFireResistance },
+                {"Закрепление_по_концам_элемента", fixationElement},
+                {"Класс_арматуры_по_прочности", armatureClass },
+                {"Вид_бетона", concreteType},
+                {"Класс_бетона_по_прочности", concreteClass}
             };
             Dictionary<string, double> dictDbl = new Dictionary<string, double>()
             {
-                {"Длина_элемента", 5400 },
-                {"Высота_элемента", 1200 },
-                {"Ширина_элемента", 400 },
-                {"Расстояние_от_грани_элемента_до_центра_тяжести_арматуры", 55 },
-                {"Диаметр_арматуры", 20 },
-                {"Количество_арматуры", 4},
-                {"Величина_изгибающего_момента", 10},
-                {"Величина_нормальной_силы", 200}
+                {"Длина_элемента", lenth },
+                {"Высота_элемента", heigh },
+                {"Ширина_элемента", width },
+                {"Расстояние_от_грани_элемента_до_центра_тяжести_арматуры", armatureInstallationDepth },
+                {"Диаметр_арматуры", armatureDiameter },
+                {"Количество_арматуры", armatureCount},
+                {"Величина_изгибающего_момента", moment},
+                {"Величина_нормальной_силы", strength}
             };
 
 
             ColumnFireIsWithFourSidesDataFactory dataFactory = new ColumnFireIsWithFourSidesDataFactory();
             bool check = dataFactory.TryCreate(dictStr, dictDbl, out ColumnFireIsWithFourSidesData<Dictionary<string, string>> data);
-            data.Check = true;
+            data.Check = true; //!!!!!!!!!!!!!!!!!!!!!!!
             FireResistanceBasic fireResistance = new FireResistanceBasic();
             fireResistance.TryPerformCalculation(data);
-            
+
             ResultAsDictionary result = fireResistance.GetResult() as ResultAsDictionary;
-            string answer = result.GetItemDescription("FireResistanceVolume");
-
-
-            //string answer = $"Диаметр арматуры{data.ArmatureDiameter}:Количество арматуры{data.ArmatureCount}:Класс арматуры{data.ArmatureClass}:Расположение арматуры{data.ArmatureInstallationDepth}:Тип бетона{data.ConcreteType}:Класс бетона{data.ConcreteClass}:Предел огнестойкости{data.FireResistanceValue}:Момент{data.Moment}:Продольная сила{data.Strength}:Длина колонны{data.LengthColumn}:Высота колонны{data.HighColumn}:Ширина колонны{data.WidthColumn}:закрепление{data.FixationElement}";
-            ViewData["Answer"] = answer;
-            return View();
+            string[] str = result.ToString().Split("\n");
+            return View(str);
         }
 
         public IActionResult Privacy()

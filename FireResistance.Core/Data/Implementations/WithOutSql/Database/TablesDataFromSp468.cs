@@ -41,12 +41,13 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
             "А800",
             "А1000",
             "В500",
-            "А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544-2006",
+            "А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544_2006",
             "А600С_МАРКИ_18Г2СФ_ТЕРМОМЕХАНИЧЕСКИ_УПРОЧНЕННАЯ",
             "А500С_МАРКИ_Ст3Гпс_ТЕРМОМЕХАНИЧЕСКИ_УПРОЧНЕННАЯ_ПО_ГОСТ_34028_2016"
         };
 
-        private static List<int> temperatureForTables = new List<int>()
+
+private static List<int> temperatureForTables = new List<int>()
         {
             20,
             200,

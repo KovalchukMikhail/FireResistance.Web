@@ -19,5 +19,7 @@ namespace FireResistance.Core.Infrastructure.Core
         public double GetWorkHeight(double h, double a) => h - a;
 
         public double GetWorkLenth(double l, double coefficientFixationElement) => l * coefficientFixationElement;
+
+        public double GetFinalСoefficient(double checkedValue, double criticalValue) => checkedValue / criticalValue;
     }
 }

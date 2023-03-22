@@ -79,6 +79,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             bool check = equationsSp468.CheckEquationEightDotTwentyFive(column.Strength, values.e, column.ConcreteFR.ResistWithTemperatureNormativeForSqueeze, column.WidthProfileWithWarming, values.xt, column.WorkHeightProfileWithWarming, column.ArmatureFR.ResistSqueezeWithTemperatureСalculation, column.ArmatureFR.Area, column.WorkHeight, column.DistanceToArmature, out double leftPartOfEquation, out double rightPartOfEquation);
             values.LeftPartOfFinalEquation = leftPartOfEquation;
             values.RightPartOfFinalEquation = rightPartOfEquation;
+            values.FinalСoefficient = commonEquations.GetFinalСoefficient(leftPartOfEquation, rightPartOfEquation);
             return check;
         }
 
@@ -89,6 +90,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             values.Fi = interpolator.GetValueFromTable(NameColumns.ConcreteType, NameColumns.FlexibilityForTableEightDotOne, column.ConcreteFR.TypeName, values.Lambda, db.DataSP468Db.GetTableFiNumberEightDotOne());
             bool check = equationsSp468.CheckEquationEightDotTwentyThree(values.Fi, column.Strength, column.ConcreteFR.ResistWithTemperatureNormativeForSqueeze, column.AreaChangedProfile, column.ArmatureFR.ResistSqueezeWithTemperatureСalculation, values.Astot, out  double rightPartEquation);
             values.RightPartOfFinalEquation = rightPartEquation;
+            values.FinalСoefficient = commonEquations.GetFinalСoefficient(column.Strength, rightPartEquation);
             return check;
         }
     }

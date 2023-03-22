@@ -63,6 +63,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             result.AddItemResult("fi", values.Fi);
             result.AddItemResult("RightPartOfFinalEquation", values.RightPartOfFinalEquation);
             result.AddItemDescription("FinalEquation", values.FinalEquation);
+            result.AddItemResult("FinalСoefficient", values.FinalСoefficient);
         }
 
         public virtual void AddResultIfLastIsEightDotFifteen(CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result, TempValuesForColumn values)
@@ -79,6 +80,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             AddPartThreeResult(result, values);
             AddPartFourResult(result, values);
             result.AddItemDescription("FinalEquation", values.FinalEquation);
+            result.AddItemResult("FinalСoefficient", values.FinalСoefficient);
         }
 
         protected virtual void AddPartOneResult(CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result, TempValuesForColumn values)
@@ -120,7 +122,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
         public virtual string BuildString(CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append($"_Проверка предела огнестойкости пилона {result.GetItemResult("h")} x {result.GetItemResult("b")}\n");
+            stringBuilder.Append($"#Проверка предела огнестойкости пилона {result.GetItemResult("h")} x {result.GetItemResult("b")}\n");
             BuildDataConstruction(stringBuilder, result);
             BuildPartOneResult(stringBuilder, result);
             if (result.GetItemDescription("FinalEquation") == result.FinalEquations[0]) BuildIfLastIsEightDotTwentyThree(stringBuilder, result);
@@ -221,16 +223,17 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
                             .Append("Проврка условия 8.23 СП468.1325800.2019:\n");
 
             if (result.Status) stringBuilder.Append($"{result.GetItemResult("Nn")} ≤ {result.GetItemResult("RightPartOfFinalEquation")}\n")
-                                            .Append($"#Условие выполнено");
+                                            .Append($"Условие выполнено\n");
             else stringBuilder.Append($"{result.GetItemResult("Nn")} > {result.GetItemResult("RightPartOfFinalEquation")}\n")
-                                            .Append($"#Условие не выполнено\n");
+                                            .Append($"Условие не выполнено\n");
+            stringBuilder.Append($"Коэффициент использования = {result.GetItemResult("FinalСoefficient")}\n");
         }
 
         protected void BuildIfLastIsEightDotFifteen(StringBuilder stringBuilder, CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result)
         {
             BuildPartTwoResult(stringBuilder, result);
             stringBuilder.Append($"\t{result.GetItemResult("Nn")} > {result.GetItemResult("Ncr")}\n")
-                                    .Append($"#Условие не выполнено\n");
+                                    .Append($"Условие не выполнено\n");
         }
 
         protected void BuildIfLastIsEightDotTwentyFive(StringBuilder stringBuilder, CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result)
@@ -299,9 +302,10 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
                                 .Append($"\tN*e ≤ Rbnt*bt*xt*(h0t-0,5*xt)+Rsct*A's*(h0-a')\n");
 
             if (result.Status) stringBuilder.Append($"\t{Math.Round(result.GetItemResult("LeftPartOfFinalEquation"), 1)} ≤ {Math.Round(result.GetItemResult("RightPartOfFinalEquation"), 1)}\n")
-                                .Append($"#Условие выполнено\n");
+                                .Append($"Условие выполнено\n");
             else stringBuilder.Append($"\t{Math.Round(result.GetItemResult("LeftPartOfFinalEquation"), 1)} > {Math.Round(result.GetItemResult("RightPartOfFinalEquation"), 1)}\n")
-                                .Append($"#Условие не выполнено\n");
+                                .Append($"Условие не выполнено\n");
+            stringBuilder.Append($"\tКоэффициент использования = {result.GetItemResult("FinalСoefficient")}\n");
 
         }
 

@@ -65,7 +65,7 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
             else return false;
 
             tempNumber = doubleValues[ConstantsName.ArmatureInstallationDepthLabel];
-            if (tempNumber <= result.HeighColumn && tempNumber <= result.WidthColumn) result.ArmatureInstallationDepth = (int)tempNumber;
+            if (tempNumber <= result.HeighColumn / 2 && tempNumber <= result.WidthColumn / 2) result.ArmatureInstallationDepth = (int)tempNumber;
             else return false;
 
             tempStr = stringValues[ConstantsName.ConcreteClassLabel];
@@ -81,11 +81,11 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
             else return false;
 
             tempNumber = doubleValues[ConstantsName.MomentLabel];
-            if (tempNumber >= 0) result.Moment = (int)tempNumber;
+            if (tempNumber >= 0) result.Moment = tempNumber / 0.00000010197162123;
             else return false;
 
             tempNumber = doubleValues[ConstantsName.StrengthLabel];
-            if (tempNumber >= 0) result.Strength = (int)tempNumber;
+            if (tempNumber >= 0) result.Strength = tempNumber / 0.00010197162123;
             else return false;
             
             return result.Check = true;

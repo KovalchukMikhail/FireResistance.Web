@@ -97,7 +97,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             if (values.FinalEquation == values.MainEquations[0]) resultCreator.AddResultIfLastIsEightDotTwentyThree(result, values);
             else if (values.FinalEquation == values.MainEquations[1]) resultCreator.AddResultIfLastIsEightDotFifteen(result, values);
             else if (values.FinalEquation == values.MainEquations[2]) resultCreator.AddResultIfLastIsEightDotTwentyFive(result, values);
-            resultCreator.BuildString(result);
+            result.ResultAsString = resultCreator.BuildString(result);
         }
 
         public CalculationResult<Dictionary<string, double>, Dictionary<string, string>> GetCalculationResult()

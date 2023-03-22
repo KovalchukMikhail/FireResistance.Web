@@ -32,6 +32,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
         public virtual double LeftPartOfFinalEquation { get; set; }
         public virtual double RightPartOfFinalEquation { get; set; }
         public virtual string FinalEquation { get; set; }
+        public virtual double FinalСoefficient { get; set; }
 
         public string[] MainEquations { get; } = { "8.23:SP468", "8.15:SP63", "8.25:SP468" };
     }
