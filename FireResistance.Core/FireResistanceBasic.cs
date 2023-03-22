@@ -12,16 +12,16 @@ using System;
 
 namespace FireResistance.Core
 {
-    public class FireResistanceBasic : IFireResistance<ResultAsDictionary, SourceData<Dictionary<string, string>>>
+    public class FireResistanceBasic : IFireResistance<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, SourceData<Dictionary<string, string>>>
     {
         private IMainController<SourceData<Dictionary<string, string>>,
                                 CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
-                                                    ResultAsDictionary,
+                                                    CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
                                                     Dictionary<string, double>,
                                                     Dictionary<string, string>>>> controller;
 
         private CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
-                            ResultAsDictionary,
+                            CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
                             Dictionary<string, double>,
                             Dictionary<string, string>>> calculator;
 
@@ -30,17 +30,17 @@ namespace FireResistance.Core
             using ServiceProvider provider = DependencyCreator.GetServiceProvider();
             controller = provider.GetService<IMainController<SourceData<Dictionary<string, string>>,
                                                     CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
-                                                                        ResultAsDictionary,
+                                                                        CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
                                                                         Dictionary<string, double>,
                                                                         Dictionary<string, string>>>>>();
             calculator = provider.GetService<CalculatorAbstract<IResultBuilder<Dictionary<string, string>,
-                                                                ResultAsDictionary,
+                                                                CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
                                                                 Dictionary<string, double>,
                                                                  Dictionary<string, string>>>>();
             return controller.Run(data, calculator, provider);
         }
 
-        public ResultAsDictionary GetResult()
+        public CalculationResult<Dictionary<string, double>, Dictionary<string, string>> GetResult()
         {
             return calculator.ResultBuilder.GetCalculationResult();
         }

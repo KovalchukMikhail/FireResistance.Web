@@ -1,4 +1,5 @@
 ﻿using FireResistance.Core.Entities.Calculations;
+using FireResistance.Core.Entities.Calculations.AbstractClasses;
 using FireResistance.Core.Entities.Calculator.AbstractClasses;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Entities.Calculator
 {
-    internal class CalculatorBasic : CalculatorAbstract <IResultBuilder<Dictionary<string, string>, ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>>
+    internal class CalculatorBasic : CalculatorAbstract <IResultBuilder<Dictionary<string, string>, CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>>
     {
         public override void TryConstruct()
         {

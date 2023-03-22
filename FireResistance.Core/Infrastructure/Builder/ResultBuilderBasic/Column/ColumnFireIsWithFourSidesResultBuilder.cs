@@ -25,9 +25,9 @@ using System.Threading.Tasks.Dataflow;
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 {
-    internal class ColumnFireIsWithFourSidesResultBuilder : IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>, ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>
+    internal class ColumnFireIsWithFourSidesResultBuilder : IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>, CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>
     {
-        private ResultAsDictionary result;
+        private CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result;
         private ColumnFireIsWithFourSidesData<Dictionary<string, string>> sourceData;
         private ColumnFR column;
         private ColumnFactoryFR columnFactory;
@@ -38,7 +38,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 
         private bool firstTime { get; set; } = true;
 
-        public ColumnFireIsWithFourSidesResultBuilder(ResultAsDictionary result,
+        public ColumnFireIsWithFourSidesResultBuilder(CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result,
                                                         TempValuesForColumn values,
                                                         IColumnFireIsWithFourSidesEquationsManager equationsManager,
                                                         ColumnFactoryFR columnFactory,
@@ -100,7 +100,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             resultCreator.BuildString(result);
         }
 
-        public ResultAsDictionary GetCalculationResult()
+        public CalculationResult<Dictionary<string, double>, Dictionary<string, string>> GetCalculationResult()
         { 
             return result;
         }

@@ -47,7 +47,7 @@ namespace FireResistance.Web.Controllers
             FireResistanceBasic fireResistance = new FireResistanceBasic();
             fireResistance.TryPerformCalculation(data);
             
-            ResultAsDictionary result = fireResistance.GetResult();
+            ResultAsDictionary result = fireResistance.GetResult() as ResultAsDictionary;
             string answer = result.GetItemDescription("FireResistanceVolume");
 
 

@@ -15,14 +15,14 @@ using System.Threading.Tasks;
 namespace FireResistance.Core.Controllers.ControllerBasic
 {
     internal class MainController : IMainController <SourceData<Dictionary<string, string>>,
-                                                        CalculatorAbstract<IResultBuilder<Dictionary<string, string>, ResultAsDictionary, Dictionary<string, double>,
+                                                        CalculatorAbstract<IResultBuilder<Dictionary<string, string>, CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
                                                         Dictionary<string, string>>>>
     {
         private IResultBuilder<Dictionary<string, string>,
-                                ResultAsDictionary, Dictionary<string, double>,
+                                CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
                                 Dictionary<string, string>> resultBuilder;
         public bool Run(SourceData<Dictionary<string, string>> data,
-                            CalculatorAbstract<IResultBuilder<Dictionary<string, string>, ResultAsDictionary, Dictionary<string, double>, Dictionary<string, string>>> calculator,
+                            CalculatorAbstract<IResultBuilder<Dictionary<string, string>, CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>> calculator,
                             ServiceProvider provider)
         {
             if (!data.Check) return false;
@@ -32,7 +32,7 @@ namespace FireResistance.Core.Controllers.ControllerBasic
             {
                 case ColumnFireIsWithFourSidesData<Dictionary<string, string>>:
                     resultBuilder = provider.GetService<IColumnFireIsWithFourSidesResultBuilder<Dictionary<string, string>,
-                                                                    ResultAsDictionary,
+                                                                    CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
                                                                     Dictionary<string, double>,
                                                                     Dictionary<string, string>>>();
                     break;
