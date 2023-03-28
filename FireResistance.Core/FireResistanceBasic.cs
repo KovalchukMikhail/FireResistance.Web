@@ -41,14 +41,5 @@ namespace FireResistance.Core
             return calculator.ResultBuilder.GetCalculationResult();
         }
 
-        //public string GetResultString()
-        //{
-        //    using ServiceProvider Provider = DependencyCreator.GetServiceProvider();
-        //    IDataTemperatureСolumn dataTemperature = Provider.GetService<IDataTemperatureСolumn>();
-        //    IDataSP63 dataSP63 = Provider.GetService<IDataSP63>();
-        //    double num1 = dataSP63.GetArmatureResistSqueezeСalculation("A240");
-        //    double num = dataTemperature.GetTemperatureOfСolumn("R90", 200, 40);
-        //    return num.ToString() + "  " + "A240" + num1.ToString();
-        //}
     }
 }
