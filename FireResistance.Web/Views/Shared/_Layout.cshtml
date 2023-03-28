@@ -2,7 +2,7 @@
 @inject IHttpContextAccessor HttpContextAccessor
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,14 +21,14 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Main" asp-action="Index">
-                    <img src="~/images/tile.png" width="40%" />
+                    <img src="~/images/fire.png" width="70%" />
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+@*                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
+                    <partial name="_LoginPartial" />*@
                     
                     <ul class="navbar-nav flex-grow-1">
                             <a class="nav-link" asp-area="" asp-controller="Main" asp-action="Index">Главная страница</a>
@@ -37,7 +37,7 @@
                     </ul>
                     
                 </div>
-            </div>
+            @*</div>*@
         </nav>
     </header>
     <div class="container mb-4 pb-4">
