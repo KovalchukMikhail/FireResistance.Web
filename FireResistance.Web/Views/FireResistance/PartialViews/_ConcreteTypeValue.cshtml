@@ -1,0 +1,13 @@
+﻿<div class="border p-1">
+    <div class="col-4">
+        <label for="ConcreteType">Выберите вид бетона:</label>
+    </div>
+    <div class="col-4">
+        <select name="ConcreteType" size="1" class="form-control-sm">
+            @foreach (string value in NameColumns.ConcreteType)
+            {
+                <option value="@value">@value</option>
+            }
+    </select>
+    </div>
+</div>

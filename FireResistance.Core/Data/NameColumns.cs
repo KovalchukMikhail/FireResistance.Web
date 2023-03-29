@@ -36,7 +36,7 @@ namespace FireResistance.Core.Data
             "А500С_МАРКИ_Ст3Гпс_ТЕРМОМЕХАНИЧЕСКИ_УПРОЧНЕННАЯ_ПО_ГОСТ_34028_2016"
         };
 
-private static List<string> concreteClass = new List<string>()
+        private static List<string> concreteClass = new List<string>()
         {
             "B15", "B20", "B25", "B30", "B35", "B40", "B45", "B50"
         };

@@ -1,0 +1,14 @@
+﻿
+<div class="border p-1">
+    <div class="col-4">
+    <label for="FireResistanceValue">Выберете требуемый предел огнестойкости:</label>
+    </div>
+    <div class="col-4">
+        <select name="FireResistanceValue" size="1" class="form-control-sm">
+        @foreach(string value in NameColumns.FireResistanceForCriticalTemperature)
+        {
+            <option value="@value">@value</option>
+        }
+    </select>
+    </div>
+</div>

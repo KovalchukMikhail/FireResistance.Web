@@ -1,0 +1,13 @@
+﻿<div class="border p-1">
+    <div class="col-4">
+        <label for="FixationElement">Выберите вариант закрепления по концам элемента:</label>
+    </div>
+    <div class="col-4">
+        <select name="FixationElement" size="1" class="form-control-sm">
+            @foreach (string value in NameColumns.FixationElement)
+            {
+                <option value="@value">@value</option>
+            }
+    </select>
+    </div>
+</div>

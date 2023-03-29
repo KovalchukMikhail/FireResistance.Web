@@ -81,11 +81,11 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
             else return false;
 
             tempNumber = doubleValues[ConstantsName.MomentLabel];
-            if (tempNumber >= 0) result.Moment = tempNumber / 0.00000010197162123;
+            if (tempNumber >= 0) result.Moment = tempNumber;
             else return false;
 
             tempNumber = doubleValues[ConstantsName.StrengthLabel];
-            if (tempNumber >= 0) result.Strength = tempNumber / 0.00010197162123;
+            if (tempNumber >= 0) result.Strength = tempNumber;
             else return false;
             
             return result.Check = true;

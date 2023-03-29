@@ -1,0 +1,14 @@
+﻿<div class="border p-1">
+    <div class="col-4">
+        <label for="ArmatureClass">Выберите класс арматуры по прочности:</label>
+    </div>
+    <div class="col-4">
+        <select name="ArmatureClass" size="1" class="form-control-sm">
+            @foreach (string value in NameColumns.ArmatureClass)
+            {
+                <option value=@value>@value</option>
+            }
+    </select>
+    </div>
+</div>
+
