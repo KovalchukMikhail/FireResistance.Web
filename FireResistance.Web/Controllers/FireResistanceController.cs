@@ -8,13 +8,13 @@ namespace FireResistance.Web.Controllers
     public class FireResistanceController : Controller
     {
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult ColumnFireFourSide()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Index(ColumnFireIsWithFourSidesData data)
+        public IActionResult ColumnFireFourSide(ColumnFireIsWithFourSidesData data)
         {
             data.Check = true; //!!!!!!!!!!!!!!!!!!!!!!!
             FireResistanceBasic fireResistance = new FireResistanceBasic();
@@ -24,6 +24,32 @@ namespace FireResistance.Web.Controllers
             string[] str = result.ToString().Split("\n");
             return View(str);
         }
+
+        [HttpGet]
+        public IActionResult PlateWithRigidConnectionToColumns()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public IActionResult PlateWithRigidConnectionToColumns()
+        //{
+
+        //}
+
+        [HttpGet]
+        public IActionResult PlateWithRigidConnectionToTwoWalls()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public IActionResult PlateWithRigidConnectionToTwoWalls()
+        //{
+
+        //}
+
+
 
     }
 }

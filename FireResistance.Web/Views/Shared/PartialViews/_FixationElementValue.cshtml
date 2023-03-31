@@ -1,10 +1,12 @@
-﻿<div class="border p-1">
+﻿@inject NameColumns nameColumns
+
+<div class="border p-1">
     <div class="col-4">
         <label for="FixationElement">Выберите вариант закрепления по концам элемента:</label>
     </div>
     <div class="col-4">
         <select name="FixationElement" size="1" class="form-control-sm">
-            @foreach (string value in NameColumns.FixationElement)
+            @foreach (string value in nameColumns.FixationElement)
             {
                 <option value="@value">@value</option>
             }

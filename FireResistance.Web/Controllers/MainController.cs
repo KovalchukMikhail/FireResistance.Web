@@ -19,41 +19,6 @@ namespace FireResistance.Web.Controllers
         [HttpGet]
         public IActionResult Index() => View();
 
-        [HttpPost]
-        public IActionResult Index(string valueOfFireResistance, string fixationElement, string armatureClass, string concreteType, string concreteClass, double lenth, double heigh, double width, double armatureInstallationDepth, double armatureDiameter, double armatureCount, double moment, double strength)
-        {
-            Dictionary<string, string> dictStr = new Dictionary<string, string>()
-            {
-                {"Предел_огнестойкости", valueOfFireResistance },
-                {"Закрепление_по_концам_элемента", fixationElement},
-                {"Класс_арматуры_по_прочности", armatureClass },
-                {"Вид_бетона", concreteType},
-                {"Класс_бетона_по_прочности", concreteClass}
-            };
-            Dictionary<string, double> dictDbl = new Dictionary<string, double>()
-            {
-                {"Длина_элемента", lenth },
-                {"Высота_элемента", heigh },
-                {"Ширина_элемента", width },
-                {"Расстояние_от_грани_элемента_до_центра_тяжести_арматуры", armatureInstallationDepth },
-                {"Диаметр_арматуры", armatureDiameter },
-                {"Количество_арматуры", armatureCount},
-                {"Величина_изгибающего_момента", moment},
-                {"Величина_нормальной_силы", strength}
-            };
-
-
-            ColumnFireIsWithFourSidesDataFactory dataFactory = new ColumnFireIsWithFourSidesDataFactory();
-            bool check = dataFactory.TryCreate(dictStr, dictDbl, out ColumnFireIsWithFourSidesData data);
-            data.Check = true; //!!!!!!!!!!!!!!!!!!!!!!!
-            FireResistanceBasic fireResistance = new FireResistanceBasic();
-            fireResistance.TryPerformCalculation(data);
-
-            ResultAsDictionary result = fireResistance.GetResult() as ResultAsDictionary;
-            string[] str = result.ToString().Split("\n");
-            return View(str);
-        }
-
         public IActionResult Privacy()
         {
             return View();

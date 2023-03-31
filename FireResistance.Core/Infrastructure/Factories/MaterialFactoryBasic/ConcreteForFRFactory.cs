@@ -16,6 +16,12 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
 {
     internal class ConcreteForFRFactory : IMaterialFactoryFR <ColumnFireIsWithFourSidesData>
     {
+        private NameColumns nameColumns;
+
+        public ConcreteForFRFactory(NameColumns nameColumns)
+        {
+            this.nameColumns = nameColumns;
+        }
         public Material Create(ServiceProvider provider, ColumnFireIsWithFourSidesData sourceData, double temperature)
         {
             RequestDb db = provider.GetService<RequestDb>();
@@ -28,7 +34,7 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
             concrete.ResistNormativeForStretch = db.DataSP63Db.GetConcreteResistNormativeStretch(concrete.ClassName);
             concrete.ResistNormativeForSqueeze = db.DataSP63Db.GetConcreteResistNormativeSqueeze(concrete.ClassName);
             concrete.Temperature = temperature;
-            concrete.BetaB = interpolator.GetValueFromTable(NameColumns.ConcreteType, NameColumns.TemperatureForTable, concrete.TypeName, concrete.Temperature, db.DataSP468Db.GetBetaBTable());
+            concrete.BetaB = interpolator.GetValueFromTable(nameColumns.ConcreteType, nameColumns.TemperatureForTable, concrete.TypeName, concrete.Temperature, db.DataSP468Db.GetBetaBTable());
             //concrete.GammaBT = interpolator.GetValueFromTable(NameColumns.ConcreteType, NameColumns.TemperatureForTable, concrete.TypeName, concrete.Temperature, db.DataSP468Db.GetGammaBtTable());
             concrete.GammaBT = 1; // See point 8.3
             concrete.ResistWithTemperatureNormativeForSqueeze = equations.GetRbWithGammaBt(concrete.ResistNormativeForSqueeze, concrete.GammaBT);

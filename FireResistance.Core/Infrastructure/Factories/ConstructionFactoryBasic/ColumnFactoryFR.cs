@@ -22,6 +22,13 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
 {
     internal class ColumnFactoryFR : IConstructionFactory<ColumnFireIsWithFourSidesData>
     {
+        private NameColumns nameColumns;
+
+        public ColumnFactoryFR(NameColumns nameColumns)
+        {
+            this.nameColumns = nameColumns;
+        }
+
         public virtual Construction Create(ServiceProvider provider, ColumnFireIsWithFourSidesData sourceData)
         {
             RequestDb db = provider.GetService<RequestDb>();
@@ -38,10 +45,10 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
             column.Moment = sourceData.Moment;
             column.Strength = sourceData.Strength;
             double minSize = Math.Min(column.Width, column.Height);
-            column.DeepConcreteWarming = interpolator.GetValueFromTable(NameColumns.FireResistanceForCriticalTemperature,
-                                                                        NameColumns.SizeForCriticalTemperature,
+            column.DeepConcreteWarming = interpolator.GetValueFromTable(nameColumns.FireResistanceForCriticalTemperature,
+                                                                        nameColumns.SizeForCriticalTemperature,
                                                                         column.FireResistanceVolume,
-                                                                        Math.Min(minSize, NameColumns.SizeForCriticalTemperature[NameColumns.SizeForCriticalTemperature.Count - 1]),
+                                                                        Math.Min(minSize, nameColumns.SizeForCriticalTemperature[nameColumns.SizeForCriticalTemperature.Count - 1]),
                                                                         db.TemperatureDb.GetTableOfDeepWarmingToCriticalTemperatureForСolumn(sourceData.ConcreteType));
             column.WorkHeight = commonEquation.GetWorkHeight(column.Height, column.DistanceToArmature);
             column.СoefficientFixationElement = db.DataSP468Db.GetСoefficientFixationElement(column.FixationElement);

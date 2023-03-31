@@ -43,6 +43,7 @@ namespace FireResistance.Core.Dependency
             .AddTransient<IDataSP468RequestDb, DataFromSP468WithOutSql>()
             .AddTransient<IDataSP63RequestDb, DataFromSP63WithOutSql>()
             .AddTransient<IDataTemperatureСolumnRequestDb, TemperatureСolumnWithOutSql>()
+            .AddTransient<NameColumns>()
             .AddTransient<RequestDb>()
             .AddTransient<ArmatureForFR>()
             .AddTransient<ConcreteForFR>()

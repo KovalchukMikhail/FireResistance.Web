@@ -1,10 +1,12 @@
-﻿<div class="border p-1">
+﻿@inject NameColumns nameColumns
+
+<div class="border p-1">
     <div class="col-4">
         <label for="ConcreteClass">Выберите класс бетона:</label>
     </div>
     <div class="col-4">
         <select name="ConcreteClass" size="1" class="form-control-sm">
-            @foreach (string value in NameColumns.ConcreteClass)
+            @foreach (string value in nameColumns.ConcreteClass)
             {
                 <option value="@value">@value</option>
             }

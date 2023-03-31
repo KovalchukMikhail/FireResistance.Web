@@ -19,6 +19,11 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
 {
     internal class ArmatureForFRFactory : IMaterialFactoryFR <ColumnFireIsWithFourSidesData>
     {
+        private NameColumns nameColumns;
+        public ArmatureForFRFactory(NameColumns nameColumns)
+        {
+            this.nameColumns = nameColumns;
+        }
 
         public Material Create(ServiceProvider provider, ColumnFireIsWithFourSidesData sourceData, double temperature)
         {
@@ -35,8 +40,8 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
             armature.ResistСalculationForSqueeze = db.DataSP63Db.GetArmatureResistSqueezeСalculation(armature.ClassName);
             armature.ResistСalculationForStretch = db.DataSP63Db.GetArmatureResistStretchСalculation(armature.ClassName);
             armature.Temperature = temperature;
-            armature.BetaS = interpolator.GetValueFromTable(NameColumns.ArmatureClass, NameColumns.TemperatureForTable, armature.ClassName, armature.Temperature, db.DataSP468Db.GetBetaSTable());
-            armature.GammaST = interpolator.GetValueFromTable(NameColumns.ArmatureClass, NameColumns.TemperatureForTable, armature.ClassName, armature.Temperature, db.DataSP468Db.GetGammaStTable());
+            armature.BetaS = interpolator.GetValueFromTable(nameColumns.ArmatureClass, nameColumns.TemperatureForTable, armature.ClassName, armature.Temperature, db.DataSP468Db.GetBetaSTable());
+            armature.GammaST = interpolator.GetValueFromTable(nameColumns.ArmatureClass, nameColumns.TemperatureForTable, armature.ClassName, armature.Temperature, db.DataSP468Db.GetGammaStTable());
             armature.ResistSqueezeWithTemperatureСalculation = equations.GetRsWithGammaSt(armature.ResistСalculationForSqueeze, armature.GammaST);
             armature.ResistStretchWithTemperatureСalculation = equations.GetRsWithGammaSt(armature.ResistСalculationForStretch, armature.GammaST);
             armature.ResistWithTemperatureNormative = equations.GetRsWithGammaSt(armature.ResistNormativeForStretch, armature.GammaST);

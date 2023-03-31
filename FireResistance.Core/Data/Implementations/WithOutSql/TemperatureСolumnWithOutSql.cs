@@ -10,13 +10,18 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
 {
     internal class TemperatureСolumnWithOutSql : IDataTemperatureСolumnRequestDb
     {
+        NameColumns nameColumns;
+        public TemperatureСolumnWithOutSql(NameColumns nameColumns)
+        {
+            this.nameColumns = nameColumns;
+        }
         public double[,] GetTableOfDeepWarmingToCriticalTemperatureForСolumn(string concreteType)
         {
-            if (concreteType == NameColumns.ConcreteType[0])
+            if (concreteType == nameColumns.ConcreteType[0])
             {
                 return TemperatureDataFromSp468.DeepCriticalTemperatureConcreteSilicate;
             }
-            else if (concreteType == NameColumns.ConcreteType[1] || concreteType == NameColumns.ConcreteType[2])
+            else if (concreteType == nameColumns.ConcreteType[1] || concreteType == nameColumns.ConcreteType[2])
             {
                 return TemperatureDataFromSp468.DeepCriticalTemperatureConcreteCarbonate;
             }
@@ -63,9 +68,9 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql
         {
             return height switch
             {
-                200 => NameColumns.DistanceToArmatureH200,
-                300 => NameColumns.DistanceToArmatureH300,
-                400 => NameColumns.DistanceToArmatureH400,
+                200 => nameColumns.DistanceToArmatureH200,
+                300 => nameColumns.DistanceToArmatureH300,
+                400 => nameColumns.DistanceToArmatureH400,
                 _ => new List<double>()
             };
         }

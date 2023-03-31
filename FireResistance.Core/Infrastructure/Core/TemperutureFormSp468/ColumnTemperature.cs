@@ -20,15 +20,17 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
         int minSize;
         int mediumSize;
         int maxSize;
+        NameColumns nameColumns;
         
 
-        public ColumnTemperature(RequestDb db, IInterpolator interpolator)
+        public ColumnTemperature(RequestDb db, IInterpolator interpolator, NameColumns nameColumns)
         {
             this.db = db;
             this.interpolator = interpolator;
-            minSize = NameColumns.StandartHeight[0];
-            mediumSize = NameColumns.StandartHeight[1];
-            maxSize = NameColumns.StandartHeight[2];
+            this.nameColumns = nameColumns;
+            minSize = nameColumns.StandartHeight[0];
+            mediumSize = nameColumns.StandartHeight[1];
+            maxSize = nameColumns.StandartHeight[2];
         }
 
         public double GetArmatureTemperature(ColumnFR construction)

@@ -20,14 +20,16 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
         private IEquationsFromSp63 equationsSp63;
         private ICommonEquations commonEquations;
         private IInterpolator interpolator;
+        private NameColumns nameColumns;
 
-        public ColumnFireIsWithFourSidesEquationsManager(RequestDb db, IEquationsFromSp468 equationsSp468, IEquationsFromSp63 equationsSp63, ICommonEquations commonEquations, IInterpolator interpolator)
+        public ColumnFireIsWithFourSidesEquationsManager(RequestDb db, IEquationsFromSp468 equationsSp468, IEquationsFromSp63 equationsSp63, ICommonEquations commonEquations, IInterpolator interpolator, NameColumns nameColumns)
         {
             this.db = db;
             this.equationsSp468 = equationsSp468;
             this.equationsSp63 = equationsSp63;
             this.commonEquations = commonEquations;
             this.interpolator = interpolator;
+            this.nameColumns = nameColumns;
         }
 
         public virtual void RunPartOneOfEquations(TempValuesForColumn values, ColumnFR column)
@@ -87,7 +89,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
         {
             values.Lambda = values.Lambda < 12 ? 12 : values.Lambda;
             values.Astot = 2 * column.ArmatureFR.Area;
-            values.Fi = interpolator.GetValueFromTable(NameColumns.ConcreteType, NameColumns.FlexibilityForTableEightDotOne, column.ConcreteFR.TypeName, values.Lambda, db.DataSP468Db.GetTableFiNumberEightDotOne());
+            values.Fi = interpolator.GetValueFromTable(nameColumns.ConcreteType, nameColumns.FlexibilityForTableEightDotOne, column.ConcreteFR.TypeName, values.Lambda, db.DataSP468Db.GetTableFiNumberEightDotOne());
             bool check = equationsSp468.CheckEquationEightDotTwentyThree(values.Fi, column.Strength, column.ConcreteFR.ResistWithTemperatureNormativeForSqueeze, column.AreaChangedProfile, column.ArmatureFR.ResistSqueezeWithTemperatureСalculation, values.Astot, out  double rightPartEquation);
             values.RightPartOfFinalEquation = rightPartEquation;
             values.FinalСoefficient = commonEquations.GetFinalСoefficient(column.Strength, rightPartEquation);

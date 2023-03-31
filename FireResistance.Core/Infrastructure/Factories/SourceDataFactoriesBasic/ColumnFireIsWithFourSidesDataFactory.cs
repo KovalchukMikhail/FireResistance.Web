@@ -16,6 +16,12 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
 {
     public class ColumnFireIsWithFourSidesDataFactory : IColumnFireIsWithFourSidesDataFactory<ColumnFireIsWithFourSidesData>
     {
+        private NameColumns nameColumns;
+
+        public ColumnFireIsWithFourSidesDataFactory(NameColumns nameColumns)
+        {
+            this.nameColumns = nameColumns;
+        }
         public bool TryCreate(Dictionary<string, string> stringValues, Dictionary<string, double> doubleValues, out ColumnFireIsWithFourSidesData result)
         {
             result = new ColumnFireIsWithFourSidesData();
@@ -37,7 +43,7 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
             if (!utilit.CheckCountValue(stringValues, doubleValues, keys)) return false;
 
             string tempStr = stringValues[ConstantsName.fireResistanceLabel];
-            if (NameColumns.FireResistanceForCriticalTemperature.IndexOf(tempStr) != -1) result.FireResistanceValue = tempStr;
+            if (nameColumns.FireResistanceForCriticalTemperature.IndexOf(tempStr) != -1) result.FireResistanceValue = tempStr;
             else return false;
 
             double tempNumber = doubleValues[ConstantsName.LenthElementLabel];
@@ -53,11 +59,11 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
             else return false;
 
             tempStr = stringValues[ConstantsName.ArmatureClassLabel];
-            if (NameColumns.ArmatureClass.IndexOf(tempStr) != -1) result.ArmatureClass = tempStr;
+            if (nameColumns.ArmatureClass.IndexOf(tempStr) != -1) result.ArmatureClass = tempStr;
             else return false;
 
             tempNumber = doubleValues[ConstantsName.ArmatureDiameterLabel];
-            if (NameColumns.ArmatureDiameter.IndexOf((int)tempNumber) != -1) result.ArmatureDiameter = (int)tempNumber;
+            if (nameColumns.ArmatureDiameter.IndexOf((int)tempNumber) != -1) result.ArmatureDiameter = (int)tempNumber;
             else return false;
 
             tempNumber = doubleValues[ConstantsName.ArmatureCountLabel];
@@ -69,15 +75,15 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
             else return false;
 
             tempStr = stringValues[ConstantsName.ConcreteClassLabel];
-            if (NameColumns.ConcreteClass.IndexOf(tempStr) != -1) result.ConcreteClass = tempStr;
+            if (nameColumns.ConcreteClass.IndexOf(tempStr) != -1) result.ConcreteClass = tempStr;
             else return false;
 
             tempStr = stringValues[ConstantsName.ConcreteTypeLabel];
-            if (NameColumns.ConcreteType.IndexOf(tempStr) != -1) result.ConcreteType = tempStr;
+            if (nameColumns.ConcreteType.IndexOf(tempStr) != -1) result.ConcreteType = tempStr;
             else return false;
 
             tempStr = stringValues[ConstantsName.FixationElementLabel];
-            if (NameColumns.FixationElement.IndexOf(tempStr) != -1) result.FixationElement = tempStr;
+            if (nameColumns.FixationElement.IndexOf(tempStr) != -1) result.FixationElement = tempStr;
             else return false;
 
             tempNumber = doubleValues[ConstantsName.MomentLabel];
