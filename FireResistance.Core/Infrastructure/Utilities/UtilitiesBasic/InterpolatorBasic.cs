@@ -46,15 +46,28 @@ namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
                 int indexColumnInt = Convert.ToInt32(indexColumn);
                 return table[indexRowInt, indexColumnInt];
             }
-            else if (indexRow != -1 && indexColumn != -1)
+            else if (indexRow != -1 && indexRow == indexColumn)
             {
                 int indexFirstRow = Convert.ToInt32(Math.Truncate(indexRow));
-                int indexFirstColumn = Convert.ToInt32(Math.Truncate(indexColumn));
                 int indexNextRow = indexFirstRow + 1;
-                int indexNextColumn = indexFirstColumn + 1;
+                double firstValue = table[indexFirstRow, indexFirstRow];
+                double nextValue = table[indexNextRow, indexNextRow];
+                return GetIntermediateValue(indexFirstRow, indexNextRow, indexRow, firstValue, nextValue);
+            }
+            else if (indexRow != -1 && indexColumn != -1)
+            {
+                int size = namesOfRows.Count;
+                int indexFirstRow = Convert.ToInt32(Math.Truncate(indexRow));
+                int indexFirstColumn = Convert.ToInt32(Math.Truncate(indexColumn));
+                int indexNextRow = indexFirstRow < size - 1 ? indexFirstRow + 1 : indexFirstRow;
+                int indexNextColumn = indexFirstColumn < size - 1 ? indexFirstColumn + 1 : indexFirstColumn;
                 double firstValue = table[indexFirstRow, indexFirstColumn];
-                double nextValue = table[indexNextRow, indexNextColumn];
-                return GetIntermediateValue(indexFirst, indexNext, index, firstValue, nextValue);
+                double secondValue = table[indexFirstRow, indexNextColumn];
+                double thirdValue = table[indexNextRow, indexFirstColumn];
+                double fourthValue = table[indexNextRow, indexNextColumn];
+                double ValueBetweenFirstAndSecond = GetIntermediateValue(indexFirstColumn, indexNextColumn, indexColumn, firstValue, secondValue);
+                double ValueBetweenThirdAndFourth = GetIntermediateValue(indexFirstColumn, indexNextColumn, indexColumn, thirdValue, fourthValue);
+                return GetIntermediateValue(indexFirstRow, indexNextRow, indexRow, ValueBetweenFirstAndSecond, ValueBetweenThirdAndFourth);
             }
             else return -1;
         }

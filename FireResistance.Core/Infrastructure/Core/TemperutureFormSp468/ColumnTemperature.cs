@@ -39,18 +39,18 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
 
             if (size == minSize || size == mediumSize || size >= maxSize)
             {
-                return GetTemperatureAtPoint(size, construction.DistanceToArmature, construction);
+                return GetTemperatureAtPoint(size, construction.DistanceToArmature, construction.DistanceToArmature, construction);
             }
             else if (size > minSize && size < mediumSize)
             {
-                double firstValue = GetTemperatureAtPoint(minSize, construction.DistanceToArmature, construction);
-                double secondValue = GetTemperatureAtPoint(mediumSize, construction.DistanceToArmature, construction);
+                double firstValue = GetTemperatureAtPoint(minSize, construction.DistanceToArmature, construction.DistanceToArmature, construction);
+                double secondValue = GetTemperatureAtPoint(mediumSize, construction.DistanceToArmature, construction.DistanceToArmature, construction);
                 return interpolator.GetIntermediateValue(minSize, mediumSize, size, firstValue, secondValue);
             }
             else if (size > mediumSize && size < maxSize)
             {
-                double firstValue = GetTemperatureAtPoint(mediumSize, construction.DistanceToArmature, construction);
-                double secondValue = GetTemperatureAtPoint(maxSize, construction.DistanceToArmature, construction);
+                double firstValue = GetTemperatureAtPoint(mediumSize, construction.DistanceToArmature, construction.DistanceToArmature, construction);
+                double secondValue = GetTemperatureAtPoint(maxSize, construction.DistanceToArmature, construction.DistanceToArmature, construction);
                 return interpolator.GetIntermediateValue(mediumSize, maxSize, size, firstValue, secondValue);
             }
             else return -1;
@@ -95,13 +95,14 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
             int positionForCalculation = Convert.ToInt32(construction.DistanceFromBringToPointAverageTemperature) > (size / 2) ?
                 (size / 2)
                 : Convert.ToInt32(construction.DistanceFromBringToPointAverageTemperature);
+            int maxIndex = size / 2;
             double temperatureSum = 0;
             int count = 0;
             double last = 0;
             double currentTemperature = 0;
-            for (int i = 0; i < positionForCalculation + 1; i++)
+            for (int i = 0; i < maxIndex + 1; i++)
             {
-                currentTemperature = GetTemperatureAtPoint(size, i, construction);
+                currentTemperature = GetTemperatureAtPoint(size, positionForCalculation, i, construction);
                 if(currentTemperature <= criticalTemperature)
                 {
                     temperatureSum += currentTemperature;
