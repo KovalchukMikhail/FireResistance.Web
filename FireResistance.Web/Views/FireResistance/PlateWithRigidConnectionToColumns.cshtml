@@ -1,7 +1,66 @@
-﻿
-@{
-    ViewData["Title"] = "PlateWithRigidConnectionToColumns";
-}
+﻿@model string []
 
-<h1>PlateWithRigidConnectionToColumns</h1>
+<div class="border p-3">
+    @if (Model != null)
+    {
+        foreach (string str in Model)
+        {
+            if (str.StartsWith("#"))
+            {
+                string text = str.Replace("#", "");
+                <h2>@text</h2>
+            }
+            else if (!str.StartsWith("\t"))
+            {
+                <strong>
+                    @str
+                </strong>
+            }
+            else
+            {
+                <p>@str</p>
+            }
 
+        }
+    }
+</div>
+
+<form method="post">
+    <div class="border p-3">
+        <partial name="~/Views/Shared/PartialViews/_FireResistanceValue.cshtml" />
+        <partial name="~/Views/Shared/PartialViews/_FixationElementValue.cshtml" />
+        <partial name="~/Views/Shared/PartialViews/_ArmatureClassValue.cshtml" />
+        <partial name="~/Views/Shared/PartialViews/_ConcreteTypeValue.cshtml" />
+        <partial name="~/Views/Shared/PartialViews/_ConcreteClassValue.cshtml" />
+        <div class="border p-1">
+            <label>Укажите длину элемента:</label><br />
+            <input type="number" name="LengthColumn" value=5450 />
+        </div>
+        <div class="border p-1">
+            <label>Укажите высоту элемента:</label><br />
+            <input type="number" name="HeighColumn" value=1200 />
+        </div>
+        <div class="border p-1">
+            <label>Укажите ширину элемента:</label><br />
+            <input type="number" name="WidthColumn" value=300 />
+        </div>
+        <div class="border p-1">
+            <label>Укажите расстояние от грани элемента до центра тяжести арматуры:</label><br />
+            <input type="number" name="ArmatureInstallationDepth" value=55 />
+        </div>
+        <partial name="~/Views/Shared/PartialViews/_ArmatureDiameterValue.cshtml" />
+        <div class="border p-1">
+            <label>Укажите количество арматуры:</label><br />
+            <input type="number" name="ArmatureCount" value=3 />
+        </div>
+        <div class="border p-1">
+            <label>Укажите вличену изгибающего момента от постоянной и длительной нормативной нагрузки:</label><br />
+            <input type="number" name="Moment" value=10 />
+        </div>
+        <div class="border p-1">
+            <label>Укажите вличену нормальной силы от постоянной и длительной нормативной нагрузки:</label><br />
+            <input type="number" name="Strength" value=300 />
+        </div>
+        <input type="submit" value="Send" />
+    </div>
+</form>

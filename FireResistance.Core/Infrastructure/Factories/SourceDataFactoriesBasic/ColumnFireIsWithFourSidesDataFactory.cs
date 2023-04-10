@@ -2,7 +2,6 @@
 using FireResistance.Core.Data.Implementations.WithOutSql.Database;
 using FireResistance.Core.Entities.SourceDataForCalculation;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
-using FireResistance.Core.Entities.SourceDataForCalculation.Enum;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.SourceDataFactory;
 using FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic;
@@ -94,7 +93,7 @@ namespace FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic
             if (tempNumber >= 0) result.Strength = tempNumber;
             else return false;
             
-            return result.Check = true;
+            return true;
 
         }
 

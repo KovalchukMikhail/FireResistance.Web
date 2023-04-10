@@ -83,11 +83,11 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
             else return -1;
         }
 
-        private double GetTemperatureAtPoint(int size, int distanceToPoint, ColumnFR construction)
+        private double GetTemperatureAtPoint(int size, int distanceToPointByX, int distanceToPointByY, ColumnFR construction)
         {
             double[,] temperutureArray = db.TemperatureDb.GetArrayTemperature(construction.FireResistanceVolume, size);
             List<double> distanceToArmatureForArray = db.TemperatureDb.GetListOfDistanceToArmature(size);
-            return interpolator.GetValueFromTemperatureTable(distanceToArmatureForArray, distanceToPoint, temperutureArray);
+            return interpolator.GetValueFromTemperatureTable(distanceToArmatureForArray, distanceToPointByX, distanceToPointByY, temperutureArray);
         }
 
         private double GetAveregeTemperature(int size, ColumnFR construction, double criticalTemperature, int additionalSize = 0)

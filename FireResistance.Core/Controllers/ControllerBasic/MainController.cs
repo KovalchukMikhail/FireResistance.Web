@@ -25,9 +25,6 @@ namespace FireResistance.Core.Controllers.ControllerBasic
                             CalculatorAbstract<IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>> calculator,
                             ServiceProvider provider)
         {
-            if (!data.Check) return false;
-
-
             switch (data)
             {
                 case ColumnFireIsWithFourSidesData:

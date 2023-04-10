@@ -1,65 +1,151 @@
-﻿@model string []
+﻿@model DataOfColumnFireFourSideVM
+@inject NameColumns nameColumns
+
 
 <div class="border p-3">
-@if (Model != null)
-{
-    foreach (string str in Model)
+    @if (Model != null)
     {
-        if (str.StartsWith("#"))
+        if (Model.Result !=  null)
         {
-            string text = str.Replace("#", "");
-            <h2>@text</h2>
-        }
-        else if (!str.StartsWith("\t"))
-        {
-            <strong>
-                @str
-            </strong>
-        }
-        else
-        {
-            <p>@str</p>
-        }
+            string[] result = Model.Result.ToString().Split("\n");
+            foreach (string str in result)
+            {
+                if (str.StartsWith("#"))
+                {
+                    string text = str.Replace("#", "");
+                    <h2>@text</h2>
+                }
+                else if (!str.StartsWith("\t"))
+                {
+                    <strong>
+                        @str
+                    </strong>
+                }
+                else
+                {
+                    <p>@str</p>
+                }
 
+            }
+        }
     }
-}
 </div>
+
 
 <form method="post">
     <div class="border p-3">
-        <partial name="~/Views/Shared/PartialViews/_FireResistanceValue.cshtml" />
-        <partial name="~/Views/Shared/PartialViews/_FixationElementValue.cshtml" />
-        <partial name="~/Views/Shared/PartialViews/_ArmatureClassValue.cshtml" />
-        <partial name="~/Views/Shared/PartialViews/_ConcreteTypeValue.cshtml" />
-        <partial name="~/Views/Shared/PartialViews/_ConcreteClassValue.cshtml" />
+        <div class="border p-1">
+            <div class="col-4">
+                <label for="FireResistanceValue">Выберете требуемый предел огнестойкости:</label>
+            </div>
+            <div class="col-4">
+                <select asp-for="SourceData.FireResistanceValue" size="1" class="form-control-sm">
+                    @foreach (string value in nameColumns.FireResistanceForCriticalTemperature)
+                    {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="border p-1">
+            <div class="col-4">
+                <label for="ArmatureClass">Выберите класс арматуры по прочности:</label>
+            </div>
+            <div class="col-4">
+                <select asp-for="SourceData.ArmatureClass" size="1" class="form-control-sm">
+                    @foreach (string value in nameColumns.ArmatureClass)
+                    {
+                    <option value=@value>@value</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="border p-1">
+            <div class="col-4">
+                <label for="ConcreteType">Выберите вид бетона:</label>
+            </div>
+            <div class="col-4">
+                <select asp-for="SourceData.ConcreteType" size="1" class="form-control-sm">
+                    @foreach (string value in nameColumns.ConcreteType)
+                    {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="border p-1">
+            <div class="col-4">
+                <label for="ConcreteClass">Выберите класс бетона:</label>
+            </div>
+            <div class="col-4">
+                <select asp-for="SourceData.ConcreteClass" size="1" class="form-control-sm">
+                    @foreach (string value in nameColumns.ConcreteClass)
+                    {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="border p-1">
+            <div class="col-4">
+                <label for="FixationElement">Выберите вариант закрепления по концам элемента:</label>
+            </div>
+            <div class="col-4">
+                <select asp-for="SourceData.FixationElement" size="1" class="form-control-sm">
+                    @foreach (string value in nameColumns.FixationElement)
+                    {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
+        </div>
         <div class="border p-1">
             <label>Укажите длину элемента:</label><br />
-            <input type="number" name="LengthColumn" value=5450 />
+            <input type="number" asp-for="SourceData.LengthColumn" />
+            <span asp-validation-for="SourceData.LengthColumn" class="text-danger"></span>
         </div>
         <div class="border p-1">
             <label>Укажите высоту элемента:</label><br />
-            <input type="number" name="HeighColumn" value=1200 />
+            <input type="number" asp-for="SourceData.HeighColumn" />
+            <span asp-validation-for="SourceData.HeighColumn" class="text-danger"></span>
         </div>
             <div class="border p-1">
             <label>Укажите ширину элемента:</label><br />
-            <input type="number" name="WidthColumn" value=300 />
+            <input type="number" asp-for="SourceData.WidthColumn" />
+            <span asp-validation-for="SourceData.WidthColumn" class="text-danger"></span>
         </div>
         <div class="border p-1">
             <label>Укажите расстояние от грани элемента до центра тяжести арматуры:</label><br />
-            <input type="number" name="ArmatureInstallationDepth" value=55 />
+            <input type="number" asp-for="SourceData.ArmatureInstallationDepth" />
+            <span asp-validation-for="SourceData.ArmatureInstallationDepth" class="text-danger"></span>
         </div>
-        <partial name="~/Views/Shared/PartialViews/_ArmatureDiameterValue.cshtml" />
+        <div class="border p-1">
+            <div class="col-4">
+                <label for="ArmatureDiameter">Укажите диаметр арматуры:</label>
+            </div>
+            <div class="col-4">
+                <select asp-for="SourceData.ArmatureDiameter" size="1" class="form-control-sm">
+                    @foreach (int value in nameColumns.ArmatureDiameter)
+                    {
+                        <option value=@value>@value</option>
+                    }
+                </select>
+            </div>
+        </div>
         <div class="border p-1">
             <label>Укажите количество арматуры:</label><br />
-            <input type="number" name="ArmatureCount" value=3 />
+            <input type="number" asp-for="SourceData.ArmatureCount" />
+            <span asp-validation-for="SourceData.ArmatureCount" class="text-danger"></span>
         </div>
         <div class="border p-1">
             <label>Укажите вличену изгибающего момента от постоянной и длительной нормативной нагрузки:</label><br />
-            <input type="number" name="Moment" value=10 />
+            <input type="number" asp-for="SourceData.Moment" />
+            <span asp-validation-for="SourceData.Moment" class="text-danger"></span>
         </div>
         <div class="border p-1">
             <label>Укажите вличену нормальной силы от постоянной и длительной нормативной нагрузки:</label><br />
-            <input type="number" name="Strength" value=300 />
+            <input type="number" asp-for="SourceData.Strength" />
+            <span asp-validation-for="SourceData.Strength" class="text-danger"></span>
         </div>
         <input type="submit" value="Send" />
     </div>

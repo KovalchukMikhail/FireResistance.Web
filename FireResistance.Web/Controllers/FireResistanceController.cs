@@ -2,6 +2,8 @@
 using FireResistance.Core;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
+using FireResistance.Web.Models.ViewModels;
 
 namespace FireResistance.Web.Controllers
 {
@@ -14,15 +16,17 @@ namespace FireResistance.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult ColumnFireFourSide(ColumnFireIsWithFourSidesData data)
+        public IActionResult ColumnFireFourSide(ColumnFireIsWithFourSidesData sourceData)
         {
-            data.Check = true; //!!!!!!!!!!!!!!!!!!!!!!!
-            FireResistanceBasic fireResistance = new FireResistanceBasic();
-            fireResistance.TryPerformCalculation(data);
+            DataOfColumnFireFourSideVM data = new DataOfColumnFireFourSideVM(sourceData);
+            if (ModelState.IsValid)
+            {
+                FireResistanceBasic fireResistance = new FireResistanceBasic();
+                fireResistance.TryPerformCalculation(sourceData);
+                data.Result = fireResistance.GetResult() as ResultAsDictionary;
+            }
+            return View(data);
 
-            ResultAsDictionary result = fireResistance.GetResult() as ResultAsDictionary;
-            string[] str = result.ToString().Split("\n");
-            return View(str);
         }
 
         [HttpGet]
@@ -48,6 +52,18 @@ namespace FireResistance.Web.Controllers
         //{
 
         //}
+
+        [HttpPost]
+        public ActionResult ShowResult(ColumnFireIsWithFourSidesData data)
+        {
+            FireResistanceBasic fireResistance = new FireResistanceBasic();
+            fireResistance.TryPerformCalculation(data);
+
+            ResultAsDictionary result = fireResistance.GetResult() as ResultAsDictionary;
+            string[] str = result.ToString().Split("\n");
+            return PartialView("_Result" ,str);
+
+        }
 
 
 

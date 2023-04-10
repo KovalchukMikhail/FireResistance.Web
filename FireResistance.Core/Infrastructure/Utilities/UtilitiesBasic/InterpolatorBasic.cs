@@ -35,21 +35,25 @@ namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
             else return -1;
         }
 
-        public double GetValueFromTemperatureTable(List<double> namesOfRows, int rowName, double[,] table)
+        public double GetValueFromTemperatureTable(List<double> namesOfRows, int rowName, int columnName, double[,] table)
         {
-            double index = IndexDeterminant.GetIndex(rowName, namesOfRows);
+            double indexRow = IndexDeterminant.GetIndex(rowName, namesOfRows);
+            double indexColumn = IndexDeterminant.GetIndex(columnName, namesOfRows);
 
-            if (index % 1 == 0)
+            if (indexRow % 1 == 0 && indexColumn % 1 == 0)
             {
-                int indexInt = Convert.ToInt32(index);
-                return table[indexInt, indexInt];
+                int indexRowInt = Convert.ToInt32(indexRow);
+                int indexColumnInt = Convert.ToInt32(indexColumn);
+                return table[indexRowInt, indexColumnInt];
             }
-            else if (index != -1)
+            else if (indexRow != -1 && indexColumn != -1)
             {
-                int indexFirst = Convert.ToInt32(Math.Truncate(index));
-                int indexNext = indexFirst + 1;
-                double firstValue = table[indexFirst, indexFirst];
-                double nextValue = table[indexNext, indexNext];
+                int indexFirstRow = Convert.ToInt32(Math.Truncate(indexRow));
+                int indexFirstColumn = Convert.ToInt32(Math.Truncate(indexColumn));
+                int indexNextRow = indexFirstRow + 1;
+                int indexNextColumn = indexFirstColumn + 1;
+                double firstValue = table[indexFirstRow, indexFirstColumn];
+                double nextValue = table[indexNextRow, indexNextColumn];
                 return GetIntermediateValue(indexFirst, indexNext, index, firstValue, nextValue);
             }
             else return -1;

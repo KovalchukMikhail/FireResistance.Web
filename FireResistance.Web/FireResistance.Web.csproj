@@ -20,5 +20,7 @@
     <ProjectReference Include="..\FireResistance.Core\FireResistance.Core.csproj" />
     <ProjectReference Include="..\FireResistance.Report\FireResistance.Report.csproj" />
   </ItemGroup>
+	
+	
 
 </Project>
