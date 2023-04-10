@@ -58,7 +58,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
             column.WorkWidthWithWarming = equationsSp468.GetHtFireFourSides(column.Width, column.DeepConcreteWarming);
             column.AreaChangedProfile = equationsSp468.GetAredColumnFourSides(column.Height, column.Width, column.DeepConcreteWarming);
             column.WorkHeightProfileWithWarming = equationsSp468.GetH0tFireFourSides(column.WorkHeight, column.DeepConcreteWarming);
-            column.DistanceFromBringToPointAverageTemperature = equationsSp468.GetDistanceFromBringToPointAverageTemperatureForColumn(column.WorkHeightProfileWithWarming);
+            column.DistanceFromBringToPointAverageTemperature = equationsSp468.GetDistanceFromBringToPointAverageTemperatureForColumn(column.WorkHeightProfileWithWarming, column.DeepConcreteWarming);
             SetMaterials(column, provider, sourceData, db); 
             return column;
         }
@@ -67,7 +67,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
         {
             RequestDb db = provider.GetService<RequestDb>();
             IEquationsFromSp468 equations = provider.GetRequiredService<IEquationsFromSp468>();
-            column.DistanceFromBringToPointAverageTemperature = equations.GetDistanceFromBringToPointAverageTemperatureForColumn(column.WorkHeightProfileWithWarming, xt, KsiR);
+            column.DistanceFromBringToPointAverageTemperature = equations.GetDistanceFromBringToPointAverageTemperatureForColumn(column.WorkHeightProfileWithWarming, column.DeepConcreteWarming, xt, KsiR);
             SetMaterials(column, provider, sourceData, db);
             return column;
         }

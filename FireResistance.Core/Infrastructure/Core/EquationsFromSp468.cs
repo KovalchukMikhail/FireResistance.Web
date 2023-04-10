@@ -287,16 +287,16 @@ namespace FireResistance.Core.Infrastructure.Core
         public double GetSigmaEquationEightDotFiftyFive(double ts) => 89 - 0.27 * ts;
 
         /// <summary>Equation from item 5.4</summary>
-        public double GetDistanceFromBringToPointAverageTemperatureForColumn(double h0t, double xt = 0, double KsiR = 0)
+        public double GetDistanceFromBringToPointAverageTemperatureForColumn(double h0t, double at, double xt = 0, double KsiR = 0)
         {
-            if (xt == 0 || KsiR == 0) return 0.2 * h0t;
-            else return 0.5 * xt;
+            if (xt == 0 || KsiR == 0) return 0.2 * h0t + at;
+            else return 0.5 * xt + at;
         }
         /// <summary>Equation from item 5.4</summary>
-        public double GetDistanceFromBringToPointAverageTemperatureForSlab(double h0t, double xt = 0, double KsiR = 0)
+        public double GetDistanceFromBringToPointAverageTemperatureForSlab(double h0t, double at, double xt = 0, double KsiR = 0)
         {
-            if (xt == 0 || KsiR == 0) return 0.1 * h0t;
-            else return 0.5 * xt;
+            if (xt == 0 || KsiR == 0) return 0.1 * h0t + at;
+            else return 0.5 * xt + at;
         }
         /// <summary>Equation from item 8.20 for Ksi</summary>
         public double GetKsi(double xt, double h0t) => xt / h0t;

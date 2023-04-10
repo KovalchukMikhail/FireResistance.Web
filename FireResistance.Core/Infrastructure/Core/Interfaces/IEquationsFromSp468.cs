@@ -190,10 +190,10 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public double GetSigmaEquationEightDotFiftyFive(double ts);
 
         /// <summary>Equation from item 5.4 for Column</summary>
-        public double GetDistanceFromBringToPointAverageTemperatureForColumn(double h0t, double xt = 0, double KsiR = 0);
+        public double GetDistanceFromBringToPointAverageTemperatureForColumn(double h0t, double at, double xt = 0, double KsiR = 0);
 
         /// <summary>Equation from item 5.4 for slab</summary>
-        public double GetDistanceFromBringToPointAverageTemperatureForSlab(double h0t, double xt = 0, double KsiR = 0);
+        public double GetDistanceFromBringToPointAverageTemperatureForSlab(double h0t, double at, double xt = 0, double KsiR = 0);
         /// <summary>Equation from item 8.20 for Ksi</summary>
         public double GetKsi(double xt, double h0t);
     }
