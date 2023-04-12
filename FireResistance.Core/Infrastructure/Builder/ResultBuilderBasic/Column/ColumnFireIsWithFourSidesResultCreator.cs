@@ -162,7 +162,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
                             .Append("Температура арматуры определенная по приложению Б СП468.1325800.2019 для угловых стержней:\n")
                                 .Append($"\t{result.GetItemResult("TemperaturOfArmature")} °С\n")
                             .Append("Температура прогрева бетона определенная в соответствии с п. 5.4 по приложению Б СП468.1325800.2019:\n")
-                                .Append($"\t{result.GetItemResult("TemperaturOfConcrete")} шт.\n")
+                                .Append($"\t{result.GetItemResult("TemperaturOfConcrete")} °С\n")
                             .Append("Изгибающий момент от постоянной и длительной нормативной нагрузки::\n")
                                 .Append($"\tMn = {Math.Round(result.GetItemResult("Mn"), 2)} Н * мм = {result.GetItemResult("Mn") * 0.00000010197162123} т * м\n")
                             .Append("Нормальная сила от постоянной и длительной нормативной нагрузки:\n")
@@ -275,7 +275,8 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 
         protected void BuildPartThreeResult(StringBuilder stringBuilder, CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result)
         {
-            stringBuilder.Append("Коэффициент учитывающий влияние прогиба п. 8.1.15 СП63.13330.2018:\n")
+            stringBuilder.Append($"\t{result.GetItemResult("Nn")} < {result.GetItemResult("Ncr")} \nУсловие выполнено.\n")
+                    .Append("\t\nКоэффициент учитывающий влияние прогиба п. 8.1.15 СП63.13330.2018:\n")
                         .Append($"\tη = 1/(1-N/Ncr) = {result.GetItemResult("n")}\n")
                     .Append("Расстояние от точки приложения силы N до центра тяжести сечения арматуры:\n")
                         .Append($"\te = e0*η + 0,5 * (h0t - a') + et = {result.GetItemResult("e")} мм\n")

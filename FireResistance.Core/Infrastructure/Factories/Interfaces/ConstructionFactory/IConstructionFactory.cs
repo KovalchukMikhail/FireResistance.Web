@@ -11,6 +11,6 @@ namespace FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFa
 {
     internal interface IConstructionFactory <T>
     {
-        public Construction Create(ServiceProvider provider, T sourceData);
+        public Construction Create(T sourceData);
     }
 }

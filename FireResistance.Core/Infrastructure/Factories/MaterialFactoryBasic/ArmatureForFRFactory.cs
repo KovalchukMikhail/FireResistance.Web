@@ -20,17 +20,22 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
     internal class ArmatureForFRFactory : IMaterialFactoryFR <ColumnFireIsWithFourSidesData>
     {
         private NameColumns nameColumns;
-        public ArmatureForFRFactory(NameColumns nameColumns)
+        private RequestDb db;
+        private ArmatureForFR armature;
+        private IInterpolator interpolator;
+        private IEquationsFromSp468 equations;
+
+        public ArmatureForFRFactory(NameColumns nameColumns, RequestDb db, ArmatureForFR armature, IInterpolator interpolator, IEquationsFromSp468 equations)
         {
             this.nameColumns = nameColumns;
+            this.db = db;
+            this.armature = armature;
+            this.interpolator = interpolator;
+            this.equations = equations;
         }
 
-        public Material Create(ServiceProvider provider, ColumnFireIsWithFourSidesData sourceData, double temperature)
+        public Material Create(ColumnFireIsWithFourSidesData sourceData, double temperature)
         {
-            RequestDb db = provider.GetRequiredService<RequestDb>();
-            ArmatureForFR armature = provider.GetRequiredService<ArmatureForFR>();
-            IInterpolator interpolator = provider.GetRequiredService<IInterpolator>();
-            IEquationsFromSp468 equations = provider.GetRequiredService<IEquationsFromSp468>();
             armature.ClassName = sourceData.ArmatureClass;
             armature.Diameter = sourceData.ArmatureDiameter;
             armature.Count = sourceData.ArmatureCount;

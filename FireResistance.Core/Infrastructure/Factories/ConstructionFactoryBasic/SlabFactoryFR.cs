@@ -12,7 +12,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
 {
     internal class SlabFactoryFR : IConstructionFactory<ColumnFireIsWithFourSidesData>
     {
-        public virtual Construction Create(ServiceProvider provider, ColumnFireIsWithFourSidesData sourceData)
+        public virtual Construction Create(ColumnFireIsWithFourSidesData sourceData)
         {
             throw new NotImplementedException();
         }

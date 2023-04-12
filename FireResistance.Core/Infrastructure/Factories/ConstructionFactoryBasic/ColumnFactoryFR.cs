@@ -23,19 +23,38 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
     internal class ColumnFactoryFR : IConstructionFactory<ColumnFireIsWithFourSidesData>
     {
         private NameColumns nameColumns;
+        private RequestDb db;
+        private ColumnFR column;
+        private IInterpolator interpolator;
+        private IEquationsFromSp468 equationsSp468;
+        private ICommonEquations commonEquation;
+        private ColumnTemperature columnTemperature;
+        ArmatureForFRFactory armatureFactory;
+        ConcreteForFRFactory concreteFactory;
 
-        public ColumnFactoryFR(NameColumns nameColumns)
-        {
+        public ColumnFactoryFR(NameColumns nameColumns,
+                                RequestDb db,
+                                ColumnFR column,
+                                IInterpolator interpolator,
+                                IEquationsFromSp468 equationsSp468,
+                                ICommonEquations commonEquation,
+                                ColumnTemperature columnTemperature,
+                                ArmatureForFRFactory armatureFactory,
+                                ConcreteForFRFactory concreteFactory)
+        {                                                            
             this.nameColumns = nameColumns;
+            this.db = db;
+            this.column = column;
+            this.interpolator = interpolator;
+            this.equationsSp468 = equationsSp468;
+            this.commonEquation = commonEquation;
+            this.columnTemperature = columnTemperature;
+            this.armatureFactory = armatureFactory;
+            this.concreteFactory = concreteFactory;
         }
 
-        public virtual Construction Create(ServiceProvider provider, ColumnFireIsWithFourSidesData sourceData)
+        public virtual Construction Create(ColumnFireIsWithFourSidesData sourceData)
         {
-            RequestDb db = provider.GetService<RequestDb>();
-            ColumnFR column = provider.GetRequiredService<ColumnFR>();
-            IInterpolator interpolator = provider.GetService<IInterpolator>();
-            IEquationsFromSp468 equationsSp468 = provider.GetRequiredService<IEquationsFromSp468>();
-            ICommonEquations commonEquation = provider.GetRequiredService<ICommonEquations>();
             column.Width = sourceData.WidthColumn;
             column.Height = sourceData.HeighColumn;
             column.Length = sourceData.LengthColumn;
@@ -59,29 +78,24 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
             column.AreaChangedProfile = equationsSp468.GetAredColumnFourSides(column.Height, column.Width, column.DeepConcreteWarming);
             column.WorkHeightProfileWithWarming = equationsSp468.GetH0tFireFourSides(column.WorkHeight, column.DeepConcreteWarming);
             column.DistanceFromBringToPointAverageTemperature = equationsSp468.GetDistanceFromBringToPointAverageTemperatureForColumn(column.WorkHeightProfileWithWarming, column.DeepConcreteWarming);
-            SetMaterials(column, provider, sourceData, db); 
+            SetMaterials(column, sourceData, db); 
             return column;
         }
 
-        public virtual ColumnFR OverrideColumn(ServiceProvider provider, ColumnFireIsWithFourSidesData sourceData, ColumnFR column, double xt, double KsiR)
+        public virtual ColumnFR OverrideColumn(ColumnFireIsWithFourSidesData sourceData, ColumnFR column, double xt, double KsiR)
         {
-            RequestDb db = provider.GetService<RequestDb>();
-            IEquationsFromSp468 equations = provider.GetRequiredService<IEquationsFromSp468>();
-            column.DistanceFromBringToPointAverageTemperature = equations.GetDistanceFromBringToPointAverageTemperatureForColumn(column.WorkHeightProfileWithWarming, column.DeepConcreteWarming, xt, KsiR);
-            SetMaterials(column, provider, sourceData, db);
+            column.DistanceFromBringToPointAverageTemperature = equationsSp468.GetDistanceFromBringToPointAverageTemperatureForColumn(column.WorkHeightProfileWithWarming, column.DeepConcreteWarming, xt, KsiR);
+            SetMaterials(column, sourceData, db);
             return column;
         }
 
-        protected virtual void SetMaterials(ColumnFR column, ServiceProvider provider, ColumnFireIsWithFourSidesData sourceData, RequestDb db)
+        protected virtual void SetMaterials(ColumnFR column, ColumnFireIsWithFourSidesData sourceData, RequestDb db)
         {
-            ColumnTemperature columnTemperature = provider.GetRequiredService<ColumnTemperature>();
             double temperatureArmature = columnTemperature.GetArmatureTemperature(column);
             double criticalTemperature = db.DataSP468Db.GetCriticalTemperatureConcrete(sourceData.ConcreteType);
             double TemperatureConcrete = columnTemperature.GetConcreteTemperature(column, criticalTemperature);
-            ArmatureForFRFactory armatureFactory = provider.GetRequiredService<ArmatureForFRFactory>();
-            ConcreteForFRFactory concreteFactory = provider.GetRequiredService<ConcreteForFRFactory>();
-            column.ArmatureFR = armatureFactory.Create(provider, sourceData, temperatureArmature) as ArmatureForFR;
-            column.ConcreteFR = concreteFactory.Create(provider, sourceData, TemperatureConcrete) as ConcreteForFR; 
+            column.ArmatureFR = armatureFactory.Create(sourceData, temperatureArmature) as ArmatureForFR;
+            column.ConcreteFR = concreteFactory.Create(sourceData, TemperatureConcrete) as ConcreteForFR; 
         }
     }
 

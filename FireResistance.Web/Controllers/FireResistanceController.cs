@@ -22,7 +22,7 @@ namespace FireResistance.Web.Controllers
             if (ModelState.IsValid)
             {
                 FireResistanceBasic fireResistance = new FireResistanceBasic();
-                fireResistance.TryPerformCalculation(sourceData);
+                fireResistance.PerformCalculation(sourceData);
                 data.Result = fireResistance.GetResult() as ResultAsDictionary;
             }
             return View(data);
@@ -57,7 +57,7 @@ namespace FireResistance.Web.Controllers
         public ActionResult ShowResult(ColumnFireIsWithFourSidesData data)
         {
             FireResistanceBasic fireResistance = new FireResistanceBasic();
-            fireResistance.TryPerformCalculation(data);
+            fireResistance.PerformCalculation(data);
 
             ResultAsDictionary result = fireResistance.GetResult() as ResultAsDictionary;
             string[] str = result.ToString().Split("\n");

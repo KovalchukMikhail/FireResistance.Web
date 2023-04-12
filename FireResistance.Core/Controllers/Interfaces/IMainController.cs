@@ -10,6 +10,6 @@ namespace FireResistance.Core.Controllers.Interfaces
 {
     internal interface IMainController <T, K>
     {
-        public bool Run(T data, K calculator, ServiceProvider provider);
+        public void Run(T data, K calculator, ServiceProvider provider);
     }
 }

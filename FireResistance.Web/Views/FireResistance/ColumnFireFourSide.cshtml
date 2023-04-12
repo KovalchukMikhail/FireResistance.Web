@@ -103,21 +103,25 @@
             <label>Укажите длину элемента:</label><br />
             <input type="number" asp-for="SourceData.LengthColumn" />
             <span asp-validation-for="SourceData.LengthColumn" class="text-danger"></span>
+            <label>  мм</label>
         </div>
         <div class="border p-1">
             <label>Укажите высоту элемента:</label><br />
             <input type="number" asp-for="SourceData.HeighColumn" />
             <span asp-validation-for="SourceData.HeighColumn" class="text-danger"></span>
+            <label>  мм</label>
         </div>
             <div class="border p-1">
             <label>Укажите ширину элемента:</label><br />
             <input type="number" asp-for="SourceData.WidthColumn" />
             <span asp-validation-for="SourceData.WidthColumn" class="text-danger"></span>
+            <label>  мм</label>
         </div>
         <div class="border p-1">
             <label>Укажите расстояние от грани элемента до центра тяжести арматуры:</label><br />
             <input type="number" asp-for="SourceData.ArmatureInstallationDepth" />
             <span asp-validation-for="SourceData.ArmatureInstallationDepth" class="text-danger"></span>
+            <label>  мм</label>
         </div>
         <div class="border p-1">
             <div class="col-4">
@@ -130,22 +134,26 @@
                         <option value=@value>@value</option>
                     }
                 </select>
+                <label>  мм</label>
             </div>
         </div>
         <div class="border p-1">
             <label>Укажите количество арматуры:</label><br />
             <input type="number" asp-for="SourceData.ArmatureCount" />
             <span asp-validation-for="SourceData.ArmatureCount" class="text-danger"></span>
+            <label>  шт.</label>
         </div>
         <div class="border p-1">
             <label>Укажите вличену изгибающего момента от постоянной и длительной нормативной нагрузки:</label><br />
-            <input type="number" asp-for="SourceData.Moment" />
+            <input type="number" step="0.0001" asp-for="SourceData.Moment" />
             <span asp-validation-for="SourceData.Moment" class="text-danger"></span>
+            <label>  т*м</label>
         </div>
         <div class="border p-1">
             <label>Укажите вличену нормальной силы от постоянной и длительной нормативной нагрузки:</label><br />
-            <input type="number" asp-for="SourceData.Strength" />
+            <input type="number" step="0.0001" asp-for="SourceData.Strength" />
             <span asp-validation-for="SourceData.Strength" class="text-danger"></span>
+            <label>  т</label>
         </div>
         <input type="submit" value="Send" />
     </div>

@@ -10,7 +10,7 @@ namespace FireResistance.Core
 {
     internal interface IFireResistance <N, K>
     {
-        public bool TryPerformCalculation(K data);
+        public void PerformCalculation(K data);
         public N GetResult();
     }
 }

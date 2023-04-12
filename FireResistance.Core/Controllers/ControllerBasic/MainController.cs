@@ -21,7 +21,7 @@ namespace FireResistance.Core.Controllers.ControllerBasic
     {
         private IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
                                 Dictionary<string, string>> resultBuilder;
-        public bool Run(SourceData data,
+        public void Run(SourceData data,
                             CalculatorAbstract<IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>> calculator,
                             ServiceProvider provider)
         {
@@ -41,14 +41,14 @@ namespace FireResistance.Core.Controllers.ControllerBasic
                 case WallFireIsWithOneSideData:
                     resultBuilder = null;
                     break;
-                default: return false;
             };
 
-            resultBuilder.SetSourceData(data, provider);
-            calculator.ResultBuilder = resultBuilder;
-            calculator.TryConstruct();
-            return true;
-
+            if(resultBuilder != null)
+            {
+                resultBuilder.SetSourceData(data);
+                calculator.ResultBuilder = resultBuilder;
+                calculator.Construct();
+            }
         }
     }
 }

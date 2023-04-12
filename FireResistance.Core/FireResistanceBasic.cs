@@ -23,7 +23,7 @@ namespace FireResistance.Core
                             Dictionary<string, double>,
                             Dictionary<string, string>>> calculator;
 
-        public bool TryPerformCalculation(SourceData data)
+        public void PerformCalculation(SourceData data)
         {
             using ServiceProvider provider = DependencyCreator.GetServiceProvider();
             controller = provider.GetService<IMainController<SourceData,
@@ -33,12 +33,12 @@ namespace FireResistance.Core
             calculator = provider.GetService<CalculatorAbstract<IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
                                                                 Dictionary<string, double>,
                                                                  Dictionary<string, string>>>>();
-            return controller.Run(data, calculator, provider);
+            controller.Run(data, calculator, provider);
         }
 
         public CalculationResult<Dictionary<string, double>, Dictionary<string, string>> GetResult()
         {
-            return calculator.ResultBuilder.GetCalculationResult();
+            return calculator?.ResultBuilder?.GetCalculationResult();
         }
 
     }

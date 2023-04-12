@@ -11,6 +11,6 @@ namespace FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactor
 {
     internal interface IMaterialFactoryFR <T>
     {
-        public Material Create(ServiceProvider provider, T sourceData, double temperuture);
+        public Material Create(T sourceData, double temperuture);
     }
 }

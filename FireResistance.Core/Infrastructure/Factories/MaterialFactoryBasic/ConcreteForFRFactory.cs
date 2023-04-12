@@ -17,17 +17,22 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
     internal class ConcreteForFRFactory : IMaterialFactoryFR <ColumnFireIsWithFourSidesData>
     {
         private NameColumns nameColumns;
+        private RequestDb db;
+        private ConcreteForFR concrete;
+        private IInterpolator interpolator;
+        private IEquationsFromSp468 equations;
 
-        public ConcreteForFRFactory(NameColumns nameColumns)
+
+        public ConcreteForFRFactory(NameColumns nameColumns, RequestDb db, ConcreteForFR concrete, IInterpolator interpolator, IEquationsFromSp468 equations)
         {
             this.nameColumns = nameColumns;
+            this.db = db;
+            this.concrete = concrete;
+            this.interpolator = interpolator;
+            this.equations = equations;
         }
-        public Material Create(ServiceProvider provider, ColumnFireIsWithFourSidesData sourceData, double temperature)
+        public Material Create(ColumnFireIsWithFourSidesData sourceData, double temperature)
         {
-            RequestDb db = provider.GetService<RequestDb>();
-            ConcreteForFR concrete = provider.GetService<ConcreteForFR>();
-            IInterpolator interpolator = provider.GetRequiredService<IInterpolator>();
-            IEquationsFromSp468 equations = provider.GetRequiredService<IEquationsFromSp468>();
             concrete.ClassName = sourceData.ConcreteClass;
             concrete.TypeName = sourceData.ConcreteType;
             concrete.StartElasticityModulus = db.DataSP63Db.GetConcreteStartElasticityModulus(concrete.ClassName);

@@ -32,7 +32,6 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
         private ColumnFireIsWithFourSidesData sourceData;
         private ColumnFR column;
         private ColumnFactoryFR columnFactory;
-        private ServiceProvider provider;
         private TempValuesForColumn values;
         private IColumnFireIsWithFourSidesEquationsManager equationsManager;
         private IColumnFireIsWithFourSidesResultCreator resultCreator;
@@ -52,15 +51,14 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             this.resultCreator = resultCreator;
         }
 
-        public void SetSourceData(SourceData sourceData, ServiceProvider provider)
+        public void SetSourceData(SourceData sourceData)
         {
             this.sourceData = sourceData as ColumnFireIsWithFourSidesData;
-            this.provider = provider;
         }
 
         public void BuildConstructions()
         {
-            column = columnFactory.Create(provider, sourceData) as ColumnFR;   
+            column = columnFactory.Create(sourceData) as ColumnFR;   
         }
         
         public void BuildCalculation()
@@ -80,7 +78,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             equationsManager.RunPartThreeOfEquations(values, column);
             if (values.xt >= values.KsiR * column.WorkHeightProfileWithWarming && firstTime)
             {
-                columnFactory.OverrideColumn(provider, sourceData, column, values.xt, values.KsiR);
+                columnFactory.OverrideColumn(sourceData, column, values.xt, values.KsiR);
                 firstTime = false;
                 BuildCalculation();
             }

@@ -17,9 +17,9 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
 
         [Range(1, int.MaxValue, ErrorMessage = "Не корректно указанна длина элемента")]
         public virtual int LengthColumn { get; set; }
-        [Range(200, int.MaxValue, ErrorMessage = "минимальная допустимая высота сечения 200 мм")]
+        [Range(200, int.MaxValue, ErrorMessage = "Минимальная допустимая высота сечения 200 мм")]
         public virtual int HeighColumn { get; set; }
-        [Range(200, int.MaxValue, ErrorMessage = "минимальная допустимая ширина сечения 200 мм")]
+        [Range(200, int.MaxValue, ErrorMessage = "Минимальная допустимая ширина сечения 200 мм")]
         public virtual int WidthColumn { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "Не корректные данные")]
         public virtual int ArmatureInstallationDepth { get; set; }
