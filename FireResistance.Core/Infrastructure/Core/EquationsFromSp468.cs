@@ -1,7 +1,9 @@
-﻿using FireResistance.Core.Infrastructure.Core.Interfaces;
+﻿using FireResistance.Core.ExceptionFR;
+using FireResistance.Core.Infrastructure.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +30,11 @@ namespace FireResistance.Core.Infrastructure.Core
         public double GetEst(double Es, double betaS) => Es * betaS;
 
         /// <summary>Equation (5.8)</summary>
-        public double GetEs0(double Rst, double Est) => Rst / Est;
+        public double GetEs0(double Rst, double Est)
+        {
+            if (Est <= 0) throw new ExceptionFRBasic("Недопустимое значение Est, ошибка возникла при определении Es0 в формуле 5.8 СП468", Est);
+            return Rst / Est;
+        }
 
         /// <summary>Equation (8.2)</summary>
         public double GetBtFireThreeSides(double b, double at) => b - 2 * at;
@@ -60,7 +66,11 @@ namespace FireResistance.Core.Infrastructure.Core
 
         /// <summary>Equation (8.11)</summary>
         public double GetXtEquationEightDotEleven(double Rsnt, double AsStretch, double Rsct, double AsSqueeze, double Rbnt, double b)
-            => (Rsnt * AsStretch - Rsct * AsSqueeze) / (Rbnt * b);
+        {
+            if (Rbnt <= 0) throw new ExceptionFRBasic("Недопустимое значение Rbnt, ошибка возникла при определении Xt в формуле 8.11 СП468", Rbnt);
+            if (b <= 0) throw new ExceptionFRBasic("Недопустимое значение b, ошибка возникла при определении Xt в формуле 8.11 СП468", b);
+            return (Rsnt * AsStretch - Rsct * AsSqueeze) / (Rbnt * b);
+        }
 
         /// <summary>Equation (8.12)</summary>
         public double GetMultTEquationEightDotTwelve(double Rsnt, double AsStretch, double h0, double xt, double Rsct, double AsSqueeze, double a)
@@ -68,15 +78,35 @@ namespace FireResistance.Core.Infrastructure.Core
 
         /// <summary>Equation (8.13)</summary>
         public double GetGammaStCrFirstOption(double Mn, double Rsn, double AsStretch, double h0, double xt)
-            => Mn / (Rsn * AsStretch *(h0 - 0.5 * xt));
+        {
+            try
+            {
+                return Mn / (Rsn * AsStretch * (h0 - 0.5 * xt));
+            }
+            catch(DivideByZeroException)
+            {
+                throw new ExceptionFRBasic("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.13 СП468");
+            }
+            
+        }
 
         /// <summary>Equation (8.14)</summary>
         public double GetGammaStCrSecondOption(double Mn, double Rsct, double AsSqueeze, double xt, double a, double Rsn, double AsStretch, double h0)
-            => (Mn - Rsct * AsSqueeze * (0.5 * xt - a))/(Rsn * AsStretch * (h0 - 0.5 * xt));
+        {
+            try
+            {
+                return (Mn - Rsct * AsSqueeze * (0.5 * xt - a)) / (Rsn * AsStretch * (h0 - 0.5 * xt));
+            }
+            catch (DivideByZeroException)
+            {
+                throw new ExceptionFRBasic("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.14 СП468");
+            }
+        }
 
         /// <summary>Equation (8.15)</summary>
         public bool GetNs(double n1, double Rbtnt, double ls, double us, double alpha, double Rsnt, double AsStretch, out double partLeft, out double partRight)
         {
+            if (alpha <= 0) throw new ExceptionFRBasic("Недопустимое значение alpha, ошибка возникла в формуле 8.15 СП468", alpha);
             partLeft = n1 * Rbtnt * ls * us / alpha;
             partRight = Rsnt * AsStretch;
             return partLeft < partRight;
@@ -96,7 +126,11 @@ namespace FireResistance.Core.Infrastructure.Core
 
         /// <summary>Equation (8.18)</summary>
         public double GetXtEquationEightDotEighteen(double Rsnt, double AsStretch, double Rsct, double AsSqueeze, double Rbn, double bft, double bt, double hft, double Rbnt)
-            => (Rsnt * AsStretch - Rsct * AsSqueeze - Rbn * (bft - bt) * hft) / (Rbnt * bt);
+        {
+            if (Rbnt <= 0) throw new ExceptionFRBasic("Недопустимое значение Rbnt, ошибка возникла при определении Xt в формуле 8.18 СП468", Rbnt);
+            if (bt <= 0) throw new ExceptionFRBasic("Недопустимое значение bt, ошибка возникла при определении Xt в формуле 8.18 СП468", bt);
+            return (Rsnt * AsStretch - Rsct * AsSqueeze - Rbn * (bft - bt) * hft) / (Rbnt * bt);
+        }
 
         /// <summary>Equation (8.19)</summary>
         public double GetMultTEquationEightDotNineteen(double [] Rsnt, double [] AsStretch, double [] h0, double [] xtForLeft, double[] xtForRight, double [] Rsct, double [] AsSqueeze, double [] a)
@@ -120,12 +154,21 @@ namespace FireResistance.Core.Infrastructure.Core
                 }
                 return equationLeft + equationRighht;
             }
-            else return -1;
+            else throw new ExceptionFRBasic("Ошибка при расчете по формуле 8.19 СП468");
         }
 
         /// <summary>Equation (8.20)</summary>
         public double GetGammaSCr(double Mn, double A, double B, double Rsn, double AsStretch, double h0, double xt)
-            => (Mn - A - B) / (Rsn * AsStretch * (h0 - 0.5 * xt));
+        {
+            try
+            {
+                return (Mn - A - B) / (Rsn * AsStretch * (h0 - 0.5 * xt));
+            }
+            catch (DivideByZeroException)
+            {
+                throw new ExceptionFRBasic("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.20 СП468");
+            }
+        }
 
         /// <summary>Equation (8.21)</summary>
         public double GetA(double Rbnt, double bt, double xt, double h0, double hft)
@@ -155,12 +198,26 @@ namespace FireResistance.Core.Infrastructure.Core
 
         /// <summary>Equation (8.26)</summary>
         public double GetXtEquationEightDotTwentySix(double Nn, double Rsnl, double AsStretch, double Rsct, double Rbnt, double bt)
-            => (Nn + Rsnl * AsStretch - Rsct * AsStretch) / (Rbnt * bt);
+        {
+            if (Rbnt <= 0) throw new ExceptionFRBasic("Недопустимое значение Rbnt, ошибка возникла при определении Xt в формуле 8.26 СП468", Rbnt);
+            if (bt <= 0) throw new ExceptionFRBasic("Недопустимое значение bt, ошибка возникла при определении Xt в формуле 8.26 СП468", bt);
+            return (Nn + Rsnl * AsStretch - Rsct * AsStretch) / (Rbnt * bt);
+        }
 
         /// <summary>Equation (8.27)</summary>
         public double GetXtEquationEightDotTwentySeven(double Nn, double Rsnt, double AsStretch, double KsiR, double Rsct, double AsSqueeze, double Rbnt, double bt, double h0t)
-            => (Nn + Rsnt * AsStretch * (1 + KsiR) / (1 - KsiR) - Rsct * AsSqueeze)
-            / (Rbnt * bt + 2 * Rsnt * AsStretch/(h0t * (1 - KsiR)));
+        {
+            try
+            {
+                return (Nn + Rsnt * AsStretch * (1 + KsiR) / (1 - KsiR) - Rsct * AsSqueeze)
+                        / (Rbnt * bt + 2 * Rsnt * AsStretch / (h0t * (1 - KsiR)));
+            }
+            catch (DivideByZeroException)
+            {
+                throw new ExceptionFRBasic("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.27 СП468");
+            }
+            
+        }
 
         /// <summary>Equation (8.28)</summary>
         public double GetEEquationEightDotTwentyEight(double e0, double n, double h0, double a, double et)
@@ -168,15 +225,28 @@ namespace FireResistance.Core.Infrastructure.Core
 
         /// <summary>Equation (8.29)</summary>
         public double GetEt(double a, double alphaSt, double ts, double alphaBt, double tb, double lo, double h0t)
-            => a * (alphaSt * ts - alphaBt * tb) * Math.Pow(lo, 2) / (8 * h0t);
+        {
+            if (h0t <= 0) throw new ExceptionFRBasic("Недопустимое значение h0t, ошибка возникла при определении et в формуле 8.29 СП468", h0t);
+            return a * (alphaSt * ts - alphaBt * tb) * Math.Pow(lo, 2) / (8 * h0t);
+        }
 
         /// <summary>Equation (8.30)</summary>
         public double GetEEquationEightDotThirty(double e0, double Eb1, double Jred, double Nn, double l0)
-            => e0 / ((Math.Pow(Math.PI, 2) * Eb1 * Jred / (Nn * Math.Pow(l0, 2))) - 1);
+        {
+            try
+            {
+                return e0 / ((Math.Pow(Math.PI, 2) * Eb1 * Jred / (Nn * Math.Pow(l0, 2))) - 1);
+            }
+            catch (DivideByZeroException)
+            {
+                throw new ExceptionFRBasic("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.30 СП468");
+            }
+            
+        }
 
         /// <summary>Equation (8.31)</summary>
         public bool CheckEquationEightDotThirtyOne(double Nn, double NultT)
-            => Nn <= NultT;
+            => Nn < NultT;
 
         /// <summary>Equation (8.32)</summary>
         public double GetNultT(double Rsnt, double Astot)
@@ -208,7 +278,11 @@ namespace FireResistance.Core.Infrastructure.Core
 
         /// <summary>Equation (8.36)</summary>
         public double GetXtEquationEightDotThirtySix(double Rsnt, double AsStretch, double Rsct, double AsSqueeze, double Nn, double Rbnt, double bt)
-            => (Rsnt * AsStretch - Rsct * AsSqueeze - Nn)/(Rbnt * bt);
+        {
+            if (Rbnt <= 0) throw new ExceptionFRBasic("Недопустимое значение Rbnt, ошибка возникла при определении Xt в формуле 8.36 СП468", Rbnt);
+            if (bt <= 0) throw new ExceptionFRBasic("Недопустимое значение bt, ошибка возникла при определении Xt в формуле 8.36 СП468", bt);
+            return (Rsnt * AsStretch - Rsct * AsSqueeze - Nn) / (Rbnt * bt);
+        }
 
         /// <summary>Equation (8.38)</summary>
         public double GetMt(double temperatureCurvature, double D) => temperatureCurvature * D;
@@ -239,11 +313,19 @@ namespace FireResistance.Core.Infrastructure.Core
 
         /// <summary>Equation (8.44)</summary>
         public double GetXitEquationEightDotFourtyFour(double Rsn, double As, double Rbnt, double lTwo)
-            => Rsn * As / (Rbnt * lTwo);
+        {
+            if (Rbnt <= 0) throw new ExceptionFRBasic("Недопустимое значение Rbnt, ошибка возникла в формуле 8.36 СП468", Rbnt);
+            if (lTwo <= 0) throw new ExceptionFRBasic("Недопустимое значение lTwo, ошибка возникла в формуле 8.36 СП468", lTwo);
+            return Rsn * As / (Rbnt * lTwo);
+        }
 
         /// <summary>Equation (8.45)</summary>
         public double GetXitEquationEightDotFourtyFive(double Rsnt, double As, double Rbnt, double lTwo)
-            => Rsnt * As / (Rbnt * lTwo);
+        {
+            if (Rbnt <= 0) throw new ExceptionFRBasic("Недопустимое значение Rbnt, ошибка возникла в формуле 8.36 СП468", Rbnt);
+            if (lTwo <= 0) throw new ExceptionFRBasic("Недопустимое значение lTwo, ошибка возникла в формуле 8.36 СП468", lTwo);
+            return Rsnt* As / (Rbnt * lTwo);
+        }
 
         /// <summary>Equation (8.46)</summary>
         public bool CheckEquationEightDotFourtySix(double q, double lOne, double lTwo, double MOne, double MTwo, double MILeft, double MIRight, double MIIDown, double MIIUp, out double partLeft, out double partRight)
@@ -262,9 +344,16 @@ namespace FireResistance.Core.Infrastructure.Core
         /// <summary>Equation (8.49)</summary>
         public bool CheckEquationEightDotFourtyNine(double q, double lOne, double lTwo, double aOne, double aTwo, double MOne, double MTwo, double MILeft, double MIRight, double MIIDown, double MIIUp, out double partLeft, out double partRight)
         {
-            partLeft = q * (lOne * lTwo - lOne * aTwo + 4 * aOne * aTwo / 3);
-            partRight = (2 * MOne + MILeft + MIRight) / aOne + (2 * MTwo + MIIDown + MIIUp) / aTwo;
-            return partLeft <= partRight;
+            try
+            {
+                partLeft = q * (lOne * lTwo - lOne * aTwo + 4 * aOne * aTwo / 3);
+                partRight = (2 * MOne + MILeft + MIRight) / aOne + (2 * MTwo + MIIDown + MIIUp) / aTwo;
+                return partLeft <= partRight;
+            }
+            catch (DivideByZeroException)
+            {
+                throw new ExceptionFRBasic("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.49 СП468");
+            }
         }
 
         /// <summary>Equation (8.50)</summary>
@@ -299,6 +388,10 @@ namespace FireResistance.Core.Infrastructure.Core
             else return 0.5 * xt + at;
         }
         /// <summary>Equation from item 8.20 for Ksi</summary>
-        public double GetKsi(double xt, double h0t) => xt / h0t;
+        public double GetKsi(double xt, double h0t)
+        {
+            if (h0t <= 0) throw new ExceptionFRBasic("Недопустимое значение h0t, ошибка возникла при определении ξ по п. 8.20 СП468", h0t);
+            return xt / h0t;
+        }
     }
 }
