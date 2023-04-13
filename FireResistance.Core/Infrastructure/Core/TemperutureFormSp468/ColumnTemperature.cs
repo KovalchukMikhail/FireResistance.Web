@@ -2,6 +2,7 @@
 using FireResistance.Core.Entities.Constructions.AbstractClasses;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.Materials;
+using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 using System;
@@ -37,7 +38,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
         {
             int size = Convert.ToInt32(Math.Min(construction.Width, construction.Height));
 
-            if (size == minSize || size == mediumSize || size >= maxSize)
+            if (size == minSize || size == mediumSize || size == maxSize)
             {
                 return GetTemperatureAtPoint(size, construction.DistanceToArmature, construction.DistanceToArmature, construction);
             }
@@ -53,7 +54,11 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
                 double secondValue = GetTemperatureAtPoint(maxSize, construction.DistanceToArmature, construction.DistanceToArmature, construction);
                 return interpolator.GetIntermediateValue(mediumSize, maxSize, size, firstValue, secondValue);
             }
-            else return -1;
+            if (size > maxSize)
+            {
+                return GetTemperatureAtPoint(maxSize, construction.DistanceToArmature, construction.DistanceToArmature, construction);
+            }
+            else throw new Exception("Ошибка возникла при определении температуры арматуры");
         }
 
         public double GetConcreteTemperature(ColumnFR construction, double criticalTemperature)
@@ -80,7 +85,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
             {
                 return GetAveregeTemperature(maxSize, construction, criticalTemperature, (size - maxSize)/2);
             }
-            else return -1;
+            else throw new Exception("Ошибка возникла при определении температуры бетона");
         }
 
         private double GetTemperatureAtPoint(int size, int distanceToPointByX, int distanceToPointByY, ColumnFR construction)
@@ -111,7 +116,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
                 }
             }
             temperatureSum += last * additionalSize;
-            if (temperatureSum == 0) return -1;
+            if (temperatureSum == 0) throw new Exception("Ошибка возникла при определении температуры бетона");
             else return temperatureSum/(count + additionalSize);
 
         }

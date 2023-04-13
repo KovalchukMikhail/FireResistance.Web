@@ -85,7 +85,7 @@ namespace FireResistance.Core.Infrastructure.Core
             }
             catch(DivideByZeroException)
             {
-                throw new ExceptionFRBasic("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.13 СП468");
+                throw new Exception("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.13 СП468");
             }
             
         }
@@ -99,7 +99,7 @@ namespace FireResistance.Core.Infrastructure.Core
             }
             catch (DivideByZeroException)
             {
-                throw new ExceptionFRBasic("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.14 СП468");
+                throw new Exception("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.14 СП468");
             }
         }
 
@@ -154,7 +154,7 @@ namespace FireResistance.Core.Infrastructure.Core
                 }
                 return equationLeft + equationRighht;
             }
-            else throw new ExceptionFRBasic("Ошибка при расчете по формуле 8.19 СП468");
+            else throw new Exception("Ошибка при расчете по формуле 8.19 СП468");
         }
 
         /// <summary>Equation (8.20)</summary>
@@ -166,7 +166,7 @@ namespace FireResistance.Core.Infrastructure.Core
             }
             catch (DivideByZeroException)
             {
-                throw new ExceptionFRBasic("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.20 СП468");
+                throw new Exception("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.20 СП468");
             }
         }
 
@@ -214,7 +214,7 @@ namespace FireResistance.Core.Infrastructure.Core
             }
             catch (DivideByZeroException)
             {
-                throw new ExceptionFRBasic("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.27 СП468");
+                throw new Exception("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.27 СП468");
             }
             
         }
@@ -239,7 +239,7 @@ namespace FireResistance.Core.Infrastructure.Core
             }
             catch (DivideByZeroException)
             {
-                throw new ExceptionFRBasic("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.30 СП468");
+                throw new Exception("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.30 СП468");
             }
             
         }
@@ -352,7 +352,7 @@ namespace FireResistance.Core.Infrastructure.Core
             }
             catch (DivideByZeroException)
             {
-                throw new ExceptionFRBasic("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.49 СП468");
+                throw new Exception("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.49 СП468");
             }
         }
 

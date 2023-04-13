@@ -8,6 +8,7 @@ using FireResistance.Core.Entities.Materials.AbstractClasses;
 using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
+using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.interfaces;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
@@ -58,39 +59,68 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 
         public void BuildConstructions()
         {
-            column = columnFactory.Create(sourceData) as ColumnFR;   
+            try
+            {
+                column = columnFactory.Create(sourceData) as ColumnFR;
+            }
+            catch (ExceptionFRBasic ex)
+            {
+                result.ExeptionList.Add($"{ex.Message}. Значение переменной вызвавшей ошибку равно {ex.InvalidValue} метод в котором произошла ошибка {ex.TargetSite}");
+            }
+            catch (Exception ex)
+            {
+                result.ExeptionList.Add($"{ex.Message}. Метод в котором произошла ошибка {ex.TargetSite}");
+            }
+
         }
         
         public void BuildCalculation()
         {
-            equationsManager.RunPartOneOfEquations(values, column);
-            if (values.e0 <= column.Height / 30 && values.Lambda <= 20)
+            if (result.ExeptionList.Count > 0) return;
+            try
             {
-                values.FinalEquation = values.MainEquations[0];
-                result.Status = equationsManager.RunEquationEightDotTwentyThree(values, column);
+                equationsManager.RunPartOneOfEquations(values, column);
+                if (values.e0 <= column.Height / 30 && values.Lambda <= 20)
+                {
+                    values.FinalEquation = values.MainEquations[0];
+                    result.Status = equationsManager.RunEquationEightDotTwentyThree(values, column);
+                }
+                equationsManager.RunPartTwoOfEquations(values, column);
+                if (values.Ncr <= column.Strength)
+                {
+                    values.FinalEquation = values.MainEquations[1];
+                    result.Status = false;
+                }
+                equationsManager.RunPartThreeOfEquations(values, column);
+                if (values.xt >= values.KsiR * column.WorkHeightProfileWithWarming && firstTime)
+                {
+                    columnFactory.OverrideColumn(sourceData, column, values.xt, values.KsiR);
+                    firstTime = false;
+                    BuildCalculation();
+                }
+                else
+                {
+                    values.FinalEquation = values.MainEquations[2];
+                    result.Status = equationsManager.RunPartFourOfEquations(values, column);
+                }
             }
-            equationsManager.RunPartTwoOfEquations(values, column);
-            if (values.Ncr <= column.Strength)
+            catch (ExceptionFRBasic ex)
             {
-                values.FinalEquation = values.MainEquations[1];
-                result.Status = false;
+                result.ExeptionList.Add($"{ex.Message}. Значение переменной вызвавшей ошибку равно {ex.InvalidValue} метод в котором произошла ошибка {ex.TargetSite}");
             }
-            equationsManager.RunPartThreeOfEquations(values, column);
-            if (values.xt >= values.KsiR * column.WorkHeightProfileWithWarming && firstTime)
+            catch (Exception ex)
             {
-                columnFactory.OverrideColumn(sourceData, column, values.xt, values.KsiR);
-                firstTime = false;
-                BuildCalculation();
-            }
-            else
-            {
-                values.FinalEquation = values.MainEquations[2];
-                result.Status = equationsManager.RunPartFourOfEquations(values, column); 
+                result.ExeptionList.Add($"{ex.Message}. Метод в котором произошла ошибка {ex.TargetSite}");
             }
         }
 
         public void BuildResult()
         {
+            if(result.ExeptionList.Count > 0)
+            {
+                result.ResultAsString = resultCreator.BuildError(result);
+                return;
+            }
             result.FinalEquations = values.MainEquations;
             resultCreator.AddConstructionDataToResult(result, column);
             if (values.FinalEquation == values.MainEquations[0]) resultCreator.AddResultIfLastIsEightDotTwentyThree(result, values);

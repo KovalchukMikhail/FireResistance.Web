@@ -1,4 +1,5 @@
-﻿using FireResistance.Core.Infrastructure.Utilities.Interfaces;
+﻿using FireResistance.Core.ExceptionFR;
+using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +21,14 @@ namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
         {
             int rowIndex = Convert.ToInt32(IndexDeterminant.GetIndex(rowName, namesOfRows));
             double columnIndex = IndexDeterminant.GetIndex(columnName, namesOfColumns);
-            if(columnIndex % 1 == 0 && rowIndex != -1)
+
+            if (columnIndex < 0 || rowIndex < 0) throw new Exception("Недопустимое значение индексов при определении значения в таблице");
+
+            if (columnIndex % 1 == 0)
             {
                 return table[rowIndex, Convert.ToInt32(columnIndex)];
             }
-            else if (rowIndex != -1 && columnIndex != -1)
+            else
             {
                 int indexFirst = Convert.ToInt32(Math.Truncate(columnIndex));
                 int indexNext = indexFirst + 1;
@@ -32,7 +36,6 @@ namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
                 double nextValue = table[rowIndex, indexNext];
                 return GetIntermediateValue(indexFirst, indexNext, columnIndex, firstValue, nextValue);
             }
-            else return -1;
         }
 
         public double GetValueFromTemperatureTable(List<double> namesOfRows, int rowName, int columnName, double[,] table)
@@ -40,13 +43,15 @@ namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
             double indexRow = IndexDeterminant.GetIndex(rowName, namesOfRows);
             double indexColumn = IndexDeterminant.GetIndex(columnName, namesOfRows);
 
+            if (indexRow < 0 || indexColumn < 0) throw new Exception("Недопустимое значение индексов при определении значения температуры");
+
             if (indexRow % 1 == 0 && indexColumn % 1 == 0)
             {
                 int indexRowInt = Convert.ToInt32(indexRow);
                 int indexColumnInt = Convert.ToInt32(indexColumn);
                 return table[indexRowInt, indexColumnInt];
             }
-            else if (indexRow != -1 && indexRow == indexColumn)
+            else if (indexRow == indexColumn)
             {
                 int indexFirstRow = Convert.ToInt32(Math.Truncate(indexRow));
                 int indexNextRow = indexFirstRow + 1;
@@ -54,7 +59,7 @@ namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
                 double nextValue = table[indexNextRow, indexNextRow];
                 return GetIntermediateValue(indexFirstRow, indexNextRow, indexRow, firstValue, nextValue);
             }
-            else if (indexRow != -1 && indexColumn != -1)
+            else
             {
                 int size = namesOfRows.Count;
                 int indexFirstRow = Convert.ToInt32(Math.Truncate(indexRow));
@@ -69,7 +74,6 @@ namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
                 double ValueBetweenThirdAndFourth = GetIntermediateValue(indexFirstColumn, indexNextColumn, indexColumn, thirdValue, fourthValue);
                 return GetIntermediateValue(indexFirstRow, indexNextRow, indexRow, ValueBetweenFirstAndSecond, ValueBetweenThirdAndFourth);
             }
-            else return -1;
         }
 
         public double GetIntermediateValue(double pointOfFirstValue, double pointOfSecondValue, double curentPoint, double firstValue, double secondValue)

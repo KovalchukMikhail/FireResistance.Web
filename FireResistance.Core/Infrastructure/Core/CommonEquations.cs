@@ -1,4 +1,5 @@
 ﻿using FireResistance.Core.Data;
+using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,10 @@ namespace FireResistance.Core.Infrastructure.Core
 
         public double GetWorkLenth(double l, double coefficientFixationElement) => l * coefficientFixationElement;
 
-        public double GetFinalСoefficient(double checkedValue, double criticalValue) => checkedValue / criticalValue;
+        public double GetFinalСoefficient(double checkedValue, double criticalValue)
+        {
+            if (criticalValue == 0) throw new ExceptionFRBasic("Невозможно определить коэффициент использования так как критическое значение равно 0", criticalValue);
+            return checkedValue / criticalValue;
+        }
     }
 }

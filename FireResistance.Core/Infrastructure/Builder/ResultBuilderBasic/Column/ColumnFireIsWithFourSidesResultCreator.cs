@@ -131,6 +131,14 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             return stringBuilder.ToString();
         }
 
+        public virtual string BuildError(CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append($"#Расчет выполнен некорректно. Список ошибок:\n");
+            foreach (string str in result.ExeptionList) stringBuilder.Append($"{str}; \n");
+            return stringBuilder.ToString();
+        }
+
         protected virtual void BuildDataConstruction(StringBuilder stringBuilder, CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result)
         {
             stringBuilder.Append("Требуемый предел огнестойкости\n")

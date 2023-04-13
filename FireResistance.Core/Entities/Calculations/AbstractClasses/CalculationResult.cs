@@ -14,7 +14,7 @@ namespace FireResistance.Core.Entities.Calculations.AbstractClasses
         public bool Status { get; set; } = false;
         public string ResultAsString { get; set; } = "";
         public string[] FinalEquations { get; set; }
-        public List<string> ExeptionList { get; set; }
+        public List<string> ExeptionList { get; set; } = new List<string>();
 
         public abstract double GetItemResult(string key);
         public abstract void AddItemResult(string key, double value);
