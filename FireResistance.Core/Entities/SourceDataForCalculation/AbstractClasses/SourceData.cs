@@ -19,5 +19,7 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses
         public virtual string ConcreteClass { get; set; }
         [Required(ErrorMessage = "Не указано зачение")]
         public virtual int ArmatureDiameter { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "Не корректные данные")]
+        public virtual int ArmatureCount { get; set; }
     }
 }

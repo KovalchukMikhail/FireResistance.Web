@@ -1,66 +1,180 @@
-﻿@model string []
+﻿@model DataOfPlateWithRigidConnectionToColumnsVM
+@inject NameColumns nameColumns
+
 
 <div class="border p-3">
     @if (Model != null)
     {
-        foreach (string str in Model)
+        if (Model.Result != null)
         {
-            if (str.StartsWith("#"))
+            string[] result = Model.Result.ToString().Split("\n");
+            foreach (string str in result)
             {
-                string text = str.Replace("#", "");
-                <h2>@text</h2>
-            }
-            else if (!str.StartsWith("\t"))
-            {
-                <strong>
-                    @str
-                </strong>
-            }
-            else
-            {
-                <p>@str</p>
-            }
+                if (str.StartsWith("#"))
+                {
+                    string text = str.Replace("#", "");
+                    <h2>@text</h2>
+                }
+                else if (!str.StartsWith("\t"))
+                {
+                    <strong>
+                        @str
+                    </strong>
+                }
+                else
+                {
+                    <p>@str</p>
+                }
 
+            }
         }
     }
 </div>
 
+
 <form method="post">
     <div class="border p-3">
-        <partial name="~/Views/Shared/PartialViews/_FireResistanceValue.cshtml" />
-        <partial name="~/Views/Shared/PartialViews/_FixationElementValue.cshtml" />
-        <partial name="~/Views/Shared/PartialViews/_ArmatureClassValue.cshtml" />
-        <partial name="~/Views/Shared/PartialViews/_ConcreteTypeValue.cshtml" />
-        <partial name="~/Views/Shared/PartialViews/_ConcreteClassValue.cshtml" />
         <div class="border p-1">
-            <label>Укажите длину элемента:</label><br />
-            <input type="number" name="LengthColumn" value=5450 />
+            <div class="col-4">
+                <label for="FireResistanceValue">Выберете требуемый предел огнестойкости:</label>
+            </div>
+            <div class="col-4">
+                <select asp-for="SourceData.FireResistanceValue" size="1" class="form-control-sm">
+                    @foreach (string value in nameColumns.FireResistanceForCriticalTemperature)
+                    {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
         </div>
         <div class="border p-1">
-            <label>Укажите высоту элемента:</label><br />
-            <input type="number" name="HeighColumn" value=1200 />
+            <div class="col-4">
+                <label for="ArmatureClass">Выберите класс арматуры по прочности:</label>
+            </div>
+            <div class="col-4">
+                <select asp-for="SourceData.ArmatureClass" size="1" class="form-control-sm">
+                    @foreach (string value in nameColumns.ArmatureClass)
+                    {
+                        <option value=@value>@value</option>
+                    }
+                </select>
+            </div>
         </div>
         <div class="border p-1">
-            <label>Укажите ширину элемента:</label><br />
-            <input type="number" name="WidthColumn" value=300 />
+            <div class="col-4">
+                <label for="ConcreteType">Выберите вид бетона:</label>
+            </div>
+            <div class="col-4">
+                <select asp-for="SourceData.ConcreteType" size="1" class="form-control-sm">
+                    @foreach (string value in nameColumns.ConcreteType)
+                    {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
         </div>
         <div class="border p-1">
-            <label>Укажите расстояние от грани элемента до центра тяжести арматуры:</label><br />
-            <input type="number" name="ArmatureInstallationDepth" value=55 />
+            <div class="col-4">
+                <label for="ConcreteClass">Выберите класс бетона:</label>
+            </div>
+            <div class="col-4">
+                <select asp-for="SourceData.ConcreteClass" size="1" class="form-control-sm">
+                    @foreach (string value in nameColumns.ConcreteClass)
+                    {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
         </div>
-        <partial name="~/Views/Shared/PartialViews/_ArmatureDiameterValue.cshtml" />
         <div class="border p-1">
-            <label>Укажите количество арматуры:</label><br />
-            <input type="number" name="ArmatureCount" value=3 />
+            <label>Укажите расстояние между рядами колонн в перпендикулярном направлении:</label><br />
+            <input type="number" asp-for="SourceData.LengthAcross" />
+            <span asp-validation-for="SourceData.LengthAcross" class="text-danger"></span>
+            <label>  мм</label>
         </div>
         <div class="border p-1">
-            <label>Укажите вличену изгибающего момента от постоянной и длительной нормативной нагрузки:</label><br />
-            <input type="number" name="Moment" value=10 />
+            <label>Укажите расстояние между рядами колонн вдоль рассматриваемой полосы:</label><br />
+            <input type="number" asp-for="SourceData.LengthAlong" />
+            <span asp-validation-for="SourceData.LengthAlong" class="text-danger"></span>
+            <label>  мм</label>
         </div>
         <div class="border p-1">
-            <label>Укажите вличену нормальной силы от постоянной и длительной нормативной нагрузки:</label><br />
-            <input type="number" name="Strength" value=300 />
+            <label>Укажите расстояние от крайних пластических шарниров до ближайших к ним рядов колонн:</label><br />
+            <input type="number" asp-for="SourceData.DistanceFromEdgeOfColumnToHinge" />
+            <span asp-validation-for="SourceData.DistanceFromEdgeOfColumnToHinge" class="text-danger"></span>
+            <label>  мм</label>
+        </div>
+        <div class="border p-1">
+            <label>Укажите высоту плиты:</label><br />
+            <input type="number" asp-for="SourceData.Heigh" />
+            <span asp-validation-for="SourceData.Heigh" class="text-danger"></span>
+            <label>  мм</label>
+        </div>
+        <div class="border p-1">
+            <label>Укажите расстояние от нижней грани элемента до оси арматуры:</label><br />
+            <input type="number" asp-for="SourceData.ArmatureInstallationDepthFromBelow" />
+            <span asp-validation-for="SourceData.ArmatureInstallationDepthFromBelow" class="text-danger"></span>
+            <label>  мм</label>
+        </div>
+        <div class="border p-1">
+            <label>Укажите расстояние от верхней грани элемента до оси арматуры:</label><br />
+            <input type="number" asp-for="SourceData.ArmatureInstallationDepthFromAbove" />
+            <span asp-validation-for="SourceData.ArmatureInstallationDepthFromAbove" class="text-danger"></span>
+            <label>  мм</label>
+        </div>
+        <div class="border p-1">
+            <div class="col-4">
+                <label for="ArmatureDiameter">Укажите диаметр продольной растянутой нижней арматуры:</label>
+            </div>
+            <div class="col-4">
+                <select asp-for="SourceData.ArmatureDiameter" size="1" class="form-control-sm">
+                    @foreach (int value in nameColumns.ArmatureDiameter)
+                    {
+                        <option value=@value>@value</option>
+                    }
+                </select>
+                <label>  мм</label>
+            </div>
+        </div>
+        <div class="border p-1">
+            <label>Укажите количество нижней арматуры:</label><br />
+            <input type="number" asp-for="SourceData.ArmatureCount" />
+            <span asp-validation-for="SourceData.ArmatureCount" class="text-danger"></span>
+            <label>  шт.</label>
+        </div>
+        <div class="border p-1">
+            <div class="col-4">
+                <label for="ArmatureDiameter">Укажите диаметр продольной растянутой верхней арматуры:</label>
+            </div>
+            <div class="col-4">
+                <select asp-for="SourceData.ArmatureDiameterFromAbove" size="1" class="form-control-sm">
+                    @foreach (int value in nameColumns.ArmatureDiameter)
+                    {
+                        <option value=@value>@value</option>
+                    }
+                </select>
+                <label>  мм</label>
+            </div>
+        </div>
+        <div class="border p-1">
+            <label>Укажите количество верхней арматуры:</label><br />
+            <input type="number" asp-for="SourceData.ArmatureCountFromAbove" />
+            <span asp-validation-for="SourceData.ArmatureCountFromAbove" class="text-danger"></span>
+            <label>  шт.</label>
+        </div>
+        <div class="border p-1">
+            <label>Укажите интенсивность нормативной постоянной и временной длительной нагрузок, равномерно распределенных по полосе на 1 пог. м с коэф. перегруза γf = 1:</label><br />
+            <input type="number" step="0.0001" asp-for="SourceData.DistributedLoad" />
+            <span asp-validation-for="SourceData.DistributedLoad" class="text-danger"></span>
+            <label>  т*м</label>
         </div>
         <input type="submit" value="Send" />
     </div>
 </form>
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

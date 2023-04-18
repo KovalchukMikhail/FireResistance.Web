@@ -3,6 +3,7 @@ using FireResistance.Core.Entities.Constructions.AbstractClasses;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.Materials.AbstractClasses;
+using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
@@ -17,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
 {
-    internal class ArmatureForFRFactory : IMaterialFactoryFR <ColumnFireIsWithFourSidesData>
+    internal class ArmatureForFRFactory : IMaterialFactoryFR <SourceData>
     {
         private NameColumns nameColumns;
         private RequestDb db;
@@ -34,7 +35,7 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
             this.equations = equations;
         }
 
-        public Material Create(ColumnFireIsWithFourSidesData sourceData, double temperature)
+        public Material Create(SourceData sourceData, double temperature)
         {
             armature.ClassName = sourceData.ArmatureClass;
             armature.Diameter = sourceData.ArmatureDiameter;

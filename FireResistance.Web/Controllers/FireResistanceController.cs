@@ -4,6 +4,7 @@ using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using FireResistance.Web.Models.ViewModels;
+using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 
 namespace FireResistance.Web.Controllers
 {
@@ -35,11 +36,21 @@ namespace FireResistance.Web.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult PlateWithRigidConnectionToColumns()
-        //{
-
-        //}
+        [HttpPost]
+        public IActionResult PlateWithRigidConnectionToColumns(PlateWithRigidConnectionToColumnsData sourceData)
+        {
+            DataOfPlateWithRigidConnectionToColumnsVM data = new DataOfPlateWithRigidConnectionToColumnsVM(sourceData);
+            if (ModelState.IsValid)
+            {
+                //FireResistanceBasic fireResistance = new FireResistanceBasic();
+                //fireResistance.PerformCalculation(sourceData);
+                //data.Result = fireResistance.GetResult() as ResultAsDictionary;
+                data.Result = new ResultAsDictionary();
+                data.Result.ResultAsString = "Исходные данные приняты";
+                return View(data);
+            }
+            return View(data);
+        }
 
         [HttpGet]
         public IActionResult PlateWithRigidConnectionToTwoWalls()

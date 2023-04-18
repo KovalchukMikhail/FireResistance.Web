@@ -7,7 +7,7 @@ using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
 {
-    public abstract class PlateWithRigidConnectionToTwoWallsData : SourceData
+    public class PlateWithRigidConnectionToTwoWallsData : SourceData
     {
     }
 }

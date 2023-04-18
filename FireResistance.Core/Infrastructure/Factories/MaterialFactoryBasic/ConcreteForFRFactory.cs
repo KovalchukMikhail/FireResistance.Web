@@ -2,6 +2,7 @@
 using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.Materials.AbstractClasses;
 using FireResistance.Core.Entities.Materials.BaseClasses;
+using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
 {
-    internal class ConcreteForFRFactory : IMaterialFactoryFR <ColumnFireIsWithFourSidesData>
+    internal class ConcreteForFRFactory : IMaterialFactoryFR <SourceData>
     {
         private NameColumns nameColumns;
         private RequestDb db;
@@ -32,7 +33,7 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
             this.interpolator = interpolator;
             this.equations = equations;
         }
-        public Material Create(ColumnFireIsWithFourSidesData sourceData, double temperature)
+        public Material Create(SourceData sourceData, double temperature)
         {
             concrete.ClassName = sourceData.ConcreteClass;
             concrete.TypeName = sourceData.ConcreteType;

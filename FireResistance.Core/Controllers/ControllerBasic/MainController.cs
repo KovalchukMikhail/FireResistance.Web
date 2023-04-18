@@ -38,9 +38,6 @@ namespace FireResistance.Core.Controllers.ControllerBasic
                 case PlateWithRigidConnectionToTwoWallsData:
                     resultBuilder = null;
                     break;
-                case WallFireIsWithOneSideData:
-                    resultBuilder = null;
-                    break;
             };
 
             if(resultBuilder != null)
