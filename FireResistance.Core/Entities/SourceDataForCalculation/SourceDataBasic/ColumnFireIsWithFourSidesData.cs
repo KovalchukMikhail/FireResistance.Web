@@ -27,7 +27,7 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
         public virtual string FixationElement { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "Не корректные данные")]
         public virtual int ArmatureCount { get; set; }
-        [Range(0.0001, double.MaxValue, ErrorMessage = "Значение должно быть больше 0.0001")]
+        [Range(0, double.MaxValue, ErrorMessage = "Значение должно быть больше 0")]
         public virtual double Moment
         {
             get => moment;

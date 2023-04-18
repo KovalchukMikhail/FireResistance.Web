@@ -1,6 +1,7 @@
 ﻿using FireResistance.Core.Data;
 using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.Materials.AbstractClasses;
+using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
@@ -39,6 +40,14 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
             concrete.ResistNormativeForStretch = db.DataSP63Db.GetConcreteResistNormativeStretch(concrete.ClassName);
             concrete.ResistNormativeForSqueeze = db.DataSP63Db.GetConcreteResistNormativeSqueeze(concrete.ClassName);
             concrete.Temperature = temperature;
+            try
+            {
+                concrete.BetaB = interpolator.GetValueFromTable(nameColumns.ConcreteType, nameColumns.TemperatureForTable, concrete.TypeName, concrete.Temperature, db.DataSP468Db.GetBetaBTable());
+            }
+            catch (Exception)
+            {
+                throw new Exception("Ошибка произошла при опредилении коэфициентов BetaB.");
+            }
             concrete.BetaB = interpolator.GetValueFromTable(nameColumns.ConcreteType, nameColumns.TemperatureForTable, concrete.TypeName, concrete.Temperature, db.DataSP468Db.GetBetaBTable());
             //concrete.GammaBT = interpolator.GetValueFromTable(NameColumns.ConcreteType, NameColumns.TemperatureForTable, concrete.TypeName, concrete.Temperature, db.DataSP468Db.GetGammaBtTable());
             concrete.GammaBT = 1; // See point 8.3

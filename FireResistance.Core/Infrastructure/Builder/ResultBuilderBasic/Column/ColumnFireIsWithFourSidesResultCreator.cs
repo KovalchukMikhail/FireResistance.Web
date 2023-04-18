@@ -230,10 +230,10 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
                                 .Append($"\tAs,tot = {result.GetItemResult("Astot")}\n")
                             .Append("Проврка условия 8.23 СП468.1325800.2019:\n");
 
-            if (result.Status) stringBuilder.Append($"{result.GetItemResult("Nn")} ≤ {result.GetItemResult("RightPartOfFinalEquation")}\n")
-                                            .Append($"Условие выполнено\n");
+            if (result.Status) stringBuilder.Append($"\t{result.GetItemResult("Nn")} ≤ {result.GetItemResult("RightPartOfFinalEquation")}\n")
+                                            .Append($"Условие выполнено\n\t\n");
             else stringBuilder.Append($"{result.GetItemResult("Nn")} > {result.GetItemResult("RightPartOfFinalEquation")}\n")
-                                            .Append($"Условие не выполнено\n");
+                                            .Append($"Условие не выполнено\n\t\n");
             stringBuilder.Append($"Коэффициент использования = {result.GetItemResult("FinalСoefficient")}\n");
         }
 
@@ -299,7 +299,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
                     .Append("Относительная высота сжатой зоны:\n")
                         .Append($"\tξ = xt/h0t = {result.GetItemResult("Ksi")}\n");
 
-            if (result.GetItemResult("Ksi") <= result.GetItemResult("KsiR")) stringBuilder.Append("Условие ξ ≤ ξR выполняется:\n");
+            if (result.GetItemResult("Ksi") <= result.GetItemResult("KsiR")) stringBuilder.Append("Условие ξ ≤ ξR выполняется\n\t\n");
             else stringBuilder.Append("Условие ξ ≤ ξR не выполняется:\n")
                                .Append("Высота сжатой зоны при  ξ > ξR:\n")
                                     .Append($"\txt = (N+Rsnt*As*(1+ξR)/(1-ξR)-Rsct*A's)/(Rbnt*bt+2*Rsnt*As/(h0t*(1-ξR)) = {result.GetItemResult("xtSecond")} мм\n");

@@ -65,11 +65,11 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             }
             catch (ExceptionFRBasic ex)
             {
-                result.ExeptionList.Add($"{ex.Message}. Значение переменной вызвавшей ошибку равно {ex.InvalidValue} метод в котором произошла ошибка {ex.TargetSite}");
+                result.ExeptionList.Add($"{ex.Message}. Значение переменной вызвавшей ошибку равно {ex.InvalidValue}");
             }
             catch (Exception ex)
             {
-                result.ExeptionList.Add($"{ex.Message}. Метод в котором произошла ошибка {ex.TargetSite}");
+                result.ExeptionList.Add($"{ex.Message}.");
             }
 
         }
@@ -80,16 +80,18 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             try
             {
                 equationsManager.RunPartOneOfEquations(values, column);
-                if (values.e0 <= column.Height / 30 && values.Lambda <= 20)
+                if (values.e0 <= Convert.ToDouble(column.Height) / 30 && values.Lambda <= 20)
                 {
                     values.FinalEquation = values.MainEquations[0];
                     result.Status = equationsManager.RunEquationEightDotTwentyThree(values, column);
+                    return;
                 }
                 equationsManager.RunPartTwoOfEquations(values, column);
                 if (values.Ncr <= column.Strength)
                 {
                     values.FinalEquation = values.MainEquations[1];
                     result.Status = false;
+                    return;
                 }
                 equationsManager.RunPartThreeOfEquations(values, column);
                 if (values.xt >= values.KsiR * column.WorkHeightProfileWithWarming && firstTime)
@@ -106,11 +108,11 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             }
             catch (ExceptionFRBasic ex)
             {
-                result.ExeptionList.Add($"{ex.Message}. Значение переменной вызвавшей ошибку равно {ex.InvalidValue} метод в котором произошла ошибка {ex.TargetSite}");
+                result.ExeptionList.Add($"{ex.Message}. Значение переменной вызвавшей ошибку равно {ex.InvalidValue}.");
             }
             catch (Exception ex)
             {
-                result.ExeptionList.Add($"{ex.Message}. Метод в котором произошла ошибка {ex.TargetSite}");
+                result.ExeptionList.Add($"{ex.Message}.");
             }
         }
 

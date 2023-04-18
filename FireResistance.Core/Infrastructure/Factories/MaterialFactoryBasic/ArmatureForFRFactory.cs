@@ -45,8 +45,14 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
             armature.ResistСalculationForSqueeze = db.DataSP63Db.GetArmatureResistSqueezeСalculation(armature.ClassName);
             armature.ResistСalculationForStretch = db.DataSP63Db.GetArmatureResistStretchСalculation(armature.ClassName);
             armature.Temperature = temperature;
-            armature.BetaS = interpolator.GetValueFromTable(nameColumns.ArmatureClass, nameColumns.TemperatureForTable, armature.ClassName, armature.Temperature, db.DataSP468Db.GetBetaSTable());
-            armature.GammaST = interpolator.GetValueFromTable(nameColumns.ArmatureClass, nameColumns.TemperatureForTable, armature.ClassName, armature.Temperature, db.DataSP468Db.GetGammaStTable());
+            try
+            {
+                armature.BetaS = interpolator.GetValueFromTable(nameColumns.ArmatureClass, nameColumns.TemperatureForTable, armature.ClassName, armature.Temperature, db.DataSP468Db.GetBetaSTable());
+                armature.GammaST = interpolator.GetValueFromTable(nameColumns.ArmatureClass, nameColumns.TemperatureForTable, armature.ClassName, armature.Temperature, db.DataSP468Db.GetGammaStTable());
+            }catch(Exception)
+            {
+                throw new Exception("Ошибка произошла при опредилении коэфициентов BetaS и GammaST");
+            }
             armature.ResistSqueezeWithTemperatureСalculation = equations.GetRsWithGammaSt(armature.ResistСalculationForSqueeze, armature.GammaST);
             armature.ResistStretchWithTemperatureСalculation = equations.GetRsWithGammaSt(armature.ResistСalculationForStretch, armature.GammaST);
             armature.ResistWithTemperatureNormative = equations.GetRsWithGammaSt(armature.ResistNormativeForStretch, armature.GammaST);

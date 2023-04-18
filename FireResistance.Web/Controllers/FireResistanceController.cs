@@ -53,19 +53,5 @@ namespace FireResistance.Web.Controllers
 
         //}
 
-        [HttpPost]
-        public ActionResult ShowResult(ColumnFireIsWithFourSidesData data)
-        {
-            FireResistanceBasic fireResistance = new FireResistanceBasic();
-            fireResistance.PerformCalculation(data);
-
-            ResultAsDictionary result = fireResistance.GetResult() as ResultAsDictionary;
-            string[] str = result.ToString().Split("\n");
-            return PartialView("_Result" ,str);
-
-        }
-
-
-
     }
 }
