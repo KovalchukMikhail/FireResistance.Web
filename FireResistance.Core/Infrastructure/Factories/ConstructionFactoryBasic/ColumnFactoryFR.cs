@@ -18,7 +18,7 @@ using FireResistance.Core.Infrastructure.Core.Interfaces;
 using System.Data.Common;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 
-namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactory
+namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
 {
     internal class ColumnFactoryFR : IConstructionFactory<ColumnFireIsWithFourSidesData>
     {

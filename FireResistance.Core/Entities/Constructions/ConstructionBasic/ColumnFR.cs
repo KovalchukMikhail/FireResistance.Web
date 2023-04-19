@@ -21,8 +21,5 @@ namespace FireResistance.Core.Entities.Constructions.ConstructionBasic
         public virtual double WorkWidthWithWarming { get; set; }
         public virtual double AreaChangedProfile { get; set; }
         public virtual double WorkHeightProfileWithWarming { get; set; }
-        
-
-
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic
 {
-    internal class WallFireIsWithOneSideDataResultBuilder
+    internal class SlabWithRigidConnectionToColumnsResultBuilder
     {
     }
 }

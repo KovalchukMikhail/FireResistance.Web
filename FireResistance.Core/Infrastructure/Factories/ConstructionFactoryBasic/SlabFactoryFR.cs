@@ -1,4 +1,6 @@
-﻿using FireResistance.Core.Entities.Constructions.AbstractClasses;
+﻿using FireResistance.Core.Data;
+using FireResistance.Core.Entities.Constructions.AbstractClasses;
+using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,11 +12,23 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
 {
-    internal class SlabFactoryFR : IConstructionFactory<ColumnFireIsWithFourSidesData>
+    internal class SlabFactoryFR : IConstructionFactory<SlabWithRigidConnectionToColumnsData>
     {
-        public virtual Construction Create(ColumnFireIsWithFourSidesData sourceData)
+        private NameColumns nameColumns;
+        private RequestDb db;
+        private SlabFR slab;
+
+        public SlabFactoryFR(NameColumns nameColumns, RequestDb db, SlabFR slab)
         {
-            throw new NotImplementedException();
+            this.nameColumns = nameColumns;
+            this.db = db;
+            this.slab = slab;
+        }
+
+        public virtual Construction Create(SlabWithRigidConnectionToColumnsData sourceData)
+        {
+
+            return slab;
         }
     }
 }

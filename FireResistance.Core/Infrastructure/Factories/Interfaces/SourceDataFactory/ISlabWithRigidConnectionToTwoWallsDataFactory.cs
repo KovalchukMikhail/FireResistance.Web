@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.Interfaces.SourceDataFactory
 {
-    internal interface IPlateWithRigidConnectionToColumnsDataFactory<T> : ISourceDataFactory<T>
+    internal interface ISlabWithRigidConnectionToTwoWallsDataFactory<T> : ISourceDataFactory<T>
         where T : SourceData
     {
     }

@@ -38,7 +38,7 @@ namespace FireResistance.Core
 
         public CalculationResult<Dictionary<string, double>, Dictionary<string, string>> GetResult()
         {
-            return calculator?.ResultBuilder?.GetCalculationResult();
+            return calculator.ResultBuilder.GetCalculationResult();
         }
 
     }

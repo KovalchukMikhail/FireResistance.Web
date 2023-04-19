@@ -8,7 +8,7 @@ using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
 {
-    public class PlateWithRigidConnectionToColumnsData : SourceData
+    public class SlabWithRigidConnectionToColumnsData : SourceData
     {
         [Range(1, int.MaxValue, ErrorMessage = "Расстояние указано не корректно")]
         public virtual int LengthAlong { get; set; }

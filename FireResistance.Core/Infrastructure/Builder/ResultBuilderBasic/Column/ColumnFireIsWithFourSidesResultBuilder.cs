@@ -12,7 +12,7 @@ using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.interfaces;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
-using FireResistance.Core.Infrastructure.Factories.ConstructionFactory;
+using FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
