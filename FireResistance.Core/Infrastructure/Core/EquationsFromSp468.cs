@@ -58,7 +58,7 @@ namespace FireResistance.Core.Infrastructure.Core
         public double GetAredColumnFourSides(double h, double b, double at) => 0.9 * (b - 2 * at) * (h - 2 * at);
 
         /// <summary>Equation (8.9)</summary>
-        public double GetH0tFireFourSides(double h0, double at) => h0- at;
+        public double GetH0tWithFire(double h0, double at) => h0 - at;
 
         /// <summary>Equation (8.10)</summary>
         public double GetMultTEquationEightDotTen(double Rbnt, double b, double xt, double h0, double Rsct, double AsSqueeze, double a)

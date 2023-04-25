@@ -76,7 +76,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
             column.WidthProfileWithWarming = equationsSp468.GetHtFireFourSides(column.Width, column.DeepConcreteWarming);
             column.WorkWidthWithWarming = equationsSp468.GetHtFireFourSides(column.Width, column.DeepConcreteWarming);
             column.AreaChangedProfile = equationsSp468.GetAredColumnFourSides(column.Height, column.Width, column.DeepConcreteWarming);
-            column.WorkHeightProfileWithWarming = equationsSp468.GetH0tFireFourSides(column.WorkHeight, column.DeepConcreteWarming);
+            column.WorkHeightProfileWithWarming = equationsSp468.GetH0tWithFire(column.WorkHeight, column.DeepConcreteWarming);
             column.DistanceFromBringToPointAverageTemperature = equationsSp468.GetDistanceFromBringToPointAverageTemperatureForColumn(column.WorkHeightProfileWithWarming, column.DeepConcreteWarming);
             SetMaterials(column, sourceData, db); 
             return column;
@@ -93,9 +93,9 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
         {
             double temperatureArmature = columnTemperature.GetArmatureTemperature(column);
             double criticalTemperature = db.DataSP468Db.GetCriticalTemperatureConcrete(sourceData.ConcreteType);
-            double TemperatureConcrete = columnTemperature.GetConcreteTemperature(column, criticalTemperature);
+            double temperatureConcrete = columnTemperature.GetConcreteTemperature(column, criticalTemperature);
             column.ArmatureFR = armatureFactory.Create(sourceData, temperatureArmature) as ArmatureForFR;
-            column.ConcreteFR = concreteFactory.Create(sourceData, TemperatureConcrete) as ConcreteForFR; 
+            column.ConcreteFR = concreteFactory.Create(sourceData, temperatureConcrete) as ConcreteForFR; 
         }
     }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FireResistance.Core.Entities.Constructions.ConstructionBasic;
+using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,6 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnCo
 {
     internal interface ISlabWithRigidConnectionToColumnsEquationsManager
     {
+        public void RunEquations(TempValuesForSlabOnColumns values, SlabFR slab);
     }
 }

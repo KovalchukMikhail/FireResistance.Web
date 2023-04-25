@@ -17,6 +17,6 @@ namespace FireResistance.Core.Entities.Constructions.ConstructionBasic
         public virtual ConcreteForFR ConcreteFR { get; set; }
         public virtual double DeepConcreteWarming { get; set; }
         public virtual double HeightProfileWithWarming { get; set; }
-        public virtual double WorkHeightProfileWithWarming { get; set; }
+        public virtual double WorkHeightProfileWithWarmingForAboveArmature { get; set; }
     }
 }

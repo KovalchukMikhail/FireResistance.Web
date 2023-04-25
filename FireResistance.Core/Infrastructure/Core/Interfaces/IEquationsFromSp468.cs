@@ -51,7 +51,7 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public double GetAredColumnFourSides(double h, double b, double at);
 
         /// <summary>Equation (8.9)</summary>
-        public double GetH0tFireFourSides(double h0, double at);
+        public double GetH0tWithFire(double h0, double at);
 
         /// <summary>Equation (8.10)</summary>
         public double GetMultTEquationEightDotTen(double Rbnt, double b, double xt, double h0, double Rsct, double AsSqueeze, double a);
