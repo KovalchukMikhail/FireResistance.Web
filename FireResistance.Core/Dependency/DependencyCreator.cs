@@ -38,13 +38,13 @@ namespace FireResistance.Core.Dependency
     internal class DependencyCreator
     {
         private static IServiceCollection services = new ServiceCollection()
-            .AddTransient<IDataTemperatureСolumnRequestDb, TemperatureСolumnWithOutSql>()
+            .AddTransient<IDataTemperatureOfСolumnRequestDb, TemperatureOfСolumnWithOutSql>()
             .AddTransient<IDataSP63RequestDb, DataFromSP63WithOutSql>()
             .AddTransient<IDataSP468RequestDb, DataFromSP468WithOutSql>()
             .AddTransient<IArmatureAreaRequestDb, ArmatureArea>()
             .AddTransient<IDataSP468RequestDb, DataFromSP468WithOutSql>()
             .AddTransient<IDataSP63RequestDb, DataFromSP63WithOutSql>()
-            .AddTransient<IDataTemperatureСolumnRequestDb, TemperatureСolumnWithOutSql>()
+            .AddTransient<IDataTemperatureOfСolumnRequestDb, TemperatureOfСolumnWithOutSql>()
             .AddTransient<NameColumns>()
             .AddTransient<RequestDb>()
             .AddTransient<ArmatureForFR>()

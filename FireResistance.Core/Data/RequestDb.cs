@@ -12,9 +12,9 @@ namespace FireResistance.Core.Data
         public virtual IArmatureAreaRequestDb ArmatureAreaDb { get; set; }
         public virtual IDataSP468RequestDb DataSP468Db { get; set; }
         public virtual IDataSP63RequestDb DataSP63Db { get; set; }
-        public virtual IDataTemperatureСolumnRequestDb TemperatureDb { get; set; }
+        public virtual IDataTemperatureOfСolumnRequestDb TemperatureDb { get; set; }
 
-        public RequestDb(IArmatureAreaRequestDb armatureAreaDb, IDataSP468RequestDb dataSP468Db, IDataSP63RequestDb dataSP63Db, IDataTemperatureСolumnRequestDb temperatureDb)
+        public RequestDb(IArmatureAreaRequestDb armatureAreaDb, IDataSP468RequestDb dataSP468Db, IDataSP63RequestDb dataSP63Db, IDataTemperatureOfСolumnRequestDb temperatureDb)
         {
             ArmatureAreaDb = armatureAreaDb;
             DataSP468Db = dataSP468Db;

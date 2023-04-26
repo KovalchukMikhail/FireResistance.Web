@@ -7,7 +7,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
 {
-    internal static class TemperatureDataFromSp468
+    internal static class TemperatureDataOfColumnFromSp468
     {
         public static List<int> LenthFromArmatureToEdgeTable200 => new List<int>(lenthFromArmatureToEdgeTable200);
         public static List<int> LenthFromArmatureToEdgeTable300 => new List<int>(lenthFromArmatureToEdgeTable300);
