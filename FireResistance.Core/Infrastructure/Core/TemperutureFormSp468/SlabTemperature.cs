@@ -62,6 +62,60 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
             }
             else throw new Exception("Ошибка возникла при определении температуры плиты");
         }
+
+        public virtual double GetDeepConcreteWarming(SlabFR slab, SlabWithRigidConnectionToColumnsData sourceData, double criticalTemperature)
+        {
+            if (slab.Height >= minHeight && slab.Height <= maxHeight)
+            {
+                if (slab.Height % 20 == 0)
+                {
+                    for (int deep = 0; deep <= slab.Height; deep++)
+                    {
+                        if (GetTemperatureAtPoint(slab.Height, deep, sourceData.ConcreteType, slab.FireResistanceVolume) <= criticalTemperature)
+                            return deep;
+                    }
+                    throw new ExceptionFRBasic("Все сечение нагрето выше предельно допустимой температуры", criticalTemperature);
+                }
+                else
+                {
+                    GetTempValuesOfHeight(slab.Height, out int firstHeight, out int secondHeight);
+                    bool check = false;
+                    double firstDeep = 0;
+                    double secondDeep = 0;
+                    for (firstDeep = 0; firstDeep <= firstHeight; firstDeep++)
+                    {
+                        if (GetTemperatureAtPoint(firstHeight, firstDeep, sourceData.ConcreteType, slab.FireResistanceVolume) <= criticalTemperature)
+                        {
+                            check = true;
+                            break;
+                        }
+                    }
+                    if (!check) throw new ExceptionFRBasic("Все сечение нагрето выше предельно допустимой температуры", criticalTemperature);
+                    check = false;
+                    for (secondDeep = 0; secondDeep <= secondHeight; secondDeep++)
+                    {
+                        if (GetTemperatureAtPoint(firstHeight, secondDeep, sourceData.ConcreteType, slab.FireResistanceVolume) <= criticalTemperature)
+                        {
+                            check = true;
+                            break;
+                        }
+                    }
+                    if (!check) throw new ExceptionFRBasic("Все сечение нагрето выше предельно допустимой температуры", criticalTemperature);
+                    return interpolator.GetIntermediateValue(firstHeight, secondHeight, slab.Height, firstDeep, secondDeep);
+                }
+
+            }
+            else if (slab.Height >= maxHeight)
+            {
+                for (int deep = 0; deep <= slab.Height; deep++)
+                {
+                    if (GetTemperatureAtPoint(maxHeight, deep, sourceData.ConcreteType, slab.FireResistanceVolume) <= criticalTemperature)
+                        return deep;
+                }
+                throw new ExceptionFRBasic("Сечение нагрето выше критической температуры на глубину более 200 мм, невозможно определить глубину прогрева бетона до критической температуры", criticalTemperature);
+            }
+            else throw new Exception("Ошибка возникла при определении температуры плиты");
+        }
         protected virtual List<double> GetNamesOfColumns(double height)
         {
             List<double> result = new List<double>();
@@ -72,6 +126,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
         protected virtual double GetTemperatureAtPoint(int height, double distanceToPoint, string concreteType, string fireResistanceVolume)
         {
             double[,] table = db.TemperatureOfSlabDb.GetArrayTemperature(height, concreteType);
+            if (table[table.Length - 1, 0] < 0) throw new Exception("Для сечения указанной высоты не предусмотренна возможность определения температуры при R150");
             List<double> namesOfColumns = GetNamesOfColumns(height);
             return interpolator.GetValueFromTable(nameColumns.FireResistanceForCriticalTemperature, namesOfColumns, fireResistanceVolume, distanceToPoint, table);
         }

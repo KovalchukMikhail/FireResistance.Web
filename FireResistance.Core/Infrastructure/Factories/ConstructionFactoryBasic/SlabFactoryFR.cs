@@ -29,13 +29,13 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
         private ISlabTemperature<SlabFR, SlabWithRigidConnectionToColumnsData> slabTemperature;
 
         public SlabFactoryFR(NameColumns nameColumns,
-                                RequestDb db,
-                                SlabFR slab,
-                                ICommonEquations commonEquation,
-                                IEquationsFromSp468 equationsSp468,
-                                ArmatureForFRFactory armatureFactory,
-                                ConcreteForFRFactory concreteFactory,
-                                ISlabTemperature<SlabFR, SlabWithRigidConnectionToColumnsData> slabTemperature)
+                            RequestDb db,
+                            SlabFR slab,
+                            ICommonEquations commonEquation,
+                            IEquationsFromSp468 equationsSp468,
+                            ArmatureForFRFactory armatureFactory,
+                            ConcreteForFRFactory concreteFactory,
+                            ISlabTemperature<SlabFR, SlabWithRigidConnectionToColumnsData> slabTemperature)
         {
             this.nameColumns = nameColumns;
             this.db = db;
@@ -59,12 +59,17 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
             slab.FireResistanceVolume = sourceData.FireResistanceValue;
             slab.WorkingHeightForAboveArmature = commonEquation.GetWorkHeight(slab.Height, slab.ArmatureInstallationDepthFromAbove);
             slab.WorkingHeightForBelowArmature = commonEquation.GetWorkHeight(slab.Height, slab.ArmatureInstallationDepthFromBelow);
-            slab.DeepConcreteWarming = 50;//!!!!!!!!!!!!!!!!!!
+            double criticalTemperature = db.DataSP468Db.GetCriticalTemperatureConcrete(sourceData.ConcreteType);
+            slab.DeepConcreteWarming = slabTemperature.GetDeepConcreteWarming(slab, sourceData, criticalTemperature);
             slab.WorkHeightProfileWithWarmingForAboveArmature = equationsSp468.GetH0tWithFire(slab.WorkingHeightForAboveArmature, slab.DeepConcreteWarming);
-            double temperatureAboveArmature = 400;//!!!!!!!!!!!!!!!!!!
-            double temperatureBelowArmature = 400;//!!!!!!!!!!!!!!!!!!
-            double temperatureConcrete = 400;//!!!!!!!!!!!!!!!!!!
-            slab.ConcreteFR = concreteFactory.Create(sourceData, temperatureConcrete) as ConcreteForFR;
+            double temperatureAboveArmature = slabTemperature.GetTemperature(slab, slab.WorkingHeightForAboveArmature, sourceData);
+            double temperatureBelowArmature = slabTemperature.GetTemperature(slab, slab.ArmatureInstallationDepthFromBelow, sourceData);
+            double distanceToPointForConcreteFromBelow = 0.1 * slab.WorkHeightProfileWithWarmingForAboveArmature;
+            double distanceToPointForConcreteToTop = slab.Height - 0.1 * slab.WorkingHeightForBelowArmature;
+            double temperatureConcreteFromBelow = slabTemperature.GetTemperature(slab, distanceToPointForConcreteToTop, sourceData);
+            double temperatureConcreteToTop = slabTemperature.GetTemperature(slab, distanceToPointForConcreteFromBelow, sourceData);
+            slab.ConcreteFromBelowFR = concreteFactory.Create(sourceData, temperatureConcreteFromBelow) as ConcreteForFR;
+            slab.ConcreteOnTopFR = concreteFactory.Create(sourceData, temperatureConcreteToTop) as ConcreteForFR;
             slab.ArmatureFRFromAbove = armatureFactory.Create(sourceData, temperatureAboveArmature) as ArmatureForFR;
             slab.ArmatureFRFromBelow = armatureFactory.Create (sourceData, temperatureBelowArmature) as ArmatureForFR;
             return slab;
