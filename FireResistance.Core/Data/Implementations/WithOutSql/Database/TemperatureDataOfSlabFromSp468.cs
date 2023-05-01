@@ -8,17 +8,35 @@ namespace FireResistance.Core.Data.Implementations.WithOutSql.Database
 {
     internal class TemperatureDataOfSlabFromSp468
     {
-        private static List<string> fireResistanceForCriticalTemperature = new List<string>
-        {
-            "R30", "R45", "R60", "R90", "R120", "R150"
-        };
+        public static double[,] TemperatureForSilicateH40 => Utilities.GetCopyArray(temperatureForSilicateH40);
+        public static double[,] TemperatureForSilicateH60 => Utilities.GetCopyArray(temperatureForSilicateH60);
+        public static double[,] TemperatureForSilicateH80 => Utilities.GetCopyArray(temperatureForSilicateH80);
+        public static double[,] TemperatureForSilicateH100 => Utilities.GetCopyArray(temperatureForSilicateH100);
+        public static double[,] TemperatureForSilicateH120 => Utilities.GetCopyArray(temperatureForSilicateH120);
+        public static double[,] TemperatureForSilicateH140 => Utilities.GetCopyArray(temperatureForSilicateH140);
+        public static double[,] TemperatureForSilicateH160 => Utilities.GetCopyArray(temperatureForSilicateH160);
+        public static double[,] TemperatureForSilicateH180 => Utilities.GetCopyArray(temperatureForSilicateH180);
+        public static double[,] TemperatureForSilicateH200 => Utilities.GetCopyArray(temperatureForSilicateH200);
 
-        private static Dictionary<string, double> criticalTemperatureConcrete = new Dictionary<string, double>()
-        {
-            {"ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ", 500 },
-            {"ТЯЖЕЛЫЙ_НА_КАРБОНАТНОМ_ЗАПОЛНИТЕЛЕ", 600 },
-            {"КОНСТРУКЦИОННЫЙ_КЕРАМЗИТОБЕТОН", 600 }
-        };
+        public static double[,] TemperatureForCarbonateH40 => Utilities.GetCopyArray(temperatureForCarbonateH40);
+        public static double[,] TemperatureForCarbonateH60 => Utilities.GetCopyArray(temperatureForCarbonateH60);
+        public static double[,] TemperatureForCarbonateH80 => Utilities.GetCopyArray(temperatureForCarbonateH80);
+        public static double[,] TemperatureForCarbonateH100 => Utilities.GetCopyArray(temperatureForCarbonateH100);
+        public static double[,] TemperatureForCarbonateH120 => Utilities.GetCopyArray(temperatureForCarbonateH120);
+        public static double[,] TemperatureForCarbonateH140 => Utilities.GetCopyArray(temperatureForCarbonateH140);
+        public static double[,] TemperatureForCarbonateH160 => Utilities.GetCopyArray(temperatureForCarbonateH160);
+        public static double[,] TemperatureForCarbonateH180 => Utilities.GetCopyArray(temperatureForCarbonateH180);
+        public static double[,] TemperatureForCarbonateH200 => Utilities.GetCopyArray(temperatureForCarbonateH200);
+        public static double[,] TemperatureForСlayditeH40 => Utilities.GetCopyArray(temperatureForСlayditeH40);
+        public static double[,] TemperatureForСlayditeH60 => Utilities.GetCopyArray(temperatureForСlayditeH60);
+        public static double[,] TemperatureForСlayditeH80 => Utilities.GetCopyArray(temperatureForСlayditeH80);
+        public static double[,] TemperatureForСlayditeH100 => Utilities.GetCopyArray(temperatureForСlayditeH100);
+        public static double[,] TemperatureForСlayditeH120 => Utilities.GetCopyArray(temperatureForСlayditeH120);
+        public static double[,] TemperatureForСlayditeH140 => Utilities.GetCopyArray(temperatureForСlayditeH140);
+        public static double[,] TemperatureForСlayditeH160 => Utilities.GetCopyArray(temperatureForСlayditeH160);
+        public static double[,] TemperatureForСlayditeH180 => Utilities.GetCopyArray(temperatureForСlayditeH180);
+        public static double[,] TemperatureForСlayditeH200 => Utilities.GetCopyArray(temperatureForСlayditeH200);
+
         // строки R30, R45, R60, R90, R120, R150. столбцы от 0 до h по 10 мм
         private static double[,] temperatureForSilicateH40 =
         {

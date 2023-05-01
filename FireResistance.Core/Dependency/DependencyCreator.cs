@@ -32,6 +32,7 @@ using System.Threading.Tasks;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.interfaces;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnColumns;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnColumns.interfaces;
+using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 
 namespace FireResistance.Core.Dependency
 {
@@ -58,7 +59,8 @@ namespace FireResistance.Core.Dependency
             .AddTransient<IInterpolator, InterpolatorBasic>()
             .AddTransient<ColumnFactoryFR>()
             .AddTransient<SlabFactoryFR>()
-            .AddTransient<ColumnTemperature>()
+            .AddTransient<IColumnTemperature<ColumnFR>, ColumnTemperatureBasic >()
+            .AddTransient<ISlabTemperature<SlabFR, SlabWithRigidConnectionToColumnsData>, SlabTemperatureBasic>()
             .AddTransient<IEquationsFromSp468, EquationsFromSp468>()
             .AddTransient<IEquationsFromSp63, EquationsFromSp63>()
             .AddTransient<ICommonEquations, CommonEquations>()

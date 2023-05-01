@@ -38,7 +38,7 @@ namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
             }
         }
 
-        public double GetValueFromTemperatureTable(List<double> namesOfRows, int rowName, int columnName, double[,] table)
+        public double GetValueFromTemperatureTableOfColumn(List<double> namesOfRows, int rowName, int columnName, double[,] table)
         {
             double indexRow = IndexDeterminant.GetIndex(rowName, namesOfRows);
             double indexColumn = IndexDeterminant.GetIndex(columnName, namesOfRows);

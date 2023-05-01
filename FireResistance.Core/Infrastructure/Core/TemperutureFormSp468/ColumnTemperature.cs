@@ -7,6 +7,7 @@ using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
 {
-    internal class ColumnTemperature : IConstructionTemperature <ColumnFR>
+    internal class ColumnTemperatureBasic : IColumnTemperature<ColumnFR>
     {
         private RequestDb db;
         IInterpolator interpolator;
@@ -24,78 +25,78 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
         NameColumns nameColumns;
         
 
-        public ColumnTemperature(RequestDb db, IInterpolator interpolator, NameColumns nameColumns)
+        public ColumnTemperatureBasic(RequestDb db, IInterpolator interpolator, NameColumns nameColumns) 
         {
             this.db = db;
             this.interpolator = interpolator;
             this.nameColumns = nameColumns;
-            minSize = nameColumns.StandartHeight[0];
-            mediumSize = nameColumns.StandartHeight[1];
-            maxSize = nameColumns.StandartHeight[2];
+            minSize = nameColumns.StandartHeightOfColumn["min"];
+            mediumSize = nameColumns.StandartHeightOfColumn["medium"];
+            maxSize = nameColumns.StandartHeightOfColumn["max"];
         }
 
-        public double GetArmatureTemperature(ColumnFR construction)
+        public virtual double GetArmatureTemperature(ColumnFR column)
         {
-            int size = Convert.ToInt32(Math.Min(construction.Width, construction.Height));
+            int size = Convert.ToInt32(Math.Min(column.Width, column.Height));
 
             if (size == minSize || size == mediumSize || size == maxSize)
             {
-                return GetTemperatureAtPoint(size, construction.DistanceToArmature, construction.DistanceToArmature, construction);
+                return GetTemperatureAtPoint(size, column.DistanceToArmature, column.DistanceToArmature, column);
             }
             else if (size > minSize && size < mediumSize)
             {
-                double firstValue = GetTemperatureAtPoint(minSize, construction.DistanceToArmature, construction.DistanceToArmature, construction);
-                double secondValue = GetTemperatureAtPoint(mediumSize, construction.DistanceToArmature, construction.DistanceToArmature, construction);
+                double firstValue = GetTemperatureAtPoint(minSize, column.DistanceToArmature, column.DistanceToArmature, column);
+                double secondValue = GetTemperatureAtPoint(mediumSize, column.DistanceToArmature, column.DistanceToArmature, column);
                 return interpolator.GetIntermediateValue(minSize, mediumSize, size, firstValue, secondValue);
             }
             else if (size > mediumSize && size < maxSize)
             {
-                double firstValue = GetTemperatureAtPoint(mediumSize, construction.DistanceToArmature, construction.DistanceToArmature, construction);
-                double secondValue = GetTemperatureAtPoint(maxSize, construction.DistanceToArmature, construction.DistanceToArmature, construction);
+                double firstValue = GetTemperatureAtPoint(mediumSize, column.DistanceToArmature, column.DistanceToArmature, column);
+                double secondValue = GetTemperatureAtPoint(maxSize, column.DistanceToArmature, column.DistanceToArmature, column);
                 return interpolator.GetIntermediateValue(mediumSize, maxSize, size, firstValue, secondValue);
             }
-            if (size > maxSize)
+            else if (size > maxSize)
             {
-                return GetTemperatureAtPoint(maxSize, construction.DistanceToArmature, construction.DistanceToArmature, construction);
+                return GetTemperatureAtPoint(maxSize, column.DistanceToArmature, column.DistanceToArmature, column);
             }
             else throw new Exception("Ошибка возникла при определении температуры арматуры");
         }
 
-        public double GetConcreteTemperature(ColumnFR construction, double criticalTemperature)
+        public virtual double GetConcreteTemperature(ColumnFR column, double criticalTemperature)
         {
-            int size = Convert.ToInt32(Math.Min(construction.Width, construction.Height));
+            int size = Convert.ToInt32(Math.Min(column.Width, column.Height));
 
             if (size == minSize || size == mediumSize || size == maxSize)
             {
-                return GetAveregeTemperature(size, construction, criticalTemperature);
+                return GetAveregeTemperature(size, column, criticalTemperature);
             }
             else if (size > minSize && size < mediumSize)
             {
-                double firstValue = GetAveregeTemperature(minSize, construction, criticalTemperature);
-                double secondValue = GetAveregeTemperature(mediumSize, construction, criticalTemperature);
+                double firstValue = GetAveregeTemperature(minSize, column, criticalTemperature);
+                double secondValue = GetAveregeTemperature(mediumSize, column, criticalTemperature);
                 return interpolator.GetIntermediateValue(minSize, mediumSize, size, firstValue, secondValue);
             }
             else if (size > mediumSize && size < maxSize)
             {
-                double firstValue = GetAveregeTemperature(mediumSize, construction, criticalTemperature);
-                double secondValue = GetAveregeTemperature(maxSize, construction, criticalTemperature);
+                double firstValue = GetAveregeTemperature(mediumSize, column, criticalTemperature);
+                double secondValue = GetAveregeTemperature(maxSize, column, criticalTemperature);
                 return interpolator.GetIntermediateValue(mediumSize, maxSize, size, firstValue, secondValue);
             }
             if(size > maxSize)
             {
-                return GetAveregeTemperature(maxSize, construction, criticalTemperature, (size - maxSize)/2);
+                return GetAveregeTemperature(maxSize, column, criticalTemperature, (size - maxSize)/2);
             }
             else throw new Exception("Ошибка возникла при определении температуры бетона");
         }
 
-        private double GetTemperatureAtPoint(int size, int distanceToPointByX, int distanceToPointByY, ColumnFR construction)
+        protected virtual double GetTemperatureAtPoint(int size, int distanceToPointByX, int distanceToPointByY, ColumnFR construction)
         {
-            double[,] temperutureArray = db.TemperatureDb.GetArrayTemperature(construction.FireResistanceVolume, size);
-            List<double> distanceToArmatureForArray = db.TemperatureDb.GetListOfDistanceToArmature(size);
-            return interpolator.GetValueFromTemperatureTable(distanceToArmatureForArray, distanceToPointByX, distanceToPointByY, temperutureArray);
+            double[,] temperutureArray = db.TemperatureOfColumnDb.GetArrayTemperature(construction.FireResistanceVolume, size);
+            List<double> distanceToArmatureForArray = db.TemperatureOfColumnDb.GetListOfDistanceToArmature(size);
+            return interpolator.GetValueFromTemperatureTableOfColumn(distanceToArmatureForArray, distanceToPointByX, distanceToPointByY, temperutureArray);
         }
 
-        private double GetAveregeTemperature(int size, ColumnFR construction, double criticalTemperature, int additionalSize = 0)
+        protected virtual double GetAveregeTemperature(int size, ColumnFR construction, double criticalTemperature, int additionalSize = 0)
         {
             int positionForCalculation = Convert.ToInt32(construction.DistanceFromBringToPointAverageTemperature) > (size / 2) ?
                 (size / 2)

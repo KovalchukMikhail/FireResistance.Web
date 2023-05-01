@@ -26,8 +26,16 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
         private IEquationsFromSp468 equationsSp468;
         private ArmatureForFRFactory armatureFactory;
         private ConcreteForFRFactory concreteFactory;
+        private ISlabTemperature<SlabFR, SlabWithRigidConnectionToColumnsData> slabTemperature;
 
-        public SlabFactoryFR(NameColumns nameColumns, RequestDb db, SlabFR slab, ICommonEquations commonEquation, IEquationsFromSp468 equationsSp468, ArmatureForFRFactory armatureFactory, ConcreteForFRFactory concreteFactory)
+        public SlabFactoryFR(NameColumns nameColumns,
+                                RequestDb db,
+                                SlabFR slab,
+                                ICommonEquations commonEquation,
+                                IEquationsFromSp468 equationsSp468,
+                                ArmatureForFRFactory armatureFactory,
+                                ConcreteForFRFactory concreteFactory,
+                                ISlabTemperature<SlabFR, SlabWithRigidConnectionToColumnsData> slabTemperature)
         {
             this.nameColumns = nameColumns;
             this.db = db;
@@ -36,6 +44,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
             this.equationsSp468 = equationsSp468;
             this.armatureFactory = armatureFactory;
             this.concreteFactory = concreteFactory;
+            this.slabTemperature = slabTemperature;
         }
 
         public virtual Construction Create(SlabWithRigidConnectionToColumnsData sourceData)

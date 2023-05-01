@@ -19,7 +19,22 @@ namespace FireResistance.Core.Data
         public virtual List<double> SizeForCriticalTemperature => new List<double>(sizeForCriticalTemperature);
         public virtual List<double> FlexibilityForTableEightDotOne => new List<double>(flexibilityForTableEightDotOne);
         public virtual List<string> FireResistanceForCriticalTemperature => new List<string>(fireResistanceForCriticalTemperature);
-        public virtual List<int> StandartHeight => new List<int>(standartHeight);
+        public virtual Dictionary<string, int> StandartHeightOfColumn
+        {
+            get
+            {
+                Dictionary<string, int> dict = new Dictionary<string, int>();
+                return dict = standartHeightOfColumn.ToDictionary(entry => entry.Key, entry => entry.Value);
+            }
+        }
+        public virtual Dictionary<string,int> BoundaryHeightOfSlab
+        {
+            get
+            {
+                Dictionary<string, int> dict = new Dictionary<string, int();
+                return dict = boundaryHeightOfSlab.ToDictionary(entry => entry.Key, entry => entry.Value);
+            }
+        }
         public virtual List<int> ArmatureDiameter => new List<int>(armatureDiameter);
 
         private List<string> armatureClass = new List<string>()
@@ -81,11 +96,17 @@ namespace FireResistance.Core.Data
         {
             "R30", "R45", "R60", "R90", "R120", "R150"
         };
-        private List<int> standartHeight = new List<int>()
+        private Dictionary<string, int> standartHeightOfColumn = new Dictionary<string, int>()
         {
-            200, 300, 400
+            {"min", 200 },
+            {"medium", 300 },
+            {"max", 400 }
         };
-
+        private Dictionary<string, int> boundaryHeightOfSlab = new Dictionary<string, int>()
+        {
+            {"min", 40 },
+            {"max", 200 }
+        };
         private List<int> armatureDiameter = new List<int>()
         {
             6, 8, 10, 12, 14, 16, 18, 20, 22, 25, 28, 32, 36, 40
