@@ -87,13 +87,13 @@
             </div>
         </div>
         <div class="border p-1">
-            <label>Укажите расстояние между рядами колонн в перпендикулярном направлении:</label><br />
+            <label>Укажите расстояние между рядами колонн в перпендикулярном направлении (Длина пролета):</label><br />
             <input type="number" asp-for="SourceData.LengthAcross" />
             <span asp-validation-for="SourceData.LengthAcross" class="text-danger"></span>
             <label>  мм</label>
         </div>
         <div class="border p-1">
-            <label>Укажите расстояние между рядами колонн вдоль рассматриваемой полосы:</label><br />
+            <label>Укажите расстояние между рядами колонн вдоль рассматриваемой полосы (Ширина расматриваемого участка плиты):</label><br />
             <input type="number" asp-for="SourceData.LengthAlong" />
             <span asp-validation-for="SourceData.LengthAlong" class="text-danger"></span>
             <label>  мм</label>

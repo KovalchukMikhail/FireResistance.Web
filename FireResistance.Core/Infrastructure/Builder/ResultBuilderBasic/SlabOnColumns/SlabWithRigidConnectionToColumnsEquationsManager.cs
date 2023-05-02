@@ -20,11 +20,11 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnCo
             this.equationsSp468 = equationsSp468;
             this.commonEquations = commonEquations;
         }
-        public virtual void RunEquations(TempValuesForSlabOnColumns values, SlabFR slab)
+        public virtual bool RunEquations(TempValuesForSlabOnColumns values, SlabFR slab)
         {
-            values.XLiT = equationsSp468.GetXitEquationEightDotFourtyFour(slab.ArmatureFRFromAbove.ResistNormativeForStretch, slab.ArmatureFRFromAbove.Area, slab.ConcreteFR.ResistWithTemperatureNormativeForSqueeze, slab.Width);
-            values.XRiT = equationsSp468.GetXitEquationEightDotFourtyFour(slab.ArmatureFRFromAbove.ResistNormativeForStretch, slab.ArmatureFRFromAbove.Area, slab.ConcreteFR.ResistWithTemperatureNormativeForSqueeze, slab.Width);
-            values.X1T = equationsSp468.GetXitEquationEightDotFourtyFive(slab.ArmatureFRFromBelow.ResistWithTemperatureNormative, slab.ArmatureFRFromBelow.Area, slab.ConcreteFR.ResistWithTemperatureNormativeForSqueeze,slab.Width);
+            values.XLiT = equationsSp468.GetXitEquationEightDotFourtyFour(slab.ArmatureFRFromAbove.ResistWithTemperatureNormative, slab.ArmatureFRFromAbove.Area, slab.ConcreteFromBelowFR.ResistWithTemperatureNormativeForSqueeze, slab.Width);
+            values.XRiT = equationsSp468.GetXitEquationEightDotFourtyFour(slab.ArmatureFRFromAbove.ResistWithTemperatureNormative, slab.ArmatureFRFromAbove.Area, slab.ConcreteFromBelowFR.ResistWithTemperatureNormativeForSqueeze, slab.Width);
+            values.X1T = equationsSp468.GetXitEquationEightDotFourtyFive(slab.ArmatureFRFromBelow.ResistWithTemperatureNormative, slab.ArmatureFRFromBelow.Area, slab.ConcreteOnTopFR.ResistWithTemperatureNormativeForSqueeze, slab.Width);
             values.ZLI = equationsSp468.GetZ(slab.WorkHeightProfileWithWarmingForAboveArmature, values.XLiT);
             values.ZRI = equationsSp468.GetZ(slab.WorkHeightProfileWithWarmingForAboveArmature, values.XRiT);
             values.Z1 = equationsSp468.GetZ(slab.WorkingHeightForBelowArmature, values.X1T);
@@ -32,6 +32,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnCo
             values.LeftPartOfFinalEquation = partLeft;
             values.RightPartOfFinalEquation = partRight;
             values.FinalСoefficient = commonEquations.GetFinalСoefficient(values.LeftPartOfFinalEquation, values.RightPartOfFinalEquation);
+            return check;
         }
     }
 }

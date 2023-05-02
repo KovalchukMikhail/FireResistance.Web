@@ -10,6 +10,6 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnCo
 {
     internal interface ISlabWithRigidConnectionToColumnsEquationsManager
     {
-        public void RunEquations(TempValuesForSlabOnColumns values, SlabFR slab);
+        public bool RunEquations(TempValuesForSlabOnColumns values, SlabFR slab);
     }
 }

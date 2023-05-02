@@ -20,21 +20,20 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
     {
         private NameColumns nameColumns;
         private RequestDb db;
-        private ConcreteForFR concrete;
         private IInterpolator interpolator;
         private IEquationsFromSp468 equations;
 
 
-        public ConcreteForFRFactory(NameColumns nameColumns, RequestDb db, ConcreteForFR concrete, IInterpolator interpolator, IEquationsFromSp468 equations)
+        public ConcreteForFRFactory(NameColumns nameColumns, RequestDb db, IInterpolator interpolator, IEquationsFromSp468 equations)
         {
             this.nameColumns = nameColumns;
             this.db = db;
-            this.concrete = concrete;
             this.interpolator = interpolator;
             this.equations = equations;
         }
         public Material Create(SourceData sourceData, double temperature)
         {
+            ConcreteForFR concrete = new ConcreteForFR();
             concrete.ClassName = sourceData.ConcreteClass;
             concrete.TypeName = sourceData.ConcreteType;
             concrete.StartElasticityModulus = db.DataSP63Db.GetConcreteStartElasticityModulus(concrete.ClassName);

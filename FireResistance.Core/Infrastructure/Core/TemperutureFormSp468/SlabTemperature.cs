@@ -126,7 +126,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
         protected virtual double GetTemperatureAtPoint(int height, double distanceToPoint, string concreteType, string fireResistanceVolume)
         {
             double[,] table = db.TemperatureOfSlabDb.GetArrayTemperature(height, concreteType);
-            if (table[table.Length - 1, 0] < 0) throw new Exception("Для сечения указанной высоты не предусмотренна возможность определения температуры при R150");
+            if (table[table.GetLength(0) - 1, 0] < 0) throw new Exception("Для сечения указанной высоты не предусмотренна возможность определения температуры при R150");
             List<double> namesOfColumns = GetNamesOfColumns(height);
             return interpolator.GetValueFromTable(nameColumns.FireResistanceForCriticalTemperature, namesOfColumns, fireResistanceVolume, distanceToPoint, table);
         }

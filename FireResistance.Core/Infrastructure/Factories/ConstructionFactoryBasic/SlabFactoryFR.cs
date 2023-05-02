@@ -50,8 +50,8 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
         public virtual Construction Create(SlabWithRigidConnectionToColumnsData sourceData)
         {
             slab.Height = sourceData.Heigh;
-            slab.Width = sourceData.LengthAcross;
-            slab.Length = sourceData.LengthAlong;
+            slab.Length = sourceData.LengthAcross;
+            slab.Width = sourceData.LengthAlong;
             slab.ArmatureInstallationDepthFromAbove = sourceData.ArmatureInstallationDepthFromAbove;
             slab.ArmatureInstallationDepthFromBelow = sourceData.ArmatureInstallationDepthFromBelow;
             slab.DistanceFromEdgeOfColumnToHinge = sourceData.DistanceFromEdgeOfColumnToHinge;
@@ -64,10 +64,10 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
             slab.WorkHeightProfileWithWarmingForAboveArmature = equationsSp468.GetH0tWithFire(slab.WorkingHeightForAboveArmature, slab.DeepConcreteWarming);
             double temperatureAboveArmature = slabTemperature.GetTemperature(slab, slab.WorkingHeightForAboveArmature, sourceData);
             double temperatureBelowArmature = slabTemperature.GetTemperature(slab, slab.ArmatureInstallationDepthFromBelow, sourceData);
-            double distanceToPointForConcreteFromBelow = 0.1 * slab.WorkHeightProfileWithWarmingForAboveArmature;
+            double distanceToPointForConcreteFromBelow = 0.1 * slab.WorkHeightProfileWithWarmingForAboveArmature + slab.DeepConcreteWarming;
             double distanceToPointForConcreteToTop = slab.Height - 0.1 * slab.WorkingHeightForBelowArmature;
-            double temperatureConcreteFromBelow = slabTemperature.GetTemperature(slab, distanceToPointForConcreteToTop, sourceData);
-            double temperatureConcreteToTop = slabTemperature.GetTemperature(slab, distanceToPointForConcreteFromBelow, sourceData);
+            double temperatureConcreteFromBelow = slabTemperature.GetTemperature(slab, distanceToPointForConcreteFromBelow, sourceData);
+            double temperatureConcreteToTop = slabTemperature.GetTemperature(slab, distanceToPointForConcreteToTop, sourceData);
             slab.ConcreteFromBelowFR = concreteFactory.Create(sourceData, temperatureConcreteFromBelow) as ConcreteForFR;
             slab.ConcreteOnTopFR = concreteFactory.Create(sourceData, temperatureConcreteToTop) as ConcreteForFR;
             slab.ArmatureFRFromAbove = armatureFactory.Create(sourceData, temperatureAboveArmature) as ArmatureForFR;

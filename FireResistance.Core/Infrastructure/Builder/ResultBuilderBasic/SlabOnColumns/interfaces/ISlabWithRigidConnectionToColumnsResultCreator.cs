@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FireResistance.Core.Entities.Calculations.AbstractClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnCo
 {
     internal interface ISlabWithRigidConnectionToColumnsResultCreator
     {
+        public string BuildError(CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result);
     }
 }

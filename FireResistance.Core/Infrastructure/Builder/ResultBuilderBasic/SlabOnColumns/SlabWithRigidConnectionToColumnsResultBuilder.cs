@@ -67,7 +67,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnCo
             if (result.ExeptionList.Count > 0) return;
             try
             {
-
+                result.Status = equationsManager.RunEquations(values, slab);
             }
             catch (ExceptionFRBasic ex)
             {
@@ -81,17 +81,19 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnCo
 
         public void BuildResult()
         {
-            //if (result.ExeptionList.Count > 0)
-            //{
-            //    result.ResultAsString = resultCreator.BuildError(result);
-            //    return;
-            //}
-            //result.FinalEquations = values.MainEquations;
-            //resultCreator.AddConstructionDataToResult(result, column);
-            //if (values.FinalEquation == values.MainEquations[0]) resultCreator.AddResultIfLastIsEightDotTwentyThree(result, values);
-            //else if (values.FinalEquation == values.MainEquations[1]) resultCreator.AddResultIfLastIsEightDotFifteen(result, values);
-            //else if (values.FinalEquation == values.MainEquations[2]) resultCreator.AddResultIfLastIsEightDotTwentyFive(result, values);
-            //result.ResultAsString = resultCreator.BuildString(result);
+            if (result.ExeptionList.Count > 0)
+            {
+                result.ResultAsString = resultCreator.BuildError(result);
+                return;
+            }
+            result.ResultAsString = $"температура нижней арматуры {slab.ArmatureFRFromBelow.Temperature}\n" +
+                                    $"температура верхней арматуры {slab.ArmatureFRFromAbove.Temperature}\n" +
+                                    $"Температура бетона снизу {slab.ConcreteFromBelowFR.Temperature}\n"+
+                                    $"Толщина слоя бетона выше критической температуры {slab.DeepConcreteWarming}\n"+
+                                    $"Финальное уравгнение слева {values.LeftPartOfFinalEquation}\n"+
+                                    $"Финальное уравнение справа {values.RightPartOfFinalEquation}\n"+
+                                    $"Финальный коэфициент {values.FinalСoefficient}";
+
         }
 
         public CalculationResult<Dictionary<string, double>, Dictionary<string, string>> GetCalculationResult()

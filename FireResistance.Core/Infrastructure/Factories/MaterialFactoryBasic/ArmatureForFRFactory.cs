@@ -22,21 +22,20 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
     {
         private NameColumns nameColumns;
         private RequestDb db;
-        private ArmatureForFR armature;
         private IInterpolator interpolator;
         private IEquationsFromSp468 equations;
 
-        public ArmatureForFRFactory(NameColumns nameColumns, RequestDb db, ArmatureForFR armature, IInterpolator interpolator, IEquationsFromSp468 equations)
+        public ArmatureForFRFactory(NameColumns nameColumns, RequestDb db, IInterpolator interpolator, IEquationsFromSp468 equations)
         {
             this.nameColumns = nameColumns;
             this.db = db;
-            this.armature = armature;
             this.interpolator = interpolator;
             this.equations = equations;
         }
 
         public Material Create(SourceData sourceData, double temperature)
         {
+            ArmatureForFR armature = new ArmatureForFR();
             armature.ClassName = sourceData.ArmatureClass;
             armature.Diameter = sourceData.ArmatureDiameter;
             armature.Count = sourceData.ArmatureCount;

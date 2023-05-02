@@ -31,7 +31,7 @@ namespace FireResistance.Core.Data
         {
             get
             {
-                Dictionary<string, int> dict = new Dictionary<string, int();
+                Dictionary<string, int> dict = new Dictionary<string, int>();
                 return dict = boundaryHeightOfSlab.ToDictionary(entry => entry.Key, entry => entry.Value);
             }
         }

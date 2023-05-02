@@ -28,7 +28,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
         private IInterpolator interpolator;
         private IEquationsFromSp468 equationsSp468;
         private ICommonEquations commonEquation;
-        private ColumnTemperature columnTemperature;
+        private IColumnTemperature<ColumnFR> columnTemperature;
         ArmatureForFRFactory armatureFactory;
         ConcreteForFRFactory concreteFactory;
 
@@ -38,7 +38,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
                                 IInterpolator interpolator,
                                 IEquationsFromSp468 equationsSp468,
                                 ICommonEquations commonEquation,
-                                ColumnTemperature columnTemperature,
+                                IColumnTemperature<ColumnFR> columnTemperature,
                                 ArmatureForFRFactory armatureFactory,
                                 ConcreteForFRFactory concreteFactory)
         {                                                            
@@ -68,7 +68,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
                                                                         nameColumns.SizeForCriticalTemperature,
                                                                         column.FireResistanceVolume,
                                                                         Math.Min(minSize, nameColumns.SizeForCriticalTemperature[nameColumns.SizeForCriticalTemperature.Count - 1]),
-                                                                        db.TemperatureDb.GetTableOfDeepWarmingToCriticalTemperatureForСolumn(sourceData.ConcreteType));
+                                                                        db.TemperatureOfColumnDb.GetTableOfDeepWarmingToCriticalTemperatureForСolumn(sourceData.ConcreteType));
             column.WorkHeight = commonEquation.GetWorkHeight(column.Height, column.DistanceToArmature);
             column.СoefficientFixationElement = db.DataSP468Db.GetСoefficientFixationElement(column.FixationElement);
             column.WorkLenth = commonEquation.GetWorkLenth(column.Length, column.СoefficientFixationElement);
