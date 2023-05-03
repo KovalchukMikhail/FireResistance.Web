@@ -1,6 +1,5 @@
-﻿@model DataOfSlabWithRigidConnectionToColumnsVM
+﻿@model DataOfSlabWithRigidConnectionVM
 @inject NameColumns nameColumns
-
 
 <div class="border p-3">
     @if (Model != null)
@@ -33,6 +32,7 @@
 
 
 <form method="post">
+    <input asp-for="SourceData.IsOnCollums" value="1" hidden />
     <div class="border p-3">
         <div class="border p-1">
             <div class="col-4">

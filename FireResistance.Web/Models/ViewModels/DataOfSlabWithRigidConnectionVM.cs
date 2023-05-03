@@ -4,11 +4,11 @@ using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 
 namespace FireResistance.Web.Models.ViewModels
 {
-    public class DataOfSlabWithRigidConnectionToColumnsVM
+    public class DataOfSlabWithRigidConnectionVM
     {
-        public SlabWithRigidConnectionToColumnsData SourceData { get; set; }
+        public SlabWithRigidConnectionData SourceData { get; set; }
         public ResultAsDictionary Result { get; set; }
-        public DataOfSlabWithRigidConnectionToColumnsVM(SlabWithRigidConnectionToColumnsData sourceData)
+        public DataOfSlabWithRigidConnectionVM(SlabWithRigidConnectionData sourceData)
         {
             SourceData = sourceData;
         }

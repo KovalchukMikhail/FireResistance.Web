@@ -37,17 +37,14 @@ namespace FireResistance.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult SlabWithRigidConnectionToColumns(SlabWithRigidConnectionToColumnsData sourceData)
+        public IActionResult SlabWithRigidConnectionToColumns(SlabWithRigidConnectionData sourceData)
         {
-            DataOfSlabWithRigidConnectionToColumnsVM data = new DataOfSlabWithRigidConnectionToColumnsVM(sourceData);
+            DataOfSlabWithRigidConnectionVM data = new DataOfSlabWithRigidConnectionVM(sourceData);
             if (ModelState.IsValid)
             {
                 FireResistanceBasic fireResistance = new FireResistanceBasic();
                 fireResistance.PerformCalculation(sourceData);
                 data.Result = fireResistance.GetResult() as ResultAsDictionary;
-                //data.Result = new ResultAsDictionary();
-                //data.Result.ResultAsString = "Исходные данные приняты";
-                //return View(data);
             }
             return View(data);
         }
@@ -58,11 +55,18 @@ namespace FireResistance.Web.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult PlateWithRigidConnectionToTwoWalls()
-        //{
-
-        //}
+        [HttpPost]
+        public IActionResult SlabWithRigidConnectionToTwoWalls(SlabWithRigidConnectionData sourceData)
+        {
+            DataOfSlabWithRigidConnectionVM data = new DataOfSlabWithRigidConnectionVM(sourceData);
+            if (ModelState.IsValid)
+            {
+                FireResistanceBasic fireResistance = new FireResistanceBasic();
+                fireResistance.PerformCalculation(sourceData);
+                data.Result = fireResistance.GetResult() as ResultAsDictionary;
+            }
+            return View(data);
+        }
 
     }
 }

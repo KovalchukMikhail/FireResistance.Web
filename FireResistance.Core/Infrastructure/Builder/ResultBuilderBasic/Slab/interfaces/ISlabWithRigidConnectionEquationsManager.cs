@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnColumns.interfaces
+namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab.interfaces
 {
-    internal interface ISlabWithRigidConnectionToColumnsEquationsManager
+    internal interface ISlabWithRigidConnectionEquationsManager
     {
-        public bool RunEquations(TempValuesForSlabOnColumns values, SlabFR slab);
+        public bool RunEquations(TempValuesForSlab values, SlabFR slab);
     }
 }

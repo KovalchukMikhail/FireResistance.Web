@@ -32,13 +32,10 @@ namespace FireResistance.Core.Controllers.ControllerBasic
                                                                     Dictionary<string, double>,
                                                                     Dictionary<string, string>>>();
                     break;
-                case SlabWithRigidConnectionToColumnsData:
-                    resultBuilder = provider.GetService<ISlabWithRigidConnectionToColumnsResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
+                case SlabWithRigidConnectionData:
+                    resultBuilder = provider.GetService<ISlabWithRigidConnectionResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
                                                                     Dictionary<string, double>,
                                                                     Dictionary<string, string>>>();
-                    break;
-                case SlabWithRigidConnectionToTwoWallsData:
-                    resultBuilder = null;
                     break;
             };
 

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnColumns
+namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
 {
-    internal class TempValuesForSlabOnColumns
+    internal class TempValuesForSlab
     {
         public virtual double ZLI { get; set; }
         public virtual double ZRI { get; set; }

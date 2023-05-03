@@ -3,6 +3,7 @@ using FireResistance.Core.Entities.Constructions.AbstractClasses;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
+using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Core.TemperutureFormSp468;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
@@ -17,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
 {
-    internal class SlabFactoryFR : IConstructionFactory<SlabWithRigidConnectionToColumnsData>
+    internal class SlabFactoryFR : IConstructionFactory<SlabWithRigidConnectionData>
     {
         private NameColumns nameColumns;
         private RequestDb db;
@@ -26,7 +27,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
         private IEquationsFromSp468 equationsSp468;
         private ArmatureForFRFactory armatureFactory;
         private ConcreteForFRFactory concreteFactory;
-        private ISlabTemperature<SlabFR, SlabWithRigidConnectionToColumnsData> slabTemperature;
+        private ISlabTemperature<SlabFR, SlabWithRigidConnectionData> slabTemperature;
 
         public SlabFactoryFR(NameColumns nameColumns,
                             RequestDb db,
@@ -35,7 +36,7 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
                             IEquationsFromSp468 equationsSp468,
                             ArmatureForFRFactory armatureFactory,
                             ConcreteForFRFactory concreteFactory,
-                            ISlabTemperature<SlabFR, SlabWithRigidConnectionToColumnsData> slabTemperature)
+                            ISlabTemperature<SlabFR, SlabWithRigidConnectionData> slabTemperature)
         {
             this.nameColumns = nameColumns;
             this.db = db;
@@ -47,16 +48,19 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
             this.slabTemperature = slabTemperature;
         }
 
-        public virtual Construction Create(SlabWithRigidConnectionToColumnsData sourceData)
+        public virtual Construction Create(SlabWithRigidConnectionData sourceData)
         {
+            slab.FireResistanceVolume = sourceData.FireResistanceValue;
+            slab.IsOnColumns = sourceData.IsOnCollums == 1? true : false;
             slab.Height = sourceData.Heigh;
             slab.Length = sourceData.LengthAcross;
             slab.Width = sourceData.LengthAlong;
             slab.ArmatureInstallationDepthFromAbove = sourceData.ArmatureInstallationDepthFromAbove;
             slab.ArmatureInstallationDepthFromBelow = sourceData.ArmatureInstallationDepthFromBelow;
+            if (slab.ArmatureInstallationDepthFromAbove > slab.Height / 2) throw new ExceptionFRBasic("Недопустимое расположение верхней арматуры. Арматура расположена в нижней зоне плиты", slab.ArmatureInstallationDepthFromAbove);
+            if (slab.ArmatureInstallationDepthFromBelow > slab.Height / 2) throw new ExceptionFRBasic("Недопустимое расположение нижней арматуры. Арматура расположена в верхней зоне плиты", slab.ArmatureInstallationDepthFromAbove);
             slab.DistanceFromEdgeOfColumnToHinge = sourceData.DistanceFromEdgeOfColumnToHinge;
             slab.DistributedLoad = sourceData.DistributedLoad;
-            slab.FireResistanceVolume = sourceData.FireResistanceValue;
             slab.WorkingHeightForAboveArmature = commonEquation.GetWorkHeight(slab.Height, slab.ArmatureInstallationDepthFromAbove);
             slab.WorkingHeightForBelowArmature = commonEquation.GetWorkHeight(slab.Height, slab.ArmatureInstallationDepthFromBelow);
             double criticalTemperature = db.DataSP468Db.GetCriticalTemperatureConcrete(sourceData.ConcreteType);

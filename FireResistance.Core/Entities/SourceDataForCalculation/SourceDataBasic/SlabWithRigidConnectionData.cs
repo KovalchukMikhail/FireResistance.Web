@@ -8,13 +8,16 @@ using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
 {
-    public class SlabWithRigidConnectionToColumnsData : SourceData
+    public class SlabWithRigidConnectionData : SourceData
     {
+        private double distributedLoad;
+        [Range(0, 1, ErrorMessage = "Необходимо указать значение. 0 - плита оперта на стены, 1 - плита оперта на колонны")]
+        public int IsOnCollums { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "Расстояние указано не корректно")]
         public virtual int LengthAlong { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "Расстояние указано не корректно")]
         public virtual int LengthAcross { get; set; }
-        [Range(1, int.MaxValue, ErrorMessage = "Расстояние указано не корректно")]
+        [Range(0, int.MaxValue, ErrorMessage = "Расстояние указано не корректно")]
         public virtual int DistanceFromEdgeOfColumnToHinge { get; set; }
         [Range(40, int.MaxValue, ErrorMessage = "Значение должно быть больше или равно 40")]
         public virtual int Heigh { get; set; }
@@ -27,7 +30,11 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
         [Required(ErrorMessage = "Не указано зачение")]
         public virtual int ArmatureDiameterFromAbove { get; set; }
         [Range(0.00001, double.MaxValue, ErrorMessage = "Значение должно быть больше 0.00001")]
-        public virtual double DistributedLoad { get; set; }
+        public virtual double DistributedLoad
+        {
+            get { return distributedLoad; }
+            set { distributedLoad = value * 0.0098066501; }
+        }
 
     }
 }

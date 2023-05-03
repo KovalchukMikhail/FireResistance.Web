@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
 {
-    internal class SlabTemperatureBasic : ISlabTemperature<SlabFR, SlabWithRigidConnectionToColumnsData>
+    internal class SlabTemperatureBasic : ISlabTemperature<SlabFR, SlabWithRigidConnectionData>
     {
         private RequestDb db;
         IInterpolator interpolator;
@@ -33,7 +33,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
             maxHeight = nameColumns.BoundaryHeightOfSlab["max"];
         }
 
-        public virtual double GetTemperature(SlabFR slab, double distanceToPoint, SlabWithRigidConnectionToColumnsData sourceData)
+        public virtual double GetTemperature(SlabFR slab, double distanceToPoint, SlabWithRigidConnectionData sourceData)
         {
             if (slab.Height < distanceToPoint) throw new ExceptionFRBasic("Некорректное значение расстояния до точки в которой определяется температура", distanceToPoint);
             if (slab.Height >= minHeight && slab.Height <= maxHeight)
@@ -63,7 +63,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
             else throw new Exception("Ошибка возникла при определении температуры плиты");
         }
 
-        public virtual double GetDeepConcreteWarming(SlabFR slab, SlabWithRigidConnectionToColumnsData sourceData, double criticalTemperature)
+        public virtual double GetDeepConcreteWarming(SlabFR slab, SlabWithRigidConnectionData sourceData, double criticalTemperature)
         {
             if (slab.Height >= minHeight && slab.Height <= maxHeight)
             {
@@ -126,7 +126,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
         protected virtual double GetTemperatureAtPoint(int height, double distanceToPoint, string concreteType, string fireResistanceVolume)
         {
             double[,] table = db.TemperatureOfSlabDb.GetArrayTemperature(height, concreteType);
-            if (table[table.GetLength(0) - 1, 0] < 0) throw new Exception("Для сечения указанной высоты не предусмотренна возможность определения температуры при R150");
+            if (fireResistanceVolume == "R150" && table[table.GetLength(0) - 1, 0] < 0) throw new Exception("Для сечения указанной высоты не предусмотренна возможность определения температуры при R150");
             List<double> namesOfColumns = GetNamesOfColumns(height);
             return interpolator.GetValueFromTable(nameColumns.FireResistanceForCriticalTemperature, namesOfColumns, fireResistanceVolume, distanceToPoint, table);
         }
@@ -135,7 +135,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
         {
             secondHeight = 0;
             firstHeight = 0;
-            for (int i = minHeight; i <= maxHeight; minHeight += 20)
+            for (int i = minHeight; i <= maxHeight; i += 20)
             {
                 if (i > height)
                 {

@@ -1,7 +1,6 @@
 ﻿using FireResistance.Core;
 using FireResistance.Core.Entities.Calculations;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
-using FireResistance.Core.Infrastructure.Factories.SourceDataFactoriesBasic;
 using FireResistance.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;

@@ -4,34 +4,35 @@ using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
-using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnColumns.interfaces;
-using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnColumns;
+using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab.interfaces;
+using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab;
 using FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FireResistance.Core.Entities.Constructions.AbstractClasses;
 
-namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnColumns
+namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
 {
-    internal class SlabWithRigidConnectionToColumnsResultBuilder : ISlabWithRigidConnectionToColumnsResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>
+    internal class SlabWithRigidConnectionResultBuilder : ISlabWithRigidConnectionResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>
     {
         private CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result;
-        private SlabWithRigidConnectionToColumnsData sourceData;
+        private SlabWithRigidConnectionData sourceData;
         private SlabFR slab;
         private SlabFactoryFR slabFactory;
-        private TempValuesForSlabOnColumns values;
-        private ISlabWithRigidConnectionToColumnsEquationsManager equationsManager;
-        private ISlabWithRigidConnectionToColumnsResultCreator resultCreator;
+        private TempValuesForSlab values;
+        private ISlabWithRigidConnectionEquationsManager equationsManager;
+        private ISlabWithRigidConnectionResultCreator resultCreator;
 
         private bool firstTime { get; set; } = true;
 
-        public SlabWithRigidConnectionToColumnsResultBuilder(CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result,
-                                                        TempValuesForSlabOnColumns values,
-                                                        ISlabWithRigidConnectionToColumnsEquationsManager equationsManager,
+        public SlabWithRigidConnectionResultBuilder(CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result,
+                                                        TempValuesForSlab values,
+                                                        ISlabWithRigidConnectionEquationsManager equationsManager,
                                                         SlabFactoryFR slabFactory,
-                                                        ISlabWithRigidConnectionToColumnsResultCreator resultCreator)
+                                                        ISlabWithRigidConnectionResultCreator resultCreator)
         {
             this.result = result;
             this.values = values;
@@ -42,7 +43,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnCo
 
         public void SetSourceData(SourceData sourceData)
         {
-            this.sourceData = sourceData as SlabWithRigidConnectionToColumnsData;
+            this.sourceData = sourceData as SlabWithRigidConnectionData;
         }
 
         public void BuildConstructions()
@@ -86,14 +87,9 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnCo
                 result.ResultAsString = resultCreator.BuildError(result);
                 return;
             }
-            result.ResultAsString = $"температура нижней арматуры {slab.ArmatureFRFromBelow.Temperature}\n" +
-                                    $"температура верхней арматуры {slab.ArmatureFRFromAbove.Temperature}\n" +
-                                    $"Температура бетона снизу {slab.ConcreteFromBelowFR.Temperature}\n"+
-                                    $"Толщина слоя бетона выше критической температуры {slab.DeepConcreteWarming}\n"+
-                                    $"Финальное уравгнение слева {values.LeftPartOfFinalEquation}\n"+
-                                    $"Финальное уравнение справа {values.RightPartOfFinalEquation}\n"+
-                                    $"Финальный коэфициент {values.FinalСoefficient}";
-
+            resultCreator.AddConstructionDataToResult(result, slab);
+            resultCreator.AddResult(result, values);
+            result.ResultAsString = resultCreator.BuildString(result, slab.IsOnColumns);
         }
 
         public CalculationResult<Dictionary<string, double>, Dictionary<string, string>> GetCalculationResult()

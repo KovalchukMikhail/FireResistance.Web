@@ -30,8 +30,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.interfaces;
-using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnColumns;
-using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnColumns.interfaces;
+using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab;
+using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab.interfaces;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 
 namespace FireResistance.Core.Dependency
@@ -61,16 +61,16 @@ namespace FireResistance.Core.Dependency
             .AddTransient<ColumnFactoryFR>()
             .AddTransient<SlabFactoryFR>()
             .AddTransient<IColumnTemperature<ColumnFR>, ColumnTemperatureBasic >()
-            .AddTransient<ISlabTemperature<SlabFR, SlabWithRigidConnectionToColumnsData>, SlabTemperatureBasic>()
+            .AddTransient<ISlabTemperature<SlabFR, SlabWithRigidConnectionData>, SlabTemperatureBasic>()
             .AddTransient<IEquationsFromSp468, EquationsFromSp468>()
             .AddTransient<IEquationsFromSp63, EquationsFromSp63>()
             .AddTransient<ICommonEquations, CommonEquations>()
             .AddTransient<IColumnFireIsWithFourSidesEquationsManager, ColumnFireIsWithFourSidesEquationsManager>()
-            .AddTransient<ISlabWithRigidConnectionToColumnsEquationsManager, SlabWithRigidConnectionToColumnsEquationsManager>()
+            .AddTransient<ISlabWithRigidConnectionEquationsManager, SlabWithRigidConnectionEquationsManager>()
             .AddTransient<IColumnFireIsWithFourSidesResultCreator, ColumnFireIsWithFourSidesResultCreator>()
-            .AddTransient<ISlabWithRigidConnectionToColumnsResultCreator, SlabWithRigidConnectionToColumnsResultCreator>()
+            .AddTransient<ISlabWithRigidConnectionResultCreator, SlabWithRigidConnectionResultCreator>()
             .AddTransient<TempValuesForColumn>()
-            .AddTransient<TempValuesForSlabOnColumns>()
+            .AddTransient<TempValuesForSlab>()
             .AddTransient<IMainController<SourceData,
                                           CalculatorAbstract<IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
                                               Dictionary<string, string>>>>, MainController>()
@@ -78,10 +78,10 @@ namespace FireResistance.Core.Dependency
                                                                     Dictionary<string, double>,
                                                                     Dictionary<string, string>>,
                                                         ColumnFireIsWithFourSidesResultBuilder>()
-            .AddTransient<ISlabWithRigidConnectionToColumnsResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
+            .AddTransient<ISlabWithRigidConnectionResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
                                                                     Dictionary<string, double>,
                                                                     Dictionary<string, string>>,
-                                                        SlabWithRigidConnectionToColumnsResultBuilder>()
+                                                        SlabWithRigidConnectionResultBuilder>()
             .AddTransient<CalculatorAbstract<IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
                                              Dictionary<string, string>>>, CalculatorBasic>()
             .AddTransient<SlabFR>()

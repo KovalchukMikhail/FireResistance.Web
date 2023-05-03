@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Builder.Interfaces
 {
-    internal interface ISlabWithRigidConnectionToTwoWallsResultBuilder<N, T, K> : IResultBuilder<N, T, K>
+    internal interface ISlabWithRigidConnectionResultBuilder<N, T, K> : IResultBuilder<N, T, K>
         where N : CalculationResult<T, K>
     {
     }

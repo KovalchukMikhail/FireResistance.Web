@@ -1,6 +1,6 @@
 ﻿using FireResistance.Core.Entities.Constructions.AbstractClasses;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
-using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnColumns.interfaces;
+using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab.interfaces;
 using FireResistance.Core.Infrastructure.Core;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using System;
@@ -9,18 +9,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.SlabOnColumns
+namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
 {
-    internal class SlabWithRigidConnectionToColumnsEquationsManager : ISlabWithRigidConnectionToColumnsEquationsManager
+    internal class SlabWithRigidConnectionEquationsManager : ISlabWithRigidConnectionEquationsManager
     {
         private IEquationsFromSp468 equationsSp468;
         private ICommonEquations commonEquations;
-        public SlabWithRigidConnectionToColumnsEquationsManager(IEquationsFromSp468 equationsSp468, ICommonEquations commonEquations)
+        public SlabWithRigidConnectionEquationsManager(IEquationsFromSp468 equationsSp468, ICommonEquations commonEquations)
         {
             this.equationsSp468 = equationsSp468;
             this.commonEquations = commonEquations;
         }
-        public virtual bool RunEquations(TempValuesForSlabOnColumns values, SlabFR slab)
+        public virtual bool RunEquations(TempValuesForSlab values, SlabFR slab)
         {
             values.XLiT = equationsSp468.GetXitEquationEightDotFourtyFour(slab.ArmatureFRFromAbove.ResistWithTemperatureNormative, slab.ArmatureFRFromAbove.Area, slab.ConcreteFromBelowFR.ResistWithTemperatureNormativeForSqueeze, slab.Width);
             values.XRiT = equationsSp468.GetXitEquationEightDotFourtyFour(slab.ArmatureFRFromAbove.ResistWithTemperatureNormative, slab.ArmatureFRFromAbove.Area, slab.ConcreteFromBelowFR.ResistWithTemperatureNormativeForSqueeze, slab.Width);
