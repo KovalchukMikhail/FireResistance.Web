@@ -27,7 +27,6 @@ namespace FireResistance.Web.Controllers
                 data.Result = fireResistance.GetResult() as ResultAsDictionary;
             }
             return View(data);
-
         }
 
         [HttpGet]

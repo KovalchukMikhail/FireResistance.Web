@@ -1,0 +1,30 @@
+﻿@model FireResistance.Core.Entities.Calculations.ResultAsDictionary
+
+<div class="border p-3">
+    @if (Model != null)
+    {
+        if (Model != null)
+        {
+            string[] result = Model.ToString().Split("\n");
+            foreach (string str in result)
+            {
+                if (str.StartsWith("#"))
+                {
+                    string text = str.Replace("#", "");
+                    <h2>@text</h2>
+                }
+                else if (!str.StartsWith("\t"))
+                {
+                    <strong>
+                        @str
+                    </strong>
+                }
+                else
+                {
+                    <p>@str</p>
+                }
+
+            }
+        }
+    }
+</div>

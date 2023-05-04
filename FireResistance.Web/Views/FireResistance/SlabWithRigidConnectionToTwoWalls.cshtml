@@ -1,35 +1,10 @@
 ﻿@model DataOfSlabWithRigidConnectionVM
 @inject NameColumns nameColumns
 
-<div class="border p-3">
-    @if (Model != null)
-    {
-        if (Model.Result != null)
-        {
-            string[] result = Model.Result.ToString().Split("\n");
-            foreach (string str in result)
-            {
-                if (str.StartsWith("#"))
-                {
-                    string text = str.Replace("#", "");
-                    <h2>@text</h2>
-                }
-                else if (!str.StartsWith("\t"))
-                {
-                    <strong>
-                        @str
-                    </strong>
-                }
-                else
-                {
-                    <p>@str</p>
-                }
-
-            }
-        }
-    }
-</div>
-
+@if (Model != null)
+{
+    <partial name="_Result" model="@Model.Result" />
+}
 
 <form method="post">
     <input asp-for="SourceData.IsOnCollums" value="0" hidden />
