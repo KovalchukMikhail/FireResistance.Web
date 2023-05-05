@@ -95,7 +95,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
                                 .Append($"\th = {result.GetItemResult("h")} мм\n")
                             .Append("Расстояния между рядами колонн в перпендикулярном направлении (длина пролета):\n")
                                 .Append($"\tL1 = {result.GetItemResult("L1")} мм\n")
-                            .Append("Расстояния между рядами колонн вдоль рассматриваемой полосы (ширина расматриваемого участка плиты):\n")
+                            .Append("Расстояния между рядами колонн вдоль рассматриваемой полосы (ширина рассматриваемого участка плиты):\n")
                                 .Append($"\tL2 = {result.GetItemResult("L2")} мм\n")
                             .Append("Расстояние от крайних пластических шарниров до оси ближайших к ним рядов колонн:\n")
                                 .Append($"\tС = {result.GetItemResult("C")} мм\n");
@@ -108,7 +108,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
                                 .Append($"\th = {result.GetItemResult("h")} мм\n")
                             .Append("Расстояние между опорами (длина пролета):\n")
                                 .Append($"\tL1 = {result.GetItemResult("L1")} мм\n")
-                            .Append("Ширина расматриваемого участка плиты:\n")
+                            .Append("Ширина рассматриваемого участка плиты:\n")
                                 .Append($"\tL2 = {result.GetItemResult("L2")} мм\n")
                             .Append("Расстояние от крайних пластических шарниров до опоры:\n")
                                 .Append($"\tС = {result.GetItemResult("C")} мм\n");

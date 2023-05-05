@@ -30,7 +30,7 @@
                 <select asp-for="SourceData.ArmatureClass" size="1" class="form-control-sm">
                     @foreach (string value in nameColumns.ArmatureClass)
                     {
-                    <option value=@value>@value</option>
+                    <option value=@value>@value.Replace("_", " ")</option>
                     }
                 </select>
             </div>
@@ -43,7 +43,7 @@
                 <select asp-for="SourceData.ConcreteType" size="1" class="form-control-sm">
                     @foreach (string value in nameColumns.ConcreteType)
                     {
-                        <option value="@value">@value</option>
+                        <option value="@value">@value.Replace("_", " ")</option>
                     }
                 </select>
             </div>
@@ -69,7 +69,7 @@
                 <select asp-for="SourceData.FixationElement" size="1" class="form-control-sm">
                     @foreach (string value in nameColumns.FixationElement)
                     {
-                        <option value="@value">@value</option>
+                        <option value="@value">@value.Replace("_", " ")</option>
                     }
                 </select>
             </div>
@@ -119,13 +119,13 @@
             <label>  шт.</label>
         </div>
         <div class="border p-1">
-            <label>Укажите вличену изгибающего момента от постоянной и длительной нормативной нагрузки:</label><br />
+            <label>Укажите величену изгибающего момента от постоянной и длительной нормативной нагрузки:</label><br />
             <input type="number" step="0.0001" asp-for="SourceData.Moment" />
             <span asp-validation-for="SourceData.Moment" class="text-danger"></span>
             <label>  т*м</label>
         </div>
         <div class="border p-1">
-            <label>Укажите вличену нормальной силы от постоянной и длительной нормативной нагрузки:</label><br />
+            <label>Укажите величену нормальной силы от постоянной и длительной нормативной нагрузки:</label><br />
             <input type="number" step="0.0001" asp-for="SourceData.Strength" />
             <span asp-validation-for="SourceData.Strength" class="text-danger"></span>
             <label>  т</label>

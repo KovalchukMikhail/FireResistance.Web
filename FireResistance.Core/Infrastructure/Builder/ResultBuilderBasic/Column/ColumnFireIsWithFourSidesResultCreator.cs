@@ -151,7 +151,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
                                 .Append($"\tb = {result.GetItemResult("b")} мм\n")
                             .Append("Закрепление по концам элемента:\n")
                                 .Append($"\t{result.GetItemDescription("FixationElement")}\n")
-                            .Append("Коэффициент расчетной длинны:\n")
+                            .Append("Коэффициент расчетной длины:\n")
                                 .Append($"\t{result.GetItemResult("СoefficientFixationElement")}\n")
                             .Append("Класс бетона по прочности:\n")
                                 .Append($"\t{result.GetItemDescription("ClassNameOfConcrete")}\n")

@@ -30,7 +30,7 @@
                 <select asp-for="SourceData.ArmatureClass" size="1" class="form-control-sm">
                     @foreach (string value in nameColumns.ArmatureClass)
                     {
-                        <option value=@value>@value</option>
+                        <option value=@value>@value.Replace("_", " ")</option>
                     }
                 </select>
             </div>
@@ -43,7 +43,7 @@
                 <select asp-for="SourceData.ConcreteType" size="1" class="form-control-sm">
                     @foreach (string value in nameColumns.ConcreteType)
                     {
-                        <option value="@value">@value</option>
+                        <option value="@value">@value.Replace("_", " ")</option>
                     }
                 </select>
             </div>
@@ -68,7 +68,7 @@
             <label>  мм</label>
         </div>
         <div class="border p-1">
-            <label>Укажите расстояние между рядами колонн вдоль рассматриваемой полосы (Ширина расматриваемого участка плиты):</label><br />
+            <label>Укажите расстояние между рядами колонн вдоль рассматриваемой полосы (Ширина рассматриваемого участка плиты):</label><br />
             <input type="number" asp-for="SourceData.LengthAlong" />
             <span asp-validation-for="SourceData.LengthAlong" class="text-danger"></span>
             <label>  мм</label>
