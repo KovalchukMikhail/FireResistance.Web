@@ -13,6 +13,7 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
         private double distributedLoad;
         [Key]
         public int Id { get; set; }
+        public int UserId { get; set; }
         [Range(0, 1, ErrorMessage = "Необходимо указать значение. 0 - плита оперта на стены, 1 - плита оперта на колонны")]
         public int IsOnCollums { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "Расстояние указано не корректно")]

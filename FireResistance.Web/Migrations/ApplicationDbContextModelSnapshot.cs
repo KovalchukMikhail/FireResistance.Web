@@ -3,19 +3,16 @@ using System;
 using FireResistance.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FireResistance.Web.Data.Migrations
+namespace FireResistance.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230511114146_initMigration")]
-    partial class initMigration
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
