@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FireResistance.Web.Data
@@ -9,5 +10,7 @@ namespace FireResistance.Web.Data
             : base(options)
         {
         }
+        public DbSet<ColumnFireIsWithFourSidesData> ColumnFireIsWithFourSidesData { get; set; }
+        public DbSet<SlabWithRigidConnectionData> SlabWithRigidConnectionData { get; set; }
     }
 }

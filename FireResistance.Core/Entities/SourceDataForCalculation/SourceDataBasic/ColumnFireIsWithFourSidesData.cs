@@ -14,6 +14,8 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
     {
         private double moment;
         private double strength;
+        [Key]
+        public int Id { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage = "Не корректно указанна длина элемента")]
         public virtual int LengthColumn { get; set; }
