@@ -5,11 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using FireResistance.Web.Models.ViewModels;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
+using FireResistance.Web.Data;
 
 namespace FireResistance.Web.Controllers
 {
     public class FireResistanceController : Controller
     {
+        private ApplicationDbContext db;
+        public FireResistanceController(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
         [HttpGet]
         public IActionResult ColumnFireFourSide()
         {
@@ -25,6 +31,8 @@ namespace FireResistance.Web.Controllers
                 FireResistanceBasic fireResistance = new FireResistanceBasic();
                 fireResistance.PerformCalculation(sourceData);
                 data.Result = fireResistance.GetResult() as ResultAsDictionary;
+                db.ColumnFireIsWithFourSidesData.Add(sourceData);
+                db.SaveChanges();
             }
             return View(data);
         }
