@@ -9,6 +9,8 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses
 {
     public abstract class SourceData
     {
+        public string UserId { get; set; } = string.Empty;
+        public string SaveDate { get; set; }
         [Required(ErrorMessage = "Не указано зачение")]
         public virtual string FireResistanceValue { get; set; }
         [Required(ErrorMessage = "Не указано зачение")]

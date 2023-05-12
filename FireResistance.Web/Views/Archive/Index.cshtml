@@ -1,0 +1,89 @@
+﻿@model ArchiveVM
+
+<div class="container p-3 bg-white">
+    <div class="row pt-4">
+            <h2>Сохраненные расчеты</h2>
+@*        <div class="col-6 text-right">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
+                <i class="fas fa-plus"></i> &nbsp; Create New Category
+            </a>
+        </div>*@
+    </div>
+
+    <br /><br />
+    @if(Model != null)
+    {
+        @if (Model.DataForColumn != null && Model.DataForColumn.Count() > 0)
+        {
+            <h4 class="text-primary">Расчет колонн на огнестойкость при огневом воздействии с 4 сторон</h4>
+            <table class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Наименование расчета
+                        </th>
+                        <th>
+                            Дата сохранения
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model.DataForColumn)
+                    {
+                        <tr>
+                            <td width="50%">@obj.FireResistanceValue;h=@obj.HeighColumn x b=@obj.WidthColumn;M=@obj.Moment;N=@obj.Strength</td>
+                            <td width="30%">@obj.SaveDate</td>
+                            <td class="text-center">
+                                <div class="w-75 btn-group" role="group">
+                                    <a asp-controller="" asp-route-Id="@obj.Id" asp-action="Delete" class="btn btn-danger mx-2">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        @if (Model.DataForSlab != null && Model.DataForSlab.Count() > 0)
+        {
+            <h4 class="text-primary">Расчеты сплошных плит на огнестойкость при огневом воздействии снизу</h4>
+            <table class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Наименование расчета
+                        </th>
+                        <th>
+                            Дата сохранения
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model.DataForSlab)
+                    {
+                        <tr>
+                            <td width="50%">@obj.FireResistanceValue;h=@obj.Heigh;L1=@obj.LengthAcross;L2=@obj.LengthAlong</td>
+                            <td width="30%">@obj.SaveDate</td>
+                            <td class="text-center">
+                                <div class="w-75 btn-group" role="group">
+                                    <a asp-controller="" asp-route-Id="@obj.Id" asp-action="Delete" class="btn btn-danger mx-2">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+    else
+    {
+        <h4>Данные не найдены</h4>
+    }
+
+
+</div>
