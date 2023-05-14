@@ -1,4 +1,5 @@
 ﻿using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

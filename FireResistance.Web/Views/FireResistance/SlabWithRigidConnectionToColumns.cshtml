@@ -1,9 +1,14 @@
 ﻿@model DataOfSlabWithRigidConnectionVM
 @inject NameColumns nameColumns
 
+@{
+    double distributedLoad = 0;
+}
+
 @if (Model != null)
 {
     <partial name="_Result" model="@Model.Result" />
+    distributedLoad = Model.SourceData.DistributedLoad / 0.0098066501;
 }
 
 <form method="post">
@@ -109,16 +114,22 @@
                 </div>
                 <div class="form-group">
                     <label for="DistributedLoad">Укажите интенсивность нормативной постоянной и временной длительной нагрузок, равномерно распределенных по полосе на 1 пог. м с коэф. перегруза γf = 1 (т*м):</label>
-                    <input type="number" step="0.0001" asp-for="SourceData.DistributedLoad" class="form-control" />
+                    <input type="number" step="0.0001" asp-for="SourceData.DistributedLoad" value="@distributedLoad" class="form-control" />
                     <span asp-validation-for="SourceData.DistributedLoad" class="text-danger"></span>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <button type="submit" class="btn btn-primary">Выполнить расчет</button>
+        <div class="col-md-2">
+            <button asp-action="SlabWithRigidConnectionToColumns" type="submit" class="btn btn-primary">Выполнить расчет</button>
         </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="col-md-4">
+                <button asp-action="AddDataForCalculationOfSlab" type="submit" class="btn btn-primary">Сохранить расчетные данные</button>
+            </div>
+        }
     </div>
     </div>
 </form>

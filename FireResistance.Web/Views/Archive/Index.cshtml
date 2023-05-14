@@ -32,11 +32,19 @@
                     @foreach (var obj in Model.DataForColumn)
                     {
                         <tr>
-                            <td width="50%">@obj.FireResistanceValue;h=@obj.HeighColumn x b=@obj.WidthColumn;M=@obj.Moment;N=@obj.Strength</td>
+                            <td width="50%">
+                                <form method="post">
+                                    @{
+                                        double strength = obj.Strength * 0.00010197162123;
+                                        double moment = obj.Moment * 0.00000010197162123;
+                                    }
+                                    <a asp-controller="FireResistance" asp-action="LoadColumnFireFourSide" asp-route-id="@obj.Id" type="submit">Колонна @obj.HeighColumn x @obj.WidthColumn, @obj.FireResistanceValue, M=@moment т*м, N=@strength т</a>
+                                </form>
+                            </td>
                             <td width="30%">@obj.SaveDate</td>
                             <td class="text-center">
                                 <div class="w-75 btn-group" role="group">
-                                    <a asp-controller="" asp-route-Id="@obj.Id" asp-action="Delete" class="btn btn-danger mx-2">
+                                    <a asp-controller="Archive" asp-action="DeleteDataOfColumn" asp-route-Id="@obj.Id" class="btn btn-danger mx-2">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
                                 </div>
@@ -65,11 +73,19 @@
                     @foreach (var obj in Model.DataForSlab)
                     {
                         <tr>
-                            <td width="50%">@obj.FireResistanceValue;h=@obj.Heigh;L1=@obj.LengthAcross;L2=@obj.LengthAlong</td>
+                            <td width="50%">
+                                <form method="post">
+                                    @{
+                                        double distributedLoad = obj.DistributedLoad / 0.0098066501;
+                                        string pillar = obj.IsOnCollums == 1 ? "колонны" : "стены";
+                                    }
+                                    <a asp-controller="FireResistance" asp-action="LoadSlab" asp-route-id="@obj.Id" type="submit">Плита опретая на @pillar, h = @obj.Heigh, @obj.FireResistanceValue, M=@distributedLoad т/м2</a>
+                                </form>
+                            </td>
                             <td width="30%">@obj.SaveDate</td>
                             <td class="text-center">
                                 <div class="w-75 btn-group" role="group">
-                                    <a asp-controller="" asp-route-Id="@obj.Id" asp-action="Delete" class="btn btn-danger mx-2">
+                                    <a asp-route-Id="@obj.Id" asp-action="DeleteDataOfSlab" class="btn btn-danger mx-2">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
                                 </div>
@@ -87,3 +103,4 @@
 
 
 </div>
+
