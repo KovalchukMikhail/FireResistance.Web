@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireResistance.Web", "FireResistance.Web\FireResistance.Web.csproj", "{6D49CA59-EF48-4243-9B07-AFA1AA0ECBBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FireResistance.Web", "FireResistance.Web\FireResistance.Web.csproj", "{6D49CA59-EF48-4243-9B07-AFA1AA0ECBBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireResistance.Core", "FireResistance.Core\FireResistance.Core.csproj", "{49762291-7465-4B91-B88A-14ACBECB4F64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FireResistance.Core", "FireResistance.Core\FireResistance.Core.csproj", "{49762291-7465-4B91-B88A-14ACBECB4F64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireResistance.Report", "FireResistance.Report\FireResistance.Report.csproj", "{FFAE72C0-2A5E-4379-B0EF-5AD3D4C32EE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireResistance.Logger", "Logger\FireResistance.Logger.csproj", "{69DB4D9A-7BC9-4119-A911-3067D00EEEC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{49762291-7465-4B91-B88A-14ACBECB4F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49762291-7465-4B91-B88A-14ACBECB4F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49762291-7465-4B91-B88A-14ACBECB4F64}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FFAE72C0-2A5E-4379-B0EF-5AD3D4C32EE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FFAE72C0-2A5E-4379-B0EF-5AD3D4C32EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FFAE72C0-2A5E-4379-B0EF-5AD3D4C32EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FFAE72C0-2A5E-4379-B0EF-5AD3D4C32EE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69DB4D9A-7BC9-4119-A911-3067D00EEEC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69DB4D9A-7BC9-4119-A911-3067D00EEEC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69DB4D9A-7BC9-4119-A911-3067D00EEEC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69DB4D9A-7BC9-4119-A911-3067D00EEEC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
