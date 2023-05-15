@@ -8,9 +8,7 @@ namespace FireResistance.Web.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
+            : base(options) { }
         public DbSet<ColumnFireIsWithFourSidesData> ColumnFireIsWithFourSidesData { get; set; }
         public DbSet<SlabWithRigidConnectionData> SlabWithRigidConnectionData { get; set; }
     }
