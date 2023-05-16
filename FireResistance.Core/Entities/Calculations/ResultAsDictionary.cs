@@ -1,11 +1,4 @@
 ﻿using FireResistance.Core.Entities.Calculations.AbstractClasses;
-using FireResistance.Core.Entities.SourceDataForCalculation;
-using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FireResistance.Core.Entities.Calculations
 {

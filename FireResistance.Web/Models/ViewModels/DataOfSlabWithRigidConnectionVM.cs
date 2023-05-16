@@ -1,5 +1,4 @@
 ﻿using FireResistance.Core.Entities.Calculations;
-using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 
 namespace FireResistance.Web.Models.ViewModels

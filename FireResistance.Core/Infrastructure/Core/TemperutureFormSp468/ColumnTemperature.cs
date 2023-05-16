@@ -1,17 +1,7 @@
 ﻿using FireResistance.Core.Data;
-using FireResistance.Core.Entities.Constructions.AbstractClasses;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
-using FireResistance.Core.Entities.Materials;
-using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
 {

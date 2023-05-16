@@ -2,25 +2,26 @@
 using FireResistance.Core;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using Microsoft.AspNetCore.Mvc;
-using System.Text;
 using FireResistance.Web.Models.ViewModels;
-using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Web.Data;
 using System.Security.Claims;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using FireResistance.Logger;
 
 namespace FireResistance.Web.Controllers
 {
     public class FireResistanceController : Controller
     {
         private ApplicationDbContext db;
-        public FireResistanceController(ApplicationDbContext db)
+        private FileLogger logger;
+        public FireResistanceController(ApplicationDbContext db, FileLogger logger)
         {
             this.db = db;
+            this.logger = logger;
         }
         [HttpGet]
         public IActionResult ColumnFireFourSide()
         {
+            AddLog();
             return View();
         }
 
@@ -48,12 +49,14 @@ namespace FireResistance.Web.Controllers
 
         private DataOfColumnFireFourSideVM GetDataOfColumn(ColumnFireIsWithFourSidesData sourceData)
         {
+            AddLog();
             DataOfColumnFireFourSideVM data = new DataOfColumnFireFourSideVM(sourceData);
             if (ModelState.IsValid)
             {
                 FireResistanceBasic fireResistance = new FireResistanceBasic();
                 fireResistance.PerformCalculation(sourceData);
                 data.Result = fireResistance.GetResult() as ResultAsDictionary;
+                AddLog(data.SourceData.ToString());
             }
             return data;
         }
@@ -61,6 +64,7 @@ namespace FireResistance.Web.Controllers
         [HttpGet]
         public IActionResult SlabWithRigidConnectionToColumns()
         {
+            AddLog();
             return View();
         }
 
@@ -74,6 +78,7 @@ namespace FireResistance.Web.Controllers
         [HttpGet]
         public IActionResult SlabWithRigidConnectionToTwoWalls()
         {
+            AddLog();
             return View();
         }
         [HttpPost]
@@ -102,10 +107,15 @@ namespace FireResistance.Web.Controllers
                 FireResistanceBasic fireResistance = new FireResistanceBasic();
                 fireResistance.PerformCalculation(sourceData);
                 data.Result = fireResistance.GetResult() as ResultAsDictionary;
+                AddLog(data.SourceData.ToString());
             }
             return data;
         }
 
-
+        private void AddLog(string text = "")
+        {
+            string log = $"User:{User.Identity.Name}; DateTime:{DateTime.Now}; Obj:{this}; info:{text}";
+            logger.AddLog(log);
+        }
     }
 }

@@ -1,14 +1,10 @@
 ﻿using FireResistance.Core.Controllers.Interfaces;
-using FireResistance.Core.Data.Interfaces;
 using FireResistance.Core.Dependency;
-using FireResistance.Core.Entities.Calculations;
 using FireResistance.Core.Entities.Calculations.AbstractClasses;
 using FireResistance.Core.Entities.Calculator.AbstractClasses;
-using FireResistance.Core.Entities.SourceDataForCalculation;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace FireResistance.Core
 {

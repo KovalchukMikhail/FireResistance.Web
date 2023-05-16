@@ -1,11 +1,5 @@
 ﻿using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Core
 {

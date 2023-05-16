@@ -1,0 +1,35 @@
+User:ty@ya.ru; DateTime:16.05.2023 14:39:33; Obj: FireResistance.Web.Controllers.MainController
+User:ty@ya.ru; DateTime:16.05.2023 14:39:33; Obj: FireResistance.Web.Controllers.MainController
+User:ty@ya.ru; DateTime:16.05.2023 14:39:42; Obj: FireResistance.Web.Controllers.MainController
+User:ty@ya.ru; DateTime:16.05.2023 14:40:07; Obj: FireResistance.Web.Controllers.MainController
+User:ty@ya.ru; DateTime:16.05.2023 14:40:21; Obj:FireResistance.Web.Controllers.ArchiveController
+User:ty@ya.ru; DateTime:16.05.2023 14:40:21; Obj:FireResistance.Web.Controllers.ArchiveController
+User:ty@ya.ru; DateTime:16.05.2023 14:40:24; Obj:FireResistance.Web.Controllers.FireResistanceController; info:[FireResistanceValue:R120, ArmatureClass:А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544_2006, ConcreteType:ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ, ConcreteClass:B30, ArmatureDiameter:10, ArmatureCount:5, IsOnCollums:1, LengthAlong:1000, LengthAcross:5000, DistanceFromEdgeOfColumnToHinge:100, Heigh:200, ArmatureInstallationDepthFromBelow:45, ArmatureInstallationDepthFromAbove:45, ArmatureCountFromAbove:5,ArmatureDiameterFromAbove:10, DistributedLoad:0,0098066501]
+User:ty@ya.ru; DateTime:16.05.2023 14:40:39; Obj:FireResistance.Web.Controllers.FireResistanceController; info:[FireResistanceValue:R150, ArmatureClass:А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544_2006, ConcreteType:ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ, ConcreteClass:B30, ArmatureDiameter:10, ArmatureCount:5, IsOnCollums:1, LengthAlong:1000, LengthAcross:5000, DistanceFromEdgeOfColumnToHinge:100, Heigh:60, ArmatureInstallationDepthFromBelow:20, ArmatureInstallationDepthFromAbove:20, ArmatureCountFromAbove:5,ArmatureDiameterFromAbove:10, DistributedLoad:0,0098066501]
+User:ty@ya.ru; DateTime:16.05.2023 15:05:25; Obj: FireResistance.Web.Controllers.MainController
+User:ty@ya.ru; DateTime:16.05.2023 15:05:30; Obj: FireResistance.Web.Controllers.MainController
+User:ty@ya.ru; DateTime:16.05.2023 15:05:32; Obj:FireResistance.Web.Controllers.FireResistanceController; info:
+User:; DateTime:16.05.2023 15:05:33; Obj: FireResistance.Web.Controllers.MainController
+User:; DateTime:16.05.2023 15:05:35; Obj: FireResistance.Web.Controllers.MainController
+User:; DateTime:16.05.2023 15:05:36; Obj:FireResistance.Web.Controllers.FireResistanceController; info:
+User:ty@ya.ru; DateTime:16.05.2023 15:05:41; Obj:FireResistance.Web.Controllers.ArchiveController
+User:ty@ya.ru; DateTime:16.05.2023 15:05:41; Obj:FireResistance.Web.Controllers.ArchiveController
+User:; DateTime:16.05.2023 15:05:43; Obj: FireResistance.Web.Controllers.MainController
+User:ii@ya.ru; DateTime:16.05.2023 15:06:11; Obj: FireResistance.Web.Controllers.MainController
+User:ii@ya.ru; DateTime:16.05.2023 15:06:15; Obj:FireResistance.Web.Controllers.FireResistanceController; info:
+User:ii@ya.ru; DateTime:16.05.2023 15:06:16; Obj:FireResistance.Web.Controllers.ArchiveController
+User:ii@ya.ru; DateTime:16.05.2023 15:06:16; Obj:FireResistance.Web.Controllers.ArchiveController
+User:ii@ya.ru; DateTime:16.05.2023 15:06:17; Obj:FireResistance.Web.Controllers.FireResistanceController; info:
+User:ii@ya.ru; DateTime:16.05.2023 15:06:27; Obj:FireResistance.Web.Controllers.FireResistanceController; info:
+User:ii@ya.ru; DateTime:16.05.2023 15:06:54; Obj:FireResistance.Web.Controllers.FireResistanceController; info:[FireResistanceValue:R150, ArmatureClass:А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544_2006, ConcreteType:ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ, ConcreteClass:B30, ArmatureDiameter:10, ArmatureCount:5, IsOnCollums:0, LengthAlong:1000, LengthAcross:5000, DistanceFromEdgeOfColumnToHinge:0, Heigh:60, ArmatureInstallationDepthFromBelow:20, ArmatureInstallationDepthFromAbove:20, ArmatureCountFromAbove:5,ArmatureDiameterFromAbove:10, DistributedLoad:0,0098066501]
+User:ii@ya.ru; DateTime:16.05.2023 15:07:04; Obj:FireResistance.Web.Controllers.FireResistanceController; info:[FireResistanceValue:R150, ArmatureClass:А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544_2006, ConcreteType:ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ, ConcreteClass:B30, ArmatureDiameter:10, ArmatureCount:5, IsOnCollums:0, LengthAlong:1000, LengthAcross:5000, DistanceFromEdgeOfColumnToHinge:0, Heigh:200, ArmatureInstallationDepthFromBelow:45, ArmatureInstallationDepthFromAbove:45, ArmatureCountFromAbove:5,ArmatureDiameterFromAbove:10, DistributedLoad:0,0098066501]
+User:ii@ya.ru; DateTime:16.05.2023 15:07:07; Obj:FireResistance.Web.Controllers.FireResistanceController; info:[FireResistanceValue:R150, ArmatureClass:А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544_2006, ConcreteType:ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ, ConcreteClass:B30, ArmatureDiameter:10, ArmatureCount:5, IsOnCollums:0, LengthAlong:1000, LengthAcross:5000, DistanceFromEdgeOfColumnToHinge:0, Heigh:200, ArmatureInstallationDepthFromBelow:45, ArmatureInstallationDepthFromAbove:45, ArmatureCountFromAbove:5,ArmatureDiameterFromAbove:10, DistributedLoad:0,0098066501]
+User:ii@ya.ru; DateTime:16.05.2023 15:07:08; Obj:FireResistance.Web.Controllers.ArchiveController
+User:ii@ya.ru; DateTime:16.05.2023 15:07:08; Obj:FireResistance.Web.Controllers.ArchiveController
+User:ii@ya.ru; DateTime:16.05.2023 15:07:10; Obj:FireResistance.Web.Controllers.FireResistanceController; info:[FireResistanceValue:R150, ArmatureClass:А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544_2006, ConcreteType:ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ, ConcreteClass:B30, ArmatureDiameter:10, ArmatureCount:5, IsOnCollums:0, LengthAlong:1000, LengthAcross:5000, DistanceFromEdgeOfColumnToHinge:0, Heigh:200, ArmatureInstallationDepthFromBelow:45, ArmatureInstallationDepthFromAbove:45, ArmatureCountFromAbove:5,ArmatureDiameterFromAbove:10, DistributedLoad:0,0098066501]
+User:ii@ya.ru; DateTime:16.05.2023 15:07:19; Obj:FireResistance.Web.Controllers.FireResistanceController; info:[FireResistanceValue:R120, ArmatureClass:А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544_2006, ConcreteType:ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ, ConcreteClass:B30, ArmatureDiameter:10, ArmatureCount:5, IsOnCollums:0, LengthAlong:1000, LengthAcross:5000, DistanceFromEdgeOfColumnToHinge:0, Heigh:180, ArmatureInstallationDepthFromBelow:45, ArmatureInstallationDepthFromAbove:45, ArmatureCountFromAbove:5,ArmatureDiameterFromAbove:10, DistributedLoad:0,0098066501]
+User:ii@ya.ru; DateTime:16.05.2023 15:07:21; Obj:FireResistance.Web.Controllers.FireResistanceController; info:[FireResistanceValue:R120, ArmatureClass:А500С_МАРКА_25Г2С_ПО_ГОСТ_Р_52544_2006, ConcreteType:ТЯЖЕЛЫЙ_НА_СИЛИКАТНОМ_ЗАПОЛНИТЕЛЕ, ConcreteClass:B30, ArmatureDiameter:10, ArmatureCount:5, IsOnCollums:0, LengthAlong:1000, LengthAcross:5000, DistanceFromEdgeOfColumnToHinge:0, Heigh:180, ArmatureInstallationDepthFromBelow:45, ArmatureInstallationDepthFromAbove:45, ArmatureCountFromAbove:5,ArmatureDiameterFromAbove:10, DistributedLoad:0,0098066501]
+User:ii@ya.ru; DateTime:16.05.2023 15:07:23; Obj:FireResistance.Web.Controllers.ArchiveController
+User:ii@ya.ru; DateTime:16.05.2023 15:07:23; Obj:FireResistance.Web.Controllers.ArchiveController
+User:ii@ya.ru; DateTime:16.05.2023 15:07:24; Obj:FireResistance.Web.Controllers.ArchiveController
+User:ii@ya.ru; DateTime:16.05.2023 15:07:26; Obj: FireResistance.Web.Controllers.MainController

@@ -1,12 +1,4 @@
-﻿using FireResistance.Core.Data;
-using FireResistance.Core.Entities.Constructions.ConstructionBasic;
-using FireResistance.Core.Infrastructure.Core;
-using FireResistance.Core.Infrastructure.Utilities.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.interfaces
 {

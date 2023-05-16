@@ -1,28 +1,13 @@
-﻿using FireResistance.Core.Data;
-using FireResistance.Core.Entities.Calculations;
-using FireResistance.Core.Entities.Calculations.AbstractClasses;
-using FireResistance.Core.Entities.Constructions.AbstractClasses;
+﻿using FireResistance.Core.Entities.Calculations.AbstractClasses;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
-using FireResistance.Core.Entities.Materials;
-using FireResistance.Core.Entities.Materials.AbstractClasses;
-using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.interfaces;
-using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic;
-using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
-using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
-using FireResistance.Core.Infrastructure.Utilities.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
+using FireResistance.Logger;
+
 
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
@@ -36,6 +21,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
         private TempValuesForColumn values;
         private IColumnFireIsWithFourSidesEquationsManager equationsManager;
         private IColumnFireIsWithFourSidesResultCreator resultCreator;
+        private FileLogger logger;
 
         private bool firstTime { get; set; } = true;
 
@@ -43,13 +29,15 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
                                                         TempValuesForColumn values,
                                                         IColumnFireIsWithFourSidesEquationsManager equationsManager,
                                                         ColumnFactoryFR columnFactory,
-                                                        IColumnFireIsWithFourSidesResultCreator resultCreator)
+                                                        IColumnFireIsWithFourSidesResultCreator resultCreator,
+                                                        FileLogger logger)
         {
             this.result = result;
             this.values = values;
             this.equationsManager = equationsManager;
             this.columnFactory = columnFactory;
             this.resultCreator = resultCreator;
+            this.logger = logger;
         }
 
         public void SetSourceData(SourceData sourceData)
@@ -65,10 +53,12 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             }
             catch (ExceptionFRBasic ex)
             {
-                result.ExeptionList.Add($"{ex.Message}. Значение переменной вызвавшей ошибку равно {ex.InvalidValue}");
+                logger.AddLogException($"DateTime:{DateTime.Now}; ex.Message:{ex.Message}; sourceData:{sourceData}");
+                result.ExeptionList.Add($"DateTime:{DateTime.Now}; {ex.Message}. Значение переменной вызвавшей ошибку равно {ex.InvalidValue}");
             }
             catch (Exception ex)
             {
+                logger.AddLogException($"DateTime:{DateTime.Now}; ex.Message:{ex.Message}; sourceData:{sourceData}");
                 result.ExeptionList.Add($"{ex.Message}.");
             }
 
@@ -108,10 +98,12 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             }
             catch (ExceptionFRBasic ex)
             {
+                logger.AddLogException($"DateTime:{DateTime.Now}; ex.Message:{ex.Message}; sourceData:{sourceData}");
                 result.ExeptionList.Add($"{ex.Message}. Значение переменной вызвавшей ошибку равно {ex.InvalidValue}.");
             }
             catch (Exception ex)
             {
+                logger.AddLogException($"DateTime:{DateTime.Now}; ex.Message:{ex.Message}; sourceData:{sourceData}");
                 result.ExeptionList.Add($"{ex.Message}.");
             }
         }

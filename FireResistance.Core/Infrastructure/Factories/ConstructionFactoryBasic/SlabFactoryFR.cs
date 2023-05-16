@@ -5,16 +5,8 @@ using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
-using FireResistance.Core.Infrastructure.Core.TemperutureFormSp468;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
 {

@@ -1,11 +1,5 @@
 ﻿using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
-using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FireResistance.Core.Infrastructure.Core.Interfaces
 {

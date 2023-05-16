@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
@@ -36,6 +31,20 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
         {
             get { return distributedLoad; }
             set { distributedLoad = value * 0.0098066501; }
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $"IsOnCollums:{IsOnCollums}, " +
+                                        $"LengthAlong:{LengthAlong}, " +
+                                        $"LengthAcross:{LengthAcross}, " +
+                                        $"DistanceFromEdgeOfColumnToHinge:{DistanceFromEdgeOfColumnToHinge}, " +
+                                        $"Heigh:{Heigh}, " +
+                                        $"ArmatureInstallationDepthFromBelow:{ArmatureInstallationDepthFromBelow}, " +
+                                        $"ArmatureInstallationDepthFromAbove:{ArmatureInstallationDepthFromAbove}, " +
+                                        $"ArmatureCountFromAbove:{ArmatureCountFromAbove}," +
+                                        $"ArmatureDiameterFromAbove:{ArmatureDiameterFromAbove}, " +
+                                        $"DistributedLoad:{DistributedLoad}]";
         }
 
     }

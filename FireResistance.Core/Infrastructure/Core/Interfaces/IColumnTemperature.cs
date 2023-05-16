@@ -1,10 +1,4 @@
-﻿using FireResistance.Core.Entities.Constructions.AbstractClasses;
-using FireResistance.Core.Entities.Constructions.ConstructionBasic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 
 namespace FireResistance.Core.Infrastructure.Core.Interfaces
 {

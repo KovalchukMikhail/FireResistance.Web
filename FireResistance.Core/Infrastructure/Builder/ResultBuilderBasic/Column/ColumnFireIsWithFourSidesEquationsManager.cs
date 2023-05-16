@@ -1,15 +1,9 @@
 ﻿using FireResistance.Core.Data;
-using FireResistance.Core.Entities.Constructions.AbstractClasses;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.interfaces;
-using FireResistance.Core.Infrastructure.Core;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 {
@@ -22,7 +16,12 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
         private IInterpolator interpolator;
         private NameColumns nameColumns;
 
-        public ColumnFireIsWithFourSidesEquationsManager(RequestDb db, IEquationsFromSp468 equationsSp468, IEquationsFromSp63 equationsSp63, ICommonEquations commonEquations, IInterpolator interpolator, NameColumns nameColumns)
+        public ColumnFireIsWithFourSidesEquationsManager(RequestDb db,
+                                                            IEquationsFromSp468 equationsSp468,
+                                                            IEquationsFromSp63 equationsSp63,
+                                                            ICommonEquations commonEquations,
+                                                            IInterpolator interpolator,
+                                                            NameColumns nameColumns)
         {
             this.db = db;
             this.equationsSp468 = equationsSp468;

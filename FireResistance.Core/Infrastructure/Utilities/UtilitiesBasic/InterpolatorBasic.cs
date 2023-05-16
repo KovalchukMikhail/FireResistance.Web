@@ -1,11 +1,5 @@
-﻿using FireResistance.Core.ExceptionFR;
-using FireResistance.Core.Infrastructure.Utilities.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FireResistance.Core.Infrastructure.Utilities.Interfaces;
+
 
 namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
 {

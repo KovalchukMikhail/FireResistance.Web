@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FireResistance.Core.Data;
+﻿using System.ComponentModel.DataAnnotations;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
@@ -40,5 +33,15 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
             set => strength = value / 0.00010197162123;
         }
 
+        public override string ToString()
+        {
+            return base.ToString() + $"LengthColumn:{LengthColumn}, " +
+                                        $"HeighColumn:{HeighColumn}, " +
+                                        $"WidthColumn:{WidthColumn}, " +
+                                        $"ArmatureInstallationDepth:{ArmatureInstallationDepth}, " +
+                                        $"FixationElement:{FixationElement}, " +
+                                        $"Moment:{Moment}, " +
+                                        $"Strength:{Strength}]";
+        }
     }
 }

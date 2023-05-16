@@ -5,14 +5,8 @@ using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab.interfaces;
-using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab;
 using FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FireResistance.Core.Entities.Constructions.AbstractClasses;
+using FireResistance.Logger;
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
 {
@@ -25,6 +19,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
         private TempValuesForSlab values;
         private ISlabWithRigidConnectionEquationsManager equationsManager;
         private ISlabWithRigidConnectionResultCreator resultCreator;
+        private FileLogger logger;
 
         private bool firstTime { get; set; } = true;
 
@@ -32,13 +27,15 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
                                                         TempValuesForSlab values,
                                                         ISlabWithRigidConnectionEquationsManager equationsManager,
                                                         SlabFactoryFR slabFactory,
-                                                        ISlabWithRigidConnectionResultCreator resultCreator)
+                                                        ISlabWithRigidConnectionResultCreator resultCreator,
+                                                        FileLogger logger)
         {
             this.result = result;
             this.values = values;
             this.equationsManager = equationsManager;
             this.slabFactory = slabFactory;
             this.resultCreator = resultCreator;
+            this.logger = logger;
         }
 
         public void SetSourceData(SourceData sourceData)
@@ -54,10 +51,12 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
             }
             catch (ExceptionFRBasic ex)
             {
+                logger.AddLogException($"DateTime:{DateTime.Now}; ex.Message:{ex.Message}; sourceData:{sourceData}");
                 result.ExeptionList.Add($"{ex.Message}. Значение переменной вызвавшей ошибку равно {ex.InvalidValue}");
             }
             catch (Exception ex)
             {
+                logger.AddLogException($"DateTime:{DateTime.Now}; ex.Message:{ex.Message}; sourceData:{sourceData}");
                 result.ExeptionList.Add($"{ex.Message}.");
             }
 
@@ -72,10 +71,12 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
             }
             catch (ExceptionFRBasic ex)
             {
+                logger.AddLogException($"DateTime:{DateTime.Now}; ex.Message:{ex.Message}; sourceData:{sourceData}");
                 result.ExeptionList.Add($"{ex.Message}. Значение переменной вызвавшей ошибку равно {ex.InvalidValue}.");
             }
             catch (Exception ex)
             {
+                logger.AddLogException($"DateTime:{DateTime.Now}; ex.Message:{ex.Message}; sourceData:{sourceData}");
                 result.ExeptionList.Add($"{ex.Message}.");
             }
         }

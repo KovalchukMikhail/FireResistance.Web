@@ -1,20 +1,11 @@
 ﻿using FireResistance.Core.Data;
-using FireResistance.Core.Entities.Constructions.AbstractClasses;
-using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.Materials.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
-using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
-using FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
 {

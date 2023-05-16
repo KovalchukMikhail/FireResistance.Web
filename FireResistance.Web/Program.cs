@@ -1,13 +1,8 @@
 using FireResistance.Core.Data;
-using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Web.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using static Azure.Core.HttpHeader;
 using FireResistance.Logger;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +20,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddTransient<NameColumns>();
-//builder.Services.AddTransient<ILoggerFactory>();
+builder.Services.AddTransient<FileLogger>();
 
 builder.Services.AddControllersWithViews();
 

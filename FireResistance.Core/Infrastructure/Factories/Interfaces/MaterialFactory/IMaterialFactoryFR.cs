@@ -1,11 +1,4 @@
-﻿using FireResistance.Core.Entities.Constructions.AbstractClasses;
-using FireResistance.Core.Entities.Materials.AbstractClasses;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FireResistance.Core.Entities.Materials.AbstractClasses;
 
 namespace FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory
 {

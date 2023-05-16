@@ -1,12 +1,30 @@
-﻿
-
-namespace FireResistance.Logger
+﻿namespace FireResistance.Logger
 {
-    public class FileLogger : IFileLogger
+    public class FileLogger : IFileLogger, IFileLoggerException
     {
-        public void AddLog(string path, string log)
+        public virtual void AddLog(string log)
         {
-            throw new NotImplementedException();
+            WriteLog(WC.PathOfLogger, log);
+        }
+
+        public virtual void AddLogException(string log)
+        {
+            WriteLog(WC.PathOfLoggerException, log);
+        }
+
+        private async void WriteLog(string path, string log)
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(path, true))
+                {
+                    await writer.WriteLineAsync(log);
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }

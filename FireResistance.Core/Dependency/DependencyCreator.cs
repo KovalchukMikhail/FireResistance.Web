@@ -7,16 +7,12 @@ using FireResistance.Core.Entities.Calculations;
 using FireResistance.Core.Entities.Calculations.AbstractClasses;
 using FireResistance.Core.Entities.Calculator;
 using FireResistance.Core.Entities.Calculator.AbstractClasses;
-using FireResistance.Core.Entities.Constructions.AbstractClasses;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.Materials;
-using FireResistance.Core.Entities.Materials.BaseClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column;
 using FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic;
-using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
-using FireResistance.Core.Infrastructure.Factories.Interfaces.MaterialFactory;
 using FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic;
 using FireResistance.Core.Infrastructure.Core;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
@@ -24,15 +20,11 @@ using FireResistance.Core.Infrastructure.Core.TemperutureFormSp468;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 using FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.interfaces;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab.interfaces;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
+using FireResistance.Logger;
 
 namespace FireResistance.Core.Dependency
 {
@@ -85,8 +77,8 @@ namespace FireResistance.Core.Dependency
             .AddTransient<CalculatorAbstract<IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>,
                                              Dictionary<string, string>>>, CalculatorBasic>()
             .AddTransient<SlabFR>()
-            .AddTransient<ColumnFR>();
-
+            .AddTransient<ColumnFR>()
+            .AddTransient<FileLogger>();
 
         public static ServiceProvider GetServiceProvider()
         {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses
 {
@@ -23,5 +18,15 @@ namespace FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses
         public virtual int ArmatureDiameter { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "Не корректные данные")]
         public virtual int ArmatureCount { get; set; }
+
+        public override string ToString()
+        {
+            return $"[FireResistanceValue:{FireResistanceValue}, " +
+                     $"ArmatureClass:{ArmatureClass}, " +
+                     $"ConcreteType:{ConcreteType}, " +
+                     $"ConcreteClass:{ConcreteClass}, " +
+                     $"ArmatureDiameter:{ArmatureDiameter}, " +
+                     $"ArmatureCount:{ArmatureCount}, ";
+        }
     }
 }
