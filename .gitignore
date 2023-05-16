@@ -340,3 +340,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /Logger/logger.txt
+/Logger/loggerException.txt
