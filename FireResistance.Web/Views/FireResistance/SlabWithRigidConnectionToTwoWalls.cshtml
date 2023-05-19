@@ -7,12 +7,17 @@
 
 @if (Model != null)
 {
+    <div class="container">
+        <div class="row">
+            <a href="#sourcedata" style="background-color:gainsboro; border-color:gray; color:black" class="btn btn-primary">Перейти к исходным данным</a>
+        </div>
+    </div>
     <partial name="_Result" model="@Model.Result" />
-    distributedLoad = Model.SourceData.DistributedLoad / 0.0098066501;
+    distributedLoad = Math.Round(Model.SourceData.DistributedLoad / 0.0098066501, 2);
 }
 
 <div class="border p-3">
-    <h4>Расчет сплошной плиты опертой на стены, на огнестойкость при огневом воздействии снизу</h4>
+    <h4 id="sourcedata">Расчет сплошной плиты опертой на стены, на огнестойкость при огневом воздействии снизу</h4>
 </div>
 <form method="post" asp-action="SlabWithRigidConnectionToColumns">
     <input asp-for="SourceData.IsOnCollums" value="0" hidden />
@@ -121,12 +126,12 @@
     </div>
     <div class="row">
         <div class="col-md-2">
-            <button asp-action="SlabWithRigidConnectionToColumns" type="submit" class="btn btn-primary">Выполнить расчет</button>
+            <button asp-action="SlabWithRigidConnectionToColumns" type="submit" style="background-color:gainsboro; border-color:gray; color:black" class="btn btn-primary">Выполнить расчет</button>
         </div>
         @if (User.Identity.IsAuthenticated)
         {
             <div class="col-md-4">
-                <button asp-action="AddDataForCalculationOfSlab" type="submit" class="btn btn-primary">Сохранить расчетные данные</button>
+                <button asp-action="AddDataForCalculationOfSlab" type="submit" style="background-color:gainsboro; border-color:gray; color:black" class="btn btn-primary">Сохранить расчетные данные</button>
             </div>
         }
     </div>

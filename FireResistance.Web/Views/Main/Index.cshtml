@@ -6,17 +6,17 @@
             Данный ресурс предоставляет пользователям возможность проведения расчетов по определению пределов огнестойкости железобетонных конструкций.
             На данный момент реализованы 3 типа расчетов:
         </p>
-        <ol>
-            <li>
-                <a asp-controller="FireResistance" asp-action="ColumnFireFourSide">Проверка предела огнестойкости железобетонной колонны подверженной огневому воздействию с 4 сторон.</a>
-            </li>
-            <li>
-                <a asp-controller="FireResistance" asp-action="SlabWithRigidConnectionToColumns">Проверка предела огнестойкости безбалочной железобетонной плиты перекрытия сплошного сечения с жестким опиранием на колонны. При условии огневого воздействия снизу.</a>
-            </li>
-            <li>
-                <a asp-controller="FireResistance" asp-action="SlabWithRigidConnectionToTwoWalls">Проверка предела огнестойкости безбалочной железобетонной плиты перекрытия сплошного сечения с жестким опиранием по двум сторонам на стены. При условии огневого воздействия снизу.</a>
-            </li>
-        </ol>
+        <div class="container">
+            <div class="row">
+                <a asp-controller="FireResistance" asp-action="ColumnFireFourSide" style="background-color:gainsboro; border-color:gray; color:black" class="btn btn-primary">Проверка предела огнестойкости железобетонной колонны подверженной огневому воздействию с 4 сторон.</a>
+            </div> <br />
+            <div class="row">
+                <a asp-controller="FireResistance" asp-action="SlabWithRigidConnectionToColumns" style="background-color:gainsboro; border-color:gray; color:black" class="btn btn-primary">Проверка предела огнестойкости безбалочной железобетонной плиты перекрытия сплошного сечения с жестким опиранием на колонны. При условии огневого воздействия снизу.</a>
+            </div><br />
+            <div class="row">
+                <a asp-controller="FireResistance" asp-action="SlabWithRigidConnectionToTwoWalls" style="background-color:gainsboro; border-color:gray; color:black" class="btn btn-primary">Проверка предела огнестойкости безбалочной железобетонной плиты перекрытия сплошного сечения с жестким опиранием по двум сторонам на стены. При условии огневого воздействия снизу.</a>
+            </div>
+        </div>
     </section><hr>
     <section>
         <h5>Общая информация о методиках расчета огнестойкости</h5>

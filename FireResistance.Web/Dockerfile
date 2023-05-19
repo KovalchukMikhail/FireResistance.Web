@@ -21,7 +21,7 @@ RUN dotnet publish "FireResistance.Web.csproj" -c Release -o /app/publish /p:Use
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-RUN mkdir logger
+RUN mkdir ../logger
 RUN apt update
-RUN apt install nano
+RUN apt install nano -y
 ENTRYPOINT ["dotnet", "FireResistance.Web.dll"]
