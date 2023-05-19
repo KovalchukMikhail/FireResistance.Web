@@ -14,9 +14,9 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
             result.AddItemDescription("ClassNameOfConcrete", slab.ConcreteFromBelowFR.ClassName);
             result.AddItemDescription("TypeNameOfConcrete", slab.ConcreteFromBelowFR.TypeName);
             result.AddItemDescription("ClassNameOfArmature", slab.ArmatureFRFromAbove.ClassName);
-            result.AddItemResult("L1", slab.Length);
+            result.AddItemResult("l1", slab.Length);
             result.AddItemResult("h", slab.Height);
-            result.AddItemResult("L2", slab.Width);
+            result.AddItemResult("l2", slab.Width);
             result.AddItemResult("C", slab.DistanceFromEdgeOfColumnToHinge);
             result.AddItemResult("q", slab.DistributedLoad);
             result.AddItemResult("a", slab.ArmatureInstallationDepthFromBelow);
@@ -90,9 +90,9 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
                             .Append("Высота сечения:\n")
                                 .Append($"\th = {result.GetItemResult("h")} мм\n")
                             .Append("Расстояния между рядами колонн в перпендикулярном направлении (длина пролета):\n")
-                                .Append($"\tL1 = {result.GetItemResult("L1")} мм\n")
+                                .Append($"\tl1 = {result.GetItemResult("l1")} мм\n")
                             .Append("Расстояния между рядами колонн вдоль рассматриваемой полосы (ширина рассматриваемого участка плиты):\n")
-                                .Append($"\tL2 = {result.GetItemResult("L2")} мм\n")
+                                .Append($"\tl2 = {result.GetItemResult("l2")} мм\n")
                             .Append("Расстояние от крайних пластических шарниров до оси ближайших к ним рядов колонн:\n")
                                 .Append($"\tС = {result.GetItemResult("C")} мм\n");
         }
@@ -103,9 +103,9 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
                             .Append("Высота сечения:\n")
                                 .Append($"\th = {result.GetItemResult("h")} мм\n")
                             .Append("Расстояние между опорами (длина пролета):\n")
-                                .Append($"\tL1 = {result.GetItemResult("L1")} мм\n")
+                                .Append($"\tl1 = {result.GetItemResult("l1")} мм\n")
                             .Append("Ширина рассматриваемого участка плиты:\n")
-                                .Append($"\tL2 = {result.GetItemResult("L2")} мм\n")
+                                .Append($"\tl2 = {result.GetItemResult("l2")} мм\n")
                             .Append("Расстояние от крайних пластических шарниров до опоры:\n")
                                 .Append($"\tС = {result.GetItemResult("C")} мм\n");
         }
@@ -177,11 +177,11 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
         protected void BuildResult(StringBuilder stringBuilder, CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result)
         {
             stringBuilder.Append("Высота сжатой зоны в левом опорном пластическом шарнире:\n")
-                                    .Append($"\tXi,t = (Rsnt' * AsI)/(Rbnt * L2) = {result.GetItemResult("XLiT")}\n")
+                                    .Append($"\tXi,t = (Rsnt' * AsI)/(Rbnt * l2) = {result.GetItemResult("XLiT")}\n")
                                 .Append("Высота сжатой зоны в среднем опорном пластическом шарнире:\n")
-                                    .Append($"\tX1,t = (Rsnt * As1)/(Rbnt' * L2) = {result.GetItemResult("X1T")}\n")
+                                    .Append($"\tX1,t = (Rsnt * As1)/(Rbnt' * l2) = {result.GetItemResult("X1T")}\n")
                                 .Append("Высота сжатой зоны в правом опорном пластическом шарнире:\n")
-                                    .Append($"\tX'i,t = (Rsnt' * AsI)/(Rbnt * L2) = {result.GetItemResult("XRiT")}\n")
+                                    .Append($"\tX'i,t = (Rsnt' * AsI)/(Rbnt * l2) = {result.GetItemResult("XRiT")}\n")
                                 .Append("Плечо внутренней пары сил в левом пластическом шарнире. Ф. (8.43) СП468.1325800.2019:\n")
                                     .Append($"\tZI = ho't - 0,5 * Xi,t = {result.GetItemResult("ZLI")}\n")
                                 .Append("Плечо внутренней пары сил в среднем пластическом шарнире. Ф. (8.43) СП468.1325800.2019:\n")
@@ -189,7 +189,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
                                 .Append("Плечо внутренней пары сил в правом пластическом шарнире. Ф. (8.43) СП468.1325800.2019:\n")
                                     .Append($"\tZ'I = ho't - 0,5 * X'i,t = {result.GetItemResult("ZRI")}\n")
                                 .Append("Проверка условия обеспечения предела огнестойкости (формула 8.42 СП468.1325800.2019):\n")
-                                    .Append($"\t(q*L2*(L1-2*C)^2)/8 ≤ 0,5*Rsnt'*AsI*ZI+Rsnt*As1*Z1+0,5*Rsnt'*A'sI*Z'I\n");
+                                    .Append($"\t(q*l2*(l1-2*C)^2)/8 ≤ 0,5*Rsnt'*AsI*ZI+Rsnt*As1*Z1+0,5*Rsnt'*A'sI*Z'I\n");
 
             if (result.Status) stringBuilder.Append($"\t{Math.Round(result.GetItemResult("LeftPartOfFinalEquation"), 1)} ≤ {Math.Round(result.GetItemResult("RightPartOfFinalEquation"), 1)}\n")
                                 .Append($"Условие выполнено\n");

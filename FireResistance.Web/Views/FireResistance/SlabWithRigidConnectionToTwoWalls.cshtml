@@ -57,29 +57,29 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="LengthAcross">Укажите расстояние между опорами (Длина пролета): (мм):</label>
+                    <label for="LengthAcross">Укажите расстояние между опорами (Длина пролета): (l1, мм):</label>
                     <input type="number" asp-for="SourceData.LengthAcross" class="form-control" />
                     <span asp-validation-for="SourceData.LengthAcross" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label for="LengthAlong">Укажите ширина рассматриваемого участка плиты (мм):</label>
+                    <label for="LengthAlong">Укажите ширину рассматриваемого участка плиты (l2, мм):</label>
                     <input type="number" asp-for="SourceData.LengthAlong" class="form-control" />
                     <span asp-validation-for="SourceData.LengthAlong" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="Heigh">Укажите высоту плиты (мм):</label>
+                    <label for="Heigh">Укажите высоту плиты (h, мм):</label>
                     <input type="number" asp-for="SourceData.Heigh" class="form-control" />
                     <span asp-validation-for="SourceData.Heigh" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label for="ArmatureInstallationDepthFromBelow">Укажите расстояние от нижней грани элемента до оси арматуры (мм):</label>
+                    <label for="ArmatureInstallationDepthFromBelow">Укажите расстояние от нижней грани элемента до оси арматуры (a, мм):</label>
                     <input type="number" asp-for="SourceData.ArmatureInstallationDepthFromBelow" class="form-control" />
                     <span asp-validation-for="SourceData.ArmatureInstallationDepthFromBelow" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label for="ArmatureInstallationDepthFromAbove">Укажите расстояние от верхней грани элемента до оси арматуры (мм):</label>
+                    <label for="ArmatureInstallationDepthFromAbove">Укажите расстояние от верхней грани элемента до оси арматуры (a', мм):</label>
                     <input type="number" asp-for="SourceData.ArmatureInstallationDepthFromAbove" class="form-control" />
                     <span asp-validation-for="SourceData.ArmatureInstallationDepthFromAbove" class="text-danger"></span>
                 </div>

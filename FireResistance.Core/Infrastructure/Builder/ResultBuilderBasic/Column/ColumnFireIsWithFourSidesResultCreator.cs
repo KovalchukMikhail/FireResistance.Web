@@ -14,7 +14,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             result.AddItemDescription("ClassNameOfConcrete", column.ConcreteFR.ClassName);
             result.AddItemDescription("TypeNameOfConcrete", column.ConcreteFR.TypeName);
             result.AddItemDescription("ClassNameOfArmature", column.ArmatureFR.ClassName);
-            result.AddItemResult("L", column.Length);
+            result.AddItemResult("l", column.Length);
             result.AddItemResult("h", column.Height);
             result.AddItemResult("b", column.Width);
             result.AddItemResult("СoefficientFixationElement", column.СoefficientFixationElement);
@@ -139,7 +139,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             stringBuilder.Append("Требуемый предел огнестойкости\n")
                                 .Append($"\t{result.GetItemDescription("FireResistanceVolume")}\n")
                             .Append("Длина элемента:\n")
-                                .Append($"\tL = {result.GetItemResult("L")} мм\n")
+                                .Append($"\tl = {result.GetItemResult("l")} мм\n")
                             .Append("Высота сечения:\n")
                                 .Append($"\th = {result.GetItemResult("h")} мм\n")
                             .Append("Ширина сечения:\n")
@@ -257,7 +257,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             stringBuilder.Append("Относительное значение эксцентриситета продольной силы. п. 8.1.15 СП63.13330.2018:\n")
                                     .Append($"\tδe = {result.GetItemResult("deltaE")}\n")
                                 .Append("Расчетная длина элемента:\n")
-                                    .Append($"\tL0 = {result.GetItemResult("l0")} мм\n")
+                                    .Append($"\tl0 = {result.GetItemResult("l0")} мм\n")
                                 .Append("Коэф, учитывающий влияние длительности действия нагрузки. п. 8.1.15 СП63.13330.2018:\n")
                                     .Append($"\tφl = {result.GetItemResult("fiL")}\n")
                                 .Append("Момент инерции бетонного сечения относительно центра тяжести приведенного сечения:\n")
