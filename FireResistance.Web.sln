@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FireResistance.Web", "FireR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FireResistance.Core", "FireResistance.Core\FireResistance.Core.csproj", "{49762291-7465-4B91-B88A-14ACBECB4F64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireResistance.Logger", "Logger\FireResistance.Logger.csproj", "{69DB4D9A-7BC9-4119-A911-3067D00EEEC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FireResistance.Logger", "Logger\FireResistance.Logger.csproj", "{69DB4D9A-7BC9-4119-A911-3067D00EEEC5}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{AA4B7B5F-7F0D-4178-933B-EED53DBC1D78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{69DB4D9A-7BC9-4119-A911-3067D00EEEC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69DB4D9A-7BC9-4119-A911-3067D00EEEC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69DB4D9A-7BC9-4119-A911-3067D00EEEC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA4B7B5F-7F0D-4178-933B-EED53DBC1D78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA4B7B5F-7F0D-4178-933B-EED53DBC1D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA4B7B5F-7F0D-4178-933B-EED53DBC1D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA4B7B5F-7F0D-4178-933B-EED53DBC1D78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
