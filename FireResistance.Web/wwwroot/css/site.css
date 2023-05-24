@@ -9,19 +9,48 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-    color: #0366d6;
+    color: #427B86;
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    background-color: #427B86;
+    border-color: #427B86;
 }
+
+.btn-common {
+    background-color: #427B86;
+    border-color: #427B86;
+    color: #E4E6E7;
+}
+
+.btn-del {
+    background-color: #964A72;
+    border-color: #964A72;
+    color: #F3F0F2;
+}
+
+.special:hover {
+    cursor: pointer;
+    background-color: burlywood;
+}
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #427B86;
+}
+
+.form-control {
+    border: 1px solid #427B86;
+}
+.form-control:focus {
+    border-color: #427B86;
+    box-shadow: 0 0 0 0.2rem rgba(66, 123, 134, 0.25);
+}
+
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    background-color: #427B86;
+    border-color: #427B86;
 }
 
 /* Sticky footer styles
@@ -111,7 +140,7 @@ body {
     position: absolute;
     width: 100%;
     height: 30%;
-    background: rgba(0, 178, 255, 0.5);
+    background: #427B86;
     bottom: 0px;
     left: 100%;
     padding: 10px;
@@ -128,7 +157,7 @@ body {
 .box {
     width: 200px;
     height: 200px;
-    background: #0088cc;
+    background: #427B86;
     padding: 2%;
     display: table-cell;
     text-align: center;
@@ -206,6 +235,7 @@ body {
         color: lightseagreen;
     }
 
+
 #logreg-form .lines {
     width: 200px;
     border: 1px solid red;
@@ -217,7 +247,7 @@ body {
 }
 
 .facebook-btn {
-    background-color: #3C589C;
+    background-color: #427B86;
     color: white;
 }
 

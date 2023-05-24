@@ -9,7 +9,7 @@
 {
     <div class="container">
         <div class="row">
-            <a href="#sourcedata" style="background-color:gainsboro; border-color:gray; color:black" class="btn btn-primary">Перейти к исходным данным</a>
+            <a href="#sourcedata" class="btn btn-common">Перейти к исходным данным</a>
         </div>
     </div>
     <partial name="_Result" model="@Model.Result" />
@@ -130,12 +130,12 @@
     </div>
     <div class="row">
         <div class="col-md-2">
-            <button asp-action="SlabWithRigidConnectionToColumns" type="submit" style="background-color:gainsboro; border-color:gray; color:black" class="btn btn-primary">Выполнить расчет</button>
+            <button asp-action="SlabWithRigidConnectionToColumns" type="submit" class="btn btn-common">Выполнить расчет</button>
         </div>
         @if (User.Identity.IsAuthenticated)
         {
             <div class="col-md-4">
-                <button asp-action="AddDataForCalculationOfSlab" type="submit" style="background-color:gainsboro; border-color:gray; color:black" class="btn btn-primary">Сохранить расчетные данные</button>
+                <button asp-action="AddDataForCalculationOfSlab" type="submit" class="btn btn-common">Сохранить расчетные данные</button>
             </div>
         }
     </div>
