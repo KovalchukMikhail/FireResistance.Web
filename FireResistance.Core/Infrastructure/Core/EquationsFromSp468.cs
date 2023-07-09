@@ -169,8 +169,8 @@ namespace FireResistance.Core.Infrastructure.Core
             => Rbnt * (bt * xt * (h0 - 0.5 * xt) - hft * (h0 - 0.5 * hft));
 
         /// <summary>Equation (8.22)</summary>
-        public double GetB(double Rsct, double AsStretch, double h0, double a)
-            => Rsct * AsStretch * (h0 - a);
+        public double GetB(double Rsct, double AsSqueeze, double h0, double a)
+            => Rsct * AsSqueeze * (h0 - a);
 
         /// <summary>Equation (8.23)</summary>
         public bool CheckEquationEightDotTwentyThree(double fi, double Nn, double Rbnt, double Ared, double Rsct, double Astot, out double partRight)
@@ -191,11 +191,11 @@ namespace FireResistance.Core.Infrastructure.Core
         }
 
         /// <summary>Equation (8.26)</summary>
-        public double GetXtEquationEightDotTwentySix(double Nn, double Rsnl, double AsStretch, double Rsct, double Rbnt, double bt)
+        public double GetXtEquationEightDotTwentySix(double Nn, double Rsnt, double AsStretch, double Rsct, double Rbnt, double bt)
         {
             if (Rbnt <= 0) throw new ExceptionFRBasic("Недопустимое значение Rbnt, ошибка возникла при определении Xt в формуле 8.26 СП468", Rbnt);
             if (bt <= 0) throw new ExceptionFRBasic("Недопустимое значение bt, ошибка возникла при определении Xt в формуле 8.26 СП468", bt);
-            return (Nn + Rsnl * AsStretch - Rsct * AsStretch) / (Rbnt * bt);
+            return (Nn + Rsnt * AsStretch - Rsct * AsStretch) / (Rbnt * bt);
         }
 
         /// <summary>Equation (8.27)</summary>

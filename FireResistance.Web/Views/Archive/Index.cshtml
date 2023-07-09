@@ -42,9 +42,7 @@
                             </td>
                             <td width="30%">@obj.SaveDate</td>
                             <td class="text-center">
-                                <div class="w-75 btn-group" role="group">
-                                    <a asp-controller="Archive" asp-action="DeleteDataOfColumn" asp-route-Id="@obj.Id" class="btn btn-del">Удалить</a>
-                                </div>
+                                <a asp-controller="Archive" asp-action="DeleteDataOfColumn" asp-route-Id="@obj.Id" class="btn btn-del">Удалить</a>
                             </td>
                         </tr>
                     }
