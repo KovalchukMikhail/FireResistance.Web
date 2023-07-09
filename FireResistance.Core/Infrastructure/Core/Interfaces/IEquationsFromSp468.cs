@@ -212,78 +212,239 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public double GetMultTEquationEightDotNineteen(double[] Rsnt, double[] AsStretch, double[] h0, double[] xtForLeft, double[] xtForRight, double[] Rsct, double[] AsSqueeze, double[] a);
 
         /// <summary>Формула (8.20)</summary>
+        /// <param name="Mn">Нормативное значение изгибающего момента</param>
+        /// <param name="A">Определяется по формуле (8.21)</param>
+        /// <param name="B">Определяется по формуле (8.22)</param>
+        /// <param name="Rsn">Нормативное сопративление арматуры. Определяется на основании СП63</param>
+        /// <param name="AsStretch">Площадь сечения растянутой арматуры</param>
+        /// <param name="h0">Рабочая высота сечения</param>
+        /// <param name="xt">Высота сжатой зоны.</param>
+        /// <returns>Возвращаемый тип double. Критическое значение коэффициента условий работы растянутой арматуры.</returns>
         public double GetGammaSCr(double Mn, double A, double B, double Rsn, double AsStretch, double h0, double xt);
 
         /// <summary>Формула (8.21)</summary>
+        /// <param name="Rbnt">Нормативное сопротивления бетона осевому сжатию с учетом увеличения температуры. Определяется по формуле (5.1)</param>
+        /// <param name="bt">Ширина сечения с учетом увеличения температуры.</param>
+        /// <param name="xt">Высота сжатой зоны.</param>
+        /// <param name="h0">Рабочая высота сечения</param>
+        /// <param name="hft">Высота полки с учетом увеличения температуры. Определяется по формуле (8.4)</param>
+        /// <returns>Возвращаемый тип double.</returns>
         public double GetA(double Rbnt, double bt, double xt, double h0, double hft);
 
         /// <summary>Формула (8.22)</summary>
-        public double GetB(double Rsct, double AsStretch, double h0, double a);
+        /// <param name="Rsct">Расчетное сопротивление арматуры сжатию с учетом увеличения температуры. Определяется по формуле (5.6)</param>
+        /// <param name="AsSqueeze">Площадь сечения сжатой арматуры</param>
+        /// <param name="h0">Рабочая высота сечения</param>
+        /// <param name="a">Расстояние от края сечения до центра тяжести арматуры AsSqueeze</param>
+        /// <returns>Возвращаемый тип double.</returns>
+        public double GetB(double Rsct, double AsSqueeze, double h0, double a);
 
         /// <summary>Формула (8.23)</summary>
+        /// <param name="fi">Коэфициент продольного изгиба. Определяется по таблице 8.1</param>
+        /// <param name="Nn">Нормативное значение продольной силы</param>
+        /// <param name="Rbnt">Нормативное сопротивления бетона осевому сжатию с учетом увеличения температуры. Определяется по формуле (5.1)</param>
+        /// <param name="Ared">Приведенная площадь сечения. Определяется по формуле (8.8)</param>
+        /// <param name="Rsct">Расчетное сопротивление арматуры сжатию с учетом увеличения температуры. Определяется по формуле (5.6)</param>
+        /// <param name="Astot">Площадь всей продольной арматуры в сечении</param>
+        /// <returns>Возвращаемый тип bool. Если условие выполняется возвращается true если не выполняется false.</returns>
         public bool CheckEquationEightDotTwentyThree(double fi, double Nn, double Rbnt, double Ared, double Rsct, double Astot, out double partRight);
 
         /// <summary>Формула (8.24)</summary>
+        /// <param name="d">Диаметр колонны</param>
+        /// <param name="at">Глубина прогрева бетона для круглой колонны. Определяется по пункту 8.19</param>
+        /// <returns>Возвращаемый тип double. Значение площади приведенного круглого сечения.</returns>
         public double GetAred(double d, double at);
 
         /// <summary>Формула (8.25)</summary>
+        /// <param name="Nn">Нормативное значение продольной силы</param>
+        /// <param name="e">Эксцентриситет или расстояние от точки пприложения продольной силы до центра тяжести сечения растянутой
+        ///  или менее сжатой арматуры колонны при огневом воздействии. Определяется по формуле 8.28</param>
+        ///  <param name="Rbnt">Нормативное сопротивления бетона осевому сжатию с учетом увеличения температуры. Определяется по формуле (5.1)</param>
+        ///  <param name="bt">Ширина сечения с учетом увеличения температуры.</param>
+        ///  <param name="xt">Высота сжатой зоны. Определяется по формуле (8.26) при ξ меньше или равном ξR иначе по формуле (8.27)</param>
+        ///  <param name="h0t">Рабочая высота сечения с учетом увеличения температуры.</param>
+        ///  <param name="Rsct">Расчетное сопротивление арматуры сжатию с учетом увеличения температуры. Определяется по формуле (5.6)</param>
+        ///  <param name="AsSqueeze">Площадь сечения сжатой арматуры</param>
+        ///  <param name="h0">Рабочая высота сечения</param>
+        ///  <param name="a">Расстояние от края сечения до центра тяжести арматуры AsSqueeze</param>
+        /// <returns>Возвращаемый тип bool. Если условие выполняется возвращается true если не выполняется false.</returns>
         public bool CheckEquationEightDotTwentyFive(double Nn, double e, double Rbnt, double bt, double xt, double h0t, double Rsct, double AsSqueeze, double h0, double a, out double partLeft, out double partRight);
 
         /// <summary>Формула (8.26)</summary>
-        public double GetXtEquationEightDotTwentySix(double Nn, double Rsnl, double AsStretch, double Rsct, double Rbnt, double bt);
+        /// <param name="Nn">Нормативное значение продольной силы</param>
+        /// <param name="Rsnt">Нормативное сопротивления арматуры с учетом увеличения температуры. Определяется по формуле (5.5)</param>
+        /// <param name="AsStretch">Площадь сечения растянутой арматуры</param>
+        /// <param name="Rsct">Расчетное сопротивление арматуры сжатию с учетом увеличения температуры. Определяется по формуле (5.6)</param>
+        /// <param name="Rbnt">Нормативное сопротивления бетона осевому сжатию с учетом увеличения температуры. Определяется по формуле (5.1)</param>
+        /// <param name="bt">Ширина сечения с учетом увеличения температуры.</param>
+        /// <returns>Возвращаемый тип double. Значение высоты сжатой зоны при ξ меньше или равном ξR.</returns>
+        public double GetXtEquationEightDotTwentySix(double Nn, double Rsnt, double AsStretch, double Rsct, double Rbnt, double bt);
 
         /// <summary>Формула (8.27)</summary>
-        public double GetXtEquationEightDotTwentySeven(double Nn, double Rsnt, double AsStretch, double Er, double Rsct, double AsSqueeze, double Rbnt, double bt, double h0t);
+        /// <param name="Nn">Нормативное значение продольной силы</param>
+        /// <param name="Rsnt">Нормативное сопротивления арматуры с учетом увеличения температуры. Определяется по формуле (5.5)</param>
+        /// <param name="AsStretch">Площадь сечения растянутой арматуры</param>
+        /// <param name="KsiR">Граничное значение относительной высоты сжатой зоны. Определется согласно СП63</param>
+        /// <param name="Rsct">Расчетное сопротивление арматуры сжатию с учетом увеличения температуры. Определяется по формуле (5.6)</param>
+        /// <param name="AsSqueeze">Площадь сечения сжатой арматуры</param>
+        /// <param name="Rbnt">Нормативное сопротивления бетона осевому сжатию с учетом увеличения температуры. Определяется по формуле (5.1)</param>
+        /// <param name="bt">Ширина сечения с учетом увеличения температуры.</param>
+        /// <param name="h0t">Рабочая высота сечения с учетом увеличения температуры.</param>
+        /// <returns>Возвращаемый тип double. Значение высоты сжатой зоны при ξ больше ξR.</returns>
+        public double GetXtEquationEightDotTwentySeven(double Nn, double Rsnt, double AsStretch, double KsiR, double Rsct, double AsSqueeze, double Rbnt, double bt, double h0t);
 
         /// <summary>Формула (8.28)</summary>
+        /// <param name="e0">Эксцентриситет. Определяется погласно СП63</param>
+        /// <param name="n">Коэффициент учитывающий влияние прогиба на значение эксцентриситета продольной силы. Определяется погласно СП63</param>
+        /// <param name="h0">Рабочая высота сечения</param>
+        /// <param name="a">Расстояние от края сечения до центра тяжести арматуры</param>
+        /// <param name="et">Дополнительный эксцентриситет от огневого воздействия. Определяется по формуле 8.29 с учетом информации пункта 8.21</param>
+        /// <returns>Возвращаемый тип double. Значение эксцентриситета или расстояния от точки пприложения продольной силы до центра тяжести сечения растянутой
+        ///  или менее сжатой арматуры колонны при огневом воздействии.</returns>
         public double GetEEquationEightDotTwentyEight(double e0, double n, double h0, double a, double et);
 
         /// <summary>Формула (8.29)</summary>
+        /// <param name="a">Расстояние от края сечения до центра тяжести арматуры</param>
+        /// <param name="alphaSt">Коэффициент принимаемый по таблице 5.7 в зависимости от температуры арматуры у нагреваемой грани.</param>
+        /// <param name="alphaBt">Коэффициент принимаемый по таблице 5.3 в зависимости от температуры бетона менее нагретой сжатой грани.</param>
+        /// <param name="ts">Температура арматуры.</param>
+        /// <param name="tb">Температура бетона.</param>
+        /// <param name="lo">расчетная длина колонны. Определяется в соответсвии с пунктом 8.21</param>
+        /// <param name="h0t">Рабочая высота сечения с учетом увеличения температуры.</param>
+        /// <returns>Возвращаемый тип double. Значение дополнительного эксцентриситета от огневого воздействия.</returns>
         public double GetEt(double a, double alphaSt, double ts, double alphaBt, double tb, double lo, double h0t);
 
         /// <summary>Формула (8.30)</summary>
+        /// <param name="e0">Эксцентриситет. Определяется погласно СП63</param>
+        /// <param name="Eb1">Определяют по формуле (12.7)</param>
+        /// <param name="Jred">Определяют по формуле (8.125) СП 63.13330.2018 с учетом формулы (12.6)</param>
+        /// <param name="Nn">Нормативное значение продольной силы</param>
+        /// <param name="lo">расчетная длина колонны. Определяется в соответсвии с пунктом 8.21</param>
+        /// <returns>Возвращаемый тип double. Значение эксцентриситета или расстояния от точки приложения продольной силы до центра тяжести сечения растянутой
+        ///  или менее сжатой арматуры колонны при четырехстороннем огневом воздействии.</returns>
         public double GetEEquationEightDotThirty(double e0, double Eb1, double Jred, double Nn, double l0);
 
         /// <summary>Формула (8.31)</summary>
+        /// <param name="Nn">Продольная растягивающая сила от нормативной внешней нагрузки</param>
+        /// <param name="NultT"> Предельное значение продольной растягивающей силы, которое может быть воспринято элементом</param>
+        /// <returns>Возвращаемый тип bool. Если условие выполняется возвращается true если не выполняется false.</returns>
         public bool CheckEquationEightDotThirtyOne(double Nn, double NultT);
 
         /// <summary>Формула (8.32)</summary>
+        /// <param name="Rsnt">Нормативное сопротивления арматуры с учетом увеличения температуры. Определяется по формуле (5.5)</param>
+        /// <param name="Astot"> Площадь сечения всей продольной растянутой арматуры</param>
+        /// <returns>Возвращаемый тип double. Предельное значение продольной растягивающей силы, которое может быть воспринято элементом при центральном растяжении.</returns>
         public double GetNultT(double Rsnt, double Astot);
 
         /// <summary>Формула (8.33)</summary>
+        /// <param name="Nn">Продольная растягивающая сила от нормативной внешней нагрузки</param>
+        /// <param name="e">Эксцентриситет</param>
+        /// <param name="Rsnt">Нормативное сопротивления арматуры с учетом увеличения температуры. Определяется по формуле (5.5)</param>
+        /// <param name="AsSqueeze">Площадь сечения сжатой арматуры</param>
+        /// <param name="h0">Рабочая высота сечения</param>
+        /// <param name="a">Расстояние от края сечения до центра тяжести арматуры</param>
+        /// <returns>Возвращаемый тип bool. Если условие выполняется возвращается true если не выполняется false.</returns>
         public bool CheckEquationEightDotThirtyThree(double Nn, double e, double Rsnt, double AsSqueeze, double h0, double a, out double partLeft, out double partRight);
 
         /// <summary>Формула (8.34)</summary>
+        /// <param name="Nn">Продольная растягивающая сила от нормативной внешней нагрузки</param>
+        /// <param name="e">Эксцентриситет</param>
+        /// <param name="Rsnt">Нормативное сопротивления арматуры с учетом увеличения температуры. Определяется по формуле (5.5)</param>
+        /// <param name="AsStretch">Площадь сечения растянутой арматуры</param>
+        /// <param name="h0">Рабочая высота сечения</param>
+        /// <param name="a">Расстояние от края сечения до центра тяжести арматуры</param>
+        /// <returns>Возвращаемый тип bool. Если условие выполняется возвращается true если не выполняется false.</returns>
         public bool CheckEquationEightDotThirtyFour(double Nn, double e, double Rsnt, double AsStretch, double h0, double a, out double partLeft, out double partRight);
 
         /// <summary>Формула (8.35)</summary>
+        /// <param name="Nn">Продольная растягивающая сила от нормативной внешней нагрузки</param>
+        /// <param name="e">Эксцентриситет. Определяется согласно пункту 8.28.</param>
+        /// <param name="Rbnt">Нормативное сопротивления бетона осевому сжатию с учетом увеличения температуры. Определяется по формуле (5.1)</param>
+        /// <param name="bt">Ширина сечения с учетом увеличения температуры.</param>
+        /// <param name="xt">Высота сжатой зоны. Определяется согласно пункту 8.28.</param>
+        /// <param name="h0t">Рабочая высота сечения с учетом увеличения температуры.</param>
+        /// <param name="Rsct">Расчетное сопротивление арматуры сжатию с учетом увеличения температуры. Определяется по формуле (5.6)</param>
+        /// <param name="AsSqueeze">Площадь сечения сжатой арматуры</param>
+        /// <param name="h0">Рабочая высота сечения</param>
+        /// <param name="a">Расстояние от края сечения до центра тяжести арматуры</param>
+        /// <returns>Возвращаемый тип bool. Если условие выполняется возвращается true если не выполняется false.</returns>
         public bool CheckEquationEightDotThirtyFive(double Nn, double e, double Rbnt, double bt, double xt, double h0t, double Rsct, double AsSqueeze, double h0, double a, out double partLeft, out double partRight);
 
         /// <summary>Формула (8.36)</summary>
+        /// <param name="Rsnt">Нормативное сопротивления арматуры с учетом увеличения температуры. Определяется по формуле (5.5)</param>
+        /// <param name="AsStretch">Площадь сечения растянутой арматуры</param>
+        /// <param name="Rsct">Расчетное сопротивление арматуры сжатию с учетом увеличения температуры. Определяется по формуле (5.6)</param>
+        /// <param name="AsSqueeze">Площадь сечения сжатой арматуры</param>
+        /// <param name="Nn">Продольная растягивающая сила от нормативной внешней нагрузки</param>
+        /// <param name="Rbnt">Нормативное сопротивления бетона осевому сжатию с учетом увеличения температуры. Определяется по формуле (5.1)</param>
+        /// <param name="bt">Ширина сечения с учетом увеличения температуры.</param>
+        /// <returns>Возвращаемый тип double. Значение высоты сжатой зоны.</returns>
         public double GetXtEquationEightDotThirtySix(double Rsnt, double AsStretch, double Rsct, double AsSqueeze, double Nn, double Rbnt, double bt);
 
         /// <summary>Формула (8.38)</summary>
+        /// <param name="temperatureCurvature">Температурная кривизна.</param>
+        /// <param name="D">Жесткость сечения в предельной по прочности стадии.</param>
+        /// <returns>Возвращаемый тип double. Значение температурного изгибающего момента от неравномерного нагрева по высоте сечения элемента.</returns>
         public double GetMt(double temperatureCurvature, double D);
 
         /// <summary>Формула (8.39)</summary>
+        /// <param name="Mo">Опорные моменты от нагрузки.</param>
+        /// <param name="Mt">Опорные моменты от нагрева.</param>
+        /// <returns>Возвращаемый тип double. Значение момента образования опорного пластического шарнира.</returns>
         public double GetMosh(double Mo, double Mt);
 
         /// <summary>Формула (8.40)</summary>
+        /// <param name="Mn">Нормативный изгибающий момент от внешней нагрузки (постоянной и временной длительной)</param>
+        /// <param name="MultT">Несущая способность железобетонной конструкции при пожаре длительностью, равной значению
+        ///  предела огнестойкости по потере несущей способности R.</param>
+        /// <returns>Возвращаемый тип bool. Если условие выполняется возвращается true если не выполняется false.</returns>
         public bool CheckEquationEightDotFourty(double Mn, double MultT);
 
         /// <summary>Формула (8.41)</summary>
+        /// <param name="Mo">Нормативный момент от внешней нагрузки в опорном сечении (постоянной и временной длительной).</param>
+        /// <param name="Mt">Температурный изгибающий момент, определяемый по формуле (8.38).</param>
+        /// <param name="MultT">Несущая способность железобетонной конструкции при пожаре длительностью, равной значению
+        ///  предела огнестойкости по потере несущей способности R.</param>
+        /// <returns>Возвращаемый тип bool. Если условие выполняется возвращается true если не выполняется false.</returns>
         public bool CheckEquationEightDotFourtyOne(double Mo, double Mt, double MultT, out double partLeft);
 
         /// <summary>Формула (8.42)</summary>
+        /// <param name="q">Интенсивность нормативной постоянной и временной длительной нагрузок, равномерно распределенных
+        ///  по полосе на 1 лог. м с коэффициентом перегрузки yf = 1</param>
+        /// <param name="lOne">Расстояния между рядами колонн в перпендикулярном направлении.</param>
+        /// <param name="lTwo">Расстояния между рядами колонн вдоль рассматриваемой полосы.</param>
+        /// <param name="c">Расстояние от крайних пластических шарниров до ближайших к ним рядов колонн.</param>
+        /// <param name="Rsn">Нормативное сопративление арматуры. Определяется на основании СП63</param>
+        /// <param name="AsLeft">Площади верхней растянутой арматуры в левом опорном пластическом шарнире</param>
+        /// <param name="AsRight">Площади верхней растянутой арматуры в правом опорном пластическом шарнире</param>
+        /// <param name="AsMiddle">Площадь нижней растянутой арматуры в среднем пролетном пластическом шарнире</param>
+        /// <param name="zLeft">Плечо внутренней пары сил в левом пластическом шарнире</param>
+        /// <param name="zRight">Плечо внутренней пары сил в правом пластическом шарнире</param>
+        /// <param name="zMiddle">Плечо внутренней пары сил в среднем пластическом шарнире</param>
+        /// <param name="Rsnt">Нормативное сопротивления арматуры с учетом увеличения температуры. Определяется по формуле (5.5)</param>
+        /// <returns>Возвращаемый тип bool. Если условие выполняется возвращается true если не выполняется false.</returns>
         public bool CheckEquationEightDotFourtyTwo(double q, double lOne, double lTwo, double c, double Rsn, double AsLeft, double AsRight, double AsMiddle, double zLeft, double zRight, double zMiddle, double Rsnt, out double partLeft, out double partRight);
 
         /// <summary>Формула (8.43)</summary>
+        /// <param name="h0">Рабочая высота сечения</param>
+        /// <param name="xit">Высота сжатой зоны</param>
+        /// <returns>Возвращаемый тип double. Значение плеча внутренней пары сил.</returns>
         public double GetZ(double h0, double xit);
 
         /// <summary>Формула (8.44)</summary>
+        /// <param name="Rsn">Нормативное сопративление арматуры. Определяется на основании СП63</param>
+        /// <param name="As">Площадь сечения арматуры</param>
+        /// <param name="Rbnt">Нормативное сопротивления бетона осевому сжатию с учетом увеличения температуры. Определяется по формуле (5.1)</param>
+        /// <param name="lTwo">Расстояния между рядами колонн вдоль рассматриваемой полосы.</param>
+        /// <returns>Возвращаемый тип double. Высота сжатой зоны в левом или правом пластическом шарнире.</returns>
         public double GetXitEquationEightDotFourtyFour(double Rsn, double As, double Rbnt, double lTwo);
 
         /// <summary>Формула (8.45)</summary>
+        /// <param name="Rsnt">Нормативное сопротивления арматуры с учетом увеличения температуры. Определяется по формуле (5.5)</param>
+        /// <param name="As">Площадь сечения арматуры</param>
+        /// <param name="Rbnt">Нормативное сопротивления бетона осевому сжатию с учетом увеличения температуры. Определяется по формуле (5.1)</param>
+        /// <param name="lTwo">Расстояния между рядами колонн вдоль рассматриваемой полосы.</param>
+        /// <returns>Возвращаемый тип double. Высота сжатой зоны в среднем пролетном пластическом шарнире.</returns>
         public double GetXitEquationEightDotFourtyFive(double Rsnt, double As, double Rbnt, double lTwo);
 
         /// <summary>Формула (8.46)</summary>
