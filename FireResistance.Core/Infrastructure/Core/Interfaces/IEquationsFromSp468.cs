@@ -1,4 +1,6 @@
 ﻿
+using System.Xml.Linq;
+
 namespace FireResistance.Core.Infrastructure.Core.Interfaces
 {
     internal interface IEquationsFromSp468
@@ -410,7 +412,7 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
 
         /// <summary>Формула (8.42)</summary>
         /// <param name="q">Интенсивность нормативной постоянной и временной длительной нагрузок, равномерно распределенных
-        ///  по полосе на 1 лог. м с коэффициентом перегрузки yf = 1</param>
+        ///  по полосе на 1 пог. м с коэффициентом перегрузки yf = 1</param>
         /// <param name="lOne">Расстояния между рядами колонн в перпендикулярном направлении.</param>
         /// <param name="lTwo">Расстояния между рядами колонн вдоль рассматриваемой полосы.</param>
         /// <param name="c">Расстояние от крайних пластических шарниров до ближайших к ним рядов колонн.</param>
@@ -448,41 +450,100 @@ namespace FireResistance.Core.Infrastructure.Core.Interfaces
         public double GetXitEquationEightDotFourtyFive(double Rsnt, double As, double Rbnt, double lTwo);
 
         /// <summary>Формула (8.46)</summary>
+        /// <param name="q">Нормативная постоянная длительная и временная равномерно распределенная нагрузка на 1 м2 плиты.</param>
+        /// <param name="lOne">Меньший пролет плиты.</param>
+        /// <param name="lTwo">Больший пролет плиты.</param>
+        /// <param name="MOne">Момент в проете плиты см. рис.8.13.</param>
+        /// <param name="MTwo">Момент в проете плиты см. рис.8.13.</param>
+        /// <param name="MILeft">Момент на опоре плиты см. рис.8.13.</param>
+        /// <param name="MIRight">Момент на опоре плиты см. рис.8.13.</param>
+        /// <param name="MIIDown">Момент на опоре плиты см. рис.8.13.</param>
+        /// <param name="MIIUp">Момент на опоре плиты см. рис.8.13.</param>
+        /// <returns>Возвращаемый тип bool. Если условие выполняется возвращается true если не выполняется false.</returns>
         public bool CheckEquationEightDotFourtySix(double q, double lOne, double lTwo, double MOne, double MTwo, double MILeft, double MIRight, double MIIDown, double MIIUp, out double partLeft, out double partRight);
 
         /// <summary>Формула (8.47)</summary>
+        /// <param name="Rsnt">Нормативное сопротивления арматуры с учетом увеличения температуры. Определяется по формуле (5.5)</param>
+        /// <param name="As">Площадь сечения арматуры</param>
+        /// <param name="z">Плечо внутренней пары сил в пролетном пластическом шарнире. Вычесляется согласно пункту 8.46</param>
+        /// <returns>Возвращаемый тип double. Значение изгибающего момента в пролете плиты.</returns>
         public double GetMEquationEightDotFourtySeven(double As, double Rsnt, double z);
 
         /// <summary>Формула (8.48)</summary>
+        /// <param name="Rsn">Нормативное сопративление арматуры. Определяется на основании СП63</param>
+        /// <param name="As">Площадь сечения арматуры</param>
+        /// <param name="z">Плечо внутренней пары сил в опорном пластическом шарнире. Вычесляется согласно пункту 8.46</param>
+        /// <returns>Возвращаемый тип double. Значение изгибающего момента на опоре плиты.</returns>
         public double GetMEquationEightDotFourtyEight(double As, double Rsn, double z);
 
         /// <summary>Формула (8.49)</summary>
+        /// <param name="q">Нормативная постоянная длительная и временная равномерно распределенная нагрузка на 1 м2 плиты.</param>
+        /// <param name="lOne">Меньший пролет плиты.</param>
+        /// <param name="lTwo">Больший пролет плиты.</param>
+        /// <param name="aOne">Расстояни обрыва(отгиба) арматуры от длинной стороны.</param>
+        /// <param name="aTwo">Расстояни обрыва(отгиба) арматуры от короткой стороны.</param>
+        /// <param name="MOne">Момент в проете плиты см. описание формулы (8.49) в СП468.</param>
+        /// <param name="MTwo">Момент в проете плиты см. описание формулы (8.49) в СП468.</param>
+        /// <param name="MILeft">Момент на опоре плиты см. рис.8.13.</param>
+        /// <param name="MIRight">Момент на опоре плиты см. рис.8.13.</param>
+        /// <param name="MIIDown">Момент на опоре плиты см. рис.8.13.</param>
+        /// <param name="MIIUp">Момент на опоре плиты см. рис.8.13.</param>
+        /// <returns>Возвращаемый тип bool. Если условие выполняется возвращается true если не выполняется false.</returns>
         public bool CheckEquationEightDotFourtyNine(double q, double lOne, double lTwo, double aOne, double aTwo, double MOne, double MTwo, double MILeft, double MIRight, double MIIDown, double MIIUp, out double partLeft, out double partRight);
 
         /// <summary>Формула (8.50)</summary>
+        /// <param name="deltaTs">Разность между температурой нагрева арматуры при пожаре и температурой при натяжении.</param>
+        /// <param name="sigmaSp">Предварительное напряжение в арматуре принимается с учетом всех потерь при нормальной температуре.</param>
+        /// <returns>Возвращаемый тип double. Значение потерь предварительного напряжения в арматуре от релаксации напряжений за 1 - 3 часа нагрева.</returns>
         public double GetDeltaSigmaEquationEightDotFifty(double deltaTs, double sigmaSp);
 
         /// <summary>Формула (8.51)</summary>
+        /// <param name="deltaTs">Разность между температурой нагрева арматуры при пожаре и температурой при натяжении.</param>
+        /// <param name="alphaSt">Значение коэффициента определяется по таблице 5.7.</param>
+        /// <param name="alphaBt">Значение коэффициента определяется по таблице 5.3.</param>
+        /// <param name="Est">Модуль деформации арматуры при нагреве. Определяется по формуле 5.7 в зависимости от температуры нагрева арматуры</param>
+        /// <returns>Возвращаемый тип double. Дополнительные потери предварительного напряжения от разности температурных деформаций бетона и арматуры учитываются только при нагреве.</returns>
         public double GetDeltaSigmaEquationEightDotFiftyOne(double alphaSt, double alphaBt, double deltaTs, double Est);
 
         /// <summary>Формула (8.52)</summary>
+        /// <param name="ts">Температура арматуры при пожаре.</param>
+        /// <returns>Возвращаемый тип double. Значение потерь предварительного напряжения в стержневой арматуре классов А500, А600.</returns>
         public double GetSigmaEquationEightDotFiftyTwo(double ts);
 
         /// <summary>Формула (8.53)</summary>
+        /// <param name="ts">Температура арматуры при пожаре.</param>
+        /// <returns>Возвращаемый тип double. Значение потерь предварительного напряжения в стержневой арматуре классов А800.</returns>
         public double GetSigmaEquationEightDotFiftyThree(double ts);
 
         /// <summary>Формула (8.54)</summary>
+        /// <param name="ts">Температура арматуры при пожаре.</param>
+        /// <returns>Возвращаемый тип double. Значение потерь предварительного напряжения в стержневой арматуре классов А1000.</returns>
         public double GetSigmaEquationEightDotFiftyFour(double ts);
 
         /// <summary>Формула (8.55)</summary>
+        /// <param name="ts">Температура арматуры при пожаре.</param>
+        /// <returns>Возвращаемый тип double. Значение потерь предварительного напряжения в проволочной арматуре классов Вр1200 - Вр1500, К1400, К1500.</returns>
         public double GetSigmaEquationEightDotFiftyFive(double ts);
 
-        /// <summary>Equation from item 5.4 for Column</summary>
+        /// <summary>Формула из пункта 5.4, для колонн</summary>
+        /// <param name="h0t">Рабочая высота сечения с учетом увеличения температуры.</param>
+        /// <param name="xt">Высота сжатой зоны.</param>
+        /// <param name="at">Глубина прогрева бетона до критической температуры.</param>
+        /// <param name="KsiR">Граничное значение относительной высоты сжатой зоны. Определется согласно СП63.</param>
+        /// <returns>Возвращаемый тип double. Значение расстояния на котором следует определять среднюю температуру сжатой зоны бетона.</returns>
         public double GetDistanceFromBringToPointAverageTemperatureForColumn(double h0t, double at, double xt = 0, double KsiR = 0);
 
-        /// <summary>Equation from item 5.4 for slab</summary>
+        /// <summary>Формула из пункта 5.4, для плит</summary>
+        /// <param name="h0t">Рабочая высота сечения с учетом увеличения температуры.</param>
+        /// <param name="xt">Высота сжатой зоны.</param>
+        /// <param name="at">Глубина прогрева бетона до критической температуры.</param>
+        /// <param name="KsiR">Граничное значение относительной высоты сжатой зоны. Определется согласно СП63.</param>
+        /// <returns>Возвращаемый тип double. Значение расстояния на котором следует определять среднюю температуру сжатой зоны бетона.</returns>
         public double GetDistanceFromBringToPointAverageTemperatureForSlab(double h0t, double at, double xt = 0, double KsiR = 0);
-        /// <summary>Equation from item 8.20 for Ksi</summary>
+        /// <summary>Уравнение из пункта 8.20 для определения относительной высоты сжатой зоны</summary>
+        /// <param name="h0t">Рабочая высота сечения с учетом увеличения температуры.</param>
+        /// <param name="xt">Высота сжатой зоны.</param>
+        /// <returns>Возвращаемый тип double. Значение относительной высоты сжатой зоны.</returns>
         public double GetKsi(double xt, double h0t);
     }
 }
