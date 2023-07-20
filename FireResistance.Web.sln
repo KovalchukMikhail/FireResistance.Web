@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FireResistance.Logger", "Lo
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{AA4B7B5F-7F0D-4178-933B-EED53DBC1D78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculationException", "CalculationException\CalculationException.csproj", "{0FE36AF5-91E8-423A-BD4C-4998A8C7691B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquationsFromSp", "EquationsFromSp\EquationsFromSp.csproj", "{5A0ED948-11BA-4D39-A187-42D703758740}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{AA4B7B5F-7F0D-4178-933B-EED53DBC1D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA4B7B5F-7F0D-4178-933B-EED53DBC1D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA4B7B5F-7F0D-4178-933B-EED53DBC1D78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FE36AF5-91E8-423A-BD4C-4998A8C7691B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FE36AF5-91E8-423A-BD4C-4998A8C7691B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FE36AF5-91E8-423A-BD4C-4998A8C7691B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FE36AF5-91E8-423A-BD4C-4998A8C7691B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A0ED948-11BA-4D39-A187-42D703758740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0ED948-11BA-4D39-A187-42D703758740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0ED948-11BA-4D39-A187-42D703758740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0ED948-11BA-4D39-A187-42D703758740}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

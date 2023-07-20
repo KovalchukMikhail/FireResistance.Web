@@ -1,4 +1,4 @@
-﻿using FireResistance.Core.ExceptionFR;
+﻿using CalculationException;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 
 
@@ -18,7 +18,7 @@ namespace FireResistance.Core.Infrastructure.Core
 
         public double GetFinalСoefficient(double checkedValue, double criticalValue)
         {
-            if (criticalValue == 0) throw new ExceptionFRBasic("Невозможно определить коэффициент использования так как критическое значение равно 0", criticalValue);
+            if (criticalValue == 0) throw new ValueException("Невозможно определить коэффициент использования так как критическое значение равно 0", criticalValue);
             return checkedValue / criticalValue;
         }
     }

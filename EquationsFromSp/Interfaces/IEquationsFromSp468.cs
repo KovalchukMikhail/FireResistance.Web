@@ -1,9 +1,12 @@
-﻿
-using System.Xml.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace FireResistance.Core.Infrastructure.Core.Interfaces
+namespace EquationsFromSp.Interfaces
 {
-    internal interface IEquationsFromSp468
+    public interface IEquationsFromSp468
     {
         /// <summary>Формула (5.1)</summary>
         /// <param name="gammaBt">Коэфициент условий работы бетона при сжатии определяется по таблице 5.1</param>

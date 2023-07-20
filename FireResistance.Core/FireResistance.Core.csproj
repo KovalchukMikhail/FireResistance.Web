@@ -12,6 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CalculationException\CalculationException.csproj" />
+    <ProjectReference Include="..\EquationsFromSp\EquationsFromSp.csproj" />
     <ProjectReference Include="..\Logger\FireResistance.Logger.csproj" />
   </ItemGroup>
 

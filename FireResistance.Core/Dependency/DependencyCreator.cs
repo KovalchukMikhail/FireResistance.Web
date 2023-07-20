@@ -25,6 +25,8 @@ using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab.interfaces;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
 using FireResistance.Logger;
+using EquationsFromSp;
+using EquationsFromSp.Interfaces;
 
 namespace FireResistance.Core.Dependency
 {

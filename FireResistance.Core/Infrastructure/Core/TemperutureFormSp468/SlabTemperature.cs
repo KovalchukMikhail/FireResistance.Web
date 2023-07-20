@@ -1,7 +1,7 @@
-﻿using FireResistance.Core.Data;
+﻿using CalculationException;
+using FireResistance.Core.Data;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
-using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 
@@ -27,7 +27,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
 
         public virtual double GetTemperature(SlabFR slab, double distanceToPoint, SlabWithRigidConnectionData sourceData)
         {
-            if (slab.Height < distanceToPoint) throw new ExceptionFRBasic("Некорректное значение расстояния до точки в которой определяется температура", distanceToPoint);
+            if (slab.Height < distanceToPoint) throw new ValueException("Некорректное значение расстояния до точки в которой определяется температура", distanceToPoint);
             if (slab.Height >= minHeight && slab.Height <= maxHeight)
             {
                 if (slab.Height % 20 == 0)
@@ -66,7 +66,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
                         if (GetTemperatureAtPoint(slab.Height, deep, sourceData.ConcreteType, slab.FireResistanceVolume) <= criticalTemperature)
                             return deep;
                     }
-                    throw new ExceptionFRBasic("Все сечение нагрето выше предельно допустимой температуры", criticalTemperature);
+                    throw new ValueException("Все сечение нагрето выше предельно допустимой температуры", criticalTemperature);
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
                             break;
                         }
                     }
-                    if (!check) throw new ExceptionFRBasic("Все сечение нагрето выше предельно допустимой температуры", criticalTemperature);
+                    if (!check) throw new ValueException("Все сечение нагрето выше предельно допустимой температуры", criticalTemperature);
                     check = false;
                     for (secondDeep = 0; secondDeep <= secondHeight; secondDeep++)
                     {
@@ -92,7 +92,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
                             break;
                         }
                     }
-                    if (!check) throw new ExceptionFRBasic("Все сечение нагрето выше предельно допустимой температуры", criticalTemperature);
+                    if (!check) throw new ValueException("Все сечение нагрето выше предельно допустимой температуры", criticalTemperature);
                     return interpolator.GetIntermediateValue(firstHeight, secondHeight, slab.Height, firstDeep, secondDeep);
                 }
 
@@ -104,7 +104,7 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
                     if (GetTemperatureAtPoint(maxHeight, deep, sourceData.ConcreteType, slab.FireResistanceVolume) <= criticalTemperature)
                         return deep;
                 }
-                throw new ExceptionFRBasic("Сечение нагрето выше критической температуры на глубину более 200 мм, невозможно определить глубину прогрева бетона до критической температуры", criticalTemperature);
+                throw new ValueException("Сечение нагрето выше критической температуры на глубину более 200 мм, невозможно определить глубину прогрева бетона до критической температуры", criticalTemperature);
             }
             else throw new Exception("Ошибка возникла при определении температуры плиты");
         }

@@ -1,8 +1,8 @@
-﻿using FireResistance.Core.Entities.Calculations.AbstractClasses;
+﻿using CalculationException;
+using FireResistance.Core.Entities.Calculations.AbstractClasses;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
-using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Builder.Interfaces;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab.interfaces;
 using FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic;
@@ -49,7 +49,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
             {
                 slab = slabFactory.Create(sourceData) as SlabFR;
             }
-            catch (ExceptionFRBasic ex)
+            catch (ValueException ex)
             {
                 logger.AddLogException($"DateTime:{DateTime.Now}; ex.Message:{ex.Message}; sourceData:{sourceData}");
                 result.ExeptionList.Add($"{ex.Message}. Значение переменной вызвавшей ошибку равно {ex.InvalidValue}");
@@ -69,7 +69,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
             {
                 result.Status = equationsManager.RunEquations(values, slab);
             }
-            catch (ExceptionFRBasic ex)
+            catch (ValueException ex)
             {
                 logger.AddLogException($"DateTime:{DateTime.Now}; ex.Message:{ex.Message}; sourceData:{sourceData}");
                 result.ExeptionList.Add($"{ex.Message}. Значение переменной вызвавшей ошибку равно {ex.InvalidValue}.");

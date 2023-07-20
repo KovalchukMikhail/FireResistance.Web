@@ -1,4 +1,5 @@
-﻿using FireResistance.Core.Data;
+﻿using EquationsFromSp.Interfaces;
+using FireResistance.Core.Data;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.interfaces;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
