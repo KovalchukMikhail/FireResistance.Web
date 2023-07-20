@@ -1,4 +1,5 @@
-﻿using FireResistance.Core.Data;
+﻿using EquationsFromSp.Interfaces;
+using FireResistance.Core.Data;
 using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.Materials.AbstractClasses;
 using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;

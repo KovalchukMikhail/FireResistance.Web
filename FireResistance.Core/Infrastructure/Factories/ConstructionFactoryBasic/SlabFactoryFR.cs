@@ -1,9 +1,10 @@
-﻿using FireResistance.Core.Data;
+﻿using CalculationException;
+using EquationsFromSp.Interfaces;
+using FireResistance.Core.Data;
 using FireResistance.Core.Entities.Constructions.AbstractClasses;
 using FireResistance.Core.Entities.Constructions.ConstructionBasic;
 using FireResistance.Core.Entities.Materials;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
-using FireResistance.Core.ExceptionFR;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Infrastructure.Factories.Interfaces.ConstructionFactory;
 using FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic;
@@ -49,8 +50,8 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
             slab.Width = sourceData.LengthAlong;
             slab.ArmatureInstallationDepthFromAbove = sourceData.ArmatureInstallationDepthFromAbove;
             slab.ArmatureInstallationDepthFromBelow = sourceData.ArmatureInstallationDepthFromBelow;
-            if (slab.ArmatureInstallationDepthFromAbove > slab.Height / 2) throw new ExceptionFRBasic("Недопустимое расположение верхней арматуры. Арматура расположена в нижней зоне плиты", slab.ArmatureInstallationDepthFromAbove);
-            if (slab.ArmatureInstallationDepthFromBelow > slab.Height / 2) throw new ExceptionFRBasic("Недопустимое расположение нижней арматуры. Арматура расположена в верхней зоне плиты", slab.ArmatureInstallationDepthFromAbove);
+            if (slab.ArmatureInstallationDepthFromAbove > slab.Height / 2) throw new ValueException("Недопустимое расположение верхней арматуры. Арматура расположена в нижней зоне плиты", slab.ArmatureInstallationDepthFromAbove);
+            if (slab.ArmatureInstallationDepthFromBelow > slab.Height / 2) throw new ValueException("Недопустимое расположение нижней арматуры. Арматура расположена в верхней зоне плиты", slab.ArmatureInstallationDepthFromAbove);
             slab.DistanceFromEdgeOfColumnToHinge = sourceData.DistanceFromEdgeOfColumnToHinge;
             slab.DistributedLoad = sourceData.DistributedLoad;
             slab.WorkingHeightForAboveArmature = commonEquation.GetWorkHeight(slab.Height, slab.ArmatureInstallationDepthFromAbove);

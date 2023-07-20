@@ -7,6 +7,7 @@ using FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic;
 using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 using FireResistance.Core.Infrastructure.Core.Interfaces;
 using FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic;
+using EquationsFromSp.Interfaces;
 
 namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
 {
