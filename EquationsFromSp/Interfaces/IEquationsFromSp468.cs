@@ -129,7 +129,7 @@ namespace EquationsFromSp.Interfaces
         /// <param name="xt">Высота сжатой зоны. Определяется по формуле 8.11</param>
         /// <param name="h0">Рабочая высота сечения</param>
         /// <param name="a">Расстояние от края сечения до центра тяжести арматуры AsSqueeze</param>
-        /// <returns>Возвращаемый тип double. Предельное значение изгибающего момента плоского изгибаемого элемента в состоянии пределеного равновесия в сильно армированных плитах при ξ < ξR.</returns>
+        /// <returns>Возвращаемый тип double. Предельное значение изгибающего момента плоского изгибаемого элемента в состоянии пределеного равновесия в сильно армированных плитах при ξ меньше ξR.</returns>
         public double GetMultTEquationEightDotTwelve(double Rsnt, double AsStretch, double h0, double xt, double Rsct, double AsSqueeze, double a);
 
         /// <summary>Формула (8.13)</summary>
