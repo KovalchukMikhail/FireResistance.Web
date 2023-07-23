@@ -3,6 +3,7 @@ using EquationsFromSp.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -348,71 +349,174 @@ namespace EquationsFromSp
         }
         public double GetXtEquationEightDotTwentySix(double Nn, double Rsnt, double AsStretch, double Rsct, double Rbnt, double bt)
         {
-            if (Rbnt <= 0) throw new ValueException("Недопустимое значение Rbnt, ошибка возникла при определении Xt в формуле 8.26 СП468", Rbnt);
-            if (bt <= 0) throw new ValueException("Недопустимое значение bt, ошибка возникла при определении Xt в формуле 8.26 СП468", bt);
-            return (Nn + Rsnt * AsStretch - Rsct * AsStretch) / (Rbnt * bt);
+            if (Rbnt <= 0) throw new ValueException("Недопустимое значение Rbnt, ошибка возникла в формуле 8.26 СП468", Rbnt);
+            else if (bt <= 0) throw new ValueException("Недопустимое значение bt, ошибка возникла в формуле 8.26 СП468", bt);
+            else if (Nn < 0) throw new ValueException("Недопустимое значение Nn, ошибка возникла в формуле 8.26 СП468", Nn);
+            else if (Rsnt < 0) throw new ValueException("Недопустимое значение Rsnt, ошибка возникла в формуле 8.26 СП468", Rsnt);
+            else if (AsStretch < 0) throw new ValueException("Недопустимое значение AsStretch, ошибка возникла в формуле 8.26 СП468", AsStretch);
+            else if (Rsct < 0) throw new ValueException("Недопустимое значение Rsct, ошибка возникла в формуле 8.26 СП468", Rsct);
+            else
+            {
+                return (Nn + Rsnt * AsStretch - Rsct * AsStretch) / (Rbnt * bt);
+            }
         }
         public double GetXtEquationEightDotTwentySeven(double Nn, double Rsnt, double AsStretch, double KsiR, double Rsct, double AsSqueeze, double Rbnt, double bt, double h0t)
         {
-            try
+            if (Nn < 0) throw new ValueException("Недопустимое значение Nn, ошибка возникла в формуле 8.27 СП468", Nn);
+            else if (Rsnt < 0) throw new ValueException("Недопустимое значение Rsnt, ошибка возникла в формуле 8.27 СП468", Rsnt);
+            else if (AsStretch < 0) throw new ValueException("Недопустимое значение AsStretch, ошибка возникла в формуле 8.27 СП468", AsStretch);
+            else if (KsiR < 0) throw new ValueException("Недопустимое значение ξR, ошибка возникла в формуле 8.27 СП468", KsiR);
+            else if (Rsct < 0) throw new ValueException("Недопустимое значение Rsct, ошибка возникла в формуле 8.27 СП468", Rsct);
+            else if (AsSqueeze < 0) throw new ValueException("Недопустимое значение AsSqueeze, ошибка возникла в формуле 8.27 СП468", AsSqueeze);
+            else if (Rbnt < 0) throw new ValueException("Недопустимое значение Rbnt, ошибка возникла в формуле 8.27 СП468", Rbnt);
+            else if (bt < 0) throw new ValueException("Недопустимое значение bt, ошибка возникла в формуле 8.27 СП468", bt);
+            else if (h0t < 0) throw new ValueException("Недопустимое значение h0t, ошибка возникла в формуле 8.27 СП468", h0t);
+            else
             {
-                return (Nn + Rsnt * AsStretch * (1 + KsiR) / (1 - KsiR) - Rsct * AsSqueeze)
-                        / (Rbnt * bt + 2 * Rsnt * AsStretch / (h0t * (1 - KsiR)));
+                try
+                {
+                    return (Nn + Rsnt * AsStretch * (1 + KsiR) / (1 - KsiR) - Rsct * AsSqueeze)
+                            / (Rbnt * bt + 2 * Rsnt * AsStretch / (h0t * (1 - KsiR)));
+                }
+                catch (DivideByZeroException)
+                {
+                    throw new Exception("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.27 СП468");
+                }
             }
-            catch (DivideByZeroException)
-            {
-                throw new Exception("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.27 СП468");
-            }
-
         }
         public double GetEEquationEightDotTwentyEight(double e0, double n, double h0, double a, double et)
-            => e0 * n + 0.5 * (h0 - a) + et;
+        {
+            if (e0 < 0) throw new ValueException("Недопустимое значение e0, ошибка возникла в формуле 8.28 СП468", e0);
+            else if (n < 0) throw new ValueException("Недопустимое значение n, ошибка возникла в формуле 8.28 СП468", n);
+            else if (h0 < 0) throw new ValueException("Недопустимое значение h0, ошибка возникла в формуле 8.28 СП468", h0);
+            else if (a < 0) throw new ValueException("Недопустимое значение a, ошибка возникла в формуле 8.28 СП468", a);
+            else if (et < 0) throw new ValueException("Недопустимое значение et, ошибка возникла в формуле 8.28 СП468", et);
+            else
+            {
+                return e0 * n + 0.5 * (h0 - a) + et;
+            }
+        }
+
         public double GetEt(double a, double alphaSt, double ts, double alphaBt, double tb, double lo, double h0t)
         {
-            if (h0t <= 0) throw new ValueException("Недопустимое значение h0t, ошибка возникла при определении et в формуле 8.29 СП468", h0t);
-            return a * (alphaSt * ts - alphaBt * tb) * Math.Pow(lo, 2) / (8 * h0t);
+            if (h0t < 0) throw new ValueException("Недопустимое значение h0t, ошибка возникла в формуле 8.29 СП468", h0t);
+            else if (a < 0) throw new ValueException("Недопустимое значение a, ошибка возникла в формуле 8.29 СП468", a);
+            else if (alphaSt < 0) throw new ValueException("Недопустимое значение alphaSt, ошибка возникла в формуле 8.29 СП468", alphaSt);
+            else if (ts < 0) throw new ValueException("Недопустимое значение ts, ошибка возникла в формуле 8.29 СП468", ts);
+            else if (alphaBt < 0) throw new ValueException("Недопустимое значение alphaBt, ошибка возникла в формуле 8.29 СП468", alphaBt);
+            else if (tb < 0) throw new ValueException("Недопустимое значение tb, ошибка возникла в формуле 8.29 СП468", tb);
+            else if (lo < 0) throw new ValueException("Недопустимое значение lo, ошибка возникла в формуле 8.29 СП468", lo);
+            else if (h0t < 0) throw new ValueException("Недопустимое значение h0t, ошибка возникла в формуле 8.29 СП468", h0t);
+            else
+            {
+                return a * (alphaSt * ts - alphaBt * tb) * Math.Pow(lo, 2) / (8 * h0t);
+            }
         }
         public double GetEEquationEightDotThirty(double e0, double Eb1, double Jred, double Nn, double l0)
         {
-            try
+            if (e0 < 0) throw new ValueException("Недопустимое значение e0, ошибка возникла в формуле 8.30 СП468", e0);
+            else if (Eb1 < 0) throw new ValueException("Недопустимое значение Eb1, ошибка возникла в формуле 8.30 СП468", Eb1);
+            else if (Jred < 0) throw new ValueException("Недопустимое значение Jred, ошибка возникла в формуле 8.30 СП468", Jred);
+            else if (Nn < 0) throw new ValueException("Недопустимое значение Nn, ошибка возникла в формуле 8.30 СП468", Nn);
+            else if (l0 < 0) throw new ValueException("Недопустимое значение l0, ошибка возникла в формуле 8.30 СП468", l0);
+            else
             {
-                return e0 / ((Math.Pow(Math.PI, 2) * Eb1 * Jred / (Nn * Math.Pow(l0, 2))) - 1);
+                try
+                {
+                    return e0 / ((Math.Pow(Math.PI, 2) * Eb1 * Jred / (Nn * Math.Pow(l0, 2))) - 1);
+                }
+                catch (DivideByZeroException)
+                {
+                    throw new Exception("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.30 СП468");
+                }
             }
-            catch (DivideByZeroException)
-            {
-                throw new Exception("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.30 СП468");
-            }
-
         }
         public bool CheckEquationEightDotThirtyOne(double Nn, double NultT)
             => Nn < NultT;
         public double GetNultT(double Rsnt, double Astot)
-            => Rsnt * Astot;
+        {
+            if (Rsnt < 0) throw new ValueException("Недопустимое значение Rsnt, ошибка возникла формуле 8.32 СП468", Rsnt);
+            else if (Astot < 0) throw new ValueException("Недопустимое значение Astot, ошибка возникла в формуле 8.32 СП468", Astot);
+            else
+            {
+                return Rsnt * Astot;
+            }
+        }
+
         public bool CheckEquationEightDotThirtyThree(double Nn, double e, double Rsnt, double AsSqueeze, double h0, double a, out double partLeft, out double partRight)
         {
-            partLeft = Nn * e;
-            partRight = Rsnt * AsSqueeze * (h0 - a);
-            return partLeft <= partRight;
+            if (Nn < 0) throw new ValueException("Недопустимое значение Nn, ошибка возникла в формуле 8.33 СП468", Nn);
+            else if (e < 0) throw new ValueException("Недопустимое значение e, ошибка возникла в формуле 8.33 СП468", e);
+            else if (Rsnt < 0) throw new ValueException("Недопустимое значение Rsnt, ошибка возникла в формуле 8.33 СП468", Rsnt);
+            else if (AsSqueeze < 0) throw new ValueException("Недопустимое значение AsSqueeze, ошибка возникла в формуле 8.33 СП468", AsSqueeze);
+            else if (h0 < 0) throw new ValueException("Недопустимое значение h0, ошибка возникла в формуле 8.33 СП468", h0);
+            else if (a < 0) throw new ValueException("Недопустимое значение a, ошибка возникла в формуле 8.33 СП468", a);
+            else
+            {
+                partLeft = Nn * e;
+                partRight = Rsnt * AsSqueeze * (h0 - a);
+                return partLeft <= partRight;
+            }
         }
         public bool CheckEquationEightDotThirtyFour(double Nn, double e, double Rsnt, double AsStretch, double h0, double a, out double partLeft, out double partRight)
         {
-            partLeft = Nn * e;
-            partRight = Rsnt * AsStretch * (h0 - a);
-            return partLeft <= partRight;
+            if (Nn < 0) throw new ValueException("Недопустимое значение Nn, ошибка возникла в формуле 8.34 СП468", Nn);
+            else if (e < 0) throw new ValueException("Недопустимое значение e, ошибка возникла в формуле 8.34 СП468", e);
+            else if (Rsnt < 0) throw new ValueException("Недопустимое значение Rsnt, ошибка возникла в формуле 8.34 СП468", Rsnt);
+            else if (AsStretch < 0) throw new ValueException("Недопустимое значение AsStretch, ошибка возникла в формуле 8.34 СП468", AsStretch);
+            else if (h0 < 0) throw new ValueException("Недопустимое значение h0, ошибка возникла в формуле 8.34 СП468", h0);
+            else if (a < 0) throw new ValueException("Недопустимое значение a, ошибка возникла в формуле 8.34 СП468", a);
+            else
+            {
+                partLeft = Nn * e;
+                partRight = Rsnt * AsStretch * (h0 - a);
+                return partLeft <= partRight;
+            }
         }
         public bool CheckEquationEightDotThirtyFive(double NultT, double e, double Rbnt, double bt, double xt, double h0t, double Rsct, double AsSqueeze, double h0, double a, out double partLeft, out double partRight)
         {
-            partLeft = NultT * e;
-            partRight = Rbnt * bt * xt * (h0t - 0.5 * xt) + Rsct * AsSqueeze * (h0 - a);
-            return partLeft <= partRight;
+            if (NultT < 0) throw new ValueException("Недопустимое значение NultT, ошибка возникла в формуле 8.35 СП468", NultT);
+            else if (e < 0) throw new ValueException("Недопустимое значение e, ошибка возникла в формуле 8.35 СП468", e);
+            else if (Rbnt < 0) throw new ValueException("Недопустимое значение Rbnt, ошибка возникла в формуле 8.35 СП468", Rbnt);
+            else if (bt < 0) throw new ValueException("Недопустимое значение bt, ошибка возникла в формуле 8.35 СП468", bt);
+            else if (xt < 0) throw new ValueException("Недопустимое значение xt, ошибка возникла в формуле 8.35 СП468", xt);
+            else if (h0t < 0) throw new ValueException("Недопустимое значение h0t, ошибка возникла в формуле 8.35 СП468", h0t);
+            else if (Rsct < 0) throw new ValueException("Недопустимое значение Rsct, ошибка возникла в формуле 8.35 СП468", Rsct);
+            else if (AsSqueeze < 0) throw new ValueException("Недопустимое значение AsSqueeze, ошибка возникла в формуле 8.35 СП468", AsSqueeze);
+            else if (h0 < 0) throw new ValueException("Недопустимое значение h0, ошибка возникла в формуле 8.35 СП468", h0);
+            else if (a < 0) throw new ValueException("Недопустимое значение a, ошибка возникла в формуле 8.35 СП468", a);
+            else
+            {
+                partLeft = NultT * e;
+                partRight = Rbnt * bt * xt * (h0t - 0.5 * xt) + Rsct * AsSqueeze * (h0 - a);
+                return partLeft <= partRight;
+            }
         }
         public double GetXtEquationEightDotThirtySix(double Rsnt, double AsStretch, double Rsct, double AsSqueeze, double Nn, double Rbnt, double bt)
         {
             if (Rbnt <= 0) throw new ValueException("Недопустимое значение Rbnt, ошибка возникла при определении Xt в формуле 8.36 СП468", Rbnt);
-            if (bt <= 0) throw new ValueException("Недопустимое значение bt, ошибка возникла при определении Xt в формуле 8.36 СП468", bt);
-            return (Rsnt * AsStretch - Rsct * AsSqueeze - Nn) / (Rbnt * bt);
+            else if (bt <= 0) throw new ValueException("Недопустимое значение bt, ошибка возникла при определении Xt в формуле 8.36 СП468", bt);
+            else if (Rsnt < 0) throw new ValueException("Недопустимое значение Rsnt, ошибка возникла в формуле 8.36 СП468", Rsnt);
+            else if (AsStretch < 0) throw new ValueException("Недопустимое значение AsStretch, ошибка возникла в формуле 8.36 СП468", AsStretch);
+            else if (Rsct < 0) throw new ValueException("Недопустимое значение Rsct, ошибка возникла в формуле 8.36 СП468", Rsct);
+            else if (AsSqueeze < 0) throw new ValueException("Недопустимое значение AsSqueeze, ошибка возникла в формуле 8.36 СП468", AsSqueeze);
+            else if (Nn < 0) throw new ValueException("Недопустимое значение Nn, ошибка возникла в формуле 8.36 СП468", Nn);
+            else if (Rbnt < 0) throw new ValueException("Недопустимое значение Rbnt, ошибка возникла в формуле 8.36 СП468", Rbnt);
+            else if (bt < 0) throw new ValueException("Недопустимое значение bt, ошибка возникла в формуле 8.36 СП468", bt);
+            else
+            {
+                return (Rsnt * AsStretch - Rsct * AsSqueeze - Nn) / (Rbnt * bt);
+            }
         }
-        public double GetMt(double temperatureCurvature, double D) => temperatureCurvature * D;
+        public double GetMt(double temperatureCurvature, double D)
+        {
+            if (temperatureCurvature < 0) throw new ValueException("Недопустимое значение температурной кривой, ошибка возникла в формуле 8.38 СП468", temperatureCurvature);
+            else if (D < 0) throw new ValueException("Недопустимое значение D, ошибка возникла в формуле 8.38 СП468", D);
+            else
+            {
+                return temperatureCurvature * D;
+            }
+        } 
         public double GetMosh(double Mo, double Mt) => Mo + 0.5 * Mt;
         public bool CheckEquationEightDotFourty(double Mn, double MultT) => Mn < MultT;
         public bool CheckEquationEightDotFourtyOne(double Mo, double Mt, double MultT, out double partLeft)
@@ -422,65 +526,182 @@ namespace EquationsFromSp
         }
         public bool CheckEquationEightDotFourtyTwo(double q, double lOne, double lTwo, double c, double Rsn, double AsLeft, double AsRight, double AsMiddle, double zLeft, double zRight, double zMiddle, double Rsnt, out double partLeft, out double partRight)
         {
-            partLeft = q * lTwo * Math.Pow((lOne - 2 * c), 2) / 8;
-            partRight = 0.5 * Rsn * AsLeft * zLeft + Rsnt * AsMiddle * zMiddle + 0.5 * Rsn * AsRight * zRight;
-            return partLeft <= partRight;
+            if (q < 0) throw new ValueException("Недопустимое значение q, ошибка возникла в формуле 8.42 СП468", q);
+            else if (lOne < 0) throw new ValueException("Недопустимое значение lOne, ошибка возникла в формуле 8.42 СП468", lOne);
+            else if (lTwo < 0) throw new ValueException("Недопустимое значение lTwo, ошибка возникла в формуле 8.42 СП468", lTwo);
+            else if (c < 0) throw new ValueException("Недопустимое значение c, ошибка возникла в формуле 8.42 СП468", c);
+            else if (Rsn < 0) throw new ValueException("Недопустимое значение Rsn, ошибка возникла в формуле 8.42 СП468", Rsn);
+            else if (AsLeft < 0) throw new ValueException("Недопустимое значение AsLeft, ошибка возникла в формуле 8.42 СП468", AsLeft);
+            else if (AsRight < 0) throw new ValueException("Недопустимое значение AsRight, ошибка возникла в формуле 8.42 СП468", AsRight);
+            else if (AsMiddle < 0) throw new ValueException("Недопустимое значение AsMiddle, ошибка возникла в формуле 8.42 СП468", AsMiddle);
+            else if (zLeft < 0) throw new ValueException("Недопустимое значение zLeft, ошибка возникла в формуле 8.42 СП468", zLeft);
+            else if (zRight < 0) throw new ValueException("Недопустимое значение zRight, ошибка возникла в формуле 8.42 СП468", zRight);
+            else if (zMiddle < 0) throw new ValueException("Недопустимое значение zMiddle, ошибка возникла в формуле 8.42 СП468", zMiddle);
+            else if (Rsnt < 0) throw new ValueException("Недопустимое значение Rsnt, ошибка возникла в формуле 8.42 СП468", Rsnt);
+            else
+            {
+                partLeft = q * lTwo * Math.Pow((lOne - 2 * c), 2) / 8;
+                partRight = 0.5 * Rsn * AsLeft * zLeft + Rsnt * AsMiddle * zMiddle + 0.5 * Rsn * AsRight * zRight;
+                return partLeft <= partRight;
+            }
         }
-        public double GetZ(double h0, double xit) => h0 - 0.5 * xit;
+        public double GetZ(double h0, double xit)
+        {
+            if (h0 < 0) throw new ValueException("Недопустимое значение h0, ошибка возникла в формуле 8.43 СП468", h0);
+            else if (xit < 0) throw new ValueException("Недопустимое значение xit, ошибка возникла в формуле 8.43 СП468", xit);
+            else
+            {
+                 return h0 - 0.5 * xit;
+            }
+        }
         public double GetXitEquationEightDotFourtyFour(double Rsn, double As, double Rbnt, double lTwo)
         {
-            if (Rbnt <= 0) throw new ValueException("Недопустимое значение Rbnt, ошибка возникла в формуле 8.36 СП468", Rbnt);
-            if (lTwo <= 0) throw new ValueException("Недопустимое значение lTwo, ошибка возникла в формуле 8.36 СП468", lTwo);
-            return Rsn * As / (Rbnt * lTwo);
+            if (Rbnt <= 0) throw new ValueException("Недопустимое значение Rbnt, ошибка возникла в формуле 8.44 СП468", Rbnt);
+            else if (lTwo <= 0) throw new ValueException("Недопустимое значение lTwo, ошибка возникла в формуле 8.44 СП468", lTwo);
+            else if (Rsn < 0) throw new ValueException("Недопустимое значение Rsn, ошибка возникла в формуле 8.44 СП468", Rsn);
+            else if (As < 0) throw new ValueException("Недопустимое значение As, ошибка возникла в формуле 8.44 СП468", As);
+            else
+            {
+                return Rsn * As / (Rbnt * lTwo);
+            }
         }
         public double GetXitEquationEightDotFourtyFive(double Rsnt, double As, double Rbnt, double lTwo)
         {
-            if (Rbnt <= 0) throw new ValueException("Недопустимое значение Rbnt, ошибка возникла в формуле 8.36 СП468", Rbnt);
-            if (lTwo <= 0) throw new ValueException("Недопустимое значение lTwo, ошибка возникла в формуле 8.36 СП468", lTwo);
-            return Rsnt * As / (Rbnt * lTwo);
+            if (Rbnt <= 0) throw new ValueException("Недопустимое значение Rbnt, ошибка возникла в формуле 8.45 СП468", Rbnt);
+            if (lTwo <= 0) throw new ValueException("Недопустимое значение lTwo, ошибка возникла в формуле 8.45 СП468", lTwo);
+            else if (Rsnt < 0) throw new ValueException("Недопустимое значение Rsnt, ошибка возникла в формуле 8.45 СП468", Rsnt);
+            else if (As < 0) throw new ValueException("Недопустимое значение As, ошибка возникла в формуле 8.45 СП468", As);
+            else
+            {
+                return Rsnt * As / (Rbnt * lTwo);
+            }
         }
         public bool CheckEquationEightDotFourtySix(double q, double lOne, double lTwo, double MOne, double MTwo, double MILeft, double MIRight, double MIIDown, double MIIUp, out double partLeft, out double partRight)
         {
-            partLeft = q * Math.Pow(lOne, 2) * (3 * lTwo - lOne) / 12;
-            partRight = 2 * MOne + 2 * MTwo + MILeft + MIRight + MIIDown + MIIUp;
-            return partLeft <= partRight;
-        }
-        public double GetMEquationEightDotFourtySeven(double As, double Rsnt, double z) => As * Rsnt * z;
-        public double GetMEquationEightDotFourtyEight(double As, double Rsn, double z) => As * Rsn * z;
-        public bool CheckEquationEightDotFourtyNine(double q, double lOne, double lTwo, double aOne, double aTwo, double MOne, double MTwo, double MILeft, double MIRight, double MIIDown, double MIIUp, out double partLeft, out double partRight)
-        {
-            try
+            if (q < 0) throw new ValueException("Недопустимое значение q, ошибка возникла в формуле 8.46 СП468", q);
+            else if (lOne < 0) throw new ValueException("Недопустимое значение lOne, ошибка возникла в формуле 8.46 СП468", lOne);
+            else if (lTwo < 0) throw new ValueException("Недопустимое значение lTwo, ошибка возникла в формуле 8.46 СП468", lTwo);
+            else
             {
-                partLeft = q * (lOne * lTwo - lOne * aTwo + 4 * aOne * aTwo / 3);
-                partRight = (2 * MOne + MILeft + MIRight) / aOne + (2 * MTwo + MIIDown + MIIUp) / aTwo;
+                partLeft = q * Math.Pow(lOne, 2) * (3 * lTwo - lOne) / 12;
+                partRight = 2 * MOne + 2 * MTwo + MILeft + MIRight + MIIDown + MIIUp;
                 return partLeft <= partRight;
             }
-            catch (DivideByZeroException)
+        }
+        public double GetMEquationEightDotFourtySeven(double As, double Rsnt, double z)
+        {
+            if (As < 0) throw new ValueException("Недопустимое значение As, ошибка возникла в формуле 8.47 СП468", As);
+            else if (Rsnt < 0) throw new ValueException("Недопустимое значение Rsnt, ошибка возникла в формуле 8.47 СП468", Rsnt);
+            else if (z < 0) throw new ValueException("Недопустимое значение z, ошибка возникла в формуле 8.47 СП468", z);
+            else
             {
-                throw new Exception("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.49 СП468");
+                return As * Rsnt * z;
+            }
+        } 
+        public double GetMEquationEightDotFourtyEight(double As, double Rsn, double z)
+        {
+            if (As < 0) throw new ValueException("Недопустимое значение As, ошибка возникла в формуле 8.48 СП468", As);
+            else if (Rsn < 0) throw new ValueException("Недопустимое значение Rsn, ошибка возникла в формуле 8.48 СП468", Rsn);
+            else if (z < 0) throw new ValueException("Недопустимое значение z, ошибка возникла в формуле 8.48 СП468", z);
+            else
+            {
+                return As * Rsn * z;
             }
         }
-        public double GetDeltaSigmaEquationEightDotFifty(double deltaTs, double sigmaSp) => 0.001 * deltaTs * sigmaSp;
+        public bool CheckEquationEightDotFourtyNine(double q, double lOne, double lTwo, double aOne, double aTwo, double MOne, double MTwo, double MILeft, double MIRight, double MIIDown, double MIIUp, out double partLeft, out double partRight)
+        {
+            if (q < 0) throw new ValueException("Недопустимое значение q, ошибка возникла в формуле 8.49 СП468", q);
+            else if (lOne < 0) throw new ValueException("Недопустимое значение lOne, ошибка возникла в формуле 8.49 СП468", lOne);
+            else if (lTwo < 0) throw new ValueException("Недопустимое значение lTwo, ошибка возникла в формуле 8.49 СП468", lTwo);
+            else if (aOne < 0) throw new ValueException("Недопустимое значение aOne, ошибка возникла в формуле 8.49 СП468", aOne);
+            else if (aTwo < 0) throw new ValueException("Недопустимое значение aTwo, ошибка возникла в формуле 8.49 СП468", aTwo);
+            else
+            {
+                try
+                {
+                    partLeft = q * (lOne * lTwo - lOne * aTwo + 4 * aOne * aTwo / 3);
+                    partRight = (2 * MOne + MILeft + MIRight) / aOne + (2 * MTwo + MIIDown + MIIUp) / aTwo;
+                    return partLeft <= partRight;
+                }
+                catch (DivideByZeroException)
+                {
+                    throw new Exception("Недопустимое значение в знаменателе, ошибка возникла в формуле 8.49 СП468");
+                }
+            }
+        }
+        public double GetDeltaSigmaEquationEightDotFifty(double deltaTs, double sigmaSp)
+        {
+            if (deltaTs < 0) throw new ValueException("Недопустимое значение deltaTs, ошибка возникла в формуле 8.50 СП468", deltaTs);
+            else if (sigmaSp < 0) throw new ValueException("Недопустимое значение sigmaSp, ошибка возникла в формуле 8.50 СП468", sigmaSp);
+            else
+            {
+                return 0.001 * deltaTs * sigmaSp;
+            }
+        } 
         public double GetDeltaSigmaEquationEightDotFiftyOne(double alphaSt, double alphaBt, double deltaTs, double Est)
-            => (alphaSt - alphaBt) * deltaTs * Est;
-        public double GetSigmaEquationEightDotFiftyTwo(double ts) => 84 - 0.4 * ts;
-        public double GetSigmaEquationEightDotFiftyThree(double ts) => 87 - 0.39 * ts;
-        public double GetSigmaEquationEightDotFiftyFour(double ts) => 92 - 0.26 * ts;
-        public double GetSigmaEquationEightDotFiftyFive(double ts) => 89 - 0.27 * ts;
+        {
+            if (alphaSt < 0) throw new ValueException("Недопустимое значение alphaSt, ошибка возникла в формуле 8.51 СП468", alphaSt);
+            else if (alphaBt < 0) throw new ValueException("Недопустимое значение alphaBt, ошибка возникла в формуле 8.51 СП468", alphaBt);
+            else if (deltaTs < 0) throw new ValueException("Недопустимое значение deltaTs, ошибка возникла в формуле 8.51 СП468", deltaTs);
+            else if (Est < 0) throw new ValueException("Недопустимое значение Est, ошибка возникла в формуле 8.51 СП468", Est);
+            else
+            {
+                return (alphaSt - alphaBt) * deltaTs * Est;
+            }
+        }
+            
+        public double GetSigmaEquationEightDotFiftyTwo(double ts)
+        {
+            if (ts < 0) throw new ValueException("Недопустимое значение ts, ошибка возникла в формуле 8.52 СП468", ts);
+            else return 84 - 0.4 * ts;
+        }
+        public double GetSigmaEquationEightDotFiftyThree(double ts)
+        {
+            if (ts < 0) throw new ValueException("Недопустимое значение ts, ошибка возникла в формуле 8.53 СП468", ts);
+            else return 87 - 0.39 * ts;
+        }
+        public double GetSigmaEquationEightDotFiftyFour(double ts)
+        {
+            if (ts < 0) throw new ValueException("Недопустимое значение ts, ошибка возникла в формуле 8.54 СП468", ts);
+            else return 92 - 0.26 * ts;
+        }
+        public double GetSigmaEquationEightDotFiftyFive(double ts)
+        {
+            if (ts < 0) throw new ValueException("Недопустимое значение ts, ошибка возникла в формуле 8.55 СП468", ts);
+            else return 89 - 0.27 * ts;
+        }
         public double GetDistanceFromBringToPointAverageTemperatureForColumn(double h0t, double at, double xt = 0, double KsiR = 0)
         {
-            if (xt == 0 || KsiR == 0) return 0.2 * h0t + at;
-            else return 0.5 * xt + at;
+            if (h0t < 0) throw new ValueException("Недопустимое значение h0t, ошибка возникла в формуле пункта 5.4 при определении расстояния на котором следует определять температуру бетона СП468", h0t);
+            else if (at < 0) throw new ValueException("Недопустимое значение at, ошибка возникла в формуле пункта 5.4 при определении расстояния на котором следует определять температуру бетона СП468", at);
+            else if (xt < 0) throw new ValueException("Недопустимое значение xt, ошибка возникла в формуле пункта 5.4 при определении расстояния на котором следует определять температуру бетона СП468", xt);
+            else if (KsiR < 0) throw new ValueException("Недопустимое значение ξR, ошибка возникла в формуле пункта 5.4 при определении расстояния на котором следует определять температуру бетона СП468", KsiR);
+            else
+            {
+                if (xt == 0 || KsiR == 0) return 0.2 * h0t + at;
+                else return 0.5 * xt + at;
+            }
         }
         public double GetDistanceFromBringToPointAverageTemperatureForSlab(double h0t, double at, double xt = 0, double KsiR = 0)
         {
-            if (xt == 0 || KsiR == 0) return 0.1 * h0t + at;
-            else return 0.5 * xt + at;
+            if (h0t < 0) throw new ValueException("Недопустимое значение h0t, ошибка возникла в формуле пункта 5.4 при определении расстояния на котором следует определять температуру бетона СП468", h0t);
+            else if (at < 0) throw new ValueException("Недопустимое значение at, ошибка возникла в формуле пункта 5.4 при определении расстояния на котором следует определять температуру бетона СП468", at);
+            else if (xt < 0) throw new ValueException("Недопустимое значение xt, ошибка возникла в формуле пункта 5.4 при определении расстояния на котором следует определять температуру бетона СП468", xt);
+            else if (KsiR < 0) throw new ValueException("Недопустимое значение ξR, ошибка возникла в формуле пункта 5.4 при определении расстояния на котором следует определять температуру бетона СП468", KsiR);
+            else
+            {
+                if (xt == 0 || KsiR == 0) return 0.1 * h0t + at;
+                else return 0.5 * xt + at;
+            }
         }
         public double GetKsi(double xt, double h0t)
         {
             if (h0t <= 0) throw new ValueException("Недопустимое значение h0t, ошибка возникла при определении ξ по п. 8.20 СП468", h0t);
-            return xt / h0t;
+            else if (xt < 0) throw new ValueException("Недопустимое значение xt, ошибка возникла при определении ξ по п. 8.20 СП468", xt);
+            else
+            {
+                return xt / h0t;
+            }
         }
     }
 }
