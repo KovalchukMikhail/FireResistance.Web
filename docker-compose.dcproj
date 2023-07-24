@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>62606947-5e25-45f7-9c74-016822f66cc6</ProjectGuid>
+    <ProjectGuid>1fba3ce8-bd32-4b47-a503-8e10ab445197</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>fireresistance.web</DockerServiceName>

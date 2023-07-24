@@ -46,10 +46,9 @@ namespace FireResistance.Web.Controllers
             db.SaveChanges();
             return View("ColumnFireFourSide", GetDataOfColumn(sourceData));
         }
-        /// <summary>Метод для обработки post запроса. Загружает из базы данных исходные данные для выполнения расчета на огнстойкость.</summary>
+        /// <summary>Метод загружает из базы данных исходные данные для выполнения расчета на огнстойкость.</summary>
         /// <param name="id">Уникальный id строки в таблице ColumnFireIsWithFourSidesData (содержит расчетные данные для расчета колонн на огнестойкость)</param>
         /// <returns>Возвращаемый тип IActionResult. Возвращает представление ColumnFireFourSide в котором содержатся данные о расчете и результатах расчтета колонны на огнестойксть (объект класса DataOfColumnFireFourSideVM)</returns>
-        [HttpPost]
         public IActionResult LoadColumnFireFourSide(int id)
         {
             ColumnFireIsWithFourSidesData sourceData = db.ColumnFireIsWithFourSidesData.Where(x => x.Id == id).FirstOrDefault();
@@ -109,10 +108,9 @@ namespace FireResistance.Web.Controllers
             if (sourceData.IsOnCollums == 1) return View("SlabWithRigidConnectionToColumns", GetDataOfSlab(sourceData));
             else return View("SlabWithRigidConnectionToTwoWalls", GetDataOfSlab(sourceData));
         }
-        /// <summary>Метод для обработки post запроса. Загружает из базы данных исходные данные для выполнения расчета на огнстойкость.</summary>
+        /// <summary>Метод загружает из базы данных исходные данные для выполнения расчета на огнстойкость.</summary>
         /// <param name="id">Уникальный id строки в таблице SlabWithRigidConnectionData (содержит расчетные данные для расчета плиты перекрытия на огнестойкость)</param>
         /// <returns>Возвращаемый тип IActionResult. Возвращает представление SlabWithRigidConnectionToTwoWalls в котором содержатся данные о расчете и результатах расчтета колонны на огнестойксть (объект класса DataOfSlabWithRigidConnectionVM)</returns>
-        [HttpPost]
         public IActionResult LoadSlab(int id)
         {
             SlabWithRigidConnectionData sourceData = db.SlabWithRigidConnectionData.Find(id);
