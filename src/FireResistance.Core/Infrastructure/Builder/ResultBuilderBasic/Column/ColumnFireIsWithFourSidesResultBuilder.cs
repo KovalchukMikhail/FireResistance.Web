@@ -12,6 +12,7 @@ using FireResistance.Logger;
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 {
+    /// <summary>Класс описывает методы позволяющие построить объекты колонны на основании исходных данных и результаты расчетов к ним</summary>
     internal class ColumnFireIsWithFourSidesResultBuilder : IColumnFireIsWithFourSidesResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, Dictionary<string, double>, Dictionary<string, string>>
     {
         private CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result;
@@ -39,12 +40,12 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             this.resultCreator = resultCreator;
             this.logger = logger;
         }
-
+        /// <summary>Устанавливает исходные данные для экземпляра класса ColumnFireIsWithFourSidesResultBuilder</summary>
         public void SetSourceData(SourceData sourceData)
         {
             this.sourceData = sourceData as ColumnFireIsWithFourSidesData;
         }
-
+        /// <summary>Строит экземпляр объекта ColumnFR на основании исходных данных</summary>
         public void BuildConstructions()
         {
             try
@@ -63,7 +64,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             }
 
         }
-        
+        /// <summary>Метод выполняет процесс построения расчета</summary>
         public void BuildCalculation()
         {
             if (result.ExeptionList.Count > 0) return;
@@ -107,7 +108,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
                 result.ExeptionList.Add($"{ex.Message}.");
             }
         }
-
+        /// <summary>Метод выполняет процесс построения результатов расчета</summary>
         public void BuildResult()
         {
             if(result.ExeptionList.Count > 0)
@@ -122,7 +123,7 @@ namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
             else if (values.FinalEquation == values.MainEquations[2]) resultCreator.AddResultIfLastIsEightDotTwentyFive(result, values);
             result.ResultAsString = resultCreator.BuildString(result);
         }
-
+        /// <summary>Метод возвращает объект содержащий результаты расчетов</summary>
         public CalculationResult<Dictionary<string, double>, Dictionary<string, string>> GetCalculationResult()
         { 
             return result;

@@ -2,6 +2,7 @@
 
 namespace FireResistance.Core.Entities.Constructions.AbstractClasses
 {
+    /// <summary>Класс содержит общее описание конструкции</summary>
     internal abstract class Construction
     {
         public virtual Armature Armature { get; set; }

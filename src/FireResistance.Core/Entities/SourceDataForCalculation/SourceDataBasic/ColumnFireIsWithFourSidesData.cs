@@ -3,6 +3,7 @@ using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
 {
+    /// <summary>Класс описывает объекта содержащий исходные данные для расчета колонны на огнестойкость</summary>
     public class ColumnFireIsWithFourSidesData : SourceData
     {
         private double moment;

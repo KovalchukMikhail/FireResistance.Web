@@ -2,6 +2,7 @@
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses
 {
+    /// <summary>Класс в общее описывает объект содержащий исходные данные для расчетов</summary>
     public abstract class SourceData
     {
         public string UserId { get; set; } = string.Empty;

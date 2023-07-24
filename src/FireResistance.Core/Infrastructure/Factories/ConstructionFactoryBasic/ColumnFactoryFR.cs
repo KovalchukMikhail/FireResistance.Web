@@ -11,6 +11,7 @@ using EquationsFromSp.Interfaces;
 
 namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
 {
+    /// <summary>Класс описывает фабричные методы для создания объекта колонны класса ColumnFR</summary>
     internal class ColumnFactoryFR : IConstructionFactory<ColumnFireIsWithFourSidesData>
     {
         private NameColumns nameColumns;
@@ -43,7 +44,8 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
             this.armatureFactory = armatureFactory;
             this.concreteFactory = concreteFactory;
         }
-
+        /// <summary>Метод создает экземпляр колонны класса Construction на основании переданных в качестве исходных данных параметров</summary>
+        /// <returns>Возвращаемый тип Construction.</returns>
         public virtual Construction Create(ColumnFireIsWithFourSidesData sourceData)
         {
             column.Width = sourceData.WidthColumn;
@@ -72,14 +74,15 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
             SetMaterials(column, sourceData, db); 
             return column;
         }
-
+        /// <summary>Метод переопределяет данные о материалах в экземпляре класса ColumnFR</summary>
+        /// <returns>Возвращаемый тип ColumnFR.</returns>
         public virtual ColumnFR OverrideColumn(ColumnFireIsWithFourSidesData sourceData, ColumnFR column, double xt, double KsiR)
         {
             column.DistanceFromBringToPointAverageTemperature = equationsSp468.GetDistanceFromBringToPointAverageTemperatureForColumn(column.WorkHeightProfileWithWarming, column.DeepConcreteWarming, xt, KsiR);
             SetMaterials(column, sourceData, db);
             return column;
         }
-
+        /// <summary>Метод устанавливает материалы в экземпляр класса ColumnFR на основании переданных исходных данных</summary>
         protected virtual void SetMaterials(ColumnFR column, ColumnFireIsWithFourSidesData sourceData, RequestDb db)
         {
             double temperatureArmature = columnTemperature.GetArmatureTemperature(column);

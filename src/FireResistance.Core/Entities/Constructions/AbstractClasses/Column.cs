@@ -1,6 +1,7 @@
 ﻿
 namespace FireResistance.Core.Entities.Constructions.AbstractClasses
 {
+    /// <summary>Класс содержит общее описание колонны</summary>
     internal class Column : Construction
     {
         public virtual int DistanceToArmature { get; set; }

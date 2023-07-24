@@ -2,13 +2,15 @@
 
 namespace FireResistance.Core.Infrastructure.Utilities.UtilitiesBasic
 {
+    /// <summary>Класс описывает методы необходимые для получения индекса элемента в списке</summary>
     internal class IndexDeterminantBasic : IIndexDeterminant
     {
+        /// <summary>Метод определяет индекс первого вхождения элемента в списке</summary>
         public double GetIndex(string value, List<string> list)
         {    
             return list.IndexOf(value);
         }
-
+        /// <summary>Метод определяет индекс вхождения элемента в списке чисел или промежуточное значение в виде ввещественного числа между которое характеризует положение искомого значения между значениями в списке</summary>
         public double GetIndex(double value, List<double> list)
         {
             double indexValue = list.IndexOf(value);

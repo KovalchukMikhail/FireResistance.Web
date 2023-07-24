@@ -2,6 +2,7 @@
 
 namespace FireResistance.Core.Entities.Materials
 {
+    /// <summary>Класс содержит описание арматуры для выполнения расчетов на огнестойкость</summary>
     internal class ArmatureForFR : Armature
     {
         public double Temperature { get; set; }

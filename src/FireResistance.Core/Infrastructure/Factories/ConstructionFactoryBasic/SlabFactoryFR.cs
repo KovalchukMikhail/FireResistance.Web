@@ -11,6 +11,7 @@ using FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic;
 
 namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
 {
+    /// <summary>Класс описывает фабричные методы для создания объекта плиты перекрытия класса SlabFR</summary>
     internal class SlabFactoryFR : IConstructionFactory<SlabWithRigidConnectionData>
     {
         private NameColumns nameColumns;
@@ -40,7 +41,8 @@ namespace FireResistance.Core.Infrastructure.Factories.ConstructionFactoryBasic
             this.concreteFactory = concreteFactory;
             this.slabTemperature = slabTemperature;
         }
-
+        /// <summary>Метод создает экземпляр плиты перекрытия класса Construction на основании переданных в качестве исходных данных параметров</summary>
+        /// <returns>Возвращаемый тип Construction.</returns>
         public virtual Construction Create(SlabWithRigidConnectionData sourceData)
         {
             slab.FireResistanceVolume = sourceData.FireResistanceValue;

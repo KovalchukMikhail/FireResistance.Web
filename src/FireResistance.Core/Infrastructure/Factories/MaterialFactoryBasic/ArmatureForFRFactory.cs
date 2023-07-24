@@ -10,6 +10,7 @@ using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 
 namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
 {
+    /// <summary>Класс описывает фабричные методы для создания объекта арматуры класса Material</summary>
     internal class ArmatureForFRFactory : IMaterialFactoryFR <SourceData>
     {
         private NameColumns nameColumns;
@@ -24,7 +25,8 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
             this.interpolator = interpolator;
             this.equations = equations;
         }
-
+        /// <summary>Метод создает экземпляр арматуры класса Material на основании переданных в качестве исходных данных параметров</summary>
+        /// <returns>Возвращаемый тип Material.</returns>
         public Material Create(SourceData sourceData, double temperature)
         {
             ArmatureForFR armature = new ArmatureForFR();

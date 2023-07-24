@@ -2,6 +2,7 @@
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column.interfaces
 {
+    /// <summary>Интерфейс содержит общее описание методов запускающих в правельной последовательности формулы для расчета колонны на огнестойкость</summary>
     internal interface IColumnFireIsWithFourSidesEquationsManager
     {
         public void RunPartOneOfEquations(TempValuesForColumn values, ColumnFR column);

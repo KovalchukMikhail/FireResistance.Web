@@ -2,6 +2,7 @@
 
 namespace FireResistance.Core.Entities.Calculations
 {
+    /// <summary>Класс содержит описание объекта предназначеного для хранения и предоставления результатов расчета</summary>
     public class ResultAsDictionary : CalculationResult <Dictionary<string, double>, Dictionary<string, string>>
     {
         private Dictionary<string, double> result;

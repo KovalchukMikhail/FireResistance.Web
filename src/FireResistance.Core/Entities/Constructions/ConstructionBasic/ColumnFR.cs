@@ -3,6 +3,7 @@ using FireResistance.Core.Entities.Materials;
 
 namespace FireResistance.Core.Entities.Constructions.ConstructionBasic
 {
+    /// <summary>Класс содержит описание колонны для расчета огнестойкости</summary>
     internal class ColumnFR : Column
     {
         public virtual ArmatureForFR ArmatureFR { get; set; }

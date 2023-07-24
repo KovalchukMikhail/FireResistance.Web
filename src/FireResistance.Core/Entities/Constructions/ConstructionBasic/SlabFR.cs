@@ -3,6 +3,7 @@ using FireResistance.Core.Entities.Materials;
 
 namespace FireResistance.Core.Entities.Constructions.ConstructionBasic
 {
+    /// <summary>Класс содержит описание плиты для расчета огнестойкости</summary>
     internal class SlabFR : Slab
     {
         public string FireResistanceVolume { get; set; }

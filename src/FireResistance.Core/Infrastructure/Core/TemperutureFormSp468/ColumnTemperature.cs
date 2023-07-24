@@ -5,6 +5,7 @@ using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 
 namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
 {
+    /// <summary>Класс описывает объект содержащий методы для определения температуры элементов колонны</summary>
     internal class ColumnTemperatureBasic : IColumnTemperature<ColumnFR>
     {
         private RequestDb db;
@@ -24,7 +25,8 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
             mediumSize = nameColumns.StandartHeightOfColumn["medium"];
             maxSize = nameColumns.StandartHeightOfColumn["max"];
         }
-
+        /// <summary>Метод определяет температуру арматуры в колонне</summary>
+        /// <returns>Возвращаемый тип double. Возвращает температуру арматуры °C</returns>
         public virtual double GetArmatureTemperature(ColumnFR column)
         {
             int size = Convert.ToInt32(Math.Min(column.Width, column.Height));
@@ -51,7 +53,8 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
             }
             else throw new Exception("Ошибка возникла при определении температуры арматуры");
         }
-
+        /// <summary>Метод определяет температуру бетона в колонне</summary>
+        /// <returns>Возвращаемый тип double. Возвращает температуру бетона °C</returns>
         public virtual double GetConcreteTemperature(ColumnFR column, double criticalTemperature)
         {
             int size = Convert.ToInt32(Math.Min(column.Width, column.Height));
@@ -78,14 +81,16 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
             }
             else throw new Exception("Ошибка возникла при определении температуры бетона");
         }
-
+        /// <summary>Метод определяет температуру в определенной точке колонны</summary>
+        /// <returns>Возвращаемый тип double. Возвращает температуру в конкретной точке °C</returns>
         protected virtual double GetTemperatureAtPoint(int size, int distanceToPointByX, int distanceToPointByY, ColumnFR construction)
         {
             double[,] temperutureArray = db.TemperatureOfColumnDb.GetArrayTemperature(construction.FireResistanceVolume, size);
             List<double> distanceToArmatureForArray = db.TemperatureOfColumnDb.GetListOfDistanceToArmature(size);
             return interpolator.GetValueFromTemperatureTableOfColumn(distanceToArmatureForArray, distanceToPointByX, distanceToPointByY, temperutureArray);
         }
-
+        /// <summary>Метод определяет среднюю температуру в определенной линии сечения</summary>
+        /// <returns>Возвращаемый тип double. Возвращает среднюю температуру распределенную по определенной линии сечения °C</returns>
         protected virtual double GetAveregeTemperature(int size, ColumnFR construction, double criticalTemperature, int additionalSize = 0)
         {
             int positionForCalculation = Convert.ToInt32(construction.DistanceFromBringToPointAverageTemperature) > (size / 2) ?

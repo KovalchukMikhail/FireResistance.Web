@@ -2,6 +2,7 @@
 
 namespace FireResistance.Core.Entities.Calculations.AbstractClasses
 {
+    /// <summary>Класс содержит обобщенное описание объекта предназначеного для хранения и предоставления результатов расчета</summary>
     public abstract class CalculationResult <T, K>
     {
         public SourceData SourceData { get; set; }

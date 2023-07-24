@@ -2,24 +2,13 @@
 
 namespace FireResistance.Core.Entities.Materials.BaseClasses
 {
+    /// <summary>Класс содержит описание бетона</summary>
     public class Concrete : Material
     {
         public string TypeName { get; set; }
         public double ResistNormativeForStretch { get; set; }
         public double ResistNormativeForSqueeze { get; set; }
         public double StartElasticityModulus { get; set; }
-
-
-
-        //public Concrete(string className, string type, double resistNormativeForStretch,
-        //    double resistNormativeForSqueeze, double startElasticityModulus) : base(className)
-        //{
-        //    Type = type;
-        //    ResistNormativeForStretch = resistNormativeForStretch;
-        //    ResistNormativeForSqueeze = resistNormativeForSqueeze;
-        //    StartElasticityModulus = startElasticityModulus;
-        //}
-
         public override string ToString()
         {
             return $"Класс_бетона_по_прочности {ClassName}:" +

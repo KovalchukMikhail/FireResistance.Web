@@ -3,6 +3,7 @@ using FireResistance.Core.Entities.SourceDataForCalculation.AbstractClasses;
 
 namespace FireResistance.Core.Entities.SourceDataForCalculation.SourceDataBasic
 {
+    /// <summary>Класс описывает объекта содержащий исходные данные для расчета плиты перекрытия на огнестойкость</summary>
     public class SlabWithRigidConnectionData : SourceData
     {
         private double distributedLoad;

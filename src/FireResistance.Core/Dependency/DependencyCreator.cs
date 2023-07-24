@@ -30,6 +30,7 @@ using EquationsFromSp.Interfaces;
 
 namespace FireResistance.Core.Dependency
 {
+    /// <summary>Класс служит для осуществления инъекции зависимостей</summary>
     internal class DependencyCreator
     {
         private static IServiceCollection services = new ServiceCollection()
@@ -81,7 +82,8 @@ namespace FireResistance.Core.Dependency
             .AddTransient<SlabFR>()
             .AddTransient<ColumnFR>()
             .AddTransient<FileLogger>();
-
+        /// <summary>Метод возвращает объект класса ServiceProvider который можно использовать для инъекции зависимостей</summary>
+        /// <returns>Возвращаемый тип ServiceProvider.</returns>
         public static ServiceProvider GetServiceProvider()
         {
             ServiceProvider serviceProvider = services.BuildServiceProvider();

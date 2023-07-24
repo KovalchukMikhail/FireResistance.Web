@@ -2,6 +2,7 @@
 
 namespace FireResistance.Core.Entities.Materials.BaseClasses
 {
+    /// <summary>Класс содержит описание арматуры</summary>
     public class Armature : Material
     {
         public int Diameter { get; set; }
@@ -11,19 +12,6 @@ namespace FireResistance.Core.Entities.Materials.BaseClasses
         public double ResistСalculationForStretch { get; set; }
         public double ResistСalculationForSqueeze { get; set; }
         public double ElasticityModulus { get; set; }
-        //public Armature(string className, int diameter, int amount, double area,
-        //                double resistNormativeForStretch, double resistСalculationForStretch,
-        //                double resistСalculationForSqueeze, double elasticityModulus) : base(className) 
-        //{
-        //    Amount = amount;
-        //    Diameter = diameter;
-        //    Area = area;
-        //    ResistNormativeForStretch = resistNormativeForStretch;
-        //    ResistСalculationForStretch = resistСalculationForStretch;
-        //    ResistСalculationForSqueeze = resistСalculationForSqueeze;
-        //    ElasticityModulus = elasticityModulus;
-        //}
-
         public override string ToString()
         {
             return $"Класс_арматуры_по_прочности {base.ClassName}:" +

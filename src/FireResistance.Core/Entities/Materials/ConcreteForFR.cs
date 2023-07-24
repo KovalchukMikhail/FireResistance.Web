@@ -2,6 +2,7 @@
 
 namespace FireResistance.Core.Entities.Materials
 {
+    /// <summary>Класс содержит описание бетона для выполнения расчетов на огнестойкость</summary>
     internal class ConcreteForFR : Concrete
     {
         public double CriticalTemperature { get; set; }

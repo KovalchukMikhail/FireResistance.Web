@@ -8,6 +8,7 @@ using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 {
+    /// <summary>Класс содержит описание методов запускающих в правельной последовательности формулы для расчета колонны на огнестойкость</summary>
     internal class ColumnFireIsWithFourSidesEquationsManager : IColumnFireIsWithFourSidesEquationsManager
     {
         private RequestDb db;

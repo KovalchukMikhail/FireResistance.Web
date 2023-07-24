@@ -6,6 +6,7 @@ using System.Text;
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
 {
+    /// <summary>Класс содержит описание методов запускающих в правельной последовательности процесс построения результатов расчетов плиты перекрытия</summary>
     internal class SlabWithRigidConnectionResultCreator : ISlabWithRigidConnectionResultCreator
     {
         public virtual void AddConstructionDataToResult(CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result, SlabFR slab)

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Column
 {
+    /// <summary>Класс содержит описание методов запускающих в правельной последовательности процесс построения результатов расчетов колонны</summary>
     internal class ColumnFireIsWithFourSidesResultCreator : IColumnFireIsWithFourSidesResultCreator
     {
         public virtual void AddConstructionDataToResult(CalculationResult<Dictionary<string, double>, Dictionary<string, string>> result, ColumnFR column)

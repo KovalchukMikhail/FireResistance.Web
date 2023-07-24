@@ -1,6 +1,7 @@
 ﻿
 namespace FireResistance.Core.Entities.Constructions.AbstractClasses
 {
+    /// <summary>Класс содержит общее описание плиты перекрытия</summary>
     internal abstract class Slab : Construction
     {
         public virtual int ArmatureInstallationDepthFromBelow { get; set; }

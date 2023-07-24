@@ -6,6 +6,7 @@ using FireResistance.Core.Infrastructure.Core.Interfaces;
 
 namespace FireResistance.Core.Infrastructure.Builder.ResultBuilderBasic.Slab
 {
+    /// <summary>Класс содержит общее описание методов запускающих в правельной последовательности формулы для расчета плиты перекрытия на огнестойкость</summary>
     internal class SlabWithRigidConnectionEquationsManager : ISlabWithRigidConnectionEquationsManager
     {
         private IEquationsFromSp468 equationsSp468;

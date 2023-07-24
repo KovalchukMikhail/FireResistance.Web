@@ -8,6 +8,7 @@ using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 
 namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
 {
+    /// <summary>Класс описывает фабричные методы для создания объекта бетона класса Material</summary>
     internal class ConcreteForFRFactory : IMaterialFactoryFR <SourceData>
     {
         private NameColumns nameColumns;
@@ -23,6 +24,8 @@ namespace FireResistance.Core.Infrastructure.Factories.MaterialFactoryBasic
             this.interpolator = interpolator;
             this.equations = equations;
         }
+        /// <summary>Метод создает экземпляр бетона класса Material на основании переданных в качестве исходных данных параметров</summary>
+        /// <returns>Возвращаемый тип Material.</returns>
         public Material Create(SourceData sourceData, double temperature)
         {
             ConcreteForFR concrete = new ConcreteForFR();

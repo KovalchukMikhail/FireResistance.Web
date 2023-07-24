@@ -7,6 +7,7 @@ using FireResistance.Core.Infrastructure.Utilities.Interfaces;
 
 namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
 {
+    /// <summary>Класс описывает объект содержащий методы для определения температуры элементов плиты перекрытия</summary>
     internal class SlabTemperatureBasic : ISlabTemperature<SlabFR, SlabWithRigidConnectionData>
     {
         private RequestDb db;
@@ -24,7 +25,8 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
             minHeight = nameColumns.BoundaryHeightOfSlab["min"];
             maxHeight = nameColumns.BoundaryHeightOfSlab["max"];
         }
-
+        /// <summary>Метод определяет температуру в плите перекрытия на определенном расстоянии</summary>
+        /// <returns>Возвращаемый тип double. Возвращает температуру °C</returns>
         public virtual double GetTemperature(SlabFR slab, double distanceToPoint, SlabWithRigidConnectionData sourceData)
         {
             if (slab.Height < distanceToPoint) throw new ValueException("Некорректное значение расстояния до точки в которой определяется температура", distanceToPoint);
@@ -54,7 +56,8 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
             }
             else throw new Exception("Ошибка возникла при определении температуры плиты");
         }
-
+        /// <summary>Метод определяет глубину прогрева бетона</summary>
+        /// <returns>Возвращаемый тип double. Возвращает значение глубины прогрева бетона</returns>
         public virtual double GetDeepConcreteWarming(SlabFR slab, SlabWithRigidConnectionData sourceData, double criticalTemperature)
         {
             if (slab.Height >= minHeight && slab.Height <= maxHeight)
@@ -114,7 +117,8 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
             for (double i = 0; i <= height; i += 10) result.Add(i);
             return result;
         }
-
+        /// <summary>Метод определяет температуру в определенной точке плиты перекрытия</summary>
+        /// <returns>Возвращаемый тип double. Возвращает температуру в конкретной точке °C</returns>
         protected virtual double GetTemperatureAtPoint(int height, double distanceToPoint, string concreteType, string fireResistanceVolume)
         {
             double[,] table = db.TemperatureOfSlabDb.GetArrayTemperature(height, concreteType);
@@ -122,7 +126,8 @@ namespace FireResistance.Core.Infrastructure.Core.TemperutureFormSp468
             List<double> namesOfColumns = GetNamesOfColumns(height);
             return interpolator.GetValueFromTable(nameColumns.FireResistanceForCriticalTemperature, namesOfColumns, fireResistanceVolume, distanceToPoint, table);
         }
-
+        /// <summary>Метод на основании значения высоты плиты перекрытия возвращает значения высоты плиты перекрытия(ближайшее большее и ближайшее меньшее значение) содержащихся в таблицах и графиках для определения температур</summary>
+        /// <returns>Возвращаемый тип double. Возвращает температуру в конкретной точке °C</returns>
         protected virtual void GetTempValuesOfHeight (int height, out int firstHeight, out int secondHeight)
         {
             secondHeight = 0;
