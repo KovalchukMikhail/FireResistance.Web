@@ -1,6 +1,6 @@
 ﻿namespace FireResistance.Core
 {
-    /// <summary>Класс представляет точку входа для запуска расчета на огнестойкость</summary>
+    /// <summary>Интерфейс описывает точку входа для запуска расчета на огнестойкость</summary>
     internal interface IFireResistance <N, K>
     {
         /// <summary>Метод запускает процесс расчета конструкций на огнестойкость</summary>

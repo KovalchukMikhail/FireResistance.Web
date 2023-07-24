@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FireResistance.Core
 {
+    /// <summary>Класс описывает точку входа для запуска расчета на огнестойкость</summary>
     public class FireResistanceBasic : IFireResistance<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>, SourceData>
     {
         private IMainController<SourceData,
@@ -18,7 +19,7 @@ namespace FireResistance.Core
         private CalculatorAbstract<IResultBuilder<CalculationResult<Dictionary<string, double>, Dictionary<string, string>>,
                             Dictionary<string, double>,
                             Dictionary<string, string>>> calculator;
-
+        /// <summary>Метод запускает процесс расчета конструкций на огнестойкость</summary>
         public void PerformCalculation(SourceData data)
         {
             using ServiceProvider provider = DependencyCreator.GetServiceProvider();
@@ -31,7 +32,7 @@ namespace FireResistance.Core
                                                                  Dictionary<string, string>>>>();
             controller.Run(data, calculator, provider);
         }
-
+        /// <summary>Метод возвращает ссылку на объект хранящий результаты расчета на огнестойкость</summary>
         public CalculationResult<Dictionary<string, double>, Dictionary<string, string>> GetResult()
         {
             return calculator.ResultBuilder.GetCalculationResult();
