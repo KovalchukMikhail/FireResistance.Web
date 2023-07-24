@@ -7,12 +7,14 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["FireResistance.Web/FireResistance.Web.csproj", "FireResistance.Web/"]
-COPY ["FireResistance.Core/FireResistance.Core.csproj", "FireResistance.Core/"]
-COPY ["Logger/FireResistance.Logger.csproj", "Logger/"]
-RUN dotnet restore "FireResistance.Web/FireResistance.Web.csproj"
+COPY ["src/FireResistance.Web/FireResistance.Web.csproj", "src/FireResistance.Web/"]
+COPY ["src/FireResistance.Core/FireResistance.Core.csproj", "src/FireResistance.Core/"]
+COPY ["src/CalculationException/CalculationException.csproj", "src/CalculationException/"]
+COPY ["src/EquationsFromSp/EquationsFromSp.csproj", "src/EquationsFromSp/"]
+COPY ["src/Logger/FireResistance.Logger.csproj", "src/Logger/"]
+RUN dotnet restore "src/FireResistance.Web/FireResistance.Web.csproj"
 COPY . .
-WORKDIR "/src/FireResistance.Web"
+WORKDIR "/src/src/FireResistance.Web"
 RUN dotnet build "FireResistance.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
