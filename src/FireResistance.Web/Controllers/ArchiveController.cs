@@ -18,13 +18,18 @@ namespace FireResistance.Web.Controllers
             this.db = db;
             this.logger = logger;
         }
+        /// <summary>Метод для обработки get запроса</summary>
+        /// <returns>Возвращаемый тип IActionResult. Возвращает представление Index в котором содержатся данные о сохранненых расчетах (объект класса ArchiveVM)</returns>
         [HttpGet]
         public IActionResult Index()
         {
             AddLog();
             return View(GetArchiveVM());
         }
-
+        /// <summary>Метод для обработки delete запроса. Удаляет из базы данных данные о расчете колонны на огнечтойкость в соответсвии с переданным id</summary>
+        /// <param name="id">Уникальный id строки в таблице ColumnFireIsWithFourSidesData (содержит расчетные данные для расчета колонн на огнестойкость)</param>
+        /// <returns>Возвращаемый тип IActionResult. Возвращает представление Index в котором содержатся данные о сохранненых расчетах (объект класса ArchiveVM)</returns>
+        [HttpDelete]
         public IActionResult DeleteDataOfColumn(int id)
         {
             ColumnFireIsWithFourSidesData data = db.ColumnFireIsWithFourSidesData.Find(id);
@@ -32,7 +37,10 @@ namespace FireResistance.Web.Controllers
             db.SaveChanges();
             return View("Index", GetArchiveVM());
         }
-
+        /// <summary>Метод для обработки delete запроса. Удаляет из базы данных данные о расчете плиты перекрытия на огнечтойкость в соответсвии с переданным id</summary>
+        /// <param name="id">Уникальный id строки в таблице SlabWithRigidConnectionData (содержит расчетные данные для расчета плиты перекрытия на огнестойкость)</param>
+        /// <returns>Возвращаемый тип IActionResult. Возвращает представление Index в котором содержатся данные о сохранненых расчетах (объект класса ArchiveVM)</returns>
+        [HttpDelete]
         public IActionResult DeleteDataOfSlab(int id)
         {
             SlabWithRigidConnectionData data = db.SlabWithRigidConnectionData.Find(id);
@@ -40,7 +48,8 @@ namespace FireResistance.Web.Controllers
             db.SaveChanges();
             return View("Index", GetArchiveVM());
         }
-
+        /// <summary>Возвращает объект класса ArchiveVM в котором содержаться все расчетные данные сохраненные конкретным пользователем</summary>
+        /// <returns>Возвращаемый тип ArchiveVM.</returns>
         private ArchiveVM GetArchiveVM()
         {
             AddLog();
@@ -50,6 +59,7 @@ namespace FireResistance.Web.Controllers
             archiveVM.DataForSlab = db.SlabWithRigidConnectionData.Where(s => s.UserId == userId).ToList();
             return archiveVM;
         }
+        /// <summary>Добавляет новую запись в logger</summary>
         private void AddLog()
         {
             string log = $"User:{User.Identity.Name}; DateTime:{DateTime.Now}; Obj:{this}";

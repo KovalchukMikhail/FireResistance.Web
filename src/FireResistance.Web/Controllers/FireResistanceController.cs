@@ -18,19 +18,25 @@ namespace FireResistance.Web.Controllers
             this.db = db;
             this.logger = logger;
         }
+        /// <summary>Метод для обработки get запроса</summary>
+        /// <returns>Возвращаемый тип IActionResult. Возвращает представление ColumnFireFourSide</returns>
         [HttpGet]
         public IActionResult ColumnFireFourSide()
         {
             AddLog();
             return View();
         }
-
+        /// <summary>Метод для обработки post запроса. Передает данные для расчета колонны на огнестойкость.</summary>
+        /// <param name="sourceData">Исходные данные для выполнения расчетов. Объект класса ColumnFireIsWithFourSidesData</param>
+        /// <returns>Возвращаемый тип IActionResult. Возвращает представление ColumnFireFourSide в котором содержатся данные о расчете и результатах расчтета колонны на огнестойксть (объект класса DataOfColumnFireFourSideVM)</returns>
         [HttpPost]
         public IActionResult ColumnFireFourSide(ColumnFireIsWithFourSidesData sourceData)
         {
             return View(GetDataOfColumn(sourceData));
         }
-
+        /// <summary>Метод для обработки post запроса. Сохраняет исходные данные для расчета колонны на огнестойкость в базу данных.</summary>
+        /// <param name="sourceData">Исходные данные для выполнения расчетов. Объект класса ColumnFireIsWithFourSidesData</param>
+        /// <returns>Возвращаемый тип IActionResult. Возвращает представление ColumnFireFourSide в котором содержатся данные о расчете и результатах расчтета колонны на огнестойксть (объект класса DataOfColumnFireFourSideVM)</returns>
         [HttpPost]
         public IActionResult AddDataForCalculationOfColumn(ColumnFireIsWithFourSidesData sourceData)
         {
@@ -40,13 +46,18 @@ namespace FireResistance.Web.Controllers
             db.SaveChanges();
             return View("ColumnFireFourSide", GetDataOfColumn(sourceData));
         }
-
+        /// <summary>Метод для обработки post запроса. Загружает из базы данных исходные данные для выполнения расчета на огнстойкость.</summary>
+        /// <param name="id">Уникальный id строки в таблице ColumnFireIsWithFourSidesData (содержит расчетные данные для расчета колонн на огнестойкость)</param>
+        /// <returns>Возвращаемый тип IActionResult. Возвращает представление ColumnFireFourSide в котором содержатся данные о расчете и результатах расчтета колонны на огнестойксть (объект класса DataOfColumnFireFourSideVM)</returns>
+        [HttpPost]
         public IActionResult LoadColumnFireFourSide(int id)
         {
             ColumnFireIsWithFourSidesData sourceData = db.ColumnFireIsWithFourSidesData.Where(x => x.Id == id).FirstOrDefault();
             return View("ColumnFireFourSide", GetDataOfColumn(sourceData));
         }
-
+        /// <summary>Метод после проверки на валидность переданных параметров запускает выполнение расчета колонны на огнестойкость.</summary>
+        /// <param name="sourceData">Исходные данные для выполнения расчетов. Объект класса ColumnFireIsWithFourSidesData</param>
+        /// <returns>Возвращаемый тип DataOfColumnFireFourSideVM. Объект класса DataOfColumnFireFourSideVM содержит исходные данные и результаты расчета колонны на огнестойкость</returns>
         private DataOfColumnFireFourSideVM GetDataOfColumn(ColumnFireIsWithFourSidesData sourceData)
         {
             AddLog();
@@ -60,27 +71,34 @@ namespace FireResistance.Web.Controllers
             }
             return data;
         }
-
+        /// <summary>Метод для обработки get запроса</summary>
+        /// <returns>Возвращаемый тип IActionResult. Возвращает представление SlabWithRigidConnectionToColumns</returns>
         [HttpGet]
         public IActionResult SlabWithRigidConnectionToColumns()
         {
             AddLog();
             return View();
         }
-
+        /// <summary>Метод для обработки post запроса. Передает данные для расчета плиты перекрытия на огнестойкость.</summary>
+        /// <param name="sourceData">Исходные данные для выполнения расчетов. Объект класса SlabWithRigidConnectionData</param>
+        /// <returns>Возвращаемый тип IActionResult. Возвращает представление SlabWithRigidConnectionToColumns в котором содержатся данные о расчете и результатах расчтета плиты перекрытия на огнестойксть (объект класса DataOfSlabWithRigidConnectionVM)</returns>
         [HttpPost]
         public IActionResult SlabWithRigidConnectionToColumns(SlabWithRigidConnectionData sourceData)
         {
             if (sourceData.IsOnCollums == 1) return View(GetDataOfSlab(sourceData));
             else return View("SlabWithRigidConnectionToTwoWalls", GetDataOfSlab(sourceData));
         }
-
+        /// <summary>Метод для обработки get запроса</summary>
+        /// <returns>Возвращаемый тип IActionResult. Возвращает представление SlabWithRigidConnectionToTwoWalls</returns>
         [HttpGet]
         public IActionResult SlabWithRigidConnectionToTwoWalls()
         {
             AddLog();
             return View();
         }
+        /// <summary>Метод для обработки post запроса. Сохраняет исходные данные для расчета плиты перекрытия на огнестойкость в базу данных.</summary>
+        /// <param name="sourceData">Исходные данные для выполнения расчетов. Объект класса SlabWithRigidConnectionData</param>
+        /// <returns>Возвращаемый тип IActionResult. Возвращает представление SlabWithRigidConnectionToTwoWalls в котором содержатся данные о расчете и результатах расчтета колонны на огнестойксть (объект класса DataOfSlabWithRigidConnectionVM)</returns>
         [HttpPost]
         public IActionResult AddDataForCalculationOfSlab(SlabWithRigidConnectionData sourceData)
         {
@@ -91,14 +109,19 @@ namespace FireResistance.Web.Controllers
             if (sourceData.IsOnCollums == 1) return View("SlabWithRigidConnectionToColumns", GetDataOfSlab(sourceData));
             else return View("SlabWithRigidConnectionToTwoWalls", GetDataOfSlab(sourceData));
         }
-
+        /// <summary>Метод для обработки post запроса. Загружает из базы данных исходные данные для выполнения расчета на огнстойкость.</summary>
+        /// <param name="id">Уникальный id строки в таблице SlabWithRigidConnectionData (содержит расчетные данные для расчета плиты перекрытия на огнестойкость)</param>
+        /// <returns>Возвращаемый тип IActionResult. Возвращает представление SlabWithRigidConnectionToTwoWalls в котором содержатся данные о расчете и результатах расчтета колонны на огнестойксть (объект класса DataOfSlabWithRigidConnectionVM)</returns>
+        [HttpPost]
         public IActionResult LoadSlab(int id)
         {
             SlabWithRigidConnectionData sourceData = db.SlabWithRigidConnectionData.Find(id);
             if (sourceData.IsOnCollums == 1) return View("SlabWithRigidConnectionToColumns", GetDataOfSlab(sourceData));
             else return View("SlabWithRigidConnectionToTwoWalls", GetDataOfSlab(sourceData));
         }
-
+        /// <summary>Метод после проверки на валидность переданных параметров запускает выполнение расчета плиты перекрытия на огнестойкость.</summary>
+        /// <param name="sourceData">Исходные данные для выполнения расчетов. Объект класса SlabWithRigidConnectionData</param>
+        /// <returns>Возвращаемый тип DataOfSlabWithRigidConnectionVM. Объект класса DataOfSlabWithRigidConnectionVM содержит исходные данные и результаты расчета плиты перекрытия на огнестойкость</returns>
         private DataOfSlabWithRigidConnectionVM GetDataOfSlab(SlabWithRigidConnectionData sourceData)
         {
             DataOfSlabWithRigidConnectionVM data = new DataOfSlabWithRigidConnectionVM(sourceData);
@@ -111,7 +134,7 @@ namespace FireResistance.Web.Controllers
             }
             return data;
         }
-
+        /// <summary>Добавляет новую запись в logger</summary>
         private void AddLog(string text = "")
         {
             string log = $"User:{User.Identity.Name}; DateTime:{DateTime.Now}; Obj:{this}; info:{text}";

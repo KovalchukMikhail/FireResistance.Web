@@ -14,6 +14,8 @@ namespace FireResistance.Web.Controllers
         {
             this.logger = logger;
         }
+        /// <summary>Метод для обработки get запроса</summary>
+        /// <returns>Возвращаемый тип IActionResult. Возвращает представление Index</returns>
         [HttpGet]
         public IActionResult Index()
         {
@@ -26,6 +28,7 @@ namespace FireResistance.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        /// <summary>Добавляет новую запись в logger</summary>
         private void AddLog()
         {
             string log = $"User:{User.Identity.Name}; DateTime:{DateTime.Now}; Obj: {this}";
