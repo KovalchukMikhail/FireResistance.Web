@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace FireResistance.Web.Data
 {
+    /// <summary>Класс содержит описание сеанса с баззой данных и может использоваться для запроса и сохранения экземпляров сущностей </summary>
     public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -26,7 +27,9 @@ namespace FireResistance.Web.Data
             }
             //Database.EnsureCreated();
         }
+        // Так как в классе наследуемом от DbContext определено свойство типа DbSet для класса ColumnFireIsWithFourSidesData будет создана таблица в базе данных
         public DbSet<ColumnFireIsWithFourSidesData> ColumnFireIsWithFourSidesData { get; set; }
+        // Так как в классе наследуемом от DbContext определено свойство типа DbSet для класса SlabWithRigidConnectionData будет создана таблица в базе данных
         public DbSet<SlabWithRigidConnectionData> SlabWithRigidConnectionData { get; set; }
     }
 }

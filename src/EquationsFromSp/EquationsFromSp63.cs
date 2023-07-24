@@ -56,6 +56,7 @@ namespace EquationsFromSp
             if (eb <= 0) throw new ValueException("Недопустимое значение εb, ошибка возникла при определении ξR по формуле 8.1 СП63", eb);
             return 0.8 / (1 + eSel / eb);
         }
+        public double GetEbTwo() => 0.0035;
         public double GetESel(double Rs, double Es)
         {
             if (Es <= 0) throw new ValueException("Недопустимое значение Es, ошибка возникла при определении εs,el по формуле 8.2 СП63", Es);
